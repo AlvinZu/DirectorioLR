@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Directorio Profesional | Encuentra expertos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .fade-in {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .search-highlight {
+            background-color: #FEF08A;
+        }
+        
+        /*Detalle de la corona*/
+        .membership-badge {
+            position: absolute;
+            top: -12px;
+            right: -12px;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            color: gold;
+            background: black;
+        }
+      
+        /*Detalle del borde de la tarjeta*/
+        .premium-card {
+            border: 4px solid black;
+            position: relative;
+            overflow: hidden;
+
+        }
+        
+         /*Detalle de las estrellas*/
+        .premium-card::after {
+            content: '⭐⭐⭐⭐⭐';
+            position: absolute;
+            top: 10px;
+            right: -30px;
+            background: black;
+            color: gold;
+            padding: 2px 30px;
+            transform: rotate(45deg);
+            font-size: 12px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- Header -->
+    <header class="bg-blue-600 text-white shadow-lg">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-briefcase text-2xl"></i>
+                <h1 class="text-xl font-bold">Directorio Los Reyes</h1>
+            </div>
+            <nav class="hidden md:flex space-x-6">
+                <button id="homeBtn" class="hover:text-blue-200 font-medium flex items-center">
+                    <i class="fas fa-home mr-1"></i> Inicio
+                </button>
+                <button id="featuredBtn" class="hover:text-blue-200 font-medium flex items-center">
+                    <i class="fas fa-star mr-1"></i> Destacados
+                </button>
+            </nav>
+            <button class="md:hidden text-xl" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden md:hidden bg-blue-700 py-2 px-4">
+            <button id="mobileHomeBtn" class="block w-full text-left py-2 hover:bg-blue-600 rounded px-2">
+                <i class="fas fa-home mr-2"></i> Inicio
+            </button>
+            <button id="mobileFeaturedBtn" class="block w-full text-left py-2 hover:bg-blue-600 rounded px-2">
+                <i class="fas fa-star mr-2"></i> Destacados
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-6">
+        <!-- Home Screen -->
+        <div id="homeScreen" class="fade-in">
+            <!-- Search Section -->
+            <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">Encuentra profesionales cerca de ti</h2>
+                <div class="relative">
+                    <input type="text" id="searchInput" placeholder="Buscar por nombre o categoría..." 
+                           class="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                    <i class="fas fa-search absolute right-4 top-4 text-gray-400"></i>
+                </div>
+                <div id="searchResults" class="hidden mt-2 border border-gray-200 rounded-lg max-h-60 overflow-y-auto"></div>
+            </div>
+            
+            <!-- Sección de Categorías -->
+            <div class="mb-8">
+                <h2 class="text-xl font-bold text-gray-800 mb-4">Explora por categorías</h2>
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4" id="categoriesGrid">
+                    <!-- Categories will be loaded here by JavaScript -->
+                </div>
+            </div>
+            
+            <!-- Featured Professionals Preview - Vista previa de profesionales destacados -->
+            <div class="mb-8">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-xl font-bold text-gray-800">Profesionales destacados</h2>
+                    <button id="viewAllFeatured" class="text-blue-600 hover:underline">Ver todos</button>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="featuredPreview">
+                    <!-- La vista previa destacada se cargará aquí -->
+                </div>
+            </div>
+        </div>
+        
+        <!-- Category Professionals Screen - Pantalla Categoría Profesionales -->
+        <div id="categoryScreen" class="hidden fade-in">
+            <div class="flex items-center mb-6">
+                <button id="backFromCategory" class="mr-4 text-blue-600 hover:text-blue-800">
+                    <i class="fas fa-arrow-left text-xl"></i>
+                </button>
+                <h2 class="text-2xl font-bold text-gray-800" id="categoryTitle"></h2>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="professionalsGrid">
+                <!-- Professionals will be loaded here by JavaScript -->
+            </div>
+        </div>
+        
+        <!-- Professional Details Screen - Pantalla de detalles profesionales -->
+        <div id="detailsScreen" class="hidden fade-in">
+            <div class="flex items-center mb-6">
+                <button id="backFromDetails" class="mr-4 text-blue-600 hover:text-blue-800">
+                    <i class="fas fa-arrow-left text-xl"></i>
+                </button>
+                <h2 class="text-2xl font-bold text-gray-800">Detalles del profesional</h2>
+            </div>
+            
+            <div class="bg-white rounded-lg shadow-md overflow-hidden" id="professionalDetails">
+                <!-- Details will be loaded here by JavaScript -->
+            </div>
+        </div>
+        
+        <!-- Featured Professionals Screen - Pantalla de profesionales destacados -->
+        <div id="featuredScreen" class="hidden fade-in">
+            <div class="flex items-center mb-6">
+                <button id="backFromFeatured" class="mr-4 text-blue-600 hover:text-blue-800">
+                    <i class="fas fa-arrow-left text-xl"></i>
+                </button>
+                <h2 class="text-2xl font-bold text-gray-800">Profesionales destacados</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="featuredGrid">
+                <!-- Featured professionals will be loaded here by JavaScript -->
+            </div>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Directorio Los Reyes</h3>
+                    <p class="text-gray-300">Conectando profesionales con clientes desde 2023.</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Enlaces rápidos</h3>
+                    <ul class="space-y-2">
+                        <li><button id="footerHomeBtn" class="text-gray-300 hover:text-white">Inicio</button></li>
+                        <li><button id="footerFeaturedBtn" class="text-gray-300 hover:text-white">Destacados</button></li>
+                        
+                    </ul>
+                </div>
+              
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Contacto</h3>
+                    <p class="text-gray-300"><i class="fas fa-phone mr-2"></i> +52 443 477 0618</p>
+                  
+                  <div class="border-t border-gray-700 mt-8 pt-6 text-center text-gray-400">
+                    <h3 class="text-xl font-bold mb-4">Anunciate con Nosotros</h3>
+                    <p class="text-gray-300">Tenemos Planes de 3, 6, 9 y 12 Meses.</p>
+                </div>
+            </div>
+            
+        </div>
+    </footer>
+    
+    <script>
+        // Base de datos de los profesionales
+        const professionals = [
+            // Dentists
+            {
+                id: 1,
+                name: "Dra. Ana López",
+                category: "Dentistas",
+                specialty: "Ortodoncista",
+                description: "Especialista en ortodoncia y cuidado dental preventivo.",
+                phone: "+525512345678",
+                address: "Av. Reforma 123, CDMX",
+                experience: "10 años",
+                price: "$800 - Consulta inicial",
+                membership: "premium", //Puedes cambiar a free
+                featured: true, //Puedes cambiar a false
+                services: ["Ortodoncia", "Blanqueamiento", "Limpieza dental", "Implantes"],
+                schedule: "Lunes a Viernes: 9am - 6pm",
+                education: "Universidad Nacional Autónoma de México",
+                image: "https://randomuser.me/api/portraits/women/65.jpg"
+            },
+            {
+                id: 2,
+                name: "Dr. Carlos Méndez",
+                category: "Dentistas",
+                specialty: "Cirujano dental",
+                description: "Experto en cirugías dentales y tratamientos de conducto.",
+                phone: "+525598765432",
+                address: "Calle Juárez 456, CDMX",
+                experience: "8 años",
+                price: "$600 - Consulta inicial",
+                membership: "free", //puedes cambiar a premiun
+                featured: false, //puedes cambiar a true
+                services: ["Cirugía dental", "Endodoncia", "Extracciones"],
+                schedule: "Lunes a Sábado: 10am - 7pm",
+                education: "Universidad Autónoma Metropolitana",
+                image: "https://randomuser.me/api/portraits/men/32.jpg"
+            },
+            
+            // Nutritionists
+            {
+                id: 3,
+                name: "Lic. Sofía Ramírez",
+                category: "Nutriólogos",
+                specialty: "Nutrición deportiva",
+                description: "Especialista en planes nutricionales para atletas y deportistas.",
+                phone: "+525511223344",
+                address: "Av. Insurgentes 789, CDMX",
+                experience: "6 años",
+                price: "$500 - Consulta inicial",
+                membership: "premium", //Puedes cambiar a free
+                featured: true, //Puedes cambiar a false
+                services: ["Plan nutricional personalizado", "Suplementación", "Control de peso"],
+                schedule: "Martes a Sábado: 8am - 4pm",
+                education: "Instituto Politécnico Nacional",
+                image: "https://randomuser.me/api/portraits/women/44.jpg"
+            },
+            
+            // Chiropractors
+            {
+                id: 4,
+                name: "Dr. Alejandro Torres",
+                category: "Quiroprácticos",
+                specialty: "Ajuste vertebral",
+                description: "Especialista en corrección postural y alivio del dolor de espalda.",
+                phone: "+525533445566",
+                address: "Calle Michoacán 101, CDMX",
+                experience: "12 años",
+                price: "$700 - Sesión",
+                membership: "premium", //Puedes cambiar a free
+                featured: true, //Puedes cambiar a false
+                services: ["Ajuste quiropráctico", "Terapia de descompresión", "Masaje terapéutico"],
+                schedule: "Lunes a Viernes: 8am - 8pm",
+                education: "Palmer College of Chiropractic",
+                image: "https://randomuser.me/api/portraits/men/75.jpg"
+            },
+            
+            // Doctors
+            {
+                id: 5,
+                name: "Dra. Patricia Sánchez",
+                category: "Doctores",
+                specialty: "Medicina general",
+                description: "Atención médica integral para toda la familia.",
+                phone: "+525544556677",
+                address: "Av. Revolución 234, CDMX",
+                experience: "15 años",
+                price: "$400 - Consulta",
+                membership: "free", //puedes cambiar a premiun
+                featured: false, //Puedes cambiar a ture
+                services: ["Consulta general", "Vacunación", "Chequeos anuales"],
+                schedule: "Lunes a Sábado: 7am - 3pm",
+                education: "Universidad Autónoma de México",
+                image: "https://randomuser.me/api/portraits/women/33.jpg"
+            },
+            
+            // Physiotherapists
+            {
+                id: 6,
+                name: "Lic. Roberto Jiménez",
+                category: "Fisioterapeutas",
+                specialty: "Rehabilitación deportiva",
+                description: "Especialista en recuperación de lesiones deportivas.",
+                phone: "+525577889900",
+                address: "Av. Universidad 567, CDMX",
+                experience: "9 años",
+                price: "$550 - Sesión",
+                membership: "premium", //Puedes cambiar a free
+                featured: true, //Puedes cambiar a false
+                services: ["Rehabilitación", "Terapia de movimiento", "Electroterapia"],
+                schedule: "Lunes a Viernes: 7am - 9pm",
+                education: "Universidad del Valle de México",
+                image: "https://randomuser.me/api/portraits/men/22.jpg"
+            },
+            
+            // Clothing Stores
+            {
+                id: 7,
+                name: "Boutique Elegance",
+                category: "Tiendas de ropa",
+                specialty: "Ropa formal",
+                description: "Las mejores marcas de ropa formal para hombre y mujer.",
+                phone: "+525512345678",
+                address: "Plaza Galerías, CDMX",
+                experience: "5 años",
+                price: "$$$",
+                membership: "free", //puedes cambiar a premiun
+                featured: false, //puedes cambiar a true
+                services: ["Venta de ropa", "Asesoría de imagen", "Alteraciones"],
+                schedule: "Lunes a Domingo: 10am - 9pm",
+                education: "",
+                image: "https://images.unsplash.com/photo-1551232864-3f0890e580d9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
+            },
+            
+            // Supplement Stores
+            {
+                id: 8,
+                name: "NutriPower",
+                category: "Venta de suplementos",
+                specialty: "Suplementos deportivos",
+                description: "Los mejores suplementos para tu rendimiento físico.",
+                phone: "+525598765432",
+                address: "Av. Tamaulipas 345, CDMX",
+                experience: "3 años",
+                price: "$$",
+                membership: "free", //puedes cambiar a premiun
+                featured: false, //puedes cambiar a true
+                services: ["Venta de suplementos", "Asesoría nutricional", "Envios a domicilio"],
+                schedule: "Lunes a Sábado: 9am - 8pm",
+                education: "",
+                image: "https://images.unsplash.com/photo-1571019613454-1cb2f5b2f836?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+            },
+            
+            // Barbers
+            {
+                id: 9,
+                name: "The Gentleman's Cut",
+                category: "Barberías",
+                specialty: "Cortes clásicos",
+                description: "Barbería tradicional con los mejores estilistas de la ciudad.",
+                phone: "+525511223344",
+                address: "Calle Oaxaca 67, CDMX",
+                experience: "7 años",
+                price: "$250 - Corte clásico",
+                membership: "premium", //Puedes cambiar a free
+                featured: true, //Puedes cambiar a false
+                services: ["Corte de cabello", "Afeitado tradicional", "Tratamientos capilares"],
+                schedule: "Martes a Domingo: 10am - 8pm",
+                education: "",
+                image: "https://images.unsplash.com/photo-1585747860715-2ba9076f2707?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+            },
+            
+            // Painters
+            {
+                id: 10,
+                name: "Pinturas y Decoraciones Martínez",
+                category: "Pintores",
+                specialty: "Pintura residencial",
+                description: "Servicio profesional de pintura para hogares y negocios.",
+                phone: "+525533445566",
+                address: "Col. Roma, CDMX",
+                experience: "10 años",
+                price: "$150/m²",
+                membership: "free", //puedes cambiar a premiun
+                featured: false, //puedes cambiar a true
+                services: ["Pintura interior/exterior", "Decoración", "Preparación de superficies"],
+                schedule: "Lunes a Sábado: 8am - 6pm",
+                education: "",
+                image: "https://images.unsplash.com/photo-1605152276897-4f618f831968?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+            },
+            
+            // Carpenters
+            {
+                id: 11,
+                name: "Muebles y Carpintería Hernández",
+                category: "Carpinteros",
+                specialty: "Muebles a medida",
+                description: "Elaboración de muebles de madera a medida con los mejores materiales.",
+                phone: "+525544556677",
+                address: "Av. Coyoacán 890, CDMX",
+                experience: "15 años",
+                price: "Cotización sin costo",
+                membership: "free", //puedes cambiar a premiun
+                featured: false, //puedes cambiar a true
+                services: ["Muebles a medida", "Restauración", "Carpintería fina"],
+                schedule: "Lunes a Viernes: 9am - 5pm",
+                education: "",
+                image: "https://images.unsplash.com/photo-1604755940508-42f9135fad1a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+            },
+            
+            // Electricians
+            {
+                id: 12,
+                name: "Electricidad Segura",
+                category: "Electricistas",
+                specialty: "Instalaciones residenciales",
+                description: "Servicio eléctrico confiable y seguro para tu hogar.",
+                phone: "+525577889900",
+                address: "Col. Del Valle, CDMX",
+                experience: "8 años",
+                price: "$300 - Visita técnica",
+                membership: "free", //puedes cambiar a premiun
+                featured: false, //puedes cambiar a true
+                services: ["Instalaciones eléctricas", "Mantenimiento", "Reparaciones urgentes"],
+                schedule: "Lunes a Domingo: 8am - 8pm",
+                education: "",
+                image: "https://images.unsplash.com/photo-1603302576837-37586b6dfd1c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+            },
+            
+            // Plumbers
+            {
+                id: 13,
+                name: "Plomería Express",
+                category: "Plomeros",
+                specialty: "Reparaciones urgentes",
+                description: "Soluciones rápidas y efectivas para problemas de plomería.",
+                phone: "+525512345678",
+                address: "Toda la CDMX",
+                experience: "6 años",
+                price: "$350 - Visita técnica",
+                membership: "free", //puedes cambiar a premiun
+                featured: false, //puedes cambiar a true
+                services: ["Reparación de fugas", "Destape de cañerías", "Instalación de tuberías"],
+                schedule: "24/7",
+                education: "",
+                image: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+            },
+            
+            // Photographers
+            {
+                id: 14,
+                name: "Fotografía Creativa",
+                category: "Fotógrafos",
+                specialty: "Bodas y eventos",
+                description: "Capturamos los momentos más importantes de tu vida con arte y profesionalismo.",
+                phone: "+525598765432",
+                address: "Av. Patriotismo 123, CDMX",
+                experience: "9 años",
+                price: "$5,000 - Sesión básica",
+                membership: "premium", //Puedes cambiar a free
+                featured: true, //Puedes cambiar a false
+                services: ["Fotografía de bodas", "Sesiones familiares", "Fotografía comercial"],
+                schedule: "Lunes a Domingo: Citas programadas",
+                education: "Centro de la Imagen",
+                image: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1528&q=80"
+            },
+            
+            // Personal Trainers
+            {
+                id: 15,
+                name: "Entrenador Javier Ríos",
+                category: "Entrenadores Personales",
+                specialty: "Pérdida de peso",
+                description: "Programas personalizados para alcanzar tus metas físicas.",
+                phone: "+525511223344",
+                address: "Gimnasio PowerFit, CDMX",
+                experience: "7 años",
+                price: "$400 - Sesión",
+                membership: "premium", //Puedes cambiar a free
+                featured: true, //Puedes cambiar a false
+                services: ["Entrenamiento personalizado", "Rutinas a domicilio", "Asesoría nutricional"],
+                schedule: "Lunes a Sábado: 6am - 9pm",
+                education: "Certificación ISSA",
+                image: "https://randomuser.me/api/portraits/men/85.jpg"
+            },
+            
+            // Lawyers
+            {
+                id: 16,
+                name: "Lic. Daniela Mendoza",
+                category: "Abogados",
+                specialty: "Derecho familiar",
+                description: "Asesoría legal especializada en divorcios y custodia de menores.",
+                phone: "+525533445566",
+                address: "Av. Paseo de la Reforma 456, CDMX",
+                experience: "11 años",
+                price: "$1,500 - Consulta",
+                membership: "premium", //Puedes cambiar a free
+                featured: true, //Puedes cambiar a false
+                services: ["Divorcios", "Custodia", "Pensión alimenticia", "Sucesiones"],
+                schedule: "Lunes a Viernes: 9am - 6pm",
+                education: "Escuela Libre de Derecho",
+                image: "https://randomuser.me/api/portraits/women/55.jpg"
+            },
+            
+            // Psychologists
+            {
+                id: 17,
+                name: "Psic. Luis González",
+                category: "Psicólogos",
+                specialty: "Terapia cognitivo-conductual",
+                description: "Ayuda profesional para superar ansiedad, depresión y problemas de relación.",
+                phone: "+525544556677",
+                address: "Col. Condesa, CDMX",
+                experience: "8 años",
+                price: "$800 - Sesión",
+                membership: "free", //puedes cambiar a premiun
+                featured: false, //puedes cambiar a true
+                services: ["Terapia individual", "Terapia de pareja", "Orientación vocacional"],
+                schedule: "Lunes a Sábado: 10am - 8pm",
+                education: "Universidad Iberoamericana",
+                image: "https://randomuser.me/api/portraits/men/45.jpg"
+            },
+            
+            // Veterinarians
+            {
+                id: 18,
+                name: "MVZ Patricia Navarro",
+                category: "Veterinarios",
+                specialty: "Animales pequeños",
+                description: "Cuidado compasivo para tus mascotas con los más altos estándares médicos.",
+                phone: "+525577889900",
+                address: "Clínica VetCare, CDMX",
+                experience: "9 años",
+                price: "$450 - Consulta",
+                membership: "premium", //Puedes cambiar a free
+                featured: true, //Puedes cambiar a false
+                services: ["Consulta general", "Vacunación", "Cirugías", "Estética canina"],
+                schedule: "Lunes a Domingo: 9am - 8pm",
+                education: "Universidad Autónoma Metropolitana",
+                image: "https://randomuser.me/api/portraits/women/25.jpg"
+            },
+            
+            // Mechanics
+            {
+                id: 19,
+                name: "Taller Mecánico Rápido",
+                category: "Mecánicos",
+                specialty: "Motor y transmisión",
+                description: "Reparación y mantenimiento de todo tipo de vehículos.",
+                phone: "+525512345678",
+                address: "Av. Constituyentes 789, CDMX",
+                experience: "12 años",
+                price: "$300 - Diagnóstico",
+                membership: "free", //puedes cambiar a premiun
+                featured: false, //puedes cambiar a true
+                services: ["Cambio de aceite", "Reparación de motor", "Afinación", "Frenos"],
+                schedule: "Lunes a Sábado: 8am - 6pm",
+                education: "",
+                image: "https://images.unsplash.com/photo-1549318581-ec0780938e03?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+            },
+            
+            // Computer Technicians
+            {
+                id: 20,
+                name: "Tecnología y Soluciones",
+                category: "Técnicos en Computadoras",
+                specialty: "Reparación de hardware",
+                description: "Soluciones técnicas para computadoras y equipos electrónicos.",
+                phone: "+525598765432",
+                address: "Plaza Tecnológica, CDMX",
+                experience: "5 años",
+                price: "$250 - Diagnóstico",
+                membership: "free", //puedes cambiar a premiun
+                featured: false, //puedes cambiar a true
+                services: ["Reparación de laptops", "Recuperación de datos", "Mantenimiento preventivo"],
+                schedule: "Lunes a Viernes: 10am - 7pm",
+                education: "",
+                image: "https://images.unsplash.com/photo-1517430816045-df4b7c11d76a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+            },
+          // Tatoos
+            {
+                id: 21,
+                name: "Estudio Black Ink",
+                category: "Tatuadores",
+                specialty: "Tatuajes realistas",
+                description: "Servicio profesional de tatuajes realistas.",
+                phone: "+525533445566",
+                address: "Col. Roma, CDMX",
+                experience: "5 años",
+                price: "$ Depende Dificultad",
+                membership: "free", //puedes cambiar a premiun
+                featured: false, //puedes cambiar a true
+                services: ["Tatuajes Realistas", "Minimalistas", "A Color"],
+                schedule: "Lunes a Sábado: 8am - 6pm",
+                education: "Escuela de la vida",
+                image: "https://images.unsplash.com/photo-1605152276897-4f618f831968?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+            },
+          {
+                id: 22,
+                name: "Dr. Carlos Méndez",
+                category: "Tatuadores",
+                specialty: "Tatuajes realistas",
+                description: "Servicio profesional de tatuajes realistas.",
+                phone: "+525533445566",
+                address: "Col. Roma, CDMX",
+                experience: "5 años",
+                price: "$ Depende Dificultad",
+                membership: "premium", //puedes cambiar a premiun
+                featured: true, //puedes cambiar a true
+                services: ["Tatuajes Realistas", "Minimalistas", "A Color"],
+                schedule: "Lunes a Sábado: 8am - 6pm",
+                education: "Escuela de la vida",
+                image: "https://randomuser.me/api/portraits/men/32.jpg"
+          }
+        ];
+
+        // Get all unique categories
+        const categories = [...new Set(professionals.map(pro => pro.category))];
+        
+        // DOM Elements
+        const homeScreen = document.getElementById('homeScreen');
+        const categoryScreen = document.getElementById('categoryScreen');
+        const detailsScreen = document.getElementById('detailsScreen');
+        const featuredScreen = document.getElementById('featuredScreen');
+        
+        const categoriesGrid = document.getElementById('categoriesGrid');
+        const professionalsGrid = document.getElementById('professionalsGrid');
+        const professionalDetails = document.getElementById('professionalDetails');
+        const featuredGrid = document.getElementById('featuredGrid');
+        const featuredPreview = document.getElementById('featuredPreview');
+        
+        const searchInput = document.getElementById('searchInput');
+        const searchResults = document.getElementById('searchResults');
+        
+        const categoryTitle = document.getElementById('categoryTitle');
+        
+        // Botones de navegación
+        const homeBtn = document.getElementById('homeBtn');
+        const featuredBtn = document.getElementById('featuredBtn');
+        const mobileHomeBtn = document.getElementById('mobileHomeBtn');
+        const mobileFeaturedBtn = document.getElementById('mobileFeaturedBtn');
+        const footerHomeBtn = document.getElementById('footerHomeBtn');
+        const footerFeaturedBtn = document.getElementById('footerFeaturedBtn');
+        const viewAllFeatured = document.getElementById('viewAllFeatured');
+        
+        const backFromCategory = document.getElementById('backFromCategory');
+        const backFromDetails = document.getElementById('backFromDetails');
+        const backFromFeatured = document.getElementById('backFromFeatured');
+        
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        // Initialize the app
+        function init() {
+            loadCategories();
+            loadFeaturedPreview();
+            setupEventListeners();
+            showScreen('home');
+        }
+        
+        // Load categories into the grid
+        function loadCategories() {
+            categoriesGrid.innerHTML = '';
+            
+            categories.forEach(category => {
+                const icon = getCategoryIcon(category);
+                
+                const categoryElement = document.createElement('div');
+                categoryElement.className = 'bg-white rounded-lg shadow-md p-4 flex flex-col items-center cursor-pointer hover:shadow-lg transition-shadow';
+                categoryElement.innerHTML = `
+                    <div class="text-4xl text-blue-600 mb-2">${icon}</div>
+                    <h3 class="text-lg font-medium text-center">${category}</h3>
+                `;
+                
+                categoryElement.addEventListener('click', () => {
+                    showCategoryProfessionals(category);
+                });
+                
+                categoriesGrid.appendChild(categoryElement);
+            });
+        }
+        
+        // Los Iconos para cada categoría
+        function getCategoryIcon(category) {
+            const icons = {
+                'Dentistas': '<i class="fas fa-tooth"></i>',
+                'Nutriólogos': '<i class="fas fa-apple-alt"></i>',
+                'Quiroprácticos': '<i class="fas fa-bone"></i>',
+                'Doctores': '<i class="fas fa-user-md"></i>',
+                'Fisioterapeutas': '<i class="fas fa-hand-holding-heart"></i>',
+                'Tiendas de ropa': '<i class="fas fa-tshirt"></i>',
+                'Venta de suplementos': '<i class="fas fa-pills"></i>',
+                'Barberías': '<i class="fas fa-cut"></i>',
+                'Pintores': '<i class="fas fa-paint-roller"></i>',
+                'Carpinteros': '<i class="fas fa-hammer"></i>',
+                'Electricistas': '<i class="fas fa-bolt"></i>',
+                'Plomeros': '<i class="fas fa-faucet"></i>',
+                'Fotógrafos': '<i class="fas fa-camera"></i>',
+                'Entrenadores Personales': '<i class="fas fa-dumbbell"></i>',
+                'Abogados': '<i class="fas fa-gavel"></i>',
+                'Psicólogos': '<i class="fas fa-brain"></i>',
+                'Veterinarios': '<i class="fas fa-paw"></i>',
+                'Mecánicos': '<i class="fas fa-car"></i>',
+                'Técnicos en Computadoras': '<i class="fas fa-laptop"></i>',
+                'Tatuadores': '<i class="fas fa-dragon"></i>'
+            };
+            
+            return icons[category] || '<i class="fas fa-briefcase"></i>';
+        }
+        
+        // Show professionals for a specific category
+        function showCategoryProfessionals(category) {
+            const categoryPros = professionals.filter(pro => pro.category === category);
+            
+            categoryTitle.textContent = category;
+            professionalsGrid.innerHTML = '';
+            
+            categoryPros.forEach(pro => {
+                const proCard = createProfessionalCard(pro);
+                professionalsGrid.appendChild(proCard);
+            });
+            
+            showScreen('category');
+        }
+        
+        // Create a professional card element
+        function createProfessionalCard(professional) {
+            const card = document.createElement('div');
+            card.className = `bg-white rounded-lg shadow-md overflow-hidden ${professional.membership === 'premium' ? 'premium-card' : ''}`;
+            
+            card.innerHTML = `
+                <div class="relative">
+                    <img src="${professional.image}" alt="${professional.name}" class="w-full h-48 object-cover">
+                    ${professional.membership === 'premium' ? '' : 
+                    `<div class="membership-badge bg-gray-200 text-gray-800">
+                        <i class="fas fa-user"></i>
+                    </div>`}
+                </div>
+                <div class="p-4">
+                    <h3 class="text-xl font-bold mb-1">${professional.name}</h3>
+                    <p class="text-blue-600 font-medium mb-2">${professional.specialty}</p>
+                    <p class="text-gray-600 text-sm mb-3 line-clamp-2">${professional.description}</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-gray-800 font-medium">${professional.price}</span>
+                        <button class="details-btn bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors" 
+                                data-id="${professional.id}">
+                            Detalles
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            return card;
+        }
+        
+        // Show professional details
+        function showProfessionalDetails(id) {
+            const professional = professionals.find(pro => pro.id === parseInt(id));
+            
+            if (!professional) return;
+            
+            professionalDetails.innerHTML = `
+                <div class="md:flex">
+                    <div class="md:w-1/3 bg-gray-100 p-6 flex flex-col items-center">
+                        <div class="relative mb-4">
+                            <img src="${professional.image}" alt="${professional.name}" 
+                                 class="w-32 h-32 rounded-full object-cover border-4 border-white shadow-md">
+                            ${professional.membership === 'premium' ? 
+                            `<div class="membership-badge bg-yellow-500 text-white">
+                                <i class="fas fa-crown"></i>
+                            </div>` : ''}
+                        </div>
+                        <h3 class="text-xl font-bold">${professional.name}</h3>
+                        <p class="text-blue-600 font-medium">${professional.specialty}</p>
+                        <p class="text-gray-600 mt-2">${professional.category}</p>
+                        
+                        <div class="mt-6 w-full">
+                            <a href="https://wa.me/${professional.phone.replace('+', '')}?text=Hola%20${encodeURIComponent(professional.name.split(' ')[0])},%20vi%20tu%20perfil%20en%20DirectorioPro%20y%20me%20gustaría%20saber%20más%20sobre%20tus%20servicios" 
+                               target="_blank" 
+                               class="block bg-green-500 text-white text-center py-3 rounded-lg hover:bg-green-600 transition-colors mb-3">
+                                <i class="fab fa-whatsapp mr-2"></i> Contactar por WhatsApp
+                            </a>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="md:w-2/3 p-6">
+                        <div class="mb-6">
+                            <h4 class="text-lg font-bold mb-2 text-gray-800">Sobre mí</h4>
+                            <p class="text-gray-700">${professional.description}</p>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <h4 class="text-lg font-bold mb-2 text-gray-800">Servicios</h4>
+                                <ul class="space-y-1">
+                                    ${professional.services.map(service => `<li class="text-gray-700"><i class="fas fa-check text-blue-500 mr-2"></i>${service}</li>`).join('')}
+                                </ul>
+                            </div>
+                            
+                            <div>
+                                <h4 class="text-lg font-bold mb-2 text-gray-800">Horario</h4>
+                                <p class="text-gray-700"><i class="far fa-clock text-blue-500 mr-2"></i>${professional.schedule}</p>
+                                
+                                <h4 class="text-lg font-bold mt-4 mb-2 text-gray-800">Experiencia</h4>
+                                <p class="text-gray-700"><i class="fas fa-briefcase text-blue-500 mr-2"></i>${professional.experience}</p>
+                            </div>
+                        </div>
+                        
+                        ${professional.education ? `
+                        <div class="mb-6">
+                            <h4 class="text-lg font-bold mb-2 text-gray-800">Educación</h4>
+                            <p class="text-gray-700"><i class="fas fa-graduation-cap text-blue-500 mr-2"></i>${professional.education}</p>
+                        </div>` : ''}
+                        
+                        <div>
+                            <h4 class="text-lg font-bold mb-2 text-gray-800">Ubicación</h4>
+                            <p class="text-gray-700 mb-4"><i class="fas fa-map-marker-alt text-blue-500 mr-2"></i>${professional.address}</p>
+                            
+                            </div>
+                        </div>
+                        
+
+                    </div>
+                </div>
+            `;
+            
+            // Add event listener to call button
+            const callBtn = professionalDetails.querySelector('.call-btn');
+            if (callBtn) {
+                callBtn.addEventListener('click', () => {
+                    window.location.href = `tel:${professional.phone}`;
+                });
+            }
+            
+            showScreen('details');
+        }
+        
+        // Load featured professionals preview
+        function loadFeaturedPreview() {
+            const featuredPros = professionals.filter(pro => pro.featured).slice(0, 3);
+            featuredPreview.innerHTML = '';
+            
+            featuredPros.forEach(pro => {
+                const proCard = createProfessionalCard(pro);
+                featuredPreview.appendChild(proCard);
+            });
+        }
+        
+        // Show all featured professionals
+        function showAllFeatured() {
+            const featuredPros = professionals.filter(pro => pro.featured);
+            featuredGrid.innerHTML = '';
+            
+            featuredPros.forEach(pro => {
+                const proCard = createProfessionalCard(pro);
+                featuredGrid.appendChild(proCard);
+            });
+            
+            showScreen('featured');
+        }
+        
+        // Show the specified screen
+        function showScreen(screen) {
+            homeScreen.classList.add('hidden');
+            categoryScreen.classList.add('hidden');
+            detailsScreen.classList.add('hidden');
+            featuredScreen.classList.add('hidden');
+            
+            switch(screen) {
+                case 'home':
+                    homeScreen.classList.remove('hidden');
+                    break;
+                case 'category':
+                    categoryScreen.classList.remove('hidden');
+                    break;
+                case 'details':
+                    detailsScreen.classList.remove('hidden');
+                    break;
+                case 'featured':
+                    featuredScreen.classList.remove('hidden');
+                    break;
+            }
+        }
+        
+        // Setup search functionality
+        function setupSearch() {
+            searchInput.addEventListener('input', () => {
+                const query = searchInput.value.trim().toLowerCase();
+                
+                if (query.length === 0) {
+                    searchResults.classList.add('hidden');
+                    return;
+                }
+                
+                // Remove accents and special characters for better search
+                const normalizedQuery = query.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+                
+                // Search in professionals and categories
+                const results = [];
+                
+                // Search in categories
+                categories.forEach(category => {
+                    const normalizedCategory = category.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+                    if (normalizedCategory.includes(normalizedQuery)) {
+                        results.push({
+                            type: 'category',
+                            name: category,
+                            match: category
+                        });
+                    }
+                });
+                
+                // Search in professionals
+                professionals.forEach(pro => {
+                    const normalizedName = pro.name.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+                    const normalizedCategory = pro.category.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+                    const normalizedSpecialty = pro.specialty.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+                    
+                    if (normalizedName.includes(normalizedQuery) || 
+                        normalizedCategory.includes(normalizedQuery) || 
+                        normalizedSpecialty.includes(normalizedQuery)) {
+                        
+                        // Highlight the matching part
+                        let matchField = '';
+                        let matchText = '';
+                        
+                        if (normalizedName.includes(normalizedQuery)) {
+                            matchField = 'name';
+                            const startIdx = normalizedName.indexOf(normalizedQuery);
+                            matchText = pro.name.substring(startIdx, startIdx + query.length);
+                        } else if (normalizedSpecialty.includes(normalizedQuery)) {
+                            matchField = 'specialty';
+                            const startIdx = normalizedSpecialty.indexOf(normalizedQuery);
+                            matchText = pro.specialty.substring(startIdx, startIdx + query.length);
+                        } else {
+                            matchField = 'category';
+                            const startIdx = normalizedCategory.indexOf(normalizedQuery);
+                            matchText = pro.category.substring(startIdx, startIdx + query.length);
+                        }
+                        
+                        results.push({
+                            type: 'professional',
+                            id: pro.id,
+                            name: pro.name,
+                            category: pro.category,
+                            specialty: pro.specialty,
+                            matchField: matchField,
+                            matchText: matchText
+                        });
+                    }
+                });
+                
+                // Display results
+                if (results.length > 0) {
+                    searchResults.innerHTML = '';
+                    results.forEach(result => {
+                        const resultElement = document.createElement('div');
+                        resultElement.className = 'p-3 hover:bg-gray-100 cursor-pointer border-b border-gray-100 last:border-0';
+                        
+                        if (result.type === 'category') {
+                            resultElement.innerHTML = `
+                                <div class="flex items-center">
+                                    <i class="fas fa-folder mr-3 text-blue-500"></i>
+                                    <div>
+                                        <p class="font-medium">${result.name}</p>
+                                        <p class="text-sm text-gray-500">Categoría</p>
+                                    </div>
+                                </div>
+                            `;
+                            
+                            resultElement.addEventListener('click', () => {
+                                showCategoryProfessionals(result.name);
+                                searchInput.value = '';
+                                searchResults.classList.add('hidden');
+                            });
+                        } else {
+                            // Highlight the matching text
+                            let displayName = result.name;
+                            let displayCategory = result.category;
+                            let displaySpecialty = result.specialty;
+                            
+                            if (result.matchField === 'name') {
+                                displayName = result.name.replace(
+                                    new RegExp(result.matchText, 'i'), 
+                                    `<span class="search-highlight">${result.matchText}</span>`
+                                );
+                            } else if (result.matchField === 'specialty') {
+                                displaySpecialty = result.specialty.replace(
+                                    new RegExp(result.matchText, 'i'), 
+                                    `<span class="search-highlight">${result.matchText}</span>`
+                                );
+                            } else {
+                                displayCategory = result.category.replace(
+                                    new RegExp(result.matchText, 'i'), 
+                                    `<span class="search-highlight">${result.matchText}</span>`
+                                );
+                            }
+                            
+                            resultElement.innerHTML = `
+                                <div class="flex items-start">
+                                    <img src="${professionals.find(p => p.id === result.id).image}" 
+                                         class="w-10 h-10 rounded-full object-cover mr-3">
+                                    <div>
+                                        <p class="font-medium">${displayName}</p>
+                                        <p class="text-sm">${displaySpecialty}</p>
+                                        <p class="text-xs text-gray-500">${displayCategory}</p>
+                                    </div>
+                                </div>
+                            `;
+                            
+                            resultElement.addEventListener('click', () => {
+                                showProfessionalDetails(result.id);
+                                searchInput.value = '';
+                                searchResults.classList.add('hidden');
+                            });
+                        }
+                        
+                        searchResults.appendChild(resultElement);
+                    });
+                    
+                    searchResults.classList.remove('hidden');
+                } else {
+                    searchResults.innerHTML = '<div class="p-3 text-gray-500">No se encontraron resultados</div>';
+                    searchResults.classList.remove('hidden');
+                }
+            });
+            
+            // Hide results when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+                    searchResults.classList.add('hidden');
+                }
+            });
+        }
+        
+        // Setup event listeners
+        function setupEventListeners() {
+            // Navigation
+            homeBtn.addEventListener('click', () => showScreen('home'));
+            featuredBtn.addEventListener('click', showAllFeatured);
+            mobileHomeBtn.addEventListener('click', () => {
+                showScreen('home');
+                mobileMenu.classList.add('hidden');
+            });
+            mobileFeaturedBtn.addEventListener('click', () => {
+                showAllFeatured();
+                mobileMenu.classList.add('hidden');
+            });
+            footerHomeBtn.addEventListener('click', () => showScreen('home'));
+            footerFeaturedBtn.addEventListener('click', showAllFeatured);
+            viewAllFeatured.addEventListener('click', showAllFeatured);
+            
+            // Back buttons
+            backFromCategory.addEventListener('click', () => showScreen('home'));
+            backFromDetails.addEventListener('click', () => showScreen('category'));
+            backFromFeatured.addEventListener('click', () => showScreen('home'));
+            
+            // Mobile menu
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            // Professional details buttons (delegated event)
+            document.addEventListener('click', (e) => {
+                if (e.target.classList.contains('details-btn')) {
+                    showProfessionalDetails(e.target.dataset.id);
+                }
+            });
+            
+            // Setup search
+            setupSearch();
+        }
+        
+        // Initialize the app when DOM is loaded
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
