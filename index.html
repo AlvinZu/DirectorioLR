@@ -7,6 +7,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+           
+       /*Código base*/
         .fade-in {
             animation: fadeIn 0.3s ease-in-out;
         }
@@ -195,7 +197,15 @@
                     <p class="text-gray-300">Tenemos Planes de 3, 6, 9 y 12 Meses a un super precio.</p>
                 </div>
             </div>
-            
+            <!-- Lightbox -->
+<div id="lightbox" class="hidden fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4">
+    <div class="max-w-4xl w-full relative">
+        <img id="lightbox-img" src="" alt="" class="rounded-lg max-h-[80vh] mx-auto">
+        <button onclick="closeLightbox()" class="absolute -top-8 right-0 text-white text-2xl hover:text-gray-300">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+</div>
         </div>
     </footer>
     
@@ -280,7 +290,12 @@
                 services: ["Ortodoncia", "Blanqueamiento", "Limpieza dental", "Implantes"],
                 schedule: "Lunes a Viernes: 9am - 6pm",
                 education: "Universidad Nacional Autónoma de México",
-                image: "https://randomuser.me/api/portraits/women/65.jpg"
+                image: "https://randomuser.me/api/portraits/women/65.jpg",
+                gallery: [
+                          "https://randomuser.me/api/portraits/women/25.jpg",
+                          "https://randomuser.me/api/portraits/women/65.jpg",
+                          "https://randomuser.me/api/portraits/women/30.jpg"
+                         ]
             },
             {
                 id: 2,
@@ -297,7 +312,12 @@
                 services: ["Cirugía dental", "Endodoncia", "Extracciones"],
                 schedule: "Lunes a Sábado: 10am - 7pm",
                 education: "Universidad Autónoma Metropolitana",
-                image: "https://randomuser.me/api/portraits/men/32.jpg"
+                image: "https://randomuser.me/api/portraits/men/32.jpg",
+                gallery: [
+                          "https://randomuser.me/api/portraits/women/25.jpg",
+                          "https://randomuser.me/api/portraits/women/65.jpg",
+                          "https://randomuser.me/api/portraits/women/30.jpg"
+                         ]
             },
             
             // Nutritionists
@@ -316,7 +336,12 @@
                 services: ["Plan nutricional personalizado", "Suplementación", "Control de peso"],
                 schedule: "Martes a Sábado: 8am - 4pm",
                 education: "Instituto Politécnico Nacional",
-                image: "https://randomuser.me/api/portraits/women/44.jpg"
+                image: "https://randomuser.me/api/portraits/women/44.jpg",
+                gallery: [
+                          "https://randomuser.me/api/portraits/women/25.jpg",
+                          "https://randomuser.me/api/portraits/women/65.jpg",
+                          "https://randomuser.me/api/portraits/women/30.jpg"
+                         ]
             },
             
             // Chiropractors
@@ -335,7 +360,12 @@
                 services: ["Ajuste quiropráctico", "Terapia de descompresión", "Masaje terapéutico"],
                 schedule: "Lunes a Viernes: 8am - 8pm",
                 education: "Palmer College of Chiropractic",
-                image: "https://randomuser.me/api/portraits/men/75.jpg"
+                image: "https://randomuser.me/api/portraits/men/75.jpg",
+                gallery: [
+                          "https://randomuser.me/api/portraits/women/25.jpg",
+                          "https://randomuser.me/api/portraits/women/65.jpg",
+                          "https://randomuser.me/api/portraits/women/30.jpg"
+                         ]
             },
             
             // Doctors
@@ -354,7 +384,12 @@
                 services: ["Consulta general", "Vacunación", "Chequeos anuales"],
                 schedule: "Lunes a Sábado: 7am - 3pm",
                 education: "Universidad Autónoma de México",
-                image: "https://randomuser.me/api/portraits/women/33.jpg"
+                image: "https://randomuser.me/api/portraits/women/33.jpg",
+                gallery: [
+                          "https://randomuser.me/api/portraits/women/25.jpg",
+                          "https://randomuser.me/api/portraits/women/65.jpg",
+                          "https://randomuser.me/api/portraits/women/30.jpg"
+                         ]
             },
             
             // Physiotherapists
@@ -373,7 +408,12 @@
                 services: ["Rehabilitación", "Terapia de movimiento", "Electroterapia"],
                 schedule: "Lunes a Viernes: 7am - 9pm",
                 education: "Universidad del Valle de México",
-                image: "https://randomuser.me/api/portraits/men/22.jpg"
+                image: "https://randomuser.me/api/portraits/men/22.jpg",
+                gallery: [
+                          "https://randomuser.me/api/portraits/women/25.jpg",
+                          "https://randomuser.me/api/portraits/women/65.jpg",
+                          "https://randomuser.me/api/portraits/women/30.jpg"
+                         ]
             },
             
             // Clothing Stores
@@ -392,7 +432,12 @@
                 services: ["Venta de ropa", "Asesoría de imagen", "Alteraciones"],
                 schedule: "Lunes a Domingo: 10am - 9pm",
                 education: "",
-                image: "https://images.unsplash.com/photo-1551232864-3f0890e580d9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
+                image: "https://images.unsplash.com/photo-1551232864-3f0890e580d9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80",
+                gallery: [
+                          "https://randomuser.me/api/portraits/women/25.jpg",
+                          "https://randomuser.me/api/portraits/women/65.jpg",
+                          "https://randomuser.me/api/portraits/women/30.jpg"
+                         ]
             },
             
             // Supplement Stores
@@ -411,7 +456,12 @@
                 services: ["Venta de suplementos", "Asesoría nutricional", "Envios a domicilio"],
                 schedule: "Lunes a Sábado: 9am - 8pm",
                 education: "",
-                image: "https://images.unsplash.com/photo-1571019613454-1cb2f5b2f836?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                image: "https://images.unsplash.com/photo-1571019613454-1cb2f5b2f836?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+                gallery: [
+                          "https://randomuser.me/api/portraits/women/25.jpg",
+                          "https://randomuser.me/api/portraits/women/65.jpg",
+                          "https://randomuser.me/api/portraits/women/30.jpg"
+                         ]
             },
             
             // Barbers
@@ -430,7 +480,12 @@
                 services: ["Corte de cabello", "Afeitado tradicional", "Tratamientos capilares"],
                 schedule: "Martes a Domingo: 10am - 8pm",
                 education: "",
-                image: "https://images.unsplash.com/photo-1585747860715-2ba9076f2707?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                image: "https://images.unsplash.com/photo-1585747860715-2ba9076f2707?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+                gallery: [
+                          "https://randomuser.me/api/portraits/women/25.jpg",
+                          "https://randomuser.me/api/portraits/women/65.jpg",
+                          "https://randomuser.me/api/portraits/women/30.jpg"
+                         ]
             },
             
             // Painters
@@ -449,7 +504,12 @@
                 services: ["Pintura interior/exterior", "Decoración", "Preparación de superficies"],
                 schedule: "Lunes a Sábado: 8am - 6pm",
                 education: "",
-                image: "https://images.unsplash.com/photo-1605152276897-4f618f831968?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                image: "https://images.unsplash.com/photo-1605152276897-4f618f831968?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+                gallery: [
+                          "https://randomuser.me/api/portraits/women/25.jpg",
+                          "https://randomuser.me/api/portraits/women/65.jpg",
+                          "https://randomuser.me/api/portraits/women/30.jpg"
+                         ]
             },
             
             // Carpenters
@@ -468,7 +528,12 @@
                 services: ["Muebles a medida", "Restauración", "Carpintería fina"],
                 schedule: "Lunes a Viernes: 9am - 5pm",
                 education: "",
-                image: "https://images.unsplash.com/photo-1604755940508-42f9135fad1a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                image: "https://images.unsplash.com/photo-1604755940508-42f9135fad1a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+                gallery: [
+                          "https://randomuser.me/api/portraits/women/25.jpg",
+                          "https://randomuser.me/api/portraits/women/65.jpg",
+                          "https://randomuser.me/api/portraits/women/30.jpg"
+                         ]
             },
             
             // Electricians
@@ -487,7 +552,12 @@
                 services: ["Instalaciones eléctricas", "Mantenimiento", "Reparaciones urgentes"],
                 schedule: "Lunes a Domingo: 8am - 8pm",
                 education: "",
-                image: "https://images.unsplash.com/photo-1603302576837-37586b6dfd1c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                image: "https://images.unsplash.com/photo-1603302576837-37586b6dfd1c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+                gallery: [
+                          "https://randomuser.me/api/portraits/women/25.jpg",
+                          "https://randomuser.me/api/portraits/women/65.jpg",
+                          "https://randomuser.me/api/portraits/women/30.jpg"
+                         ]
             },
             
             // Plumbers
@@ -506,7 +576,12 @@
                 services: ["Reparación de fugas", "Destape de cañerías", "Instalación de tuberías"],
                 schedule: "24/7",
                 education: "",
-                image: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                image: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+                gallery: [
+                          "https://randomuser.me/api/portraits/women/25.jpg",
+                          "https://randomuser.me/api/portraits/women/65.jpg",
+                          "https://randomuser.me/api/portraits/women/30.jpg"
+                         ]
             },
             
             // Photographers
@@ -525,7 +600,12 @@
                 services: ["Fotografía de bodas", "Sesiones familiares", "Fotografía comercial"],
                 schedule: "Lunes a Domingo: Citas programadas",
                 education: "Centro de la Imagen",
-                image: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1528&q=80"
+                image: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1528&q=80",
+                gallery: [
+                          "https://randomuser.me/api/portraits/women/25.jpg",
+                          "https://randomuser.me/api/portraits/women/65.jpg",
+                          "https://randomuser.me/api/portraits/women/30.jpg"
+                         ]
             },
             
             // Personal Trainers
@@ -544,10 +624,15 @@
                 services: ["Entrenamiento personalizado", "Rutinas a domicilio", "Asesoría nutricional"],
                 schedule: "Lunes a Sábado: 6am - 9pm",
                 education: "Certificación ISSA",
-                image: "https://randomuser.me/api/portraits/men/85.jpg"
+                image: "https://randomuser.me/api/portraits/men/85.jpg",
+                gallery: [
+                          "https://randomuser.me/api/portraits/women/25.jpg",
+                          "https://randomuser.me/api/portraits/women/65.jpg",
+                          "https://randomuser.me/api/portraits/women/30.jpg"
+                         ]
             },
             
-            // Lawyers
+            // Abogados
             {
                 id: 16,
                 name: "Lic. Daniela Mendoza",
@@ -563,7 +648,12 @@
                 services: ["Divorcios", "Custodia", "Pensión alimenticia", "Sucesiones"],
                 schedule: "Lunes a Viernes: 9am - 6pm",
                 education: "Escuela Libre de Derecho",
-                image: "https://randomuser.me/api/portraits/women/55.jpg"
+                image: "https://randomuser.me/api/portraits/women/55.jpg",
+                gallery: [
+                          "https://randomuser.me/api/portraits/women/25.jpg",
+                          "https://randomuser.me/api/portraits/women/65.jpg",
+                          "https://randomuser.me/api/portraits/women/30.jpg"
+                         ]
             },
             
             // Psychologists
@@ -582,7 +672,12 @@
                 services: ["Terapia individual", "Terapia de pareja", "Orientación vocacional"],
                 schedule: "Lunes a Sábado: 10am - 8pm",
                 education: "Universidad Iberoamericana",
-                image: "https://randomuser.me/api/portraits/men/45.jpg"
+                image: "https://randomuser.me/api/portraits/men/45.jpg",
+                gallery: [
+                          "https://randomuser.me/api/portraits/women/25.jpg",
+                          "https://randomuser.me/api/portraits/women/65.jpg",
+                          "https://randomuser.me/api/portraits/women/30.jpg"
+                         ]
             },
             
             // Veterinarians
@@ -601,7 +696,12 @@
                 services: ["Consulta general", "Vacunación", "Cirugías", "Estética canina"],
                 schedule: "Lunes a Domingo: 9am - 8pm",
                 education: "Universidad Autónoma Metropolitana",
-                image: "https://randomuser.me/api/portraits/women/25.jpg"
+                image: "https://randomuser.me/api/portraits/women/25.jpg",
+                gallery: [
+                          "https://randomuser.me/api/portraits/women/25.jpg",
+                          "https://randomuser.me/api/portraits/women/65.jpg",
+                          "https://randomuser.me/api/portraits/women/30.jpg"
+                         ]
             },
             
             // Mechanics
@@ -620,7 +720,12 @@
                 services: ["Cambio de aceite", "Reparación de motor", "Afinación", "Frenos"],
                 schedule: "Lunes a Sábado: 8am - 6pm",
                 education: "",
-                image: "https://images.unsplash.com/photo-1549318581-ec0780938e03?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                image: "https://images.unsplash.com/photo-1549318581-ec0780938e03?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+                gallery: [
+                          "https://randomuser.me/api/portraits/women/25.jpg",
+                          "https://randomuser.me/api/portraits/women/65.jpg",
+                          "https://randomuser.me/api/portraits/women/30.jpg"
+                         ]
             },
             
             // Computer Technicians
@@ -639,7 +744,12 @@
                 services: ["Reparación de laptops", "Recuperación de datos", "Mantenimiento preventivo"],
                 schedule: "Lunes a Viernes: 10am - 7pm",
                 education: "",
-                image: "https://images.unsplash.com/photo-1517430816045-df4b7c11d76a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                image: "https://images.unsplash.com/photo-1517430816045-df4b7c11d76a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+                gallery: [
+                          "https://randomuser.me/api/portraits/women/25.jpg",
+                          "https://randomuser.me/api/portraits/women/65.jpg",
+                          "https://randomuser.me/api/portraits/women/30.jpg"
+                         ]
             },
           // Tatoos
             {
@@ -657,7 +767,12 @@
                 services: ["Tatuajes Realistas", "Minimalistas", "A Color"],
                 schedule: "Lunes a Sábado: 8am - 6pm",
                 education: "Escuela de la vida",
-                image: "https://images.unsplash.com/photo-1605152276897-4f618f831968?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                image: "https://images.unsplash.com/photo-1605152276897-4f618f831968?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+                gallery: [
+                          "https://randomuser.me/api/portraits/women/25.jpg",
+                          "https://randomuser.me/api/portraits/women/65.jpg",
+                          "https://randomuser.me/api/portraits/women/30.jpg"
+                         ]
             },
           {
                 id: 22,
@@ -674,7 +789,12 @@
                 services: ["Tatuajes Realistas", "Minimalistas", "A Color"],
                 schedule: "Lunes a Sábado: 8am - 6pm",
                 education: "Escuela de la vida",
-                image: "https://randomuser.me/api/portraits/men/32.jpg"
+                image: "https://randomuser.me/api/portraits/men/32.jpg",
+                gallery: [
+                          "https://randomuser.me/api/portraits/women/25.jpg",
+                          "https://randomuser.me/api/portraits/women/65.jpg",
+                          "https://randomuser.me/api/portraits/women/30.jpg"
+                         ]
           },
           // Restaurantes
             {
@@ -692,7 +812,12 @@
                 services: ["Mariscos", "Cortes", "Coctelería"],
                 schedule: "Lunes a Domingo: 10am - 7pm",
                 education: "",
-                image: "https://randomuser.me/api/portraits/men/85.jpg"
+                image: "https://randomuser.me/api/portraits/men/85.jpg",
+                gallery: [
+                          "https://randomuser.me/api/portraits/women/25.jpg",
+                          "https://randomuser.me/api/portraits/women/65.jpg",
+                          "https://randomuser.me/api/portraits/women/30.jpg"
+                         ]
             },
             {
                 id: 24,
@@ -708,7 +833,12 @@
                 featured: true, //Puedes cambiar a false
                 services: ["Comida corrida", "Antojitos mexicanos", "Cortes de carne"],
                 schedule: "Lunes a Domingo 8am - 10pm",
-                image: "https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c"
+                image: "https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c",
+                gallery: [
+                          "https://randomuser.me/api/portraits/women/25.jpg",
+                          "https://randomuser.me/api/portraits/women/65.jpg",
+                          "https://randomuser.me/api/portraits/women/30.jpg"
+                         ]
            },
           
           // Servicio a Domicilio
@@ -726,7 +856,12 @@
         featured: false, //Puedes cambiar a true
         services: ["Entrega de documentos", "Paquetería", "Compras a domicilio"],
         schedule: "24/7",
-        image: "https://images.unsplash.com/photo-1600716051966-a8bda4a65848"
+        image: "https://images.unsplash.com/photo-1600716051966-a8bda4a65848",
+        gallery: [
+                  "https://randomuser.me/api/portraits/women/25.jpg",
+                  "https://randomuser.me/api/portraits/women/65.jpg",
+                  "https://randomuser.me/api/portraits/women/30.jpg"
+                 ]
     },
           
           // Construcción:
@@ -744,7 +879,12 @@
         featured: true, //Puedes cambiar a false
         services: ["Cimentación", "Albañilería", "Supervisión de obra"],
         schedule: "Lunes a Sábado 7am - 5pm",
-        image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485"
+        image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485",
+        gallery: [
+                  "https://randomuser.me/api/portraits/women/25.jpg",
+                  "https://randomuser.me/api/portraits/women/65.jpg",
+                  "https://randomuser.me/api/portraits/women/30.jpg"
+                 ]
     },
           // Arquitectos
 {
@@ -762,7 +902,12 @@
     services: ["Diseño 3D", "Supervisión de obra", "Permisos municipales"],
     schedule: "Lunes a Viernes 9am - 6pm",
     education: "UNAM - Facultad de Arquitectura",
-    image: "https://randomuser.me/api/portraits/women/60.jpg"
+    image: "https://randomuser.me/api/portraits/women/60.jpg",
+    gallery: [
+              "https://randomuser.me/api/portraits/women/25.jpg",
+              "https://randomuser.me/api/portraits/women/65.jpg",
+              "https://randomuser.me/api/portraits/women/30.jpg"
+             ]
 },
 
 // Uñas
@@ -780,7 +925,12 @@
     featured: false, //Puedes cambiar a true
     services: ["Uñas acrílicas", "Diseño de uñas", "Retoques"],
     schedule: "Martes a Domingo 10am - 8pm",
-    image: "https://images.unsplash.com/photo-1590540172602-9b60de55b9e1"
+    image: "https://images.unsplash.com/photo-1590540172602-9b60de55b9e1",
+    gallery: [
+              "https://randomuser.me/api/portraits/women/25.jpg",
+              "https://randomuser.me/api/portraits/women/65.jpg",
+              "https://randomuser.me/api/portraits/women/30.jpg"
+             ]
 },
 
 // Rotulistas
@@ -798,7 +948,12 @@
     featured: true, //Puedes cambiar a false
     services: ["Letreros luminosos", "Vinilos decorativos", "Señalización"],
     schedule: "Lunes a Sábado 9am - 5pm",
-    image: "https://images.unsplash.com/photo-1616046229478-9901c5536a45"
+    image: "https://images.unsplash.com/photo-1616046229478-9901c5536a45",
+    gallery: [
+              "https://randomuser.me/api/portraits/women/25.jpg",
+              "https://randomuser.me/api/portraits/women/65.jpg",
+              "https://randomuser.me/api/portraits/women/30.jpg"
+             ]
 },
 
 // Llanteras
@@ -816,7 +971,12 @@
     featured: false, //Puedes cambiar a true
     services: ["Balanceo", "Alineación", "Venta de llantas"],
     schedule: "Lunes a Domingo 8am - 8pm",
-    image: "https://images.unsplash.com/photo-1603382583575-3e3b7ef8fa1a"
+    image: "https://images.unsplash.com/photo-1603382583575-3e3b7ef8fa1a",
+    gallery: [
+              "https://randomuser.me/api/portraits/women/25.jpg",
+              "https://randomuser.me/api/portraits/women/65.jpg",
+              "https://randomuser.me/api/portraits/women/30.jpg"
+             ]
 },
 
 // Sitios de Taxis
@@ -834,7 +994,12 @@
     featured: true, //Puedes cambiar a false
     services: ["Servicio local", "Viajes largos", "Paquetería"],
     schedule: "24/7",
-    image: "https://images.unsplash.com/photo-1502872366988-2e72b8d1ba13"
+    image: "https://images.unsplash.com/photo-1502872366988-2e72b8d1ba13",
+    gallery: [
+              "https://randomuser.me/api/portraits/women/25.jpg",
+              "https://randomuser.me/api/portraits/women/65.jpg",
+              "https://randomuser.me/api/portraits/women/30.jpg"
+             ]
 },
 
 // Masajistas
@@ -852,7 +1017,12 @@
     featured: false, //Puedes cambiar a true
     services: ["Masaje sueco", "Piedras calientes", "Reflexología"],
     schedule: "Lunes a Sábado 10am - 8pm",
-    image: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874"
+    image: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874",
+    gallery: [
+              "https://randomuser.me/api/portraits/women/25.jpg",
+              "https://randomuser.me/api/portraits/women/65.jpg",
+              "https://randomuser.me/api/portraits/women/30.jpg"
+             ]
 },
 
     // Vinaterías
@@ -870,7 +1040,12 @@
     featured: true, //Puedes cambiar a false
     services: ["Catas de vino", "Regalos empresariales", "Entrega a domicilio"],
     schedule: "Lunes a Domingo 11am - 9pm",
-    image: "https://images.unsplash.com/photo-1551754655-cd27e38d2076"
+    image: "https://images.unsplash.com/photo-1551754655-cd27e38d2076",
+    gallery: [
+              "https://randomuser.me/api/portraits/women/25.jpg",
+              "https://randomuser.me/api/portraits/women/65.jpg",
+              "https://randomuser.me/api/portraits/women/30.jpg"
+             ]
 },
 
 // Vidrierías
@@ -888,7 +1063,12 @@
     featured: false, //Puedes cambiar a true
     services: ["Vidrios blindados", "Espejos decorativos", "Reparaciones"],
     schedule: "Lunes a Sábado 8am - 4pm",
-    image: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a"
+    image: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a",
+    gallery: [
+              "https://randomuser.me/api/portraits/women/25.jpg",
+              "https://randomuser.me/api/portraits/women/65.jpg",
+              "https://randomuser.me/api/portraits/women/30.jpg"
+             ]
 },
 
 // Herreros
@@ -906,7 +1086,12 @@
     featured: true, //Puedes cambiar a false
     services: ["Rejas de seguridad", "Muebles metálicos", "Reparaciones"],
     schedule: "Lunes a Viernes 8am - 6pm",
-    image: "https://images.unsplash.com/photo-1585490469095-3cde095a23f9"
+    image: "https://images.unsplash.com/photo-1585490469095-3cde095a23f9",
+    gallery: [
+              "https://randomuser.me/api/portraits/women/25.jpg",
+              "https://randomuser.me/api/portraits/women/65.jpg",
+              "https://randomuser.me/api/portraits/women/30.jpg"
+             ]
 },
 
 // Ferreterías
@@ -924,7 +1109,12 @@
     featured: false, //Puedes cambiar a true
     services: ["Venta al mayoreo", "Asesoría técnica", "Entrega inmediata"],
     schedule: "Lunes a Domingo 8am - 8pm",
-    image: "https://images.unsplash.com/photo-1585490469095-3cde095a23f9"
+    image: "https://images.unsplash.com/photo-1585490469095-3cde095a23f9",
+    gallery: [
+              "https://randomuser.me/api/portraits/women/25.jpg",
+              "https://randomuser.me/api/portraits/women/65.jpg",
+              "https://randomuser.me/api/portraits/women/30.jpg"
+             ]
 },
           // Loncherías
 {
@@ -941,7 +1131,12 @@
     featured: false, //Puedes cambiar a true
     services: ["Menú diario", "Desayunos", "Servicio para llevar"],
     schedule: "Lunes a Sábado 7am - 4pm",
-    image: "https://images.unsplash.com/photo-1556911220-bff31c812dba"
+    image: "https://images.unsplash.com/photo-1556911220-bff31c812dba",
+    gallery: [
+              "https://randomuser.me/api/portraits/women/25.jpg",
+              "https://randomuser.me/api/portraits/women/65.jpg",
+              "https://randomuser.me/api/portraits/women/30.jpg"
+             ]
 },
 
 // Lavanderías
@@ -959,7 +1154,12 @@
     featured: true, //Puedes cambiar a false
     services: ["Lavado en seco", "Planchado", "Remoción de manchas"],
     schedule: "Lunes a Domingo 8am - 8pm",
-    image: "https://images.unsplash.com/photo-1582730147924-d92f4da00252"
+    image: "https://images.unsplash.com/photo-1582730147924-d92f4da00252",
+    gallery: [
+              "https://randomuser.me/api/portraits/women/25.jpg",
+              "https://randomuser.me/api/portraits/women/65.jpg",
+              "https://randomuser.me/api/portraits/women/30.jpg"
+             ]
 },
 
 // Pastelerías
@@ -977,7 +1177,12 @@
     featured: true, //Puedes cambiar a false
     services: ["Pasteles personalizados", "Postres individuales", "Mesas de dulces"],
     schedule: "Martes a Domingo 9am - 7pm",
-    image: "https://images.unsplash.com/photo-1578985545062-69928b1d9587"
+    image: "https://images.unsplash.com/photo-1578985545062-69928b1d9587",
+    gallery: [
+              "https://randomuser.me/api/portraits/women/25.jpg",
+              "https://randomuser.me/api/portraits/women/65.jpg",
+              "https://randomuser.me/api/portraits/women/30.jpg"
+             ]
 },
 
 // Cafeterías
@@ -995,7 +1200,12 @@
     featured: false, //Puedes cambiar a true
     services: ["Café de origen", "Postres caseros", "Wi-Fi gratuito"],
     schedule: "Lunes a Domingo 7am - 10pm",
-    image: "https://images.unsplash.com/photo-1509042239860-f550ce710b93"
+    image: "https://images.unsplash.com/photo-1509042239860-f550ce710b93",
+    gallery: [
+              "https://randomuser.me/api/portraits/women/25.jpg",
+              "https://randomuser.me/api/portraits/women/65.jpg",
+              "https://randomuser.me/api/portraits/women/30.jpg"
+             ]
 },
 
 // Pizzerías
@@ -1013,7 +1223,12 @@
     featured: true, //Puedes cambiar a false
     services: ["Pizza a la leña", "Pastas", "Domicilio sin costo"],
     schedule: "Miércoles a Lunes 1pm - 11pm",
-    image: "https://images.unsplash.com/photo-1595854341625-f33ee10dbf94"
+    image: "https://images.unsplash.com/photo-1595854341625-f33ee10dbf94",
+    gallery: [
+              "https://randomuser.me/api/portraits/women/25.jpg",
+              "https://randomuser.me/api/portraits/women/65.jpg",
+              "https://randomuser.me/api/portraits/women/30.jpg"
+             ]
 },
 
 // Pollerías
@@ -1031,7 +1246,12 @@
     featured: false, //Puedes cambiar a true
     services: ["Pollo rostizado", "Papas al horno", "Paquetes familiares"],
     schedule: "Lunes a Domingo 10am - 8pm",
-    image: "https://images.unsplash.com/photo-1602881917674-52d02c9f1bea"
+    image: "https://images.unsplash.com/photo-1602881917674-52d02c9f1bea",
+    gallery: [
+              "https://randomuser.me/api/portraits/women/25.jpg",
+              "https://randomuser.me/api/portraits/women/65.jpg",
+              "https://randomuser.me/api/portraits/women/30.jpg"
+             ]
 },
 
 // Carnicerías
@@ -1049,7 +1269,12 @@
     featured: true, //Puedes cambiar a false
     services: ["Cortes especiales", "Marinados", "Servicio a domicilio"],
     schedule: "Lunes a Sábado 6am - 4pm",
-    image: "https://images.unsplash.com/photo-1611250282006-4484dd3f9346"
+    image: "https://images.unsplash.com/photo-1611250282006-4484dd3f9346",
+    gallery: [
+              "https://randomuser.me/api/portraits/women/25.jpg",
+              "https://randomuser.me/api/portraits/women/65.jpg",
+              "https://randomuser.me/api/portraits/women/30.jpg"
+             ]
 },
 
 // Papelerías
@@ -1067,7 +1292,12 @@
     featured: false, //Puedes cambiar a true
     services: ["Venta de útiles", "Copias e impresiones", "Regalos"],
     schedule: "Lunes a Viernes 8am - 6pm",
-    image: "https://images.unsplash.com/photo-1589998059171-988d887df646"
+    image: "https://images.unsplash.com/photo-1589998059171-988d887df646",
+    gallery: [
+              "https://randomuser.me/api/portraits/women/25.jpg",
+              "https://randomuser.me/api/portraits/women/65.jpg",
+              "https://randomuser.me/api/portraits/women/30.jpg"
+             ]
 },
 
 // Imprentas
@@ -1085,7 +1315,12 @@
     featured: true, //Puedes cambiar a false
     services: ["Tarjetas de visita", "Volantes", "Invitaciones"],
     schedule: "Lunes a Sábado 9am - 5pm",
-    image: "https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04"
+    image: "https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04",
+    gallery: [
+              "https://randomuser.me/api/portraits/women/25.jpg",
+              "https://randomuser.me/api/portraits/women/65.jpg",
+              "https://randomuser.me/api/portraits/women/30.jpg"
+             ]
 },
 
 // Hoteles
@@ -1103,7 +1338,12 @@
     featured: true, //Puedes cambiar a flase
     services: ["Habitaciones con jacuzzi", "Servicio a la habitación", "Estacionamiento"],
     schedule: "Recepción 24/7",
-    image: "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb"
+    image: "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb",
+    gallery: [
+              "https://randomuser.me/api/portraits/women/25.jpg",
+              "https://randomuser.me/api/portraits/women/65.jpg",
+              "https://randomuser.me/api/portraits/women/30.jpg"
+             ]
 },
 
 // Talleres de Motos
@@ -1121,7 +1361,12 @@
     featured: false, //Puedes cambiar a true
     services: ["Cambio de aceite", "Reparación de motor", "Pintura"],
     schedule: "Lunes a Sábado 9am - 5pm",
-    image: "https://images.unsplash.com/photo-1601924638867-2b4a1a0d4b53"
+    image: "https://images.unsplash.com/photo-1601924638867-2b4a1a0d4b53",
+    gallery: [
+              "https://randomuser.me/api/portraits/women/25.jpg",
+              "https://randomuser.me/api/portraits/women/65.jpg",
+              "https://randomuser.me/api/portraits/women/30.jpg"
+             ]
 },
 
 // Productos de Limpieza
@@ -1139,7 +1384,12 @@
     featured: false, //Puedes cambiar a true
     services: ["Venta de químicos", "Asesoría técnica", "Entrega inmediata"],
     schedule: "Lunes a Viernes 7am - 3pm",
-    image: "https://images.unsplash.com/photo-1583947581924-860bda6c26a3"
+    image: "https://images.unsplash.com/photo-1583947581924-860bda6c26a3",
+    gallery: [
+              "https://randomuser.me/api/portraits/women/25.jpg",
+              "https://randomuser.me/api/portraits/women/65.jpg",
+              "https://randomuser.me/api/portraits/women/30.jpg"
+             ]
 },
 
 // Purificadoras de Agua
@@ -1157,7 +1407,12 @@
     featured: true, //Puedes cambiar a false
     services: ["Entrega a domicilio", "Mantenimiento de dispensers", "Venta de botellas"],
     schedule: "Lunes a Domingo 7am - 9pm",
-    image: "https://images.unsplash.com/photo-1556742523-5933f22643d3"
+    image: "https://images.unsplash.com/photo-1556742523-5933f22643d3",
+    gallery: [
+              "https://randomuser.me/api/portraits/women/25.jpg",
+              "https://randomuser.me/api/portraits/women/65.jpg",
+              "https://randomuser.me/api/portraits/women/30.jpg"
+             ]
 },
 
 // Policías
@@ -1175,7 +1430,12 @@
     featured: false, //Puedes cambiar a true
     services: ["Patrullaje", "Atención a emergencias", "Orientación ciudadana"],
     schedule: "24/7",
-    image: "https://images.unsplash.com/photo-1581873372796-635b67ca2008"
+    image: "https://images.unsplash.com/photo-1581873372796-635b67ca2008",
+    gallery: [
+              "https://randomuser.me/api/portraits/women/25.jpg",
+              "https://randomuser.me/api/portraits/women/65.jpg",
+              "https://randomuser.me/api/portraits/women/30.jpg"
+             ]
 },
 
 // Ambulancias
@@ -1193,7 +1453,12 @@
     featured: true, //Puedes cambiar a false
     services: ["Traslado hospitalario", "Primeros auxilios", "Equipo de reanimación"],
     schedule: "24/7",
-    image: "https://images.unsplash.com/photo-1630513059603-8625158d3aec"
+    image: "https://images.unsplash.com/photo-1630513059603-8625158d3aec",
+    gallery: [
+              "https://randomuser.me/api/portraits/women/25.jpg",
+              "https://randomuser.me/api/portraits/women/65.jpg",
+              "https://randomuser.me/api/portraits/women/30.jpg"
+             ]
 },
           
 {
@@ -1211,7 +1476,12 @@
     featured: true, //Puedes cambiar a true
     services: ["Incendios", "Rescates", "Manejo de materiales peligrosos"],
     schedule: "24/7",
-    image: "https://images.unsplash.com/photo-1581873372796-635b67ca2008"
+    image: "https://images.unsplash.com/photo-1581873372796-635b67ca2008",
+    gallery: [
+              "https://randomuser.me/api/portraits/women/25.jpg",
+              "https://randomuser.me/api/portraits/women/65.jpg",
+              "https://randomuser.me/api/portraits/women/30.jpg"
+             ]
 },
 {
     id: 53,
@@ -1227,7 +1497,12 @@
     featured: true, //Puedes cambiar a false
     services: ["Pan dulce", "Pasteles", "Repostería fina"],
     schedule: "Lunes a Domingo 6am - 9pm",
-    image: "https://images.unsplash.com/photo-1509440159596-0249088772ff"
+    image: "https://images.unsplash.com/photo-1509440159596-0249088772ff",
+    gallery: [
+              "https://randomuser.me/api/portraits/women/25.jpg",
+              "https://randomuser.me/api/portraits/women/65.jpg",
+              "https://randomuser.me/api/portraits/women/30.jpg"
+             ]
 },
 {
     id: 54,
@@ -1243,7 +1518,12 @@
     featured: false, //Puedes cambiar a true
     services: ["Cambio de módulo", "Software", "Mantenimiento"],
     schedule: "Lunes a Sábado 10am - 8pm",
-    image: "https://images.unsplash.com/photo-1581091226033-d5c48150dbaa"
+    image: "https://images.unsplash.com/photo-1581091226033-d5c48150dbaa",
+    gallery: [
+              "https://randomuser.me/api/portraits/women/25.jpg",
+              "https://randomuser.me/api/portraits/women/65.jpg",
+              "https://randomuser.me/api/portraits/women/30.jpg"
+             ]
 },
 {
     id: 55,
@@ -1259,7 +1539,12 @@
     featured: true, //Puedes cambiar a false
     services: ["Vuelos", "Hoteles", "Tours guiados"],
     schedule: "Lunes a Viernes 9am - 6pm",
-    image: "https://images.unsplash.com/photo-1503220317375-aaad61436b1b"
+    image: "https://images.unsplash.com/photo-1503220317375-aaad61436b1b",
+    gallery: [
+              "https://randomuser.me/api/portraits/women/25.jpg",
+              "https://randomuser.me/api/portraits/women/65.jpg",
+              "https://randomuser.me/api/portraits/women/30.jpg"
+             ]
 },
 {
     id: 56,
@@ -1275,7 +1560,12 @@
     featured: false, //Puedes cambiar a true
     services: ["Partes mecánicas", "Accesorios", "Asesoría técnica"],
     schedule: "Lunes a Sábado 8am - 6pm",
-    image: "https://images.unsplash.com/photo-1580273916550-e32303c1b6b4"
+    image: "https://images.unsplash.com/photo-1580273916550-e32303c1b6b4",
+    gallery: [
+              "https://randomuser.me/api/portraits/women/25.jpg",
+              "https://randomuser.me/api/portraits/women/65.jpg",
+              "https://randomuser.me/api/portraits/women/30.jpg"
+             ]
 },
 {
     id: 57,
@@ -1291,7 +1581,12 @@
     featured: true, //Puedes cambiar a false
     services: ["Bodas", "Eventos corporativos", "Entrega a domicilio"],
     schedule: "Lunes a Domingo 8am - 8pm",
-    image: "https://images.unsplash.com/photo-1560717789-0ac7c58ac90a"
+    image: "https://images.unsplash.com/photo-1560717789-0ac7c58ac90a",
+    gallery: [
+              "https://randomuser.me/api/portraits/women/25.jpg",
+              "https://randomuser.me/api/portraits/women/65.jpg",
+              "https://randomuser.me/api/portraits/women/30.jpg"
+             ]
 },
 {
     id: 58,
@@ -1307,7 +1602,12 @@
     featured: true, //Puedes cambiar a false
     services: ["Uñas encarnadas", "Hongos", "Ortesis"],
     schedule: "Lunes a Viernes 10am - 7pm",
-    image: "https://images.unsplash.com/photo-1629909613654-28e377c0b8e0"
+    image: "https://images.unsplash.com/photo-1629909613654-28e377c0b8e0",
+    gallery: [
+              "https://randomuser.me/api/portraits/women/25.jpg",
+              "https://randomuser.me/api/portraits/women/65.jpg",
+              "https://randomuser.me/api/portraits/women/30.jpg"
+             ]
 },
 {
     id: 59,
@@ -1323,7 +1623,12 @@
     featured: false, //Puedes cambiar a true
     services: ["Bodas", "XV años", "Catering incluido"],
     schedule: "Lunes a Domingo 7am - 12am",
-    image: "https://images.unsplash.com/photo-1575425186775-b8de9a427e67"
+    image: "https://images.unsplash.com/photo-1575425186775-b8de9a427e67",
+    gallery: [
+              "https://randomuser.me/api/portraits/women/25.jpg",
+              "https://randomuser.me/api/portraits/women/65.jpg",
+              "https://randomuser.me/api/portraits/women/30.jpg"
+             ]
 },
 {
     id: 60,
@@ -1339,7 +1644,12 @@
     featured: true, //Puedes cambiar a false
     services: ["Renta por día", "Transporte incluido", "Montaje profesional"],
     schedule: "Lunes a Sábado 9am - 6pm",
-    image: "https://images.unsplash.com/photo-1555041469-586a214d43a6"
+    image: "https://images.unsplash.com/photo-1555041469-586a214d43a6",
+    gallery: [
+              "https://randomuser.me/api/portraits/women/25.jpg",
+              "https://randomuser.me/api/portraits/women/65.jpg",
+              "https://randomuser.me/api/portraits/women/30.jpg"
+             ]
 }          
          ];
 
@@ -1552,6 +1862,24 @@
 }
       
       
+      // Lightbox functions
+function showLightbox(imgUrl) {
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    lightboxImg.src = imgUrl;
+    lightbox.classList.remove('hidden');
+}
+
+function closeLightbox() {
+    document.getElementById('lightbox').classList.add('hidden');
+}
+
+// Cerrar al hacer clic fuera de la imagen
+document.getElementById('lightbox').addEventListener('click', (e) => {
+    if (e.target.id === 'lightbox') closeLightbox();
+});
+      
+      
         // Show professional details
         function showProfessionalDetails(id) {
             const professional = professionals.find(pro => pro.id === parseInt(id));
@@ -1613,6 +1941,20 @@
                             <p class="text-gray-700 mb-4"><i class="fas fa-map-marker-alt text-blue-500 mr-2"></i>${professional.address}</p>
                             
                             </div>
+                            
+                            ${professional.membership === 'premium' && professional.gallery && professional.gallery.length > 0 ? `
+    <div class="mt-8">
+        <h4 class="text-xl font-bold mb-4 text-gray-800">Galería de Trabajos</h4>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-4 gallery-grid">
+            ${professional.gallery.map(img => `
+                <img src="${img}" 
+                     alt="Trabajo de ${professional.name}" 
+                     class="cursor-pointer w-full h-48 object-cover rounded-lg shadow-md hover:shadow-lg transition-transform transform hover:scale-105"
+                     onclick="showLightbox('${img}')">
+            `).join('')}
+        </div>
+    </div>
+` : ''}
                         </div>
                         
 
