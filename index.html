@@ -192,7 +192,7 @@
                   
                   <div class="border-t border-gray-700 mt-8 pt-6 text-center text-gray-400">
                     <h3 class="text-xl font-bold mb-4">Anunciate con Nosotros</h3>
-                    <p class="text-gray-300">Tenemos Planes de 3, 6, 9 y 12 Meses.</p>
+                    <p class="text-gray-300">Tenemos Planes de 3, 6, 9 y 12 Meses a un super precio.</p>
                 </div>
             </div>
             
@@ -251,6 +251,15 @@
         'Purificadoras':['whatsapp', 'call'],  
         'Policías': ['call'],  
         'Ambulancias': ['call'],
+        'Bomberos': ['call'],
+        'Panaderías': ['call'],
+        'Reparación de Celulares': ['whatsapp', 'call'],
+        'Agencias de Viajes':['whatsapp', 'call'],
+        'Refaccionarias':['whatsapp', 'call'],
+        'Florerías':['whatsapp', 'call'],
+        'Podólogos':['whatsapp', 'call'],
+        'Quintas':['whatsapp', 'call'],
+        'Renta de Muebles':['whatsapp', 'call'],
 };
       
         // Base de datos de los profesionales
@@ -1185,8 +1194,153 @@
     services: ["Traslado hospitalario", "Primeros auxilios", "Equipo de reanimación"],
     schedule: "24/7",
     image: "https://images.unsplash.com/photo-1630513059603-8625158d3aec"
-}
+},
           
+{
+  // Bomberos
+    id: 52,
+    name: "Estación de Bomberos Central",
+    category: "Bomberos",
+    specialty: "Emergencias y rescates",
+    description: "Servicio de emergencias las 24 horas.",
+    phone: "+525533445500",
+    address: "Av. Seguridad 100",
+    experience: "Servicio público",
+    price: "Servicio gratuito",
+    membership: "premium", //Puedes cambiar a free
+    featured: true, //Puedes cambiar a true
+    services: ["Incendios", "Rescates", "Manejo de materiales peligrosos"],
+    schedule: "24/7",
+    image: "https://images.unsplash.com/photo-1581873372796-635b67ca2008"
+},
+{
+    id: 53,
+    name: "Panadería La Tradición",
+    category: "Panaderías",
+    specialty: "Pan artesanal",
+    description: "Horneando calidad desde 1985.",
+    phone: "+525544778899",
+    address: "Calle Dulce 45",
+    experience: "35 años",
+    price: "$30 - Pan de caja",
+    membership: "premium", //Puedes cambiar a free
+    featured: true, //Puedes cambiar a false
+    services: ["Pan dulce", "Pasteles", "Repostería fina"],
+    schedule: "Lunes a Domingo 6am - 9pm",
+    image: "https://images.unsplash.com/photo-1509440159596-0249088772ff"
+},
+{
+    id: 54,
+    name: "CelTech Reparaciones",
+    category: "Reparación de Celulares",
+    specialty: "Pantallas rotas",
+    description: "Reparación express de dispositivos móviles.",
+    phone: "+525577889922",
+    address: "Plaza Tecnológica Local 15",
+    experience: "5 años",
+    price: "$400 - Cambio de pantalla",
+    membership: "free", //Puedes cambiar a premium
+    featured: false, //Puedes cambiar a true
+    services: ["Cambio de módulo", "Software", "Mantenimiento"],
+    schedule: "Lunes a Sábado 10am - 8pm",
+    image: "https://images.unsplash.com/photo-1581091226033-d5c48150dbaa"
+},
+{
+    id: 55,
+    name: "Mundo Travel",
+    category: "Agencias de Viajes",
+    specialty: "Paquetes todo incluido",
+    description: "Las mejores ofertas de viaje internacional.",
+    phone: "+525512345600",
+    address: "Plaza Comercial Nivel 3",
+    experience: "12 años",
+    price: "$$$ - Paquetes personalizados",
+    membership: "premium", //Puedes cambiar a free
+    featured: true, //Puedes cambiar a false
+    services: ["Vuelos", "Hoteles", "Tours guiados"],
+    schedule: "Lunes a Viernes 9am - 6pm",
+    image: "https://images.unsplash.com/photo-1503220317375-aaad61436b1b"
+},
+{
+    id: 56,
+    name: "Refaccionaria Automotriz",
+    category: "Refaccionarias",
+    specialty: "Partes para autos americanos",
+    description: "Mayoreo y menudeo de refacciones originales.",
+    phone: "+525533221144",
+    address: "Av. Automotriz 220",
+    experience: "8 años",
+    price: "$$ - Precios competitivos",
+    membership: "free", //Puedes cambiar a premium
+    featured: false, //Puedes cambiar a true
+    services: ["Partes mecánicas", "Accesorios", "Asesoría técnica"],
+    schedule: "Lunes a Sábado 8am - 6pm",
+    image: "https://images.unsplash.com/photo-1580273916550-e32303c1b6b4"
+},
+{
+    id: 57,
+    name: "Flores Exóticas",
+    category: "Florerías",
+    specialty: "Arreglos para eventos",
+    description: "Diseños florales personalizados.",
+    phone: "+525544556633",
+    address: "Mercado de Flores Local 8",
+    experience: "7 años",
+    price: "$500 - Arreglo básico",
+    membership: "premium", //Puedes cambiar a free
+    featured: true, //Puedes cambiar a false
+    services: ["Bodas", "Eventos corporativos", "Entrega a domicilio"],
+    schedule: "Lunes a Domingo 8am - 8pm",
+    image: "https://images.unsplash.com/photo-1560717789-0ac7c58ac90a"
+},
+{
+    id: 58,
+    name: "Clínica del Pie",
+    category: "Podólogos",
+    specialty: "Cirugía podológica",
+    description: "Cuidado integral de la salud podológica.",
+    phone: "+525577885544",
+    address: "Av. Salud 1500",
+    experience: "10 años",
+    price: "$800 - Consulta especializada",
+    membership: "premium", //Puedes cambiar a free
+    featured: true, //Puedes cambiar a false
+    services: ["Uñas encarnadas", "Hongos", "Ortesis"],
+    schedule: "Lunes a Viernes 10am - 7pm",
+    image: "https://images.unsplash.com/photo-1629909613654-28e377c0b8e0"
+},
+{
+    id: 59,
+    name: "Quinta Los Arcos",
+    category: "Quintas",
+    specialty: "Eventos sociales",
+    description: "Espacio para 500 personas con jardín botánico.",
+    phone: "+525512120000",
+    address: "Camino Viejo a la Quinta 123",
+    experience: "15 años",
+    price: "$15,000 - Renta por día",
+    membership: "free", //Puedes cambiar a premium
+    featured: false, //Puedes cambiar a true
+    services: ["Bodas", "XV años", "Catering incluido"],
+    schedule: "Lunes a Domingo 7am - 12am",
+    image: "https://images.unsplash.com/photo-1575425186775-b8de9a427e67"
+},
+{
+    id: 60,
+    name: "Muebles Express",
+    category: "Renta de Muebles",
+    specialty: "Mobiliario para eventos",
+    description: "Amplio catálogo de muebles para cualquier ocasión.",
+    phone: "+525533440000",
+    address: "Av. Mueblera 456",
+    experience: "6 años",
+    price: "$200 - Juego de mesa con sillas",
+    membership: "premium", //Puedes cambiar a free
+    featured: true, //Puedes cambiar a false
+    services: ["Renta por día", "Transporte incluido", "Montaje profesional"],
+    schedule: "Lunes a Sábado 9am - 6pm",
+    image: "https://images.unsplash.com/photo-1555041469-586a214d43a6"
+}          
          ];
 
         // Get all unique categories
@@ -1305,7 +1459,16 @@
         'Productos de Limpieza': '<i class="fas fa-broom"></i>',
         'Purificadoras de Agua': '<i class="fas fa-water"></i>',
         'Policías': '<i class="fas fa-shield-alt"></i>',
-        'Ambulancias': '<i class="fas fa-ambulance"></i>'
+        'Ambulancias': '<i class="fas fa-ambulance"></i>',
+        'Bomberos': '<i class="fas fa-fire-extinguisher"></i>',
+        'Panaderías': '<i class="fas fa-bread-slice"></i>',
+        'Reparación de Celulares': '<i class="fas fa-mobile-alt"></i>',
+        'Agencias de Viajes': '<i class="fas fa-plane-departure"></i>',
+        'Refaccionarias': '<i class="fas fa-car-side"></i>',
+        'Florerías': '<i class="fas fa-spa"></i>',
+        'Podólogos': '<i class="fas fa-user-md"></i>',
+        'Quintas': '<i class="fas fa-home"></i>',
+        'Renta de Muebles': '<i class="fas fa-couch"></i>'
             };
             
             return icons[category] || '<i class="fas fa-briefcase"></i>';
