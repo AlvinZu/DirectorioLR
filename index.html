@@ -200,6 +200,59 @@
     </footer>
     
     <script>
+      
+      const contactConfig = {
+    // Categorías configurar cuales botones aparecen    
+        'Dentistas': ['whatsapp'],  
+        'Nutriólogos': ['whatsapp'],  
+        'Quiroprácticos': ['whatsapp'],  
+        'Doctores': ['whatsapp'],  
+        'Fisioterapeutas': ['whatsapp'],  
+        'Tiendas de ropa': ['whatsapp'],  
+        'Venta de suplementos': ['whatsapp'],  
+        'Barberías': ['whatsapp', 'call'],  
+        'Pintores': ['whatsapp'],  
+        'Carpinteros': ['whatsapp'],  
+        'Electricistas': ['whatsapp'],  
+        'Plomeros': ['whatsapp'],  
+        'Fotógrafos': ['whatsapp'],  
+        'Entrenadores Personales': ['whatsapp'],  
+        'Abogados': ['whatsapp'],  
+        'Psicólogos': ['whatsapp'],  
+        'Veterinarios': ['whatsapp', 'call'],  
+        'Mecánicos': ['call'],  
+        'Técnicos en Computadoras': ['whatsapp'],  
+        'Tatuadores': ['whatsapp'],  
+        'Restaurantes': ['call'],  
+        'Servicio a Domicilio': ['whatsapp', 'call'],  
+        'Construcción': ['call'],  
+        'Arquitectos': ['whatsapp', 'call'],  
+        'Uñas': ['whatsapp'],  
+        'Rotulistas': ['whatsapp'],  
+        'Llanteras': ['whatsapp', 'call'],  
+        'Sitios de Taxis': ['call'],  
+        'Masajistas': ['whatsapp'],  
+        'Vinaterías': ['call'],  
+        'Vidrierías': ['whatsapp', 'call'],  
+        'Herreros': ['whatsapp', 'call'],  
+        'Ferreterías': ['call'],  
+        'Loncherías': ['call'],  
+        'Lavanderías': ['whatsapp', 'call'],  
+        'Pastelerías': ['call'],  
+        'Cafeterías': ['call'],  
+        'Pizzerías': ['call'],  
+        'Pollerías': ['whatsapp', 'call'],  
+        'Carnicerías': ['whatsapp', 'call'],  
+        'Papelerías': ['whatsapp'],  
+        'Imprentas': ['whatsapp', 'call'],  
+        'Hoteles': ['call'],  
+        'Talleres de Motos': ['call'],  
+        'Productos de Limpieza': ['whatsapp', 'call'],  
+        'Purificadoras':['whatsapp', 'call'],  
+        'Policías': ['call'],  
+        'Ambulancias': ['call'],
+};
+      
         // Base de datos de los profesionales
         const professionals = [
             // Dentists
@@ -1303,6 +1356,39 @@
             return card;
         }
         
+      //genera los botones de contactos
+      function generateContactButtons(professional) {
+    const config = contactConfig[professional.category] || ['whatsapp']; // Default: WhatsApp
+    let buttons = '';
+    
+    const phoneNumber = professional.phone.replace(/\D/g, ''); // Limpia el número
+    
+    config.forEach(method => {
+        if (method === 'whatsapp') {
+            buttons += `
+                <a href="https://wa.me/${phoneNumber}?text=Hola%20${encodeURIComponent(professional.name.split(' ')[0])},%20vi%20tu%20perfil%20en%20DirectorioPro%20y%20me%20gustaría%20saber%20más%20sobre%20tus%20servicios" 
+                   target="_blank" 
+                   class="block bg-green-500 text-white text-center py-3 rounded-lg hover:bg-green-600 transition-colors">
+                    <i class="fab fa-whatsapp mr-2"></i> Contactar por WhatsApp
+                </a>
+            `;
+        }
+        
+        if (method === 'call') {
+            const isEmergency = ['Policías', 'Ambulancias', 'Bomberos'].includes(professional.category);
+            buttons += `
+                <a href="tel:${phoneNumber}" 
+                   class="block ${isEmergency ? 'bg-red-500 emergency-btn' : 'bg-blue-500'} text-white text-center py-3 rounded-lg hover:${isEmergency ? 'bg-red-600' : 'bg-blue-600'} transition-colors">
+                    <i class="fas fa-phone mr-2"></i> ${isEmergency ? 'Llamada de Emergencia' : 'Llamar ahora'}
+                </a>
+            `;
+        }
+    });
+    
+    return buttons;
+}
+      
+      
         // Show professional details
         function showProfessionalDetails(id) {
             const professional = professionals.find(pro => pro.id === parseInt(id));
@@ -1324,19 +1410,9 @@
                         <p class="text-blue-600 font-medium">${professional.specialty}</p>
                         <p class="text-gray-600 mt-2">${professional.category}</p>
                         
-                        <div class="mt-6 w-full">
-    ${professional.category === 'Policías' || professional.category === 'Ambulancias' ? `
-        <a href="tel:${professional.phone.replace(/\D/g, '')}" 
-           class="block bg-red-500 text-white text-center py-3 rounded-lg hover:bg-red-600 transition-colors mb-3">
-            <i class="fas fa-phone mr-2"></i> Llamar
-        </a>
-    ` : `
-        <a href="https://wa.me/${professional.phone.replace('+', '')}?text=Hola%20${encodeURIComponent(professional.name.split(' ')[0])},%20vi%20tu%20perfil%20en%20DirectorioPro%20y%20me%20gustaría%20saber%20más%20sobre%20tus%20servicios" 
-           target="_blank" 
-           class="block bg-green-500 text-white text-center py-3 rounded-lg hover:bg-green-600 transition-colors mb-3">
-            <i class="fab fa-whatsapp mr-2"></i> Contactar por WhatsApp
-        </a>
-    `}
+                       
+<div class="mt-6 w-full space-y-3">
+    ${generateContactButtons(professional)}
 </div>
                     </div>
                     
