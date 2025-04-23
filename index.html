@@ -270,6 +270,8 @@
         'Podólogos':['whatsapp', 'call'],
         'Quintas':['whatsapp', 'call'],
         'Renta de Muebles':['whatsapp', 'call'],
+        'Músicos': ['whatsapp', 'call'],
+        'Maquillistas': ['whatsapp'],
 };
       
         // Base de datos de los profesionales
@@ -1652,7 +1654,52 @@
               "https://randomuser.me/api/portraits/women/65.jpg",
               "https://randomuser.me/api/portraits/women/30.jpg"
              ]
-}          
+},     
+    // Músicos
+{
+    id: 61,
+    name: "Banda Los Reyes",
+    category: "Músicos",
+    specialty: "Música regional mexicana",
+    description: "Banda sinaloense para eventos sociales y fiestas.",
+    phone: "+525533445566",
+    address: "Calle Música 123",
+    experience: "8 años",
+    price: "$5,000 - 4 horas",
+    membership: "premium", // Puedes cambiar a free
+    featured: true, // Puedes cambiar a false
+    services: ["Eventos sociales", "Música en vivo", "Show completo"],
+    schedule: "Viernes a Domingo 6pm - 2am",
+    image: "./Images/Logo.jpg",
+    gallery: [
+              "https://randomuser.me/api/portraits/women/25.jpg",
+              "https://randomuser.me/api/portraits/women/65.jpg",
+              "https://randomuser.me/api/portraits/women/30.jpg"
+             ]
+},
+
+// Maquillistas
+{
+    id: 62,
+    name: "Studio Makeup by Ana",
+    category: "Maquillistas",
+    specialty: "Maquillaje para novias",
+    description: "Maquillaje profesional para ocasiones especiales.",
+    phone: "+525544556677",
+    address: "Plaza del Maquillaje Local 5",
+    experience: "5 años",
+    price: "$800 - Maquillaje completo",
+    membership: "premium", // Puedes cambiar a free
+    featured: true, // Puedes cambiar a false
+    services: ["Maquillaje de noche", "Maquillaje artístico", "Asesoría de imagen"],
+    schedule: "Lunes a Sábado 9am - 6pm",
+    image: "https://images.unsplash.com/photo-1599351431402-9b7ddf4a1d8a",
+    gallery: [
+              "https://randomuser.me/api/portraits/women/25.jpg",
+              "https://randomuser.me/api/portraits/women/65.jpg",
+              "https://randomuser.me/api/portraits/women/30.jpg"
+             ]    
+  }
          ];
 
         // Get all unique categories
@@ -1780,7 +1827,9 @@
         'Florerías': '<i class="fas fa-spa"></i>',
         'Podólogos': '<i class="fas fa-user-md"></i>',
         'Quintas': '<i class="fas fa-home"></i>',
-        'Renta de Muebles': '<i class="fas fa-couch"></i>'
+        'Renta de Muebles': '<i class="fas fa-couch"></i>',
+        'Músicos': '<i class="fas fa-music"></i>',
+        'Maquillistas': '<i class="fas fa-paint-brush"></i>'
             };
             
             return icons[category] || '<i class="fas fa-briefcase"></i>';
