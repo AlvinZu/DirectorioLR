@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Directorio LR</title>
+    <title>DirectorioPro LR</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -59,6 +59,7 @@
             font-size: 12px;
             font-weight: bold;
         }
+      
     </style>
 </head>
 <body class="bg-gray-50 font-sans">
@@ -67,7 +68,7 @@
         <div class="container mx-auto px-4 py-3 flex justify-between items-center">
             <div class="flex items-center space-x-2">
                 <i class="fas fa-briefcase text-2xl"></i>
-                <h1 class="text-xl font-bold">Directorio Los Reyes</h1>
+                <h1 class="text-xl font-bold">DirectorioPro Los Reyes</h1>
             </div>
             <nav class="hidden md:flex space-x-6">
                 <button id="homeBtn" class="hover:text-blue-200 font-medium flex items-center">
@@ -76,6 +77,9 @@
                 <button id="featuredBtn" class="hover:text-blue-200 font-medium flex items-center">
                     <i class="fas fa-star mr-1"></i> Destacados
                 </button>
+              <button id="offersBtn" class="hover:text-blue-200 font-medium flex items-center">
+              <i class="fas fa-tag mr-1"></i> Ofertas Exclusivas
+              </button>
             </nav>
             <button class="md:hidden text-xl" id="mobileMenuBtn">
                 <i class="fas fa-bars"></i>
@@ -89,6 +93,9 @@
             </button>
             <button id="mobileFeaturedBtn" class="block w-full text-left py-2 hover:bg-blue-600 rounded px-2">
                 <i class="fas fa-star mr-2"></i> Destacados
+            </button>
+            <button id="mobileOffersBtn" class="block w-full text-left py-2 hover:bg-blue-600 rounded px-2">
+            <i class="fas fa-tag mr-2"></i> Ofertas Exclusivas
             </button>
         </div>
     </header>
@@ -171,6 +178,21 @@
         </div>
     </main>
     
+    
+               <!-- Offers Screen - Pantalla de Ofertas -->
+<div id="offersScreen" class="hidden fade-in">
+    <div class="flex items-center mb-6">
+        <button id="backFromOffers" class="mr-4 text-blue-600 hover:text-blue-800">
+            <i class="fas fa-arrow-left text-xl"></i>
+        </button>
+        <h2 class="text-2xl font-bold text-gray-800">Ofertas Exclusivas</h2>
+    </div>
+    
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="offersGrid">
+        <!-- Las ofertas se cargarán aquí -->
+    </div>
+</div>
+              
     <!-- Footer -->
     <footer class="bg-gray-800 text-white py-8">
         <div class="container mx-auto px-4">
@@ -197,6 +219,7 @@
                     <p class="text-gray-300">Tenemos Planes de 3, 6, 9 y 12 Meses a un super precio.</p>
                 </div>
             </div>
+            
             <!-- Lightbox -->
 <div id="lightbox" class="hidden fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4">
     <div class="max-w-4xl w-full relative">
@@ -206,6 +229,7 @@
         </button>
     </div>
 </div>
+                            
         </div>
     </footer>
     
@@ -304,7 +328,16 @@
                           "https://randomuser.me/api/portraits/women/65.jpg",
                           "https://randomuser.me/api/portraits/women/30.jpg",
                           "./Images/Logo.jpg"
-                         ]
+                         ],
+              offers: [
+                       {
+                       title: "Limpieza Dental Completa",
+                       discount: "30% OFF",
+                       validity: "Válido del 10/09/23 hasta 30/09/2023",
+                       description: "Paquete completo de limpieza y blanqueamiento dental",
+                       conditions: "Aplicable solo en primeras citas. No acumulable con otras promociones"
+                       }
+                      ]
             },
             {
                 id: 2,
@@ -326,7 +359,10 @@
                           "https://randomuser.me/api/portraits/women/25.jpg",
                           "https://randomuser.me/api/portraits/women/65.jpg",
                           "https://randomuser.me/api/portraits/women/30.jpg"
-                         ]
+                         ],
+                offers: [
+                       
+                        ]
             },
             
             // Nutritionists
@@ -351,7 +387,16 @@
                           "https://randomuser.me/api/portraits/women/65.jpg",
                           "https://randomuser.me/api/portraits/women/30.jpg",
                           "./Images/Logo.jpg"
-                         ]
+                         ],
+                offers: [
+                         {
+                          title: "Recomposición Corporal",
+                          discount: "$50 PESOS DE DESCUENTO",
+                          validity: "Válido hasta el 30/09/2026",
+                          description: "Consulta completa con plicometria y valoración",
+                          conditions: "Aplicable solo en primeras citas. No acumulable con otras promociones"
+                        }
+                       ]
             },
             
             // Chiropractors
@@ -375,7 +420,23 @@
                           "https://randomuser.me/api/portraits/women/25.jpg",
                           "https://randomuser.me/api/portraits/women/65.jpg",
                           "https://randomuser.me/api/portraits/women/30.jpg"
-                         ]
+                         ],
+              offers: [
+        {
+            title: "Paquete Inicial de Ajustes",
+            discount: "40% OFF",
+            validity: "Válido del 01/10/23 hasta 15/11/2023",
+            description: "3 sesiones de ajuste quiropráctico completo + evaluación postural",
+            conditions: "Válido para nuevos pacientes. Incluye estudio de rayos X básico"
+        },
+        {
+            title: "Ajuste Express de Emergencia",
+            discount: "25% OFF",
+            validity: "Válido todos los miércoles de octubre",
+            description: "Sesión express para alivio inmediato de dolor lumbar",
+            conditions: "Solo atención previa cita. Máximo 1 uso por paciente"
+        }
+    ]
             },
             
             // Doctors
@@ -399,7 +460,10 @@
                           "https://randomuser.me/api/portraits/women/25.jpg",
                           "https://randomuser.me/api/portraits/women/65.jpg",
                           "https://randomuser.me/api/portraits/women/30.jpg"
-                         ]
+                         ],
+                offers: [
+                       
+                        ]
             },
             
             // Physiotherapists
@@ -423,7 +487,16 @@
                           "https://randomuser.me/api/portraits/women/25.jpg",
                           "https://randomuser.me/api/portraits/women/65.jpg",
                           "https://randomuser.me/api/portraits/women/30.jpg"
-                         ]
+                         ],
+              offers: [
+                {
+                  title: "Primera Consulta Express",
+                  discount: "50% OFF",
+                  validity: "Promoción permanente",
+                  description: "Valoración inicial con protocolo de tratamiento personalizado",
+                  conditions: "Solo para nuevos pacientes. Máximo 1 uso por persona"
+               }
+                      ]
             },
             
             // Clothing Stores
@@ -447,7 +520,10 @@
                           "https://randomuser.me/api/portraits/women/25.jpg",
                           "https://randomuser.me/api/portraits/women/65.jpg",
                           "https://randomuser.me/api/portraits/women/30.jpg"
-                         ]
+                         ],
+                offers: [
+                       
+                        ]
             },
             
             // Supplement Stores
@@ -471,7 +547,10 @@
                           "https://randomuser.me/api/portraits/women/25.jpg",
                           "https://randomuser.me/api/portraits/women/65.jpg",
                           "https://randomuser.me/api/portraits/women/30.jpg"
-                         ]
+                         ],
+                offers: [
+                       
+                        ]
             },
             
             // Barbers
@@ -519,7 +598,10 @@
                           "https://randomuser.me/api/portraits/women/25.jpg",
                           "https://randomuser.me/api/portraits/women/65.jpg",
                           "https://randomuser.me/api/portraits/women/30.jpg"
-                         ]
+                         ],
+                offers: [
+                       
+                        ]
             },
             
             // Carpenters
@@ -543,7 +625,10 @@
                           "https://randomuser.me/api/portraits/women/25.jpg",
                           "https://randomuser.me/api/portraits/women/65.jpg",
                           "https://randomuser.me/api/portraits/women/30.jpg"
-                         ]
+                         ],
+                offers: [
+                       
+                        ]
             },
             
             // Electricians
@@ -567,7 +652,10 @@
                           "https://randomuser.me/api/portraits/women/25.jpg",
                           "https://randomuser.me/api/portraits/women/65.jpg",
                           "https://randomuser.me/api/portraits/women/30.jpg"
-                         ]
+                         ],
+                offers: [
+                       
+                        ]
             },
             
             // Plumbers
@@ -591,7 +679,10 @@
                           "https://randomuser.me/api/portraits/women/25.jpg",
                           "https://randomuser.me/api/portraits/women/65.jpg",
                           "https://randomuser.me/api/portraits/women/30.jpg"
-                         ]
+                         ],
+                offers: [
+                       
+                        ]
             },
             
             // Photographers
@@ -687,7 +778,10 @@
                           "https://randomuser.me/api/portraits/women/25.jpg",
                           "https://randomuser.me/api/portraits/women/65.jpg",
                           "https://randomuser.me/api/portraits/women/30.jpg"
-                         ]
+                         ],
+                offers: [
+                       
+                        ]
             },
             
             // Veterinarians
@@ -735,7 +829,10 @@
                           "https://randomuser.me/api/portraits/women/25.jpg",
                           "https://randomuser.me/api/portraits/women/65.jpg",
                           "https://randomuser.me/api/portraits/women/30.jpg"
-                         ]
+                         ],
+                offers: [
+                       
+                        ]
             },
             
             // Computer Technicians
@@ -759,7 +856,10 @@
                           "https://randomuser.me/api/portraits/women/25.jpg",
                           "https://randomuser.me/api/portraits/women/65.jpg",
                           "https://randomuser.me/api/portraits/women/30.jpg"
-                         ]
+                         ],
+                offers: [
+                       
+                        ]
             },
           // Tatoos
             {
@@ -782,7 +882,10 @@
                           "https://randomuser.me/api/portraits/women/25.jpg",
                           "https://randomuser.me/api/portraits/women/65.jpg",
                           "https://randomuser.me/api/portraits/women/30.jpg"
-                         ]
+                         ],
+                offers: [
+                       
+                        ]
             },
           {
                 id: 22,
@@ -871,7 +974,10 @@
                   "https://randomuser.me/api/portraits/women/25.jpg",
                   "https://randomuser.me/api/portraits/women/65.jpg",
                   "https://randomuser.me/api/portraits/women/30.jpg"
-                 ]
+                 ],
+        offers: [
+                       
+                ]
     },
           
           // Construcción:
@@ -940,7 +1046,10 @@
               "https://randomuser.me/api/portraits/women/25.jpg",
               "https://randomuser.me/api/portraits/women/65.jpg",
               "https://randomuser.me/api/portraits/women/30.jpg"
-             ]
+             ],
+    offers: [
+                       
+            ]
 },
 
 // Rotulistas
@@ -986,7 +1095,10 @@
               "https://randomuser.me/api/portraits/women/25.jpg",
               "https://randomuser.me/api/portraits/women/65.jpg",
               "https://randomuser.me/api/portraits/women/30.jpg"
-             ]
+             ],
+    offers: [
+                       
+            ]
 },
 
 // Sitios de Taxis
@@ -1032,7 +1144,10 @@
               "https://randomuser.me/api/portraits/women/25.jpg",
               "https://randomuser.me/api/portraits/women/65.jpg",
               "https://randomuser.me/api/portraits/women/30.jpg"
-             ]
+             ],
+    offers: [
+                       
+            ]
 },
 
     // Vinaterías
@@ -1078,7 +1193,10 @@
               "https://randomuser.me/api/portraits/women/25.jpg",
               "https://randomuser.me/api/portraits/women/65.jpg",
               "https://randomuser.me/api/portraits/women/30.jpg"
-             ]
+             ],
+    offers: [
+                       
+            ]
 },
 
 // Herreros
@@ -1124,8 +1242,12 @@
               "https://randomuser.me/api/portraits/women/25.jpg",
               "https://randomuser.me/api/portraits/women/65.jpg",
               "https://randomuser.me/api/portraits/women/30.jpg"
-             ]
+             ],
+    offers: [
+                       
+            ]
 },
+          
           // Loncherías
 {
     id: 37,
@@ -1146,7 +1268,10 @@
               "https://randomuser.me/api/portraits/women/25.jpg",
               "https://randomuser.me/api/portraits/women/65.jpg",
               "https://randomuser.me/api/portraits/women/30.jpg"
-             ]
+             ],
+    offers: [
+                       
+            ]
 },
 
 // Lavanderías
@@ -1215,7 +1340,10 @@
               "https://randomuser.me/api/portraits/women/25.jpg",
               "https://randomuser.me/api/portraits/women/65.jpg",
               "https://randomuser.me/api/portraits/women/30.jpg"
-             ]
+             ],
+    offers: [
+                       
+            ]
 },
 
 // Pizzerías
@@ -1261,7 +1389,10 @@
               "https://randomuser.me/api/portraits/women/25.jpg",
               "https://randomuser.me/api/portraits/women/65.jpg",
               "https://randomuser.me/api/portraits/women/30.jpg"
-             ]
+             ],
+    offers: [
+                       
+            ]
 },
 
 // Carnicerías
@@ -1307,7 +1438,10 @@
               "https://randomuser.me/api/portraits/women/25.jpg",
               "https://randomuser.me/api/portraits/women/65.jpg",
               "https://randomuser.me/api/portraits/women/30.jpg"
-             ]
+             ],
+    offers: [
+                       
+            ]
 },
 
 // Imprentas
@@ -1376,7 +1510,10 @@
               "https://randomuser.me/api/portraits/women/25.jpg",
               "https://randomuser.me/api/portraits/women/65.jpg",
               "https://randomuser.me/api/portraits/women/30.jpg"
-             ]
+             ],
+    offers: [
+                       
+            ]
 },
 
 // Productos de Limpieza
@@ -1399,7 +1536,10 @@
               "https://randomuser.me/api/portraits/women/25.jpg",
               "https://randomuser.me/api/portraits/women/65.jpg",
               "https://randomuser.me/api/portraits/women/30.jpg"
-             ]
+             ],
+    offers: [
+                       
+            ]
 },
 
 // Purificadoras de Agua
@@ -1445,7 +1585,10 @@
               "https://randomuser.me/api/portraits/women/25.jpg",
               "https://randomuser.me/api/portraits/women/65.jpg",
               "https://randomuser.me/api/portraits/women/30.jpg"
-             ]
+             ],
+    offers: [
+                       
+            ]
 },
 
 // Ambulancias
@@ -1533,7 +1676,10 @@
               "https://randomuser.me/api/portraits/women/25.jpg",
               "https://randomuser.me/api/portraits/women/65.jpg",
               "https://randomuser.me/api/portraits/women/30.jpg"
-             ]
+             ],
+    offers: [
+                       
+            ]
 },
 {
     id: 55,
@@ -1575,7 +1721,10 @@
               "https://randomuser.me/api/portraits/women/25.jpg",
               "https://randomuser.me/api/portraits/women/65.jpg",
               "https://randomuser.me/api/portraits/women/30.jpg"
-             ]
+             ],
+    offers: [
+                       
+            ]
 },
 {
     id: 57,
@@ -1638,7 +1787,10 @@
               "https://randomuser.me/api/portraits/women/25.jpg",
               "https://randomuser.me/api/portraits/women/65.jpg",
               "https://randomuser.me/api/portraits/women/30.jpg"
-             ]
+             ],
+    offers: [
+                       
+            ]
 },
 {
     id: 60,
@@ -1749,7 +1901,10 @@
               "./Images/Logo.jpg",
               "https://randomuser.me/api/portraits/women/65.jpg",
               "https://randomuser.me/api/portraits/women/30.jpg"
-             ]
+             ],
+    offers: [
+                       
+            ]
 },
 
 // Cámaras de Seguridad
@@ -1795,7 +1950,16 @@
               "./Images/Logo.jpg",
               "https://randomuser.me/api/portraits/women/65.jpg",
               "https://randomuser.me/api/portraits/women/30.jpg"
-             ]
+             ],
+    offers: [
+         {
+            title: "Financiamiento Especial",
+            discount: "12 Meses sin Intereses",
+            validity: "Promoción permanente",
+            description: "Sistema solar con pagos fijos a 12 meses sin intereses",
+            conditions: "Crédito sujeto a aprobación. Requiere identificación oficial y comprobante de domicilio"
+        }
+    ]
 },
 
 // Auto Lavados
@@ -1818,7 +1982,10 @@
               "./Images/Logo.jpg",
               "https://randomuser.me/api/portraits/women/65.jpg",
               "https://randomuser.me/api/portraits/women/30.jpg"
-             ]
+             ],
+    offers: [
+                       
+            ]
 },
 
 // Funerarias
@@ -1841,7 +2008,16 @@
               "./Images/Logo.jpg",
               "https://randomuser.me/api/portraits/women/65.jpg",
               "https://randomuser.me/api/portraits/women/30.jpg"
-             ]
+             ],
+    offers: [
+        {
+            title: "Paquete Integral de Dignidad",
+            discount: "20% OFF",
+            validity: "Válido hasta 31/12/2023",
+            description: "Servicio completo incluye: Traslado, capilla, ceremonia y ataúd estándar",
+            conditions: "Reservación con 48 hrs de anticipación. Aplican restricciones en días festivos"
+        }
+    ]
 }
          ];
 
@@ -1926,7 +2102,7 @@
                 'Carpinteros': '<i class="fas fa-hammer"></i>',
                 'Electricistas': '<i class="fas fa-bolt"></i>',
                 'Plomeros': '<i class="fas fa-faucet"></i>',
-                'Fotógrafos': '<i class="fas fa-camera"></i>',
+                'Fotógrafos': '<i class="fas fa-camera-retro"></i>',
                 'Entrenadores Personales': '<i class="fas fa-dumbbell"></i>',
                 'Abogados': '<i class="fas fa-gavel"></i>',
                 'Psicólogos': '<i class="fas fa-brain"></i>',
@@ -1954,7 +2130,7 @@
         'Pizzerías': '<i class="fas fa-pizza-slice"></i>',
         'Pollerías': '<i class="fas fa-drumstick-bite"></i>',
         'Carnicerías': '<i class="fas fa-drumstick-bite"></i>',
-        'Papelerías': '<i class="fas fa-pen"></i>',
+        'Papelerías': '<i class="fas fa-pencil"></i>',
         'Imprentas': '<i class="fas fa-print"></i>',
         'Hoteles': '<i class="fas fa-hotel"></i>',
         'Talleres de Motos': '<i class="fas fa-motorcycle"></i>',
@@ -2203,6 +2379,7 @@ document.getElementById('lightbox').addEventListener('click', (e) => {
             categoryScreen.classList.add('hidden');
             detailsScreen.classList.add('hidden');
             featuredScreen.classList.add('hidden');
+          offersScreen.classList.add('hidden');
             
             switch(screen) {
                 case 'home':
@@ -2217,9 +2394,56 @@ document.getElementById('lightbox').addEventListener('click', (e) => {
                 case 'featured':
                     featuredScreen.classList.remove('hidden');
                     break;
+                case 'offers':
+                    offersScreen.classList.remove('hidden');
+                    loadExclusiveOffers();
+                    break;
             }
         }
+      
         
+      // Función para cargar ofertas
+function loadExclusiveOffers() {
+    const offersGrid = document.getElementById('offersGrid');
+    offersGrid.innerHTML = '';
+    
+    professionals.forEach(pro => {
+        if(pro.membership === 'premium' && pro.offers && pro.offers.length > 0) {
+            pro.offers.forEach(offer => {
+                const offerCard = document.createElement('div');
+                offerCard.className = 'bg-white rounded-lg shadow-md overflow-hidden relative';
+                offerCard.innerHTML = `
+                    <div class="p-4 bg-gradient-to-r from-blue-100 to-purple-100">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="bg-blue-600 text-white px-3 py-1 rounded-full text-sm">${offer.discount}</span>
+                            <span class="text-gray-500 text-sm">${offer.validity}</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">${offer.title}</h3>
+                        <p class="text-gray-600 mb-4">${offer.description}</p>
+                        <div class="bg-yellow-50 p-3 rounded-lg">
+                            <p class="text-sm font-semibold text-yellow-800">Condiciones:</p>
+                            <p class="text-sm text-yellow-700">${offer.conditions}</p>
+                        </div>
+                        <div class="mt-4 flex items-center">
+                            <img src="${pro.image}" class="w-10 h-10 rounded-full mr-3">
+                            <div>
+                                <p class="font-medium">${pro.name}</p>
+                                <p class="text-sm text-gray-500">${pro.category}</p>
+                            </div>
+                        </div>
+                        <button class="mt-4 w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition-colors"
+                                onclick="showProfessionalDetails(${pro.id})">
+                            Ver Perfil Completo
+                        </button>
+                    </div>
+                `;
+                offersGrid.appendChild(offerCard);
+            });
+        }
+    });
+}
+      
+      
         // Setup search functionality
         function setupSearch() {
             searchInput.addEventListener('input', () => {
@@ -2373,6 +2597,15 @@ document.getElementById('lightbox').addEventListener('click', (e) => {
         
         // Setup event listeners
         function setupEventListeners() {
+          
+          // Nuevo para ofertas setupEventListeners:
+document.getElementById('offersBtn').addEventListener('click', () => showScreen('offers'));
+document.getElementById('mobileOffersBtn').addEventListener('click', () => {
+    showScreen('offers');
+    mobileMenu.classList.add('hidden');
+});
+document.getElementById('backFromOffers').addEventListener('click', () => showScreen('home'));
+          
             // Navigation
             homeBtn.addEventListener('click', () => showScreen('home'));
             featuredBtn.addEventListener('click', showAllFeatured);
