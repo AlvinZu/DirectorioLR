@@ -7,6 +7,34 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+      /* Estilos para el selector de categorías */
+#categoryFilter {
+    min-width: 200px;
+    transition: all 0.3s ease;
+}
+
+#categoryFilter:hover {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Estilo para móviles */
+@media (max-width: 640px) {
+    #offersScreen .flex.items-center {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    #categoryFilter {
+        margin-top: 2rem, 2rem;      
+        width: 100%;
+        
+    }
+  }
+      /* Estilo para la flecha del dropdown */
+#categoryFilter + div i {
+    color: blue;
+    right: 12px;
+}
            
        /*Código base*/
         .fade-in {
@@ -185,7 +213,17 @@
         <button id="backFromOffers" class="mr-4 text-blue-600 hover:text-blue-800">
             <i class="fas fa-arrow-left text-xl"></i>
         </button>
-        <h2 class="text-2xl font-bold text-gray-800">Ofertas Exclusivas</h2>
+        <h2 class="text-2xl font-bold text-gray-800 mr-4">Ofertas Exclusivas</h2>
+        <div class="relative">
+            <select id="categoryFilter" 
+                    class="appearance-none bg-white border border-gray-300 rounded-lg py-2 px-4 pr-8 leading-tight focus:outline-none focus:border-blue-500">
+                <option value="all">Todas las categorías</option>
+                <!-- Las opciones se generarán dinámicamente -->
+            </select>
+            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </div>
     </div>
     
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="offersGrid">
@@ -2653,42 +2691,65 @@ document.getElementById('lightbox').addEventListener('click', (e) => {
       
         
       // Función para cargar ofertas
-function loadExclusiveOffers() {
+function loadExclusiveOffers(selectedCategory = 'all') {
     const offersGrid = document.getElementById('offersGrid');
     offersGrid.innerHTML = '';
-    
+
+    // Obtener categorías únicas que tienen ofertas
+    const categoriesWithOffers = [...new Set(
+        professionals
+            .filter(pro => pro.offers && pro.offers.length > 0)
+            .map(pro => pro.category)
+    )];
+
+    // Actualizar opciones del filtro
+    const categoryFilter = document.getElementById('categoryFilter');
+    categoryFilter.innerHTML = `
+        <option value="all">Todas las categorías</option>
+        ${categoriesWithOffers.map(category => `
+            <option value="${category}" ${selectedCategory === category ? 'selected' : ''}>
+                ${category}
+            </option>
+        `).join('')}
+    `;
+
+    // Generar ofertas
     professionals.forEach(pro => {
         if(pro.membership === 'premium' && pro.offers && pro.offers.length > 0) {
-            pro.offers.forEach(offer => {
-                const offerCard = document.createElement('div');
-                offerCard.className = 'bg-white rounded-lg shadow-md overflow-hidden relative';
-                offerCard.innerHTML = `
-                    <div class="p-4 bg-gradient-to-r from-blue-100 to-purple-100">
-                        <div class="flex items-center justify-between mb-2">
-                            <span class="bg-blue-600 text-white px-3 py-1 rounded-full text-sm">${offer.discount}</span>
-                            <span class="text-gray-500 text-sm">${offer.validity}</span>
-                        </div>
-                        <h3 class="text-xl font-bold mb-2">${offer.title}</h3>
-                        <p class="text-gray-600 mb-4">${offer.description}</p>
-                        <div class="bg-yellow-50 p-3 rounded-lg">
-                            <p class="text-sm font-semibold text-yellow-800">Condiciones:</p>
-                            <p class="text-sm text-yellow-700">${offer.conditions}</p>
-                        </div>
-                        <div class="mt-4 flex items-center">
-                            <img src="${pro.image}" class="w-10 h-10 rounded-full mr-3">
-                            <div>
-                                <p class="font-medium">${pro.name}</p>
-                                <p class="text-sm text-gray-500">${pro.category}</p>
+            if(selectedCategory === 'all' || pro.category === selectedCategory) {
+                pro.offers.forEach(offer => {
+                    const offerCard = document.createElement('div');
+                    offerCard.className = 'bg-white rounded-lg shadow-md overflow-hidden relative';
+                    offerCard.innerHTML = `
+                        <div class="p-4 bg-gradient-to-r from-blue-100 to-purple-100">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="bg-blue-600 text-white px-3 py-1 rounded-full text-sm">
+                                    ${offer.discount}
+                                </span>
+                                <span class="text-gray-500 text-sm">${offer.validity}</span>
                             </div>
+                            <h3 class="text-xl font-bold mb-2">${offer.title}</h3>
+                            <p class="text-gray-600 mb-4">${offer.description}</p>
+                            <div class="bg-yellow-50 p-3 rounded-lg">
+                                <p class="text-sm font-semibold text-yellow-800">Condiciones:</p>
+                                <p class="text-sm text-yellow-700">${offer.conditions}</p>
+                            </div>
+                            <div class="mt-4 flex items-center">
+                                <img src="${pro.image}" class="w-10 h-10 rounded-full mr-3">
+                                <div>
+                                    <p class="font-medium">${pro.name}</p>
+                                    <p class="text-sm text-gray-500">${pro.category}</p>
+                                </div>
+                            </div>
+                            <button class="mt-4 w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition-colors"
+                                    onclick="showProfessionalDetails(${pro.id})">
+                                Ver Perfil Completo
+                            </button>
                         </div>
-                        <button class="mt-4 w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition-colors"
-                                onclick="showProfessionalDetails(${pro.id})">
-                            Ver Perfil Completo
-                        </button>
-                    </div>
-                `;
-                offersGrid.appendChild(offerCard);
-            });
+                    `;
+                    offersGrid.appendChild(offerCard);
+                });
+            }
         }
     });
 }
@@ -2847,6 +2908,11 @@ function loadExclusiveOffers() {
         
         // Setup event listeners
         function setupEventListeners() {
+          
+          // En setupEventListeners:
+document.getElementById('categoryFilter').addEventListener('change', (e) => {
+    loadExclusiveOffers(e.target.value);
+});
           
           // Nuevo para ofertas setupEventListeners:
 document.getElementById('offersBtn').addEventListener('click', () => showScreen('offers'));
