@@ -306,7 +306,7 @@
       
         // Base de datos de los profesionales
         const professionals = [
-            // Dentists
+            // Dentistas
             {
                 id: 1,
                 name: "Dra. Ana López",
@@ -365,7 +365,7 @@
                         ]
             },
             
-            // Nutritionists
+            // Nutriólogos
             {
                 id: 3,
                 name: "Lic. Sofía Ramírez",
@@ -399,7 +399,7 @@
                        ]
             },
             
-            // Chiropractors
+            // Chiropractors - Quiroprácticos
             {
                 id: 4,
                 name: "Dr. Alejandro Torres",
@@ -439,7 +439,7 @@
     ]
             },
             
-            // Doctors
+            // Doctores
             {
                 id: 5,
                 name: "Dra. Patricia Sánchez",
@@ -466,7 +466,7 @@
                         ]
             },
             
-            // Physiotherapists
+            // Fisioterapeutas
             {
                 id: 6,
                 name: "Lic. Roberto Jiménez",
@@ -499,7 +499,7 @@
                       ]
             },
             
-            // Clothing Stores
+            // Clothing Stores - Tiendas de ropa
             {
                 id: 7,
                 name: "Boutique Elegance",
@@ -526,7 +526,7 @@
                         ]
             },
             
-            // Supplement Stores
+            // Supplement Stores - Tiendas de suplementos
             {
                 id: 8,
                 name: "NutriPower",
@@ -574,7 +574,23 @@
                           "https://randomuser.me/api/portraits/women/25.jpg",
                           "https://randomuser.me/api/portraits/women/65.jpg",
                           "https://randomuser.me/api/portraits/women/30.jpg"
-                         ]
+                         ],
+                offers: [
+        {
+            title: "Paquete Caballero Completo",
+            discount: "30% OFF",
+            validity: "Válido hasta 30/11/2023",
+            description: "Corte clásico + afeitado tradicional + pijmentacíon en barba",
+            conditions: "Válido para primera visita. Incluye bebida cortesía"
+        },
+        {
+            title: "Cortes Infantiles",
+            discount: "$80 Pesos",
+            validity: "Promoción Permanente",
+            description: "Trae a tu hijo y elige su corte preferido",
+            conditions: "Aplica para niños menores de 12 años. No incluye Diseños Extras"
+        }
+    ]
             },
             
             // Painters
@@ -706,7 +722,23 @@
                           "https://randomuser.me/api/portraits/women/25.jpg",
                           "https://randomuser.me/api/portraits/women/65.jpg",
                           "https://randomuser.me/api/portraits/women/30.jpg"
-                         ]
+                         ],
+                offers: [
+        {
+            title: "Paquete Bodas",
+            discount: "20% OFF + Sesión Gratis",
+            validity: "Válido hasta 30/12/2025",
+            description: "Cobertura completa de boda (6 horas) + álbum físico de lujo + sesión de preboda",
+            conditions: "Reservando con 3 meses de anticipación. Válido para bodas entre septiembre y diciembre del 2025"
+        },
+        {
+            title: "Sesión de Fotos Express",
+            discount: "10% OFF",
+            validity: "Lunes a Viernes en noviembre",
+            description: "Sesión de 2 horas en estudio o locación + 25 fotos editadas profesionales",
+            conditions: "Sujeto a disponibilidad. No incluye transporte fuera de la ciudad"
+        }
+    ]
             },
             
             // Personal Trainers
@@ -754,7 +786,16 @@
                           "https://randomuser.me/api/portraits/women/25.jpg",
                           "https://randomuser.me/api/portraits/women/65.jpg",
                           "https://randomuser.me/api/portraits/women/30.jpg"
-                         ]
+                         ],
+                offers: [        
+        {
+            title: "Elaboración de Testamento",
+            discount: "30% OFF",
+            validity: "Promoción de octubre",
+            description: "Testamento notariado con asesoría patrimonial incluida",
+            conditions: "Válido para testamentos simples. No incluye modificaciones posteriores"
+        }
+    ]
             },
             
             // Psychologists
@@ -805,7 +846,16 @@
                           "https://randomuser.me/api/portraits/women/25.jpg",
                           "https://randomuser.me/api/portraits/women/65.jpg",
                           "https://randomuser.me/api/portraits/women/30.jpg"
-                         ]
+                         ],
+                offers: [
+        {
+            title: "Paquete Preventivo Mascotas",
+            discount: "30% OFF",
+            validity: "Válido hasta 30/11/2023",
+            description: "Vacunación anual + desparasitación + chequeo general",
+            conditions: "Válido para 1 mascota. Incluye perros y gatos"
+        }
+    ]
             },
             
             // Mechanics
@@ -897,8 +947,8 @@
                 address: "Col. Roma, CDMX",
                 experience: "5 años",
                 price: "$ Depende Dificultad",
-                membership: "premium", //puedes cambiar a premiun
-                featured: true, //puedes cambiar a true
+                membership: "premium", //puedes cambiar a free
+                featured: true, //puedes cambiar a false
                 services: ["Tatuajes Realistas", "Minimalistas", "A Color"],
                 schedule: "Lunes a Sábado: 8am - 6pm",
                 education: "Escuela de la vida",
@@ -907,7 +957,16 @@
                           "https://randomuser.me/api/portraits/women/25.jpg",
                           "https://randomuser.me/api/portraits/women/65.jpg",
                           "https://randomuser.me/api/portraits/women/30.jpg"
-                         ]
+                         ],
+              offers: [        
+        {
+            title: "Promo Parejas",
+            discount: "2do Tatuaje 50% OFF",
+            validity: "Promoción permanente",
+            description: "Segundo tatuaje igual a mitad de precio para parejas o amigos",
+            conditions: "Mismo diseño y misma sesión. Tamaño mínimo 10cm"
+        }
+    ]
           },
           // Restaurantes
             {
@@ -930,7 +989,16 @@
                           "https://randomuser.me/api/portraits/women/25.jpg",
                           "https://randomuser.me/api/portraits/women/65.jpg",
                           "https://randomuser.me/api/portraits/women/30.jpg"
-                         ]
+                         ],
+                offers: [
+        {
+            title: "Menú Parejas VIP",
+            discount: "20% OFF",
+            validity: "Válido de lunes a viernes hasta 30/11/2025",
+            description: "Incluye plato fuerte + entrada + postre + bebida + shots de mezcal",
+            conditions: "Reserva previamente"
+        }
+    ]
             },
             {
                 id: 24,
@@ -951,7 +1019,16 @@
                           "https://randomuser.me/api/portraits/women/25.jpg",
                           "https://randomuser.me/api/portraits/women/65.jpg",
                           "https://randomuser.me/api/portraits/women/30.jpg"
-                         ]
+                         ],
+                offers: [
+        {
+            title: "Noche Romántica 2x1",
+            discount: "30% OFF",
+            validity: "Válido solo los sábados de Febrero",
+            description: "Cena para dos con mariachi en vivo a las 8pm y botella de vino",
+            conditions: "Reserva con 24h de anticipación. Cupo limitado"
+        }
+    ]
            },
           
           // Servicio a Domicilio
@@ -1023,7 +1100,16 @@
               "https://randomuser.me/api/portraits/women/25.jpg",
               "https://randomuser.me/api/portraits/women/65.jpg",
               "https://randomuser.me/api/portraits/women/30.jpg"
-             ]
+             ],
+    offers: [        
+        {
+            title: "Paquete Integral de Diseño",
+            discount: "20% OFF",
+            validity: "Válido para contratos antes del 15/12/2023",
+            description: "Diseño + renders 3D + gestión de permisos municipales",
+            conditions: "Proyectos mínimos de 150m². Pago del 50% al iniciar"
+        }
+    ]
 },
 
 // Uñas
@@ -1072,7 +1158,16 @@
               "https://randomuser.me/api/portraits/women/25.jpg",
               "https://randomuser.me/api/portraits/women/65.jpg",
               "https://randomuser.me/api/portraits/women/30.jpg"
-             ]
+             ],
+    offers: [
+        {
+            title: "Paquete Logo de Negocio",
+            discount: "35% OFF",
+            validity: "Válido hasta 30/11/2023",
+            description: "Logotio a color y detallado con estilo",
+            conditions: "No incluye la pintura."
+        }
+    ]
 },
 
 // Llanteras
@@ -1135,8 +1230,8 @@
     address: "Calle Relax 45",
     experience: "4 años",
     price: "$400 - Sesión de 1 hora",
-    membership: "free", //Puedes cambiar a premium
-    featured: false, //Puedes cambiar a true
+    membership: "premium", //Puedes cambiar a free
+    featured: true, //Puedes cambiar a false
     services: ["Masaje sueco", "Piedras calientes", "Reflexología"],
     schedule: "Lunes a Sábado 10am - 8pm",
     image: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874",
@@ -1145,9 +1240,15 @@
               "https://randomuser.me/api/portraits/women/65.jpg",
               "https://randomuser.me/api/portraits/women/30.jpg"
              ],
-    offers: [
-                       
-            ]
+    offers: [        
+        {
+            title: "Masaje en Pareja",
+            discount: "2x1",
+            validity: "Viernes románticos (todo noviembre)",
+            description: "Masaje relajante para dos personas con velas y música ambiental + Incluye aromaterapia",
+            conditions: "Reservación con 48hrs de anticipación. No aplica días festivos"
+        }
+    ]
 },
 
     // Vinaterías
@@ -1170,7 +1271,16 @@
               "https://randomuser.me/api/portraits/women/25.jpg",
               "https://randomuser.me/api/portraits/women/65.jpg",
               "https://randomuser.me/api/portraits/women/30.jpg"
-             ]
+             ],
+    offers: [        
+        {
+            title: "Sabado de Fiesta",
+            discount: "Sin costo de envío",
+            validity: "Permanente Todos los sabados",
+            description: "Todos los sabados del año te llevamos sin costo extra tu pedido",
+            conditions: "Minimo de compra de $400 Pesos. Dentro de Los Reyes."
+        }
+    ]
 },
 
 // Vidrierías
@@ -1219,7 +1329,16 @@
               "https://randomuser.me/api/portraits/women/25.jpg",
               "https://randomuser.me/api/portraits/women/65.jpg",
               "https://randomuser.me/api/portraits/women/30.jpg"
-             ]
+             ],
+    offers: [
+        {
+            title: "Portón de Seguridad Personalizado",
+            discount: "$13,000 Pesos",
+            validity: "Válido hasta 30/11/2023",
+            description: "Fabricación e instalación de portón de hierro forjado con diseño único",
+            conditions: "Mínimo 4m². Incluye pintura anticorrosiva. No incluye automatización"
+        }
+    ]
 },
 
 // Ferreterías
@@ -1294,7 +1413,16 @@
               "https://randomuser.me/api/portraits/women/25.jpg",
               "https://randomuser.me/api/portraits/women/65.jpg",
               "https://randomuser.me/api/portraits/women/30.jpg"
-             ]
+             ],
+    offers: [
+        {
+            title: "Lavado Premium + Planchado",
+            discount: "50% OFF",
+            validity: "Válido del 01/10/23 hasta 31/10/2023",
+            description: "Lavado + planchado en seco.",
+            conditions: "Aplica solo en prendas estándar (camisas, pantalones, blusas)."
+        }
+    ]
 },
 
 // Pastelerías
@@ -1317,7 +1445,16 @@
               "https://randomuser.me/api/portraits/women/25.jpg",
               "https://randomuser.me/api/portraits/women/65.jpg",
               "https://randomuser.me/api/portraits/women/30.jpg"
-             ]
+             ],
+    offers: [
+        {
+            title: "Paquete Bodas Premium",
+            discount: "20% OFF + Tasting Gratis",
+            validity: "Válido para bodas en 2025",
+            description: "Pastel de 3 pisos + 100 cupcakes + diseño personalizado",
+            conditions: "Mínimo 3 meses de anticipación. Incluye solo sabores clásicos"
+        }
+    ]
 },
 
 // Cafeterías
@@ -1366,7 +1503,16 @@
               "https://randomuser.me/api/portraits/women/25.jpg",
               "https://randomuser.me/api/portraits/women/65.jpg",
               "https://randomuser.me/api/portraits/women/30.jpg"
-             ]
+             ],
+    offers: [
+        {
+            title: "Noche Familiar Italiana",
+            discount: "2x1 en Pizzas Grandes",
+            validity: "Válido todos los viernes de noviembre 2025",
+            description: "Compra una pizza grande y lleva otra gratis + refresco 1.5L por solo $300 Pesos",
+            conditions: "Aplica solo en pedidos antes de las 9 PM."
+        }
+    ]
 },
 
 // Pollerías
@@ -1380,8 +1526,8 @@
     address: "Av. Carnes 123",
     experience: "8 años",
     price: "$120 - Pollo entero",
-    membership: "free", //Puedes cambiar a premium
-    featured: false, //Puedes cambiar a true
+    membership: "premium", //Puedes cambiar a free
+    featured: true, //Puedes cambiar a false
     services: ["Pollo rostizado", "Papas al horno", "Paquetes familiares"],
     schedule: "Lunes a Domingo 10am - 8pm",
     image: "https://images.unsplash.com/photo-1602881917674-52d02c9f1bea",
@@ -1391,8 +1537,21 @@
               "https://randomuser.me/api/portraits/women/30.jpg"
              ],
     offers: [
-                       
-            ]
+        {
+            title: "Paquete Familiar Especial",
+            discount: "$300 Pesos",
+            validity: "Válido del 10/10/23 al 10/11/2023",
+            description: "1 Pollo entero rostizado + 1 litro de refresco + papas al horno + ensalada",
+            conditions: "Mínimo 2 órdenes. Válido solo para consumo en local de 2pm a 6pm"
+        },
+        {
+            title: "Lunes de Alitas",
+            discount: "2x1 en Alitas",
+            validity: "Todos los lunes de octubre",
+            description: "Lleva 2 órdenes de alitas BBQ por el precio de 1",
+            conditions: "Aplica solo en pedidos mayores a $150. No acumulable con otras promociones"
+        }
+    ]
 },
 
 // Carnicerías
@@ -1415,7 +1574,16 @@
               "https://randomuser.me/api/portraits/women/25.jpg",
               "https://randomuser.me/api/portraits/women/65.jpg",
               "https://randomuser.me/api/portraits/women/30.jpg"
-             ]
+             ],
+    offers: [
+        {
+            title: "Paquete Parrillero Premium",
+            discount: "25% OFF",
+            validity: "Válido todos los viernes y sábados",
+            description: "Incluye: 1 kg de ribeye, 1 kg de chorizo argentino y 1 kg de costillas BBQ",
+            conditions: "Compra mínima de $500. Presentar cupón digital"
+        }
+    ]
 },
 
 // Papelerías
@@ -1464,7 +1632,16 @@
               "https://randomuser.me/api/portraits/women/25.jpg",
               "https://randomuser.me/api/portraits/women/65.jpg",
               "https://randomuser.me/api/portraits/women/30.jpg"
-             ]
+             ],
+    offers: [
+        {
+            title: "Paquete de Tarjetas para Negocios",
+            discount: "30% OFF",
+            validity: "Válido hasta 30/11/2023",
+            description: "500 tarjetas de presentación + 100 volantes full color",
+            conditions: "Papel couché 300gr. Diseño básico incluido."
+        }
+    ]
 },
 
 // Hoteles
@@ -1487,7 +1664,16 @@
               "https://randomuser.me/api/portraits/women/25.jpg",
               "https://randomuser.me/api/portraits/women/65.jpg",
               "https://randomuser.me/api/portraits/women/30.jpg"
-             ]
+             ],
+    offers: [
+        {
+            title: "Escapada de Fin de Semana",
+            discount: "30% OFF + Desayuno Incluido",
+            validity: "Válido todo Diciembre",
+            description: "2 noches en habitación ejecutiva con acceso a alberca",
+            conditions: "Mínimo 2 noches. Hotel solo Adultos"
+        }
+    ]
 },
 
 // Talleres de Motos
@@ -1562,7 +1748,16 @@
               "https://randomuser.me/api/portraits/women/25.jpg",
               "https://randomuser.me/api/portraits/women/65.jpg",
               "https://randomuser.me/api/portraits/women/30.jpg"
-             ]
+             ],
+    offers: [        
+        {
+            title: "Oferta de Fidelidad",
+            discount: "1 Garrafón Gratis",
+            validity: "Promoción permanente",
+            description: "Por cada 10 garrafones comprados, obtén el 11vo gratis",
+            conditions: "Acumulable solo con compras mensuales. Válido para garrafones de 20L"
+        }
+    ]
 },
 
 // Policías
@@ -1700,7 +1895,16 @@
               "https://randomuser.me/api/portraits/women/25.jpg",
               "https://randomuser.me/api/portraits/women/65.jpg",
               "https://randomuser.me/api/portraits/women/30.jpg"
-             ]
+             ],
+    offers: [
+        {
+            title: "Paquete Caribe Luxe Todo Incluido",
+            discount: "35% OFF + Noche Extra",
+            validity: "Reservas hasta 30/11/2023 para viajar hasta abril 2024",
+            description: "7 noches en resort 5 estrellas con vuelos, traslados y actividades acuáticas",
+            conditions: "Mínimo 2 personas. Tarifa base por habitación doble. No aplica en fechas festivas"
+        }
+    ]
 },
 {
     id: 56,
@@ -1745,7 +1949,16 @@
               "https://randomuser.me/api/portraits/women/25.jpg",
               "https://randomuser.me/api/portraits/women/65.jpg",
               "https://randomuser.me/api/portraits/women/30.jpg"
-             ]
+             ],
+    offers: [
+        {
+            title: "Paquete Bodas Premium",
+            discount: "30% OFF",
+            validity: "Válido para eventos hasta 31/12/2023",
+            description: "Arreglos florales completos para bodas (ramos, centro de mesa y decoración de altar)",
+            conditions: "Mínimo 10 centros de mesa. Incluye entrega e instalación"
+        }
+    ]
 },
 {
     id: 58,
@@ -1766,7 +1979,16 @@
               "https://randomuser.me/api/portraits/women/25.jpg",
               "https://randomuser.me/api/portraits/women/65.jpg",
               "https://randomuser.me/api/portraits/women/30.jpg"
-             ]
+             ],
+    offers: [
+        {
+            title: "Paquete Integral de Salud Podal",
+            discount: "35% OFF",
+            validity: "Válido del 15/09/23 hasta 30/10/2023",
+            description: "Incluye: Evaluación completa + Tratamiento de hongos + Ortosis personalizadas",
+            conditions: "Válido para primera consulta. Incluye seguimiento por 1 mes"
+        }
+    ]
 },
 {
     id: 59,
@@ -1811,7 +2033,16 @@
               "https://randomuser.me/api/portraits/women/25.jpg",
               "https://randomuser.me/api/portraits/women/65.jpg",
               "https://randomuser.me/api/portraits/women/30.jpg"
-             ]
+             ],
+    offers: [
+        {
+            title: "Paquete Básico para Fiestas",
+            discount: "30% OFF",
+            validity: "Válido para eventos entre el 01/10/23 y 31/12/23",
+            description: "Incluye: 10 mesas redondas, 50 sillas tipo banquet, 2 mesas dulces y mantelería básica",
+            conditions: "Reservación con 7 días de anticipación. Depósito reembolsable del 20% en caso de cancelación"
+        }
+    ]
 },     
     // Músicos
 {
@@ -1856,8 +2087,18 @@
               "https://randomuser.me/api/portraits/women/25.jpg",
               "https://randomuser.me/api/portraits/women/65.jpg",
               "https://randomuser.me/api/portraits/women/30.jpg"
-             ]    
+             ],
+    offers: [
+        {
+            title: "Paquete Novias Premium",
+            discount: "$200 Pesos de Descuento",
+            validity: "Válido para bodas entre Sep y Diciembre 2025",
+            description: "Maquillaje + Peinado + Prueba de estilo GRATIS",
+            conditions: "Reserva mínima con 2 meses de anticipación. No incluye traslado"
+        }
+    ]
   },
+          
     // Tablaroqueros
 {
     id: 63,
@@ -1927,7 +2168,16 @@
               "./Images/Logo.jpg",
               "https://randomuser.me/api/portraits/women/65.jpg",
               "https://randomuser.me/api/portraits/women/30.jpg"
-             ]
+             ],
+    offers: [
+        {
+            title: "Paquete Seguridad Total",
+            discount: "25% OFF",
+            validity: "Válido del 01/10/23 hasta 30/11/2023",
+            description: "Instalación de 4 cámaras HD + 1 mes gratis de monitoreo remoto",
+            conditions: "Válido solo para residencias. Incluye instalación profesional"
+        }
+    ]
 },
 
 // Paneles Solares
