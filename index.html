@@ -353,7 +353,13 @@
         'Cámaras de Seguridad': ['whatsapp', 'call'],
         'Paneles Solares': ['whatsapp', 'call'],
         'Auto Lavados': ['whatsapp', 'call'],
-        'Funerarias': ['call']
+        'Funerarias': ['call'],
+        'Cruz Roja': ['call'],
+        'Escuelas de Ingles': ['whatsapp', 'call'],
+        'Cerrajeros': ['whatsapp', 'call'],
+        'Deportes': ['whatsapp', 'call'],
+        'Perfumerías': ['whatsapp'],
+        'Lashistas': ['whatsapp']
 };
       
         // Base de datos de los profesionales
@@ -2320,6 +2326,193 @@
             conditions: "Reservación con 48 hrs de anticipación. Aplican restricciones en días festivos"
         }
     ]
+   },
+          // Cruz Roja
+{
+    id: 69,
+    name: "Cruz Roja Los Reyes",
+    category: "Cruz Roja",
+    specialty: "Emergencias médicas",
+    description: "Servicio de atención prehospitalaria y ambulancias",
+    phone: "+525533445500",
+    address: "Av. Salud 2500",
+    experience: "Servicio público",
+    price: "Servicio gratuito",
+    membership: "premium", // Puedes cambiar a free
+    featured: true, // Puedes cambiar a false
+    services: ["Ambulancias", "Primeros auxilios", "Donación de sangre"],
+    schedule: "24/7",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Flag_of_the_Red_Cross.svg/1200px-Flag_of_the_Red_Cross.svg.png",
+    gallery: [
+              "./Images/Logo.jpg",
+              "https://randomuser.me/api/portraits/women/65.jpg",
+              "https://randomuser.me/api/portraits/women/30.jpg"
+             ],
+    offers: [
+             {
+            
+             }
+            ]
+},
+
+// Escuelas de Ingles
+{
+    id: 70,
+    name: "VOCABLO INGLES",
+    category: "Escuelas de Ingles",
+    specialty: "Cursos intensivos",
+    description: "Clases de inglés para todos los niveles con certificación internacional",
+    phone: "+525544112233",
+    address: "Plaza del Saber Local 15",
+    experience: "10 años",
+    price: "$1,200 - Curso mensual",
+    membership: "premium", // Puedes cambiar a free
+    featured: true, // Puedes cambiar a false
+    services: ["Clases personalizadas", "Preparación TOEFL", "Conversación"],
+    schedule: "Lunes a Viernes 7am - 9pm",
+    image: "https://images.unsplash.com/photo-1580582932707-520062ed1ee1",
+    gallery: [
+              "./Images/Logo.jpg",
+              "https://randomuser.me/api/portraits/women/65.jpg",
+              "https://randomuser.me/api/portraits/women/30.jpg"
+             ],
+    offers: [
+        {
+            title: "Paquete TOEFL Express",
+            discount: "25% OFF",
+            validity: "Válido hasta 15/12/2026",
+            description: "Preparación intensiva para examen TOEFL + simulador online",
+            conditions: "Incluye material de estudio. Pago en una sola exhibición"
+        }
+    ]
+},
+
+// Cerrajeros
+{
+    id: 71,
+    name: "Cerrajería Express 24hrs",
+    category: "Cerrajeros",
+    specialty: "Apertura de autos y casas",
+    description: "Servicio rápido de cerrajería con garantía",
+    phone: "+525577889944",
+    address: "Av. Seguridad 789",
+    experience: "8 años",
+    price: "$300 - Visita básica",
+    membership: "premium", // Puedes cambiar a free
+    featured: true, // Puedes cambiar a false
+    services: ["Cambio de chapas", "Duplicado de llaves", "Cajas fuertes"],
+    schedule: "24/7",
+    image: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a",
+    gallery: [
+              "./Images/Logo.jpg",
+              "https://randomuser.me/api/portraits/women/65.jpg",
+              "https://randomuser.me/api/portraits/women/30.jpg"
+             ],
+    offers: [
+        {
+            title: "Emergencia Nocturna",
+            discount: "40% OFF",
+            validity: "De 10pm a 6am",
+            description: "Apertura de puertas de autos y casas",
+            conditions: "Válido solo para primeros 10 clientes por semana. No incluye cambio de chapa"
+        }
+    ]
+},
+
+// Deportes (Tae Kwon Do)
+{
+    id: 72,
+    name: "Escuela de Tae Kwon Do 'Numa'",
+    category: "Deportes",
+    specialty: "Tae Kwon Do infantil y adulto",
+    description: "Clases para todas las edades con maestros certificados",
+    phone: "+525512345678",
+    address: "Dojo Central Los Reyes",
+    experience: "15 años",
+    price: "$500 - Mensualidad",
+    membership: "premium", // Puedes cambiar a free
+    featured: true, // Puedes cambiar a flase
+    services: ["Clases grupales", "Exámenes de grados", "Competencias"],
+    schedule: "Lunes a Sábado 4pm - 8pm",
+    image: "https://images.unsplash.com/photo-1617791160536-598cf32026fb",
+    gallery: [
+              "./Images/Logo.jpg",
+              "https://randomuser.me/api/portraits/women/65.jpg",
+              "https://randomuser.me/api/portraits/women/30.jpg"
+             ],
+    offers: [
+        {
+            title: "Clase de Prueba Gratuita",
+            discount: "100% OFF",
+            validity: "Durante todo noviembre",
+            description: "Sesión introductoria con equipo profesional incluido",
+            conditions: "Para nuevos alumnos. Presentar identificación oficial"
+        }
+    ]
+},
+
+// Perfumerías
+{
+    id: 73,
+    name: "Perfumes Exclusivos",
+    category: "Perfumerías",
+    specialty: "Importación de fragancias",
+    description: "Las mejores marcas internacionales al mejor precio",
+    phone: "+525598765432",
+    address: "Plaza del Perfume Local 3",
+    experience: "5 años",
+    price: "$$$ - Precios desde $800",
+    membership: "free", // Puedes cambiar a premium
+    featured: false, // Puedes cambiar a true
+    services: ["Pruebas olfativas", "Regalos empresariales", "Envios"],
+    schedule: "Lunes a Domingo 10am - 8pm",
+    image: "https://images.unsplash.com/photo-1615228939096-9b04670adb61",
+    gallery: [
+              "./Images/Logo.jpg",
+              "https://randomuser.me/api/portraits/women/65.jpg",
+              "https://randomuser.me/api/portraits/women/30.jpg"
+             ],
+    offers: [
+        {
+            title: "2da Fragancia 50% OFF",
+            discount: "50% OFF",
+            validity: "Compra mínima de $1,500",
+            description: "Llévate tu segunda fragancia favorita a mitad de precio",
+            conditions: "Válido para perfumes de 100ml. No acumulable"
+        }
+    ]
+},
+
+// Lashistas
+{
+    id: 74,
+    name: "Lashes by Lupita",
+    category: "Lashistas",
+    specialty: "Extensiones de pestañas",
+    description: "Técnicas rusas y volumen híbrido profesional",
+    phone: "+525533221144",
+    address: "Calle Belleza 45",
+    experience: "3 años",
+    price: "$600 - Aplicación completa",
+    membership: "premium", // Puedes cambiar a free
+    featured: true, // Puedes cambiar a false
+    services: ["Lifting de pestañas", "Tinte", "Retoques"],
+    schedule: "Martes a Domingo 10am - 6pm",
+    image: "https://images.unsplash.com/photo-1621607511134-16d4d384152f",
+    gallery: [
+              "./Images/Logo.jpg",
+              "https://randomuser.me/api/portraits/women/65.jpg",
+              "https://randomuser.me/api/portraits/women/30.jpg"
+             ],
+    offers: [
+        {
+            title: "Primera Aplicación Especial",
+            discount: "30% OFF",
+            validity: "Para primeras clientas",
+            description: "Extensiones clásicas + mantenimiento gratis a los 15 días",
+            conditions: "Agendar cita con 48hrs de anticipación. No incluye diseño especial"
+        }
+    ]
 }
          ];
 
@@ -2456,7 +2649,13 @@
         'Cámaras de Seguridad': '<i class="fas fa-camera"></i>',
         'Paneles Solares': '<i class="fas fa-solar-panel"></i>',
         'Auto Lavados': '<i class="fas fa-car"></i>',
-        'Funerarias': '<i class="fas fa-monument"></i>'
+        'Funerarias': '<i class="fas fa-monument"></i>',
+        'Cruz Roja': '<i class="fas fa-cross"></i>',
+        'Escuelas de Ingles': '<i class="fas fa-language"></i>',
+        'Cerrajeros': '<i class="fas fa-key"></i>',
+        'Deportes': '<i class="fas fa-medal"></i>',
+        'Perfumerías': '<i class="fas fa-spray-can"></i>',
+        'Lashistas': '<i class="fas fa-eye"></i>'
     };
             
             return icons[category] || '<i class="fas fa-briefcase"></i>';
