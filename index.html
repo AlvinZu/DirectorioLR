@@ -250,8 +250,8 @@
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div>
-                    <h3 class="text-xl font-bold mb-4">Directorio Los Reyes</h3>
-                    <p class="text-gray-300">Conectando profesionales con clientes desde 2023.</p>
+                    <h3 class="text-xl font-bold mb-4">DirectorioPro Los Reyes</h3>
+                    <p class="text-gray-300">Conectando profesionales con clientes desde 2024.</p>
                 </div>
                 <div>
                     <h3 class="text-xl font-bold mb-4">Enlaces rápidos</h3>
@@ -268,7 +268,7 @@
                   
                   <div class="border-t border-gray-700 mt-8 pt-6 text-center text-gray-400">
                     <h3 class="text-xl font-bold mb-4">Anunciate con Nosotros</h3>
-                    <p class="text-gray-300">Tenemos Planes de 3, 6, 9 y 12 Meses a un super precio.</p>
+                    <p class="text-gray-300">Tenemos Planes de 6 meses y 1 Año a un super precio.</p>
                 </div>
             </div>
             
@@ -589,7 +589,7 @@
             {
                 id: 8,
                 name: "NutriPower",
-                category: "Venta de suplementos",
+                category: "Tiendas de suplementos",
                 specialty: "Suplementos deportivos",
                 description: "Los mejores suplementos para tu rendimiento físico.",
                 phone: "+525598765432",
@@ -2373,11 +2373,7 @@
               "https://randomuser.me/api/portraits/women/65.jpg",
               "https://randomuser.me/api/portraits/women/30.jpg"
              ],
-    offers: [
-             {
-            
-             }
-            ]
+    
 },
 
 // Escuelas de Ingles
@@ -2618,7 +2614,7 @@
                 'Doctores': '<i class="fas fa-user-md"></i>',
                 'Fisioterapeutas': '<i class="fas fa-hand-holding-heart"></i>',
                 'Tiendas de ropa': '<i class="fas fa-tshirt"></i>',
-                'Venta de suplementos': '<i class="fas fa-pills"></i>',
+                'Tiendas de suplementos': '<i class="fas fa-pills"></i>',
                 'Barberías': '<i class="fas fa-cut"></i>',
                 'Pintores': '<i class="fas fa-paint-roller"></i>',
                 'Carpinteros': '<i class="fas fa-hammer"></i>',
@@ -2743,7 +2739,7 @@
     config.forEach(method => {
         if (method === 'whatsapp') {
             buttons += `
-                <a href="https://wa.me/${phoneNumber}?text=Hola%20${encodeURIComponent(professional.name.split(' ')[0])},%20vi%20tu%20perfil%20en%20DirectorioLR%20y%20me%20gustaría%20saber%20más%20sobre%20tus%20servicios" 
+                <a href="https://wa.me/${phoneNumber}?text=Hola%20${encodeURIComponent(professional.name.split(' ')[0])},%20vi%20tu%20perfil%20en%20DirectorioProLR%20y%20me%20gustaría%20saber%20más%20sobre%20tus%20servicios" 
                    target="_blank" 
                    class="block bg-green-500 text-white text-center py-3 rounded-lg hover:bg-green-600 transition-colors">
                     <i class="fab fa-whatsapp mr-2"></i> Contactar por WhatsApp
@@ -2752,7 +2748,7 @@
         }
         
         if (method === 'call') {
-            const isEmergency = ['Policías', 'Ambulancias', 'Bomberos'].includes(professional.category);
+            const isEmergency = ['Policías', 'Ambulancias', 'Bomberos', 'Cruz Roja'].includes(professional.category);
             buttons += `
                 <a href="tel:${phoneNumber}" 
                    class="block ${isEmergency ? 'bg-red-500 emergency-btn' : 'bg-blue-500'} text-white text-center py-3 rounded-lg hover:${isEmergency ? 'bg-red-600' : 'bg-blue-600'} transition-colors">
@@ -2797,7 +2793,7 @@ document.getElementById('lightbox').addEventListener('click', (e) => {
                             <img src="${professional.image}" alt="${professional.name}" 
                                  class="w-32 h-32 rounded-full object-cover border-4 border-white shadow-md">
                             ${professional.membership === 'premium' ? 
-                            `<div class="membership-badge bg-yellow-500 text-white">
+                            `<div class="membership-badge bg-black-500 text-yellow">
                                 <i class="fas fa-crown"></i>
                             </div>` : ''}
                         </div>
