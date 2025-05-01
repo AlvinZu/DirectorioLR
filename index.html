@@ -323,7 +323,7 @@
         'Herreros': ['whatsapp', 'call'],  
         'Ferreterías': ['call'],  
         'Loncherías': ['call'],  
-        'Lavanderías': ['whatsapp', 'call'],  
+        'Lavanderías': ['whatsapp'],  
         'Pastelerías': ['call'],  
         'Cafeterías': ['call'],  
         'Pizzerías': ['call'],  
@@ -947,28 +947,44 @@
             // Computer Technicians
             {
                 id: 20,
-                name: "Tecnología y Soluciones",
+                name: "SyH Soluciones Ing. Humberto Alvizar",
                 category: "Técnicos en Computadoras",
-                specialty: "Reparación de hardware",
-                description: "Soluciones técnicas para computadoras y equipos electrónicos.",
-                phone: "+525598765432",
-                address: "Plaza Tecnológica, CDMX",
-                experience: "5 años",
-                price: "$250 - Diagnóstico",
-                membership: "free", //puedes cambiar a premiun
-                featured: false, //puedes cambiar a true
-                services: ["Reparación de laptops", "Recuperación de datos", "Mantenimiento preventivo"],
-                schedule: "Lunes a Viernes: 10am - 7pm",
-                education: "",
-                image: "https://images.unsplash.com/photo-1517430816045-df4b7c11d76a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+                specialty: "Computadoras - Sistemas de seguridad",
+                description: "Soluciones correctas para computadoras y equipos de seguridad.",
+                phone: "+523541096174",
+                address: "C. Salazar #13, Int. B, Col. Centro, Los Reyes Mich.",
+                experience: "Mas de 8 años",
+                price: "Consultanos Ahora",
+                membership: "premium", //puedes cambiar a free
+                featured: true, //puedes cambiar a false
+                services: ["Reparación de computadoras", "Instalación de Software y Antivirus", "Mantenimiento preventivo, Instalación de Camaras de Seguridad, Recargas de Tintas - Toner"],
+                schedule: "Lunes a Viernes: 10am a 2pm y 4pm a 8pm",
+                education: "Ingeniería en Sistemas Computacionales",
+                image: "./Images/perfil-SyH-soluciones.jpg",
                 gallery: [
-                          "https://randomuser.me/api/portraits/women/25.jpg",
-                          "https://randomuser.me/api/portraits/women/65.jpg",
-                          "https://randomuser.me/api/portraits/women/30.jpg"
+                          "./Images/SyH-1.jpg",
+                          "./Images/SyH-2.jpg",
+                          "./Images/SyH-3.jpg",
+                          "./Images/SyH-4.jpg",
+                          "./Images/SyH-5.jpg",
+                          "./Images/SyH-6.jpg"
                          ],
                 offers: [
-                       
-                        ]
+        {
+            title: "Oferta Especial en Monitores",
+            discount: "10% OFF",
+            validity: "Válido hasta 30/Agosto/2025",
+            description: "Monitores Full HD y 4K de marcas líderes (Acer, Samsung, LG, Dell)",
+            conditions: "Aplicable solo en compra directa en tienda. No incluye envío"
+        },
+        {
+            title: "Armado de PC Gamer Profesional",
+            discount: "15% OFF",
+            validity: "Durante todo Julio",
+            description: "Paquete completo: Torre + periféricos + instalación de SO",
+            conditions: "Mínimo $8,000 de presupuesto. Incluye garantía de 1 año"
+        }
+    ]
             },
           // Tatoos
             {
@@ -1461,33 +1477,34 @@
 // Lavanderías
 {
     id: 38,
-    name: "Lavandería Express",
+    name: "Lavandería Lemoncito",
     category: "Lavanderías",
-    specialty: "Lavado en seco",
+    specialty: "Limpieza de ropa",
     description: "Servicio rápido y profesional de lavandería.",
-    phone: "+525555667788",
-    address: "Av. Limpieza 67",
-    experience: "3 años",
-    price: "$30/kg - Lavado básico",
+    phone: "+523512023648",
+    address: "C. Torres Quintero, Esquina con Salazar #2, Col. Centro, Los Reyes",
+    experience: "Mas de 10 años",
+    price: "$23/kg - Lavado básico",
     membership: "premium", //Puedes cambiar a free
     featured: true, //Puedes cambiar a false
-    services: ["Lavado en seco", "Planchado", "Remoción de manchas"],
-    schedule: "Lunes a Domingo 8am - 8pm",
+    services: ["Lavado de colchas y edredones", "Remoción de manchas dificiles", "Limpieza de tenis"],
+    schedule: "Lunes a Sabado 9am - 7:30pm de corrido",
     image: "https://images.unsplash.com/photo-1582730147924-d92f4da00252",
     gallery: [
               "https://randomuser.me/api/portraits/women/25.jpg",
               "https://randomuser.me/api/portraits/women/65.jpg",
-              "https://randomuser.me/api/portraits/women/30.jpg"
+              "https://randomuser.me/api/portraits/women/30.jpg",
+              "./Images/lavanderia-4.jpg"
              ],
     offers: [
-        {
+       /* {
             title: "Lavado Premium + Planchado",
             discount: "50% OFF",
             validity: "Válido del 01/10/23 hasta 31/10/2023",
             description: "Lavado + planchado en seco.",
             conditions: "Aplica solo en prendas estándar (camisas, pantalones, blusas)."
-        }
-    ]
+        } */
+            ]
 },
 
 // Pastelerías
@@ -2699,7 +2716,7 @@
             showScreen('category');
         }
         
-        // Create a professional card element
+        // Create a professional card element - Crear una tarjeta de profesional
         function createProfessionalCard(professional) {
             const card = document.createElement('div');
             card.className = `bg-white rounded-lg shadow-md overflow-hidden ${professional.membership === 'premium' ? 'premium-card' : ''}`;
@@ -2780,7 +2797,7 @@ document.getElementById('lightbox').addEventListener('click', (e) => {
 });
       
       
-        // Show professional details
+        // Show professional details - Detalles de los profesionales
         function showProfessionalDetails(id) {
             const professional = professionals.find(pro => pro.id === parseInt(id));
             
