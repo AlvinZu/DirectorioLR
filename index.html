@@ -353,13 +353,16 @@
         'Cámaras de Seguridad': ['whatsapp', 'call'],
         'Paneles Solares': ['whatsapp', 'call'],
         'Auto Lavados': ['whatsapp', 'call'],
-        'Funerarias': ['call'],
+        'Funerarias': ['whatsapp', 'call'],
         'Cruz Roja': ['call'],
         'Escuelas de Ingles': ['whatsapp', 'call'],
         'Cerrajeros': ['whatsapp', 'call'],
         'Deportes': ['whatsapp', 'call'],
         'Perfumerías': ['whatsapp'],
-        'Lashistas': ['whatsapp']
+        'Lashistas': ['whatsapp'],
+        'Productos de Belleza': ['whatsapp', 'call'],
+        'Joyerías': ['whatsapp'],
+        
 };
       
         // Base de datos de los profesionales
@@ -2359,31 +2362,41 @@
 // Funerarias
 {
     id: 68,
-    name: "Servicios Funerarios Dignos",
+    name: "Funerales La Paz",
     category: "Funerarias",
-    specialty: "Servicios completos",
+    specialty: "Servicios Funerarios a Futuro",
     description: "Acompañamiento en los momentos más difíciles con profesionalismo y respeto.",
-    phone: "+525533440404",
-    address: "Calle Recuerdo 789",
-    experience: "20 años",
-    price: "Desde $15,000",
+    phone: "+523541201583",
+    address: "C. Corregidora #1, Col. Centro, Los Reyes, Mich.",
+    experience: "Mas de 20 años",
+    price: "Cotiza Ahora",
     membership: "premium", // Puedes cambiar a free
     featured: true, // Puedes cambiar a false
-    services: ["Cremación", "Capillas", "Traslados"],
+    services: ["Salas de Velación", "Servicio de Meseros", "Cremación", "Traslados", "Capillas"],
     schedule: "24/7",
-    image: "https://images.unsplash.com/photo-1580338453778-85b8d12edfd3",
+    image: "./Images/perfil-funerales-la-paz.jpg",
     gallery: [
-              "./Images/Logo.jpg",
-              "https://randomuser.me/api/portraits/women/65.jpg",
-              "https://randomuser.me/api/portraits/women/30.jpg"
+              "./Images/funerales-la-paz-1.jpg",
+              "./Images/funerales-la-paz-2.jpg",
+              "./Images/funerales-la-paz-3.jpg",
+              "./Images/funerales-la-paz-4.jpg",
+              "./Images/funerales-la-paz-5.jpg",
+              "./Images/funerales-la-paz-6.jpg",
              ],
     offers: [
         {
             title: "Paquete Integral de Dignidad",
-            discount: "20% OFF",
-            validity: "Válido hasta 31/12/2023",
-            description: "Servicio completo incluye: Traslado, capilla, ceremonia y ataúd estándar",
-            conditions: "Reservación con 48 hrs de anticipación. Aplican restricciones en días festivos"
+            discount: "15% OFF",
+            validity: "Válido hasta 31/Dic/2025",
+            description: "Servicio completo incluye: Traslado, capilla, ceremonia y ataúd estándar.",
+            conditions: "Reservación con 24 hrs de anticipación."
+        },
+        {
+            title: "Pre Venta de Espacios en Nuevo Cementerio Jardinez del Recuerdo",
+            discount: "$2,500 - Enganche",
+            validity: "Válido hasta 31/Dic/2025",
+            description: "Te ofrecemos un lugar de paz para preservar la memoria de los seres que tanto amamos, Diseñado con respeto, Tranquilidad para tus seres queridos, Flexibilidad en planes de contratación.",
+            conditions: "Solicita mas información por mensaje directo o llámanos."
         }
     ]
    },
@@ -2578,7 +2591,77 @@
             conditions: "Agendar cita con 48hrs de anticipación. No incluye diseño especial"
         }
     ]
-}
+},
+          // Productos de Belleza
+          {
+        id: 75,
+        name: "Salón Belleza Total",
+        category: "Productos de Belleza",
+        specialty: "Tintes de Cabello Profesionales",
+        description: "Venta de productos profesionales para tinte de cabello y aplicación experta",
+        phone: "+523541234567",
+        address: "Av. Principal 456, Los Reyes",
+        experience: "8 años",
+        price: "$300 - Kit Tinte completo",
+        membership: "premium", // Puedes cambiar a free
+        featured: true, // Puedes cambiar a false
+        services: ["Coloración profesional", "Venta de productos", "Asesoría capilar"],
+        schedule: "Lunes a Sábado 9am - 7pm",
+        image: "https://images.unsplash.com/photo-1560066984-138dadb4c035",
+        gallery: [
+            "https://images.unsplash.com/photo-1595475884562-073c30d45670",
+            "https://images.unsplash.com/photo-1519699047748-de8e457fd634"
+        ],
+        offers: [
+            {
+                title: "Tinte Premium + Tratamiento",
+                discount: "25% OFF",
+                validity: "Válido hasta 30/12/2024",
+                description: "Tinte profesional con tratamiento reparador incluido",
+                conditions: "Aplicable en colores permanentes. Incluye productos de cuidado post-coloración"
+            }
+        ]
+    },
+         // Joyerías
+    {
+        id: 76,
+        name: "Índigo Joyas",
+        category: "Joyerías",
+        specialty: "Joyeria fina en oro y plata",
+        description: "Joyeria artesanal de la más alta calidad con garantía certificada",
+        phone: "+523541054380",
+        address: "Los Reyes, Mich.",
+        experience: "Mas de 10 años",
+        price: "Desde $1,500",
+        membership: "premium", // Puedes cambiar free
+        featured: true, // Puedes cambiar false
+        services: [
+            "Joyeria en oro 10K-18K", 
+            "Diseños personalizados",
+            "Engastes profesionales",
+            "Pagos con tarjeta"
+        ],
+        schedule: "Lunes a Sábado 10:30am - 8:00pm",
+        image: "./Images/perfil-joyeria-indigo.jpg",
+        gallery: [
+            "./Images/joyeria-indigo-1.jpg",
+            "./Images/joyeria-indigo-2.jpg",
+            "./Images/joyeria-indigo-3.jpg",
+            "./Images/joyeria-indigo-4.jpg",
+            "./Images/joyeria-indigo-5.jpg",
+            "./Images/joyeria-indigo-6.jpg"
+        ],
+        offers: [
+            {
+                title: "Esclava Solida de Oro 10K",
+                discount: "15% OFF",
+                validity: "Oferta Permanente",
+                description: "Esclava de oro sólido 10K medida 18.5cm - Manofactura 100% mexicana",
+                conditions: "Incluye certificado de autenticidad. No aplica para otras promociones"
+            }
+        ]
+    }
+          
          ];
 
         // Get all unique categories
@@ -2720,7 +2803,9 @@
         'Cerrajeros': '<i class="fas fa-key"></i>',
         'Deportes': '<i class="fas fa-medal"></i>',
         'Perfumerías': '<i class="fas fa-spray-can-sparkles"></i>',
-        'Lashistas': '<i class="fas fa-eye"></i>'
+        'Lashistas': '<i class="fas fa-eye"></i>',
+        'Productos de Belleza': '<i class="fas fa-spa"></i>',
+        'Joyerías': '<i class="fas fa-gem"></i>'
     };
             
             return icons[category] || '<i class="fas fa-briefcase"></i>';
