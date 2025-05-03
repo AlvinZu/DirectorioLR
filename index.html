@@ -310,7 +310,7 @@
         'Técnicos en Computadoras': ['whatsapp'],  
         'Tatuadores': ['whatsapp'],  
         'Restaurantes': ['call'],  
-        'Servicio a Domicilio': ['whatsapp', 'call'],  
+        'Pezcaderías': ['whatsapp', 'call'],  
         'Construcción': ['call'],  
         'Arquitectos': ['whatsapp', 'call'],  
         'Uñas': ['whatsapp'],  
@@ -363,6 +363,7 @@
         'Productos de Belleza': ['whatsapp', 'call'],
         'Joyerías': ['whatsapp'],
         'Comida Rápida': ['whatsapp', 'call'],
+        'Aires Acondicionados': ['whatsapp', 'call']
         
 };
       
@@ -1128,21 +1129,21 @@
     ]
            },
           
-          // Servicio a Domicilio
+          // Pezcaderías
     {
         id: 25,
-        name: "DomiExpress",
-        category: "Servicio a Domicilio",
-        specialty: "Entrega rápida",
-        description: "Servicio de mensajería y paquetería urgente.",
+        name: "El Marlin",
+        category: "Pezcaderías",
+        specialty: "Mayoreo - Menudeo de Mariscos",
+        description: "Somos la empresa que eligen los Restaurantes para surtir lo mejor en mariscos y carnes.",
         phone: "+525555555555",
         address: "Centro de distribución Los Reyes",
-        experience: "2 años",
-        price: "$50 - Envío base",
-        membership: "free", //Puedes cambiar a premium
-        featured: false, //Puedes cambiar a true
-        services: ["Entrega de documentos", "Paquetería", "Compras a domicilio"],
-        schedule: "24/7",
+        experience: "mas de 10 años",
+        price: "Cotiza Ahora",
+        membership: "premium", //Puedes cambiar a free
+        featured: true, //Puedes cambiar a false
+        services: ["Camarones", "Tilapia", "Medallón de Atún", "Salmón", "Lengua", "Mucho mas"],
+        schedule: "Lunes a Domingo 8am a 6pm",
         image: "https://images.unsplash.com/photo-1600716051966-a8bda4a65848",
         gallery: [
                   "https://randomuser.me/api/portraits/women/25.jpg",
@@ -1475,7 +1476,7 @@
     id: 37,
     name: "Lonchería Doña Mary",
     category: "Loncherías",
-    specialty: "Comida corrida tradicional",
+    specialty: "Servicio a Domicilio",
     description: "Los mejores guisados caseros de la región.",
     phone: "+525512343434",
     address: "Mercado Municipal Local 45",
@@ -2705,6 +2706,49 @@
                 conditions: "Pedir después de las 4pm."
             }
         ]
+    },
+          // Aires Acondicionados
+    {
+        id: 78,
+        name: "ClimaTotal Solutions",
+        category: "Aires Acondicionados",
+        specialty: "Instalación y mantenimiento profesional",
+        description: "Servicio técnico especializado en climatización residencial y comercial",
+        phone: "+523541507060",
+        address: "Av. Tecnológica 45, Los Reyes",
+        experience: "9 años",
+        price: "$$ - Cotización sin costo",
+        membership: "premium",
+        featured: true,
+        services: [
+            "Instalación de equipos",
+            "Mantenimiento preventivo",
+            "Reparación de fallas",
+            "Venta de refacciones",
+            "Limpieza profunda"
+        ],
+        schedule: "Lunes a Sábado 8am - 8pm",
+        image: "https://images.unsplash.com/photo-1621979440314-8e8d8a4b8c1c",
+        gallery: [
+            "https://images.unsplash.com/photo-1609351346171-e9b8c4e0fade",
+            "https://images.unsplash.com/photo-1595943957921-5a5cbf5f67b0"
+        ],
+        offers: [
+            {
+                title: "Mantenimiento Preventivo",
+                discount: "20% OFF",
+                validity: "Válido hasta 30/Dic/2025",
+                description: "Limpieza completa + revisión de gas + chequeo eléctrico",
+                conditions: "Para equipos residenciales hasta 3 toneladas. Incluye informe técnico"
+            },
+            {
+                title: "Paquete Instalación Completa",
+                discount: "15% OFF en equipo + instalación gratis",
+                validity: "Promoción Permanente",
+                description: "Compra de equipo nuevo con instalación profesional incluida",
+                conditions: "Válido para equipos Mirage. Garantía de 1 año en mano de obra"
+            }
+        ]
     }
           
          ];
@@ -2799,7 +2843,7 @@
                 'Técnicos en Computadoras': '<i class="fas fa-laptop"></i>',
                 'Tatuadores': '<i class="fas fa-dragon"></i>',
         'Restaurantes': '<i class="fas fa-utensils"></i>',
-        'Servicio a Domicilio': '<i class="fas fa-truck"></i>',
+        'Pezcaderías': '<i class="fas fa-shrimp"></i>',
         'Construcción': '<i class="fas fa-hard-hat"></i>',
         'Arquitectos': '<i class="fas fa-drafting-compass"></i>',
         'Uñas': '<i class="fas fa-hand-sparkles"></i>',
@@ -2851,7 +2895,8 @@
         'Lashistas': '<i class="fas fa-eye"></i>',
         'Productos de Belleza': '<i class="fas fa-spa"></i>',
         'Joyerías': '<i class="fas fa-gem"></i>',
-        'Comida Rápida': '<i class="fas fa-hamburger"></i>'
+        'Comida Rápida': '<i class="fas fa-hamburger"></i>',
+        'Aires Acondicionados': '<i class="fas fa-fan"></i>'
     };
             
             return icons[category] || '<i class="fas fa-briefcase"></i>';
