@@ -362,6 +362,7 @@
         'Lashistas': ['whatsapp'],
         'Productos de Belleza': ['whatsapp', 'call'],
         'Joyerías': ['whatsapp'],
+        'Comida Rápida': ['whatsapp', 'call'],
         
 };
       
@@ -2660,6 +2661,50 @@
                 conditions: "Incluye certificado de autenticidad. No aplica para otras promociones"
             }
         ]
+    },
+         // Comida Rápida
+    {
+        id: 77,
+        name: "Burreteria Los Reyes",
+        category: "Comida Rápida",
+        specialty: "Servicio a domicilio",
+        description: "Somos La Burreteria un local de comida en donde puedes encontrar un sabor inigualable.",
+        phone: "+523541261511",
+        address: "C. Belisario Domínguez, Esquina con Jacaranda, Los Reyes. A media cuadra arriba del Hospital San José.",
+        experience: "Mas de 1 año",
+        price: "$$ - Precios accesibles",
+        membership: "premium", // Puedes cambiar a free
+        featured: true, // Puedes cambiar a false
+        services: [
+            "Burritos gigantes",
+            "Sincronizadas especiales",
+            "Tacos deliciosos",
+            "Promociones",
+            "Servicio a Domicilio"
+        ],
+        schedule: "Martes a Domingo 2pm a 10pm",
+        image: "./Images/perfil-burreteria.jpg",
+        gallery: [
+            "./Images/comida-burreteria-1.jpg",
+            "./Images/comida-burreteria-2.jpg",
+            "./Images/comida-burreteria-3.jpg"
+        ],
+        offers: [
+            {
+                title: "Combo Individual",
+                discount: "$90 Pesos",
+                validity: "Promoción Permanente",
+                description: "1 Burrito o 1 Sincronizada + Bebida 600ml. Válido para servicio en local y a domicilio.",
+                conditions: "Pedir después de las 4pm."
+            },
+            {
+                title: "Paquete Grupal",
+                discount: "$200 Pesos",
+                validity: "Promoción Permanente",
+                description: "3 Burritos o 3 Sincronizadas. Válido para servicio en local y a domicilio.",
+                conditions: "Pedir después de las 4pm."
+            }
+        ]
     }
           
          ];
@@ -2805,7 +2850,8 @@
         'Perfumerías': '<i class="fas fa-spray-can-sparkles"></i>',
         'Lashistas': '<i class="fas fa-eye"></i>',
         'Productos de Belleza': '<i class="fas fa-spa"></i>',
-        'Joyerías': '<i class="fas fa-gem"></i>'
+        'Joyerías': '<i class="fas fa-gem"></i>',
+        'Comida Rápida': '<i class="fas fa-hamburger"></i>'
     };
             
             return icons[category] || '<i class="fas fa-briefcase"></i>';
