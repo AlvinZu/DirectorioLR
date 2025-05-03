@@ -302,7 +302,7 @@
         'Electricistas': ['whatsapp'],  
         'Plomeros': ['whatsapp'],  
         'Fotógrafos': ['whatsapp'],  
-        'Entrenadores Personales': ['whatsapp'],  
+        'Protección Civil': ['call'],  
         'Abogados': ['whatsapp'],  
         'Psicólogos': ['whatsapp'],  
         'Veterinarios': ['whatsapp', 'call'],  
@@ -823,29 +823,34 @@
     ]
             },
             
-            // Personal Trainers
+            // Protección Civíl
             {
-                id: 15,
-                name: "Entrenador Javier Ríos",
-                category: "Entrenadores Personales",
-                specialty: "Pérdida de peso",
-                description: "Programas personalizados para alcanzar tus metas físicas.",
-                phone: "+525511223344",
-                address: "Gimnasio PowerFit, CDMX",
-                experience: "7 años",
-                price: "$400 - Sesión",
-                membership: "premium", //Puedes cambiar a free
-                featured: true, //Puedes cambiar a false
-                services: ["Entrenamiento personalizado", "Rutinas a domicilio", "Asesoría nutricional"],
-                schedule: "Lunes a Sábado: 6am - 9pm",
-                education: "Certificación ISSA",
-                image: "https://randomuser.me/api/portraits/men/85.jpg",
-                gallery: [
-                          "https://randomuser.me/api/portraits/women/25.jpg",
-                          "https://randomuser.me/api/portraits/women/65.jpg",
-                          "https://randomuser.me/api/portraits/women/30.jpg"
-                         ]
-            },
+        id: 15,
+        name: "Protección Civil Los Reyes",
+        category: "Protección Civil",
+        specialty: "Servicios de emergencia 24/7",
+        description: "Atención inmediata para emergencias y desastres naturales",
+        phone: "+523541234500",
+        address: "Av. Seguridad 100, Col. Centro",
+        experience: "Servicio Público",
+        price: "Servicio Gratuito",
+        membership: "premium", //Puedes cambiar a free
+        featured: true, //Puedes cambiar a false
+        services: [
+            "Respuesta a emergencias",
+            "Primeros auxilios",
+            "Coordinación en desastres",
+            "Capacitación comunitaria"
+        ],
+        schedule: "24/7",
+        image: "https://images.unsplash.com/photo-1584529252530-4928e8a616cf",
+        gallery: [
+            "https://images.unsplash.com/photo-1583336663277-620dc1996580",
+            "https://images.unsplash.com/photo-1589657120249-5d4c0d7e0b2c"
+        ],
+        offers: [
+                ]
+    },
             
             // Abogados
             {
@@ -2835,7 +2840,7 @@
                 'Electricistas': '<i class="fas fa-bolt"></i>',
                 'Plomeros': '<i class="fas fa-faucet"></i>',
                 'Fotógrafos': '<i class="fas fa-camera-retro"></i>',
-                'Entrenadores Personales': '<i class="fas fa-dumbbell"></i>',
+                'Protección Civil': '<i class="fas fa-shield-alt"></i>',
                 'Abogados': '<i class="fas fa-gavel"></i>',
                 'Psicólogos': '<i class="fas fa-brain"></i>',
                 'Veterinarios': '<i class="fas fa-paw"></i>',
@@ -2966,7 +2971,7 @@
         }
         
         if (method === 'call') {
-            const isEmergency = ['Policías', 'Ambulancias', 'Bomberos', 'Cruz Roja'].includes(professional.category);
+            const isEmergency = ['Policías', 'Ambulancias', 'Bomberos', 'Cruz Roja', 'Protección Civil'].includes(professional.category);
             buttons += `
                 <a href="tel:${phoneNumber}" 
                    class="block ${isEmergency ? 'bg-red-500 emergency-btn' : 'bg-blue-500'} text-white text-center py-3 rounded-lg hover:${isEmergency ? 'bg-red-600' : 'bg-blue-600'} transition-colors">
