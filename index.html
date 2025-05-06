@@ -289,7 +289,7 @@
       
       const contactConfig = {
     // Categorías configurar cuales botones aparecen    
-        'Dentistas': ['whatsapp'],  
+        'Dentistas': ['call'],  
         'Nutriólogos': ['whatsapp'],  
         'Quiroprácticos': ['whatsapp'],  
         'Doctores': ['whatsapp'],  
@@ -363,7 +363,8 @@
         'Productos de Belleza': ['whatsapp', 'call'],
         'Joyerías': ['whatsapp'],
         'Comida Rápida': ['whatsapp', 'call'],
-        'Aires Acondicionados': ['whatsapp', 'call']
+        'Aires Acondicionados': ['whatsapp', 'call'],
+        'Sociedad Cooperativa de Ahorros y Préstamos': ['call']
         
 };
       
@@ -372,20 +373,20 @@
             // Dentistas
             {
                 id: 1,
-                name: "Dra. Ana López",
+                name: "Clínica Dental - Dr. Juan Alcazar",
                 category: "Dentistas",
-                specialty: "Ortodoncista",
+                specialty: "Endodoncia",
                 description: "Especialista en ortodoncia y cuidado dental preventivo.",
-                phone: "+525512345678",
-                address: "Av. Reforma 123, CDMX",
-                experience: "10 años",
-                price: "$800 - Consulta inicial",
+                phone: "+523545420424",
+                address: "C. Salazar #39, Col. Centro, Los Reyes, Mich.",
+                experience: "Mas de 10 años",
+                price: "$600 - Consulta inicial",
                 membership: "premium", //Puedes cambiar a free
                 featured: true, //Puedes cambiar a false
-                services: ["Ortodoncia", "Blanqueamiento", "Limpieza dental", "Implantes"],
+                services: ["Endodoncia", "Blanqueamiento", "Limpieza dental", "Caries"],
                 schedule: "Lunes a Viernes: 9am - 6pm",
                 education: "Universidad Nacional Autónoma de México",
-                image: "https://randomuser.me/api/portraits/women/65.jpg",
+                image: "https://randomuser.me/api/portraits/men/32.jpg",
                 gallery: [
                           "https://randomuser.me/api/portraits/women/25.jpg",
                           "https://randomuser.me/api/portraits/women/65.jpg",
@@ -395,10 +396,10 @@
               offers: [
                        {
                        title: "Limpieza Dental Completa",
-                       discount: "30% OFF",
-                       validity: "Válido del 10/09/23 hasta 30/09/2023",
+                       discount: "25% OFF",
+                       validity: "Válido hasta 30/Agosto/2025",
                        description: "Paquete completo de limpieza y blanqueamiento dental",
-                       conditions: "Aplicable solo en primeras citas. No acumulable con otras promociones"
+                       conditions: "Aplicable solo en la primera cita."
                        }
                       ]
             },
@@ -417,7 +418,7 @@
                 services: ["Cirugía dental", "Endodoncia", "Extracciones"],
                 schedule: "Lunes a Sábado: 10am - 7pm",
                 education: "Universidad Autónoma Metropolitana",
-                image: "https://randomuser.me/api/portraits/men/32.jpg",
+                image: "https://randomuser.me/api/portraits/men/50.jpg",
                 gallery: [
                           "https://randomuser.me/api/portraits/women/25.jpg",
                           "https://randomuser.me/api/portraits/women/65.jpg",
@@ -2942,6 +2943,47 @@
                 conditions: "Válido para equipos Mirage. Garantía de 1 año en mano de obra"
             }
         ]
+    },
+         
+         // Sociedades Cooperativas de Ahorros y Prestamos Alianza
+    {
+        id: 79,
+        name: "Alianza Caja Popular Los Reyes",
+        category: "Sociedad Cooperativa de Ahorros y Préstamos",
+        specialty: "Prestamos y Ahorros",
+        description: "Nuestra Misión es brindar soluciones financieras competitivas que contribuyan a mejorar la calidad de vida de nuestros socios y población en general, dando valor a la sustentabilidad y fomentando la inclusión financiera.",
+        phone: "+523545420089",
+        address: "C. 16 de Septiembre #43, Col. Centro, Los Reyes, Mich.",
+        experience: "Mas de 30 años",
+        price: "Habla con Nosotros ya",
+        membership: "premium",
+        featured: true,
+        services: [
+            "Créditos personales",
+            "Ahorro programado",
+            "Seguros colectivos",
+            "Financiamiento para vivienda",
+            "Capital de trabajo"
+        ],
+        schedule: "Lunes a Viernes 9am a 4pm y Sábados 10am a 2pm",
+        image: "./Images/perfil-alianza.jpg",
+        gallery: [
+            "./Images/alianza-1.jpg",
+            "./Images/alianza-2.jpg",
+            "./Images/alianza-3.jpg",
+            "./Images/alianza-4.jpg",
+            "./Images/alianza-5.jpg",
+            "./Images/alianza-6.jpg"
+        ],
+        offers: [
+            {
+                title: "Oferta Water Credit",
+                discount: "Solicitalo Ahora",
+                validity: "Válido hasta 30/Julio/2025",
+                description: "Crédito diseñado para adquirir tinacos, cisternas y mejorar el uso de saneamiento y distribución del agua en tu hogar",
+                conditions: "Válido solo en oficina matriz. Requiere aval"
+            }
+        ]
     }
           
          ];
@@ -3089,7 +3131,8 @@
         'Productos de Belleza': '<i class="fas fa-spa"></i>',
         'Joyerías': '<i class="fas fa-gem"></i>',
         'Comida Rápida': '<i class="fas fa-hamburger"></i>',
-        'Aires Acondicionados': '<i class="fas fa-fan"></i>'
+        'Aires Acondicionados': '<i class="fas fa-fan"></i>',
+        'Sociedad Cooperativa de Ahorros y Préstamos': '<i class="fas fa-coins"></i>'
     };
             
             return icons[category] || '<i class="fas fa-briefcase"></i>';
