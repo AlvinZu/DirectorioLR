@@ -251,7 +251,7 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div>
                     <h3 class="text-xl font-bold mb-4">DirectorioPro Los Reyes</h3>
-                    <p class="text-gray-300">Conectando profesionales con clientes desde 2024.</p>
+                    <p class="text-gray-300">Conectando profesionales con clientes desde 2025.</p>
                 </div>
                 <div>
                     <h3 class="text-xl font-bold mb-4">Enlaces rápidos</h3>
@@ -338,7 +338,7 @@
         'Policías': ['call'],  
         'Ambulancias': ['call'],
         'Bomberos': ['call'],
-        'Panaderías': ['call'],
+        'Panaderías': ['whatsapp', 'call'],
         'Reparación de Celulares': ['whatsapp', 'call'],
         'Agencias de Viajes':['whatsapp', 'call'],
         'Refaccionarias':['whatsapp', 'call'],
@@ -742,9 +742,34 @@
                         ]
             },
             
-            // Carpenters
+            // Carpinteros
             {
                 id: 11,
+                name: "Compadre gera cuñado",
+                category: "Carpinteros",
+                specialty: "Muebles - Closets - Puertas",
+                description: "Elaboración de muebles de madera a medida con los mejores materiales.",
+                phone: "+523541191158",
+                address: "Av. Coyoacán 890, Los Reyes, Mich.",
+                experience: "Mas de 10 años",
+                price: "Cotiza Ahora",
+                membership: "premium", //puedes cambiar a free
+                featured: true, //puedes cambiar a false
+                services: ["Muebles a medida", "Puertas", "Closets", "Salas de TV", "Carpintería fina"],
+                schedule: "Lunes a Viernes: 9am a 6pm y Sabados 9am a 2pm",
+                education: "",
+                image: "https://images.unsplash.com/photo-1604755940508-42f9135fad1a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+                gallery: [
+                          "https://randomuser.me/api/portraits/women/25.jpg",
+                          "https://randomuser.me/api/portraits/women/65.jpg",
+                          "https://randomuser.me/api/portraits/women/30.jpg"
+                         ],
+                offers: [
+                       
+                        ]
+            },
+          {
+                id: 1101,
                 name: "Cesar Silva",
                 category: "Carpinteros",
                 specialty: "Muebles - Closets - Puertas",
@@ -769,7 +794,7 @@
                         ]
             },
             
-            // Electricians
+            // Electricistas
             {
                 id: 12,
                 name: "Electricidad Segura",
@@ -796,7 +821,7 @@
                         ]
             },
             
-            // Plumbers
+            // Plomeros
             {
                 id: 13,
                 name: "Plomería Express",
@@ -973,7 +998,7 @@
     ]
             },
             
-            // Psychologists
+            // Psicólogos
             {
                 id: 17,
                 name: "Psic. Luis González",
@@ -1000,7 +1025,7 @@
                         ]
             },
             
-            // Veterinarians
+            // Veterinarios
             {
                 id: 18,
                 name: "MVZ Patricia Navarro",
@@ -1033,7 +1058,7 @@
     ]
             },
             
-            // Mechanics
+            // Mecánicos
             {
                 id: 19,
                 name: "Taller Mecánico Rápido",
@@ -1060,7 +1085,7 @@
                         ]
             },
             
-            // Computer Technicians
+            // Técnicos en Computadoras
             {
                 id: 20,
                 name: "SyH Soluciones Ing. Humberto Alvizar",
@@ -1102,7 +1127,7 @@
         }
     ]
             },
-          // Tatoos
+          // Tatoos - Tatuadores
             {
                 id: 21,
                 name: "Estudio Black Ink",
@@ -1260,7 +1285,7 @@
         id: 26,
         name: "Construcciones Modernas",
         category: "Construcción",
-        specialty: "Obra civil",
+        specialty: "Albañilería",
         description: "Servicios integrales de construcción y remodelación.",
         phone: "+525577889944",
         address: "Calle Obrera 45",
@@ -1857,6 +1882,39 @@
 // Papelerías
 {
     id: 44,
+    name: "Papelería Central",
+    category: "Papelerías",
+    specialty: "Utiles escolares",
+    description: "LA calidad y el servicio Hechos Papelería. Contamos con una gran variedad de utiles escolares y para la oficina al mejor precio.",
+    phone: "+523545419468",
+    address: "C. Allende Norte #30 Col. Centro, Los Reyes, Mich.",
+    experience: "Mas de 10 años",
+    price: "Precios Accesibles",
+    membership: "premium", //Puedes cambiar a free
+    featured: true, //Puedes cambiar a false
+    services: ["Venta de útiles", "Copias e impresiones", "Libros", "Libretas", "Utiles para oficina"],
+    schedule: "Lunes a Viernes 9am a 2pm - 4pm a 8pm y Sábados de 9am a 2pm",
+    image: "./Images/perfil-papeleria-central.jpg",
+    gallery: [
+              "./Images/papeleria-central-1.jpg",
+              "./Images/papeleria-central-2.jpg",
+              "./Images/papeleria-central-3.jpg",
+              "./Images/papeleria-central-4.jpg",
+              "./Images/papeleria-central-5.jpg",
+              "./Images/papeleria-central-6.jpg"
+             ],
+    offers: [
+        {
+            title: "Promo Regreso a Clases",
+            discount: "$299 Pesos",
+            validity: "Válido hasta 30/Agosto/2025",
+            description: "Utiles escolares: 5 Libretas + 3 lapiceros + 1 borrador + 2 lapices + 1 saca puntas + 1 corrector.",
+            conditions: "No incluye el forrado de libretas ni etiquetas."
+        }
+    ]
+},
+      {
+    id: 4401,
     name: "Papelería Flora",
     category: "Papelerías",
     specialty: "Utiles escolares",
@@ -2115,24 +2173,36 @@
   // Panaderías
 {
     id: 53,
-    name: "Panadería La Tradición",
+    name: "Panificadora Viena",
     category: "Panaderías",
     specialty: "Pan artesanal",
-    description: "Horneando calidad desde 1985.",
-    phone: "+525544778899",
-    address: "Calle Dulce 45",
-    experience: "35 años",
-    price: "$30 - Pan de caja",
+    description: "Horneando con calidad desde 1968, somos la panificadora con mas de 47 años de tradición.",
+    phone: "+523546883660",
+    address: "MATRIZ: C. 16 Septiembre #169, Frente al obelisco. SUCURSAL CENTRO: C. Allende Sur #71, Col. Centro, Los Reyes, Mich.",
+    experience: "Mas de 47 años",
+    price: "Calidad Asegurada",
     membership: "premium", //Puedes cambiar a free
     featured: true, //Puedes cambiar a false
     services: ["Pan dulce", "Pasteles", "Repostería fina"],
-    schedule: "Lunes a Domingo 6am - 9pm",
-    image: "https://images.unsplash.com/photo-1509440159596-0249088772ff",
+    schedule: "Lunes a Domingo 7:15am a 9pm",
+    image: "./Images/perfil-panificadora-viena.jpg",
     gallery: [
-              "https://randomuser.me/api/portraits/women/25.jpg",
-              "https://randomuser.me/api/portraits/women/65.jpg",
-              "https://randomuser.me/api/portraits/women/30.jpg"
-             ]
+              "./Images/panificadora-viena-1.jpg",
+              "./Images/panificadora-viena-2.jpg",
+              "./Images/panificadora-viena-3.jpg",
+              "./Images/panificadora-viena-4.jpg",
+              "./Images/panificadora-viena-5.jpg",
+              "./Images/panificadora-viena-6.jpg"
+             ],
+   offers: [        
+        {
+            title: "Martes de Panadería",
+            discount: "2x1 en pan dulce",
+            validity: "Todos los martes de Julio 2025",
+            description: "Lleva el doble de pan dulce por el mismo precio",
+            conditions: "Válido en compras mayores a $100 pesos."
+        }
+    ]
 },
  
   // Reparación de celulares
@@ -3302,10 +3372,13 @@
     
     const phoneNumber = professional.phone.replace(/\D/g, ''); // Limpia el número
     
+    // Obtener primeras dos palabras del nombre
+    const nombreCorto = professional.name.split(' ').slice(0,2).join(' ');
+    
     config.forEach(method => {
         if (method === 'whatsapp') {
             buttons += `
-                <a href="https://wa.me/${phoneNumber}?text=Hola%20${encodeURIComponent(professional.name.split(' ')[0])},%20vi%20tu%20perfil%20en%20DirectorioProLR%20y%20me%20gustaría%20saber%20más%20sobre%20tus%20servicios" 
+                <a href="https://wa.me/${phoneNumber}?text=Hola%20${encodeURIComponent(nombreCorto)},%20vi%20tu%20perfil%20en%20DirectorioProLR%20y%20me%20gustaría%20saber%20más%20sobre%20tus%20servicios" 
                    target="_blank" 
                    class="block bg-green-500 text-white text-center py-3 rounded-lg hover:bg-green-600 transition-colors">
                     <i class="fab fa-whatsapp mr-2"></i> Contactar por WhatsApp
