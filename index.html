@@ -300,7 +300,7 @@
         'Pintores': ['whatsapp'],  
         'Carpinteros': ['whatsapp'],  
         'Electricistas': ['whatsapp'],  
-        'Plomeros': ['whatsapp'],  
+        'Plomeros': ['call'],  
         'Fotógrafos': ['call'],  
         'Protección Civil': ['call'],  
         'Abogados': ['whatsapp'],  
@@ -827,28 +827,35 @@
             // Plomeros
             {
                 id: 13,
-                name: "Plomería Express",
+                name: "Plomero Express",
                 category: "Plomeros",
-                specialty: "Reparaciones urgentes",
-                description: "Soluciones rápidas y efectivas para problemas de plomería.",
-                phone: "+525512345678",
-                address: "Toda la CDMX",
-                experience: "6 años",
-                price: "$350 - Visita técnica",
-                membership: "free", //puedes cambiar a premiun
-                featured: false, //puedes cambiar a true
-                services: ["Reparación de fugas", "Destape de cañerías", "Instalación de tuberías"],
+                specialty: "Reparaciones urgentes de plomería",
+                description: "Soluciones rápidas y efectivas para problemas de plomería. Manejamos marcas reconocidas como: Tuboplus, Rotoplas, Fleximatic, Urrea, Coflex, y muchas mas...",
+                phone: "+523541018240",
+                address: "C. Cancún #, Col. Oasis de Itzicuaro, Los Reyes, Mich. La calle que esta frente a la escuela 12 de octubre.",
+                experience: "mas de 2 años",
+                price: "Llamanos Ahora",
+                membership: "premium", //puedes cambiar a free
+                featured: true, //puedes cambiar a false
+                services: ["Accesorios de plomería", "Destape de cañerías", "Venta e Instalación de tuberías", "Registros", "Coladeras", "Tinacos", "Sisternas", "Fugas de gas", "Baños", "Servicio a Domicilio Gratis"],
                 schedule: "24/7",
                 education: "",
-                image: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+                image: "./Images/perfil-plomero-express.jpg",
                 gallery: [
-                          "https://randomuser.me/api/portraits/women/25.jpg",
-                          "https://randomuser.me/api/portraits/women/65.jpg",
-                          "https://randomuser.me/api/portraits/women/30.jpg"
+                          "./Images/plomero-express-1.jpg",
+                          "./Images/plomero-express-2.jpg",
+                          "./Images/plomero-express-3.jpg",
+                          "./Images/plomero-express-4.jpg"
                          ],
                 offers: [
-                       
-                        ]
+        {
+            title: "Promo Tinacos",
+            discount: "15% OFF",
+            validity: "Válido hasta 30/Nov/2025",
+            description: "Llevate un tinaco marca Resistec de 1100 Litros con el 15% de descuento.",
+            conditions: "Al pagar de contado, incluye servicio a domicilio."
+        }
+    ]
             },
             
             // Fotografos
@@ -1300,7 +1307,7 @@
         membership: "premium", //Puedes cambiar a free
         featured: true, //Puedes cambiar a false
         services: ["Camiones con Arena", "Camiones con Grava", "Camiones con Piedra", "Camiones con Cementante", "Retroexcavadoras", "Realizamos trabajos de Ollas Agrícolas", "Renchidos para Cimentación"],
-        schedule: "Lunes a Domingos: 7:30am a 4pm",
+        schedule: "Lunes a Sabados: 7:30am a 4pm",
         image: "./Images/perfil-camiones-herber.jpg",
         gallery: [
                   "./Images/camiones-herber-1.jpg",
