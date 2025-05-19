@@ -1,7 +1,7 @@
 {
   "name": "DirectorioPro LR",
   "short_name": "DirectorioPro",
-  "start_url": "/",
+  "start_url": "https://alvinzu.github.io/DirectorioLR/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#1e3a8a",
