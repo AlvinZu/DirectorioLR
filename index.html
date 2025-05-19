@@ -317,7 +317,7 @@
         'Técnicos en Computadoras': ['whatsapp'],  
         'Tatuadores': ['whatsapp'],  
         'Restaurantes': ['call'],  
-        'Pezcaderías': ['whatsapp', 'call'],  
+        'Pezcaderías': ['call'],  
         'Construcción': ['whatsapp', 'call'],
         'Arquitectos': ['whatsapp', 'call'],    
         'Rotulistas': ['whatsapp'],  
@@ -335,7 +335,7 @@
         'Pizzerías': ['call'],  
         'Pollerías': ['call'],  
         'Carnicerías': ['whatsapp', 'call'],  
-        'Papelerías': ['whatsapp'],  
+        'Papelerías': ['whatsapp', 'call'],  
         'Imprentas': ['call'],  
         'Hoteles': ['call'],  
         'Talleres de Motos': ['call'],  
@@ -1320,8 +1320,14 @@
                   "./Images/pescaderia-marlin-7.jpg"
                  ],
         offers: [
-                       
-                ]
+        {
+            title: "Combo Mariscos",
+            discount: "$450 Pesos",
+            validity: "Promoción Permanente",
+            description: "1/2 Kilo de Camarones + 2 Mojarras + 1kg de papas congeladas + 1/2  Kilo de Alitas de pollo.",
+            conditions: "Válido solo los Miercoles en Todo 2025."
+        }
+    ]
     },
           
           // Construcción:
@@ -1925,12 +1931,45 @@
 },
 
 // Papelerías
+     {
+    id: 4400,
+    name: "Librería y Papelería ALFA",
+    category: "Papelerías",
+    specialty: "Libros y Utiles escolares",
+    description: "La calidad y el servicio Hechos Papelería. Contamos con una gran variedad de utiles escolares y para la oficina al mejor precio.",
+    phone: "+523545422154",
+    address: "C. Allende Norte #15, Esquina esquina con C. Abasolo Pte, Col. Centro, Los Reyes, Mich.",
+    experience: "Mas de 20 años",
+    price: "Precios Accesibles",
+    membership: "premium", //Puedes cambiar a free
+    featured: true, //Puedes cambiar a false
+    services: ["Venta de Libros", "Venta de útiles", "Copias e impresiones", "Libretas", "Accesorios para oficina"],
+    schedule: "Lunes a Viernes 9am a 2pm - 4pm a 8pm y Sábados de 9am a 2pm",
+    image: "./Images/perfil-papeleria-alfa.jpg",
+    gallery: [
+              "./Images/papeleria-alfa-1.jpg",
+              "./Images/papeleria-alfa-2.jpg",
+              "./Images/papeleria-alfa-3.jpg",
+              "./Images/papeleria-alfa-4.jpg",
+              "./Images/papeleria-alfa-5.jpg",
+              "./Images/papeleria-alfa-6.jpg"
+             ],
+    offers: [
+        {
+            title: "Promo Regreso a Clases",
+            discount: "$299 Pesos",
+            validity: "Válido hasta 30/Agosto/2025",
+            description: "Utiles escolares: 5 Libretas + 3 lapiceros + 1 borrador + 2 lapices + 1 saca puntas + 1 corrector.",
+            conditions: "No incluye el forrado de libretas ni etiquetas."
+        }
+    ]
+},
 {
     id: 44,
     name: "Papelería Central",
     category: "Papelerías",
     specialty: "Utiles escolares",
-    description: "LA calidad y el servicio Hechos Papelería. Contamos con una gran variedad de utiles escolares y para la oficina al mejor precio.",
+    description: "La calidad y el servicio Hechos Papelería. Contamos con una gran variedad de utiles escolares y para la oficina al mejor precio.",
     phone: "+523545419468",
     address: "C. Allende Norte #30 Col. Centro, Los Reyes, Mich.",
     experience: "Mas de 10 años",
