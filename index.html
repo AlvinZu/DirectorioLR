@@ -2920,31 +2920,37 @@
        // Belleza - Uñas - Maquillistas - Lashistas 
     {
     id: 7401,
-    name: "Lashes by Lupita",
+    name: "KatriNails",
     category: "Belleza",
-    specialty: "Extensiones de pestañas",
-    description: "Técnicas rusas y volumen híbrido profesional",
-    phone: "+525533221144",
-    address: "Calle Belleza 45",
-    experience: "3 años",
-    price: "$600 - Aplicación completa",
+    specialty: "Productos para Uñas",
+    description: "Venta al mayoreo y menudeo de productos para uñas",
+    phone: "+523545418784",
+    address: "C. 16 de Septiembre #108, Col. Centro, Los Reyes, Mich. Frente cancha huerta de mangos",
+    experience: "Mas de 5 años",
+    price: "Cotiza Ahora",
     membership: "premium", // Puedes cambiar a free
     featured: true, // Puedes cambiar a false
-    services: ["Lifting de pestañas", "Tinte", "Retoques"],
-    schedule: "Martes a Domingo 10am - 6pm",
-    image: "https://randomuser.me/api/portraits/women/32.jpg",
+    services: ["Acrilicos 3D de Colores", "Aceites Para Cuticula", "Limpia Pincel", "Bledos Chicos", "Tips Balerina Natural 500 pzs", "Superbond + ph adherente de acrilico", "Gliters", "Kit de Polvo de Ada cambia de color con el sol", "Monomero Universal", "Y muchos productos mas..."],
+    schedule: "Lunes a Viernes: 10am a 2pm - 4pm a 8pm y Sábados: 10am a 2pm",
+    image: "./Images/perfil-katrinails.jpg",
     gallery: [
-              "./Images/Logo.jpg",
-              "https://randomuser.me/api/portraits/women/65.jpg",
-              "https://randomuser.me/api/portraits/women/30.jpg"
+              "./Images/katrinails-1.jpg",
+              "./Images/katrinails-2.jpg",
+              "./Images/katrinails-3.jpg",
+              "./Images/katrinails-4.jpg",
+              "./Images/katrinails-5.jpg",
+              "./Images/katrinails-6.jpg",
+              "./Images/katrinails-7.jpg",
+              "./Images/katrinails-8.jpg",
+              "./Images/katrinails-9.jpg"
              ],
     offers: [
         {
-            title: "Primera Aplicación Especial",
-            discount: "30% OFF",
-            validity: "Para primeras clientas",
-            description: "Extensiones clásicas + mantenimiento gratis a los 15 días",
-            conditions: "Agendar cita con 48hrs de anticipación. No incluye diseño especial"
+            title: "Kit Inicial",
+            discount: "15% OFF",
+            validity: "Válido todo el mes de Septiembre 2025",
+            description: "Bledo + 5 Acrilicos 3D + Gliters + Aceite para Cuticula.",
+            conditions: "Hasta Agotar Existencias."
         }
     ]
 },
@@ -3012,6 +3018,30 @@
 // Hospitales
 {
     id: 74,
+    name: "Hospital Regional Los Reyes",
+    category: "Hospitales",
+    specialty: "Urgencias Medicas",
+    description: "Somos un Hospital profesional",
+    phone: "+525533221144",
+    address: "Calle Belleza 45",
+    experience: "3 años",
+    price: "Llamanos ante una necesidad",
+    membership: "premium", // Puedes cambiar a free
+    featured: true, // Puedes cambiar a false
+    services: ["Lifting de pestañas", "Tinte", "Retoques"],
+    schedule: "Martes a Domingo 10am - 6pm",
+    image: "https://randomuser.me/api/portraits/women/32.jpg",
+    gallery: [
+              "./Images/Logo.jpg",
+              "https://randomuser.me/api/portraits/women/65.jpg",
+              "https://randomuser.me/api/portraits/women/30.jpg"
+             ],
+    offers: [
+        
+            ]
+},
+      {
+    id: 7401,
     name: "Hospital San José",
     category: "Hospitales",
     specialty: "Urgencias Medicas",
@@ -3561,13 +3591,13 @@
     
     const phoneNumber = professional.phone.replace(/\D/g, ''); // Limpia el número
     
-    // Obtener primeras dos palabras del nombre
-    const nombreCorto = professional.name.split(' ').slice(0,2).join(' ');
+    // Obtener el nombre completo
+    const nombreCompleto = encodeURIComponent(professional.name); // Nombre completo codificado
     
     config.forEach(method => {
         if (method === 'whatsapp') {
             buttons += `
-                <a href="https://wa.me/${phoneNumber}?text=Hola%20${encodeURIComponent(nombreCorto)},%20vi%20tu%20perfil%20en%20DirectorioProLR%20y%20me%20gustaría%20saber%20más%20sobre%20tus%20servicios" 
+                <a href="https://wa.me/${phoneNumber}?text=Hola%20${nombreCompleto},%20vi%20tu%20perfil%20en%20DirectorioPro%20LR%20y%20me%20gustaría%20saber%20más%20sobre%20tus%20servicios" 
                    target="_blank" 
                    class="block bg-green-500 text-white text-center py-3 rounded-lg hover:bg-green-600 transition-colors">
                     <i class="fab fa-whatsapp mr-2"></i> Contactar por WhatsApp
