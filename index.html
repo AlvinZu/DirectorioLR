@@ -304,7 +304,7 @@
         'Tiendas de ropa': ['whatsapp'],  
         'Venta de suplementos': ['whatsapp'],  
         'Barberías': ['whatsapp', 'call'],  
-        'Tiendas de Pinturas': ['whatsapp', 'call'],  
+        'Tiendas de Pinturas': ['call'],  
         'Carpinteros': ['whatsapp'],  
         'Electricistas': ['whatsapp'],  
         'Plomeros': ['call'],  
@@ -735,28 +735,37 @@
             // Tiendas de Pinturas
             {
                 id: 10,
-                name: "Pinturas y Decoraciones Martínez",
+                name: "Pinturas Prisa Los Reyes",
                 category: "Tiendas de Pinturas",
                 specialty: "Pintura residencial",
-                description: "Servicio profesional de pintura para hogares y negocios.",
-                phone: "+525533445566",
-                address: "Col. Roma, CDMX",
-                experience: "10 años",
-                price: "$150/m²",
-                membership: "free", //puedes cambiar a premiun
-                featured: false, //puedes cambiar a true
-                services: ["Pintura interior/exterior", "Decoración", "Preparación de superficies"],
-                schedule: "Lunes a Sábado: 8am - 6pm",
+                description: "Somos una tienda de pinturas de excelente calidad, variedad y precios para todos los bolsillos. Tenemos lo que necesitas para embellecer tu hogar, oficinas y negocios.",
+                phone: "+523545428951",
+                address: "C. 16 de Septiembre #437, Col. Centro, Los Reyes, Mich. Aun lado de la tienda 3B.",
+                experience: "Mas de 10 años",
+                price: "Cotiza Ahora",
+                membership: "premium", //puedes cambiar a free
+                featured: true, //puedes cambiar a false
+                services: ["Mas de 10 mil colores para igualar", "Pintura para interior", "Pintura para exterior", "Asesoría en colores", "Barniz Poliuretano", "Preparación de superficies", "Selladores acrilicos", "Impermeabilizantes", "Herramientas de aplicación"],
+                schedule: "Lunes a Sábado: 8:30am a 2pm - 4pm a 7pm.",
                 education: "",
-                image: "https://images.unsplash.com/photo-1605152276897-4f618f831968?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+                image: "./Images/perfil-pinturas-prisa.jpg",
                 gallery: [
-                          "https://randomuser.me/api/portraits/women/25.jpg",
-                          "https://randomuser.me/api/portraits/women/65.jpg",
-                          "https://randomuser.me/api/portraits/women/30.jpg"
+                          "./Images/pinturas-prisa-1.jpg",
+                          "./Images/pinturas-prisa-2.jpg",
+                          "./Images/pinturas-prisa-3.jpg",
+                          "./Images/pinturas-prisa-4.jpg",
+                          "./Images/pinturas-prisa-5.jpg",
+                          "./Images/pinturas-prisa-6.jpg"
                          ],
-                offers: [
-                       
-                        ]
+                 offers: [
+        {
+            title: "Kit de Pintura",
+            discount: "15% OFF",
+            validity: "Válido hasta 30/Nov/2025",
+            description: "1 Galón de pintura premium + rodillo profesional + brochas + cubeta + guantes",
+            conditions: "Compra mínima de $1,500."
+        }
+    ]
             },
             
             // Carpinteros
