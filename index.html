@@ -339,7 +339,7 @@
         'Imprentas': ['call'],  
         'Hoteles': ['call'],  
         'Talleres de Motos': ['call'],  
-        'Productos de Limpieza': ['whatsapp', 'call'],  
+        'Productos de Limpieza': ['call'],  
         'Purificadoras':['whatsapp', 'call'],  
         'Policías': ['call'],  
         'Ambulancias': ['call'],
@@ -2246,26 +2246,35 @@
 // Productos de Limpieza
 {
     id: 48,
-    name: "Limpieza Total",
+    name: "Limpia Usos",
     category: "Productos de Limpieza",
-    specialty: "Productos industriales",
-    description: "Distribuidor autorizado de marcas profesionales.",
-    phone: "5544112233",
-    address: "Zona Industrial Nave 5",
-    experience: "8 años",
-    price: "$$ - Mayoreo y menudeo",
-    membership: "free", //Puedes cambiar a premium
-    featured: false, //Puedes cambiar a true
-    services: ["Venta de químicos", "Asesoría técnica", "Entrega inmediata"],
-    schedule: "Lunes a Viernes 7am - 3pm",
-    image: "https://images.unsplash.com/photo-1583947581924-860bda6c26a3",
+    specialty: "Productos para el hogar",
+    description: "Somos Distribuidores de productos de limpieza para minoristas y mayoristas como Escuelas, Restaurantes, Hoteles, Clinicas, Gasolineras, etc.",
+    phone: "3545424907",
+    address: "Calle Lic. Antonio de Castro #34, Col. Santa Rosa, Los Reyes, Mich. Una cuadra arriba de la polleria pedraza.",
+    experience: "Mas de 8 años",
+    price: "Cotiza Ahora - Mayoreo y menudeo",
+    membership: "premium", //Puedes cambiar a free
+    featured: true, //Puedes cambiar a false
+    services: ["Suavizante", "Vel-Rosita", "Fabuloso", "Cloro", "Limpiador olor pino", "Jabón para ropa de color", "Lavatrastes", "Detergentes", "Desengrasantes", "Limpia cristales", "Jabón para manos", "Aromatizante ambiental", "Desengrasante para motor", "Pastillas de clor", "Paquetes de rollos de papel", "Escobas - Trapiadores - Recogedores", "Gel de Linaza", "Almorol", "Y mucho mas..."],
+    schedule: "Lunes a Viernes 9am a 5pm - Sabados: 10am a 2pm",
+    image: "./Images/perfil-limpia-usos.jpg",
     gallery: [
-              "https://randomuser.me/api/portraits/women/25.jpg",
-              "https://randomuser.me/api/portraits/women/65.jpg",
-              "https://randomuser.me/api/portraits/women/30.jpg"
+              "./Images/limpia-usos-1.jpg",
+              "./Images/limpia-usos-2.jpg",
+              "./Images/limpia-usos-3.jpg",
+              "./Images/limpia-usos-4.jpg",
+              "./Images/limpia-usos-5.jpg",
+              "./Images/limpia-usos-6.jpg"
              ],
     offers: [
-                       
+             {
+            title: "Oferta Limpieza Total",
+            discount: "10% OFF",
+            validity: "Promoción permanente",
+            description: "Al comprar mas de $400 pesos en productos de limpieza obten el 10% de descuento en tu cuenta total.",
+            conditions: "Válido solo en compras minimas de $400 pesos."
+             }          
             ]
 },
 
