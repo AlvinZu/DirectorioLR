@@ -271,7 +271,7 @@
               
                 <div>
                     <h3 class="text-xl font-bold mb-4">Contacto</h3>
-                    <p class="text-gray-300"><i class="fas fa-phone mr-2"></i> +52 443 477 0618</p>
+                    <p class="text-gray-300"><i class="fas fa-phone mr-2"></i> 4434770618</p>
                   
                   <div class="border-t border-gray-700 mt-8 pt-6 text-center text-gray-400">
                     <h3 class="text-xl font-bold mb-4">Anunciate con Nosotros</h3>
@@ -2810,26 +2810,35 @@
 // Auto Lavados
 {
     id: 67,
-    name: "Lavado Express del Valle",
+    name: "JyG Lavado y Detallado Automotriz",
     category: "Auto Lavados",
-    specialty: "Lavado ecológico",
-    description: "Lavado profesional sin desperdicio de agua.",
-    phone: "5544556644",
-    address: "Av. Automotriz 456",
-    experience: "3 años",
-    price: "$150 - Lavado completo",
-    membership: "free", // Puedes cambiar a premium
-    featured: false, // Puedes cambiar a true
-    services: ["Lavado manual", "Aspirado", "Encerado"],
-    schedule: "Lunes a Domingo 7am - 9pm",
-    image: "https://images.unsplash.com/photo-1553440569-bcc63803a83d",
+    specialty: "Lavado - Pulido - Encerado",
+    description: "Somos un Lavado y detallado profesional de autos, y nos interesa ofrecerte un servicio integral de detallado de tu vehículo para que siempre luzca en las mejores condiciones.",
+    phone: "3541050329",
+    address: "Calle  Av. Fidel Velázquez #51, Col. Obrera, Los Reyes, Mich. Justo frente al OXXO.",
+    experience: "Mas de 6 años",
+    price: "Agenda Ahora",
+    membership: "premium", // Puedes cambiar a free
+    featured: true, // Puedes cambiar a false
+    services: ["Lavado con Hidrolavadora", "Aspirado", "Pulido", "Encerado", "Lavado de Interiores", "Lavado de Motor", "Pulido de Faros", "Detallado de Pintura Automotriz", "Repintamos tu Auto", "Lamineria para solucionar un choque"],
+    schedule: "Lunes a Domingo 10am a 6pm",
+    image: "./Images/perfil-JyG-Auto-lavado.jpg",
     gallery: [
-              "./Images/Logo.jpg",
-              "https://randomuser.me/api/portraits/women/65.jpg",
-              "https://randomuser.me/api/portraits/women/30.jpg"
+              "./Images/JyG-Auto-lavado-1.jpg",
+              "./Images/JyG-Auto-lavado-2.jpg",
+              "./Images/JyG-Auto-lavado-3.jpg",
+              "./Images/JyG-Auto-lavado-4.jpg",
+              "./Images/JyG-Auto-lavado-5.jpg",
+              "./Images/JyG-Auto-lavado-6.jpg"
              ],
     offers: [
-                       
+             {
+            title: "Paquete Protección de Lluvias",
+            discount: "$550 Pesos",
+            validity: "Válido hasta 31/Octubre/2025",
+            description: "Servicio completo incluye: Lavado, Detallado, Aspirado, Encerado y Pulido de cristales.",
+            conditions: "Reservación con 24 hrs de anticipación. Solo para coches."
+             }          
             ]
 },
 
@@ -3614,12 +3623,12 @@
         
         // Initialize the app
         function init() {
-    loadCategories();
-    loadFeaturedPreview();
-    setupEventListeners();
-    history.replaceState({ screen: 'home' }, ''); // Estado inicial
-    showScreen('home', false);
-}
+         loadCategories();
+         loadFeaturedPreview();
+         setupEventListeners();
+         history.replaceState({ screen: 'home' }, ''); // Estado inicial
+         showScreen('home', false);
+        }
         
         // Load categories into the grid
         function loadCategories() {
