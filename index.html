@@ -3614,11 +3614,12 @@
         
         // Initialize the app
         function init() {
-            loadCategories();
-            loadFeaturedPreview();
-            setupEventListeners();
-            showScreen('home');
-        }
+    loadCategories();
+    loadFeaturedPreview();
+    setupEventListeners();
+    history.replaceState({ screen: 'home' }, ''); // Estado inicial
+    showScreen('home', false);
+}
         
         // Load categories into the grid
         function loadCategories() {
@@ -3941,32 +3942,51 @@ document.getElementById('lightbox').addEventListener('click', (e) => {
         }
         
         // Show the specified screen
-        function showScreen(screen) {
-            homeScreen.classList.add('hidden');
-            categoryScreen.classList.add('hidden');
-            detailsScreen.classList.add('hidden');
-            featuredScreen.classList.add('hidden');
-          offersScreen.classList.add('hidden');
-            
-            switch(screen) {
-                case 'home':
-                    homeScreen.classList.remove('hidden');
-                    break;
-                case 'category':
-                    categoryScreen.classList.remove('hidden');
-                    break;
-                case 'details':
-                    detailsScreen.classList.remove('hidden');
-                    break;
-                case 'featured':
-                    featuredScreen.classList.remove('hidden');
-                    break;
-                case 'offers':
-                    offersScreen.classList.remove('hidden');
-                    loadExclusiveOffers();
-                    break;
-            }
-        }
+        function showScreen(screen, pushState = true) {
+    // Ocultar todas las pantallas
+    homeScreen.classList.add('hidden');
+    categoryScreen.classList.add('hidden');
+    detailsScreen.classList.add('hidden');
+    featuredScreen.classList.add('hidden');
+    offersScreen.classList.add('hidden');
+
+    // Mostrar la pantalla solicitada
+    switch(screen) {
+        case 'home':
+            homeScreen.classList.remove('hidden');
+            break;
+        case 'category':
+            categoryScreen.classList.remove('hidden');
+            break;
+        case 'details':
+            detailsScreen.classList.remove('hidden');
+            break;
+        case 'featured':
+            featuredScreen.classList.remove('hidden');
+            break;
+        case 'offers':
+            offersScreen.classList.remove('hidden');
+            loadExclusiveOffers();
+            break;
+    }
+
+    // Actualizar el historial
+    if (pushState) {
+        history.pushState({ screen: screen }, '');
+    }
+}
+      
+      
+      // Manejar el botón de retroceso del navegador
+window.addEventListener('popstate', (event) => {
+    const state = event.state;
+    if (state && state.screen) {
+        showScreen(state.screen, false);
+    } else {
+        showScreen('home', false);
+    }
+});
+
       
         
       // Función para cargar ofertas
@@ -4217,9 +4237,10 @@ document.getElementById('backFromOffers').addEventListener('click', () => showSc
             viewAllFeatured.addEventListener('click', showAllFeatured);
             
             // Back buttons
-            backFromCategory.addEventListener('click', () => showScreen('home'));
-            backFromDetails.addEventListener('click', () => showScreen('category'));
-            backFromFeatured.addEventListener('click', () => showScreen('home'));
+            backFromCategory.addEventListener('click', () => history.back());
+            backFromDetails.addEventListener('click', () => history.back());
+            backFromFeatured.addEventListener('click', () => history.back());
+            backFromOffers.addEventListener('click', () => history.back());
             
             // Mobile menu
             mobileMenuBtn.addEventListener('click', () => {
