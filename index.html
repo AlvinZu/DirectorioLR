@@ -311,7 +311,7 @@
         'Fotógrafos': ['call'],  
         'Protección Civil': ['call'],  
         'Abogados': ['whatsapp'],  
-        'Psicólogos': ['whatsapp'],  
+        'Psicólogos': ['whatsapp', 'call'],  
         'Veterinarios': ['whatsapp', 'call'],  
         'Mecánicos': ['call'],  
         'Técnicos en Computadoras': ['whatsapp'],  
@@ -1122,27 +1122,33 @@
             // Psicólogos
             {
                 id: 17,
-                name: "Psic. Luis González",
+                name: "Lic. Martha Angélica Rodríguez Silva",
                 category: "Psicólogos",
-                specialty: "Terapia cognitivo-conductual",
+                specialty: "Terapia Familiar",
                 description: "Ayuda profesional para superar ansiedad, depresión y problemas de relación.",
-                phone: "5544556677",
-                address: "Col. Condesa, CDMX",
-                experience: "8 años",
-                price: "$800 - Sesión",
-                membership: "free", //puedes cambiar a premiun
-                featured: false, //puedes cambiar a true
-                services: ["Terapia individual", "Terapia de pareja", "Orientación vocacional"],
-                schedule: "Lunes a Sábado: 10am - 8pm",
-                education: "Universidad Iberoamericana",
-                image: "https://randomuser.me/api/portraits/men/45.jpg",
+                phone: "3541093522",
+                address: "C. Amado Nervo, Esquina con Clementede Jesus Munguía, Adentro del pasaje, Col. Centro, Los Reyes, Mich. A espaldas del Instituto Fray Juan de San Miguel.",
+                experience: "Mas de 8 años",
+                price: "Agenda Ahora",
+                membership: "premium", //puedes cambiar a free
+                featured: true, //puedes cambiar a true
+                services: ["Terapia Individual", "Terapia de Pareja", "Terapia Familiar", "Procesos de Duelo", "Terapia Infantil", "Diagnosticos Clínicos"],
+                schedule: "Lunes a Sábado: 10:30am a 2pm",
+                education: "",
+                image: "./Images/perfil-Psicologa-Martha-Angelica.jpg",
                 gallery: [
-                          "https://randomuser.me/api/portraits/women/25.jpg",
-                          "https://randomuser.me/api/portraits/women/65.jpg",
-                          "https://randomuser.me/api/portraits/women/30.jpg"
+                          "./Images/Psicologa-Martha-Angelica-1.jpg",
+                          "./Images/Psicologa-Martha-Angelica-2.jpg",
+                          "./Images/Psicologa-Martha-Angelica-3.jpg"
                          ],
                 offers: [
-                       
+                         {
+                         title: "Paquete Terapia Familia",
+                         discount: "20% OFF",
+                         validity: "Válido hasta 30/Nov/2025",
+                         description: "Terapia de Familiar + analisis clinico + ayuda emocional",
+                         conditions: "Agenda con anticipación."
+                         }
                         ]
             },
             
@@ -1169,14 +1175,14 @@
                           "https://randomuser.me/api/portraits/women/30.jpg"
                          ],
                 offers: [
-        {
-            title: "Paquete Preventivo Mascotas",
-            discount: "20% OFF",
-            validity: "Válido hasta 30/Nov/2025",
-            description: "Vacunación anual + desparasitación + chequeo general",
-            conditions: "Válido para 1 mascota. Incluye perros y gatos"
-        }
-    ]
+                        {
+                         title: "Paquete Preventivo Mascotas",
+                         discount: "20% OFF",
+                         validity: "Válido hasta 30/Nov/2025",
+                         description: "Vacunación anual + desparasitación + chequeo general",
+                         conditions: "Válido para 1 mascota. Incluye perros y gatos"
+                        }
+                        ]
             },
             
             // Mecánicos
