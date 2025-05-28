@@ -114,7 +114,7 @@
       /* Estilos para el slider */
 .swiper {
     width: 100%;
-    height: 400px;
+    height: 150px;
 }
 
 .swiper-slide {
@@ -140,7 +140,7 @@
     right: 0;
     background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
     color: white;
-    padding: 2rem;
+    padding: 1rem;
     text-align: left;
 }
 
@@ -439,6 +439,7 @@
             {
                 id: 1,
                 name: "Clínica Dental Master",
+                showInSlider: true, // Control del slider
                 category: "Dentistas",
                 specialty: "Endodoncia - Ortodoncia",
                 description: "La Clínica Dental Master es especialista tu salud bucal y especialistas en sonrisas.",
@@ -3575,6 +3576,7 @@
     {
         id: 78,
         name: "Climer Aire Acondicinado y Energía Solar",
+        showInSlider: true, // <- Nueva propiedad
         category: "Aires Acondicionados",
         specialty: "Aire Acondicionado - Paneles Solares",
         description: "Servicio técnico especializado en climatización residencial y comercial, manejamos marcas como Carrier, York, LG, Mirage, etc. Tambien contamos con venta e instalación de paneles solares",
@@ -3623,6 +3625,7 @@
     {
         id: 79,
         name: "Alianza Caja Popular Los Reyes",
+        showInSlider: true, // <- Nueva propiedad
         category: "Sociedad Cooperativa de Ahorros y Préstamos",
         specialty: "Prestamos y Ahorros",
         description: "Nuestra Misión es brindar soluciones financieras competitivas que contribuyan a mejorar la calidad de vida de nuestros socios y población en general, dando valor a la sustentabilidad y fomentando la inclusión financiera.",
@@ -3712,19 +3715,23 @@ function init() {
 function initSwiper() {
     const swiperWrapper = document.querySelector('.swiper-wrapper');
     
-    // Filtrar empresas premium con imágenes
-    const featuredCompanies = professionals.filter(pro => 
-        pro.membership === 'premium' && pro.image && pro.featured
-    ).slice(0, 8); // Mostrar las primeras 8
+    // Filtrar empresas con showInSlider: true
+    const sliderCompanies = professionals.filter(pro => 
+        pro.showInSlider && pro.image
+    );
     
     // Generar slides
-    swiperWrapper.innerHTML = featuredCompanies.map(company => `
+    swiperWrapper.innerHTML = sliderCompanies.map(company => `
         <div class="swiper-slide">
             <img src="${company.image}" alt="${company.name}">
             <div class="swiper-slide-content">
                 <h3 class="text-xl font-bold">${company.name}</h3>
                 <p class="text-sm">${company.specialty}</p>
                 <p class="text-xs mt-2">${company.category}</p>
+                <button class="mt-2 bg-white/20 backdrop-blur-sm px-4 py-1 rounded-full text-xs hover:bg-white/30 transition-all"
+                        onclick="showProfessionalDetails(${company.id})">
+                    Ver Perfil
+                </button>
             </div>
         </div>
     `).join('');
