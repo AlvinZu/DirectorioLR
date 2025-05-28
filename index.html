@@ -3734,8 +3734,7 @@ function initSwiper() {
             <img src="${company.image}" alt="${company.name}">
             <div class="swiper-slide-content">
                 <h3 class="text-xl font-bold">${company.name}</h3>
-                <p class="text-sm">${company.specialty}</p>
-                <p class="text-xs mt-2">${company.category}</p>
+                
                 <button class="mt-2 bg-white/20 backdrop-blur-sm px-4 py-1 rounded-full text-xs hover:bg-white/30 transition-all"
                         onclick="showProfessionalDetails(${company.id})">
                     Ver Perfil
@@ -3748,7 +3747,7 @@ function initSwiper() {
     new Swiper('.swiper', {
         loop: true,
         autoplay: {
-            delay: 3000,
+            delay: 2500,
         },
         navigation: {
             nextEl: '.swiper-button-next',
