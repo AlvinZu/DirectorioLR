@@ -6,6 +6,8 @@
     <title>DirectorioPro LR</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   
   <!-- Icono App -->
     <link rel="icon" type="image/png" sizes="192x192" href="icon-192x192.png">
@@ -109,6 +111,50 @@
             font-weight: bold;
         }
       
+      /* Estilos para el slider */
+.swiper {
+    width: 100%;
+    height: 400px;
+}
+
+.swiper-slide {
+    position: relative;
+    text-align: center;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.swiper-slide-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+    color: white;
+    padding: 2rem;
+    text-align: left;
+}
+
+.swiper-button-next, .swiper-button-prev {
+    color: white !important;
+    background: rgba(0,0,0,0.5);
+    padding: 1rem;
+    border-radius: 50%;
+}
+
+.swiper-pagination-bullet-active {
+    background: white !important;
+}
+      
     </style>
 </head>
 <body class="bg-gray-50 font-sans">
@@ -149,6 +195,20 @@
         </div>
     </header>
 
+  <!-- Slider de Empresas Destacadas -->
+    <section class="swiper my-8">
+        <div class="swiper-wrapper">
+            <!-- Slides dinámicos se agregarán aquí con JavaScript -->
+        </div>
+        
+        <!-- Navegación -->
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+        
+        <!-- Paginación -->
+        <div class="swiper-pagination"></div>
+    </section>
+  
     <!-- Main Content -->
     <main class="container mx-auto px-4 py-6">
         <!-- Home Screen -->
@@ -253,10 +313,6 @@
 </div>
               
     <!-- Footer -->
-  <div class="border-t border-gray-700 mt-8 pt-6 text-center text-gray-400">
-    <p>Visitas totales: <span id="visitCount">0</span></p>
-</div>
-  
     <footer class="bg-gray-800 text-white py-8">
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -3642,14 +3698,63 @@
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const mobileMenu = document.getElementById('mobileMenu');
         
-        // Initialize the app
-        function init() {
-         loadCategories();
-         loadFeaturedPreview();
-         setupEventListeners();
-         history.replaceState({ screen: 'home' }, ''); // Estado inicial
-         showScreen('home', false);
+        // En tu función init() agrega:
+function init() {
+    loadCategories();
+    loadFeaturedPreview();
+    setupEventListeners();
+    initSwiper(); // Agrega esta línea
+    history.replaceState({ screen: 'home' }, '');
+    showScreen('home', false);
+}
+
+// Nueva función para inicializar el slider
+function initSwiper() {
+    const swiperWrapper = document.querySelector('.swiper-wrapper');
+    
+    // Filtrar empresas premium con imágenes
+    const featuredCompanies = professionals.filter(pro => 
+        pro.membership === 'premium' && pro.image && pro.featured
+    ).slice(0, 8); // Mostrar las primeras 8
+    
+    // Generar slides
+    swiperWrapper.innerHTML = featuredCompanies.map(company => `
+        <div class="swiper-slide">
+            <img src="${company.image}" alt="${company.name}">
+            <div class="swiper-slide-content">
+                <h3 class="text-xl font-bold">${company.name}</h3>
+                <p class="text-sm">${company.specialty}</p>
+                <p class="text-xs mt-2">${company.category}</p>
+            </div>
+        </div>
+    `).join('');
+
+    // Inicializar Swiper
+    new Swiper('.swiper', {
+        loop: true,
+        autoplay: {
+            delay: 3000,
+        },
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+        breakpoints: {
+            640: {
+                slidesPerView: 2,
+                spaceBetween: 20,
+            },
+            1024: {
+                slidesPerView: 3,
+                spaceBetween: 30,
+            },
         }
+    });
+}
         
         // Load categories into the grid
         function loadCategories() {
@@ -4082,33 +4187,6 @@ function loadExclusiveOffers(selectedCategory = 'all') {
         }
     });
 }
-      
-      
-      // Contador de visitas con CountAPI
-    document.addEventListener('DOMContentLoaded', () => {
-        // Namespace y clave únicos para tu sitio
-        const namespace = 'directorio-pro-lr';
-        const key = 'main-counter';
-        
-        // URL para incrementar el contador
-        const incrementUrl = `https://alvinzu.github.io/DirectorioLR/hit/${namespace}/${key}`;
-        // URL para obtener el valor actual
-        const getUrl = `https://alvinzu.github.io/DirectorioLR/get/${namespace}/${key}`;
-
-        // Incrementar el contador al cargar la página
-        fetch(incrementUrl)
-            .then(response => response.json())
-            .then(data => {
-                // Después de incrementar, obtener el valor actualizado
-                fetch(getUrl)
-                    .then(response => response.json())
-                    .then(data => {
-                        document.getElementById('visitCount').textContent = data.value;
-                    })
-                    .catch(error => console.error('Error obteniendo el contador:', error));
-            })
-            .catch(error => console.error('Error incrementando el contador:', error));
-    });
       
       
         // Setup search functionality
