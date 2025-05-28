@@ -253,6 +253,10 @@
 </div>
               
     <!-- Footer -->
+  <div class="border-t border-gray-700 mt-8 pt-6 text-center text-gray-400">
+    <p>Visitas totales: <span id="visitCount">0</span></p>
+</div>
+  
     <footer class="bg-gray-800 text-white py-8">
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -1127,7 +1131,7 @@
                 specialty: "Terapia Familiar",
                 description: "Ayuda profesional para superar ansiedad, depresión y problemas de relación.",
                 phone: "3541093522",
-                address: "C. Amado Nervo, Esquina con Clementede Jesus Munguía, Adentro del pasaje, Col. Centro, Los Reyes, Mich. A espaldas del Instituto Fray Juan de San Miguel.",
+                address: "C. Amado Nervo, Esquina con Clemente de Jesus Munguía, Adentro del pasaje, Col. Centro, Los Reyes, Mich. A espaldas del Instituto Fray Juan de San Miguel.",
                 experience: "Mas de 8 años",
                 price: "Agenda Ahora",
                 membership: "premium", //puedes cambiar a free
@@ -2226,26 +2230,37 @@
 // Talleres de Motos
 {
     id: 47,
-    name: "MotoService",
+    name: "Franco Moto Refacciones",
     category: "Talleres de Motos",
-    specialty: "Motocicletas deportivas",
-    description: "Servicio especializado para todo tipo de motos.",
-    phone: "5533778899",
-    address: "Av. Motociclistas 33",
-    experience: "6 años",
-    price: "$300 - Afinación mayor",
-    membership: "free", //Puedes cambiar a premium
-    featured: false, //Puedes cambiar a true
-    services: ["Cambio de aceite", "Reparación de motor", "Pintura"],
-    schedule: "Lunes a Sábado 9am - 5pm",
-    image: "https://images.unsplash.com/photo-1601924638867-2b4a1a0d4b53",
+    specialty: "Taller de Motos y Refaccionaria",
+    description: "Servicio especializado en reparaciones para todo tipo de motos y venta de refacciones y accesorios para motocicletas.",
+    phone: "3541065408",
+    address: "C. Av. Emiliano Zapata #274, Col. Zapata, Los Reyes, Mich.",
+    experience: "Mas de 15 años",
+    price: "Cotiza Ahora",
+    membership: "premium", //Puedes cambiar a free
+    featured: true, //Puedes cambiar a false
+    services: ["Cambio de Aceite", "Reparación de Motor", "Servicio Completo", "Cascos", "Faros de Luz Led", "Trajes de Protección", "Aceites para Motor", "Anticongelantes", "Bandas", "Y Muchos Accesorios Mas..."],
+    schedule: "Lunes a Viernes 9am a 2pm - 4pm a 8pm y Sábados: 9am a 3pm",
+    image: "./Images/perfil-franco-motos.jpg",
     gallery: [
-              "https://randomuser.me/api/portraits/women/25.jpg",
-              "https://randomuser.me/api/portraits/women/65.jpg",
-              "https://randomuser.me/api/portraits/women/30.jpg"
+              "./Images/franco-motos-1.jpg",
+              "./Images/franco-motos-2.jpg",
+              "./Images/franco-motos-3.jpg",
+              "./Images/franco-motos-4.jpg",
+              "./Images/franco-motos-5.jpg",
+              "./Images/franco-motos-6.jpg",
+              "./Images/franco-motos-7.jpg",
+              "./Images/franco-motos-8.jpg"
              ],
     offers: [
-                       
+             {
+            title: "Oferta Buen Fin",
+            discount: "10% OFF",
+            validity: "Válida hasta 30/Noviembre/25",
+            description: "Refacciones y Accesorios en general, llantas de cualquier marca.",
+            conditions: "Válido solo en compras minimas de $300 pesos en adelante."
+             }               
             ]
 },
 
@@ -4067,6 +4082,33 @@ function loadExclusiveOffers(selectedCategory = 'all') {
         }
     });
 }
+      
+      
+      // Contador de visitas con CountAPI
+    document.addEventListener('DOMContentLoaded', () => {
+        // Namespace y clave únicos para tu sitio
+        const namespace = 'directorio-pro-lr';
+        const key = 'main-counter';
+        
+        // URL para incrementar el contador
+        const incrementUrl = `https://api.countapi.xyz/hit/${namespace}/${key}`;
+        // URL para obtener el valor actual
+        const getUrl = `https://api.countapi.xyz/get/${namespace}/${key}`;
+
+        // Incrementar el contador al cargar la página
+        fetch(incrementUrl)
+            .then(response => response.json())
+            .then(data => {
+                // Después de incrementar, obtener el valor actualizado
+                fetch(getUrl)
+                    .then(response => response.json())
+                    .then(data => {
+                        document.getElementById('visitCount').textContent = data.value;
+                    })
+                    .catch(error => console.error('Error obteniendo el contador:', error));
+            })
+            .catch(error => console.error('Error incrementando el contador:', error));
+    });
       
       
         // Setup search functionality
