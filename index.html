@@ -197,7 +197,7 @@
 
   <!-- Slider de Empresas Destacadas -->
   <div id="sliderContainer">
-    <section class="swiper mt-8">
+    <section class="swiper mt-1">
         <div class="swiper-wrapper">
             <!-- Slides dinámicos se agregarán aquí con JavaScript -->
         </div>
@@ -432,7 +432,8 @@
         'Joyerías': ['whatsapp'],
         'Comida Rápida': ['whatsapp', 'call'],
         'Aires Acondicionados': ['whatsapp', 'call'],
-        'Sociedad Cooperativa de Ahorros y Préstamos': ['call']
+        'Sociedad Cooperativa de Ahorros y Préstamos': ['call'],
+        'Ginecólogos': ['whatsapp', 'call']
         
 };
       
@@ -614,7 +615,7 @@
             {
                 id: 6,
                 name: "Fisioterapia Efectiva",
-                showInSlider: true, // Control del slider
+                showInSlider: false, // Control del slider
                 category: "Fisioterapeutas",
                 specialty: "Rehabilitación deportiva",
                 description: "Especialista en recuperación de lesiones, bindamos tratamiento de todo tipo de lesiones que puedan limitar tu calidad de vida.",
@@ -831,7 +832,7 @@
           {
                 id: 9002,
                 name: "Lady Barber Ditzia Barajas",
-                showInSlider: true, // Control del slider
+                showInSlider: true, // Mostrar en el slider de fotos
                 category: "Barberías",
                 specialty: "Cortes Modernos - Cortes Niños",
                 description: "Lady Barber somos una barbería con mucha profesionalidad y calidad en nuestros cortes clásicos y modernos y con la mejor actitud.",
@@ -1036,7 +1037,7 @@
             {
                 id: 14,
                 name: "Sttrata Fotografia Mexico",
-                showInSlider: true, // Control del slider
+                showInSlider: true, // Mostrar en el slider de fotos
                 category: "Fotógrafos",
                 specialty: "Bodas y Eventos",
                 description: "Capturamos los momentos más importantes de tu vida con arte y profesionalismo.",
@@ -1456,7 +1457,7 @@
     {
         id: 25,
         name: "Pescadería Marlin",
-        showInSlider: true, // Control del slider
+        showInSlider: true, // Mostrar en el slider de fotos
         category: "Pezcaderías",
         specialty: "Mayoreo - Menudeo de Mariscos",
         description: "Somos la empresa que eligen los Restaurantes para surtir lo mejor en mariscos y carnes.",
@@ -1981,6 +1982,7 @@
    {
         id: 4001,
         name: "Massimo Coffee Tea",
+        showInSlider: true, // Mostrar en el slider de fotos
         category: "Cafeterías",
         specialty: "Servicio a Domicilio",
         description: "Café artesanal y ambiente acogedor para trabajar, ideal para toda la familia.",
@@ -3633,20 +3635,19 @@
     {
         id: 79,
         name: "Alianza Caja Popular Los Reyes",
-        showInSlider: true, // <- Nueva propiedad
+        showInSlider: true, // Mostrar en el slider de fotos
         category: "Sociedad Cooperativa de Ahorros y Préstamos",
         specialty: "Prestamos y Ahorros",
         description: "Nuestra Misión es brindar soluciones financieras competitivas que contribuyan a mejorar la calidad de vida de nuestros socios y población en general, dando valor a la sustentabilidad y fomentando la inclusión financiera.",
         phone: "3545420089",
-        address: "C. 16 de Septiembre #43, Col. Centro, Los Reyes, Mich.",
-        experience: "Mas de 30 años",
+        address: "MATRIZ: C. 16 de Septiembre #43, Col. Centro, Los Reyes, Mich. SUCURSAL: C. Av. Emiliano Zapata Esq. con Av. Morelos, Col. Independencia, Los Reyes, Mich.",
+        experience: "Mas de 60 años",
         price: "Habla con Nosotros ya",
         membership: "premium",
         featured: true,
         services: [
             "Créditos personales",
             "Ahorro programado",
-            "Seguros colectivos",
             "Financiamiento para vivienda",
             "Capital de trabajo"
         ],
@@ -3669,9 +3670,54 @@
                 conditions: "Válido solo en oficina matriz. Requiere aval"
             }
         ]
-    }
+    },
+          // Nuevo profesional: Ginecóloga
+            {
+                id: 80, // ID único
+                name: "Dra. Martha Alicia Cuevas Flores",
+                category: "Ginecólogos",
+                specialty: "GINECOLOGA - OBSTETRICIA",
+                description: "Especialista en salud femenina, embarazo y ultrasonidos. Atención personalizada y profesional.",
+                phone: "3541090743", 
+                address: "C. Ignacio López Rayón #84, Col. Centro, Los Reyes, Mich.",
+                experience: "Más de 5 años",
+                price: "Agenda Ahora",
+                membership: "premium",
+                featured: true,
+                showInSlider: false, // Mostrar en el slider
+                services: [
+                    "Consulta Ginecológica",
+                    "Ultrasonido Obstétrico y Ginecológico",
+                    "Parto - Cesárea",
+                    "Control prenatal",
+                    "Planificación familiar",
+                    "Transtornos Menstruales",
+                    "Papanicolaou",
+                    "Vacuna VPH"
+                ],
+                schedule: "Lunes a Viernes: 9am - 2pm y 4pm - 7pm, Sábados: 9am - 1pm",
+                education: "Especialidad en Ginecología y Obstetricia, UNAM",
+                image: "./Images/perfil-ginecologa-martha-cuevas.jpg", // Asegurar que la imagen existe
+                gallery: [
+                          "./Images/ginecologa-martha-cuevas-1.jpg",
+                          "./Images/ginecologa-martha-cuevas-2.jpg",
+                          "./Images/ginecologa-martha-cuevas-3.jpg",
+                          "./Images/ginecologa-martha-cuevas-4.jpg",
+                          "./Images/ginecologa-martha-cuevas-5.jpg"
+                         ],
+                offers: [
+                    {
+                        title: "Ultrasonidos",
+                        discount: "20% OFF",
+                        validity: "Válido hasta 30/Nov/2025",
+                        description: "Ultrasonido obstétrico y ginecológico con la mejor tecnología",
+                        conditions: "Solo para primeras citas. Incluye diagnóstico completo."
+                    }
+                ]
+            }
           
          ];
+      
 
         // Get all unique categories
         const categories = [...new Set(professionals.map(pro => pro.category))];
@@ -3868,7 +3914,8 @@ function initSwiper() {
         'Joyerías': '<i class="fas fa-gem"></i>',
         'Comida Rápida': '<i class="fas fa-hamburger"></i>',
         'Aires Acondicionados': '<i class="fas fa-fan"></i>',
-        'Sociedad Cooperativa de Ahorros y Préstamos': '<i class="fas fa-coins"></i>'
+        'Sociedad Cooperativa de Ahorros y Préstamos': '<i class="fas fa-coins"></i>',
+        'Ginecólogos': '<i class="fas fa-venus"></i><i class="fas fa-stethoscope ml-1"></i>'
     };
             
             return icons[category] || '<i class="fas fa-briefcase"></i>';
