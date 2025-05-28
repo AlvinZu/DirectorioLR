@@ -196,10 +196,12 @@
     </header>
 
   <!-- Slider de Empresas Destacadas -->
+  <div id="sliderContainer">
     <section class="swiper my-8">
         <div class="swiper-wrapper">
             <!-- Slides dinámicos se agregarán aquí con JavaScript -->
         </div>
+      
         
         <!-- Navegación -->
         <div class="swiper-button-next"></div>
@@ -208,6 +210,7 @@
         <!-- Paginación -->
         <div class="swiper-pagination"></div>
     </section>
+    </div>
   
     <!-- Main Content -->
     <main class="container mx-auto px-4 py-6">
@@ -4090,17 +4093,19 @@ document.getElementById('lightbox').addEventListener('click', (e) => {
         
         // Show the specified screen
         function showScreen(screen, pushState = true) {
-    // Ocultar todas las pantallas
+    // Ocultar todas las pantallas y slider
     homeScreen.classList.add('hidden');
     categoryScreen.classList.add('hidden');
     detailsScreen.classList.add('hidden');
     featuredScreen.classList.add('hidden');
     offersScreen.classList.add('hidden');
+    document.getElementById('sliderContainer').classList.add('hidden'); // Ocultar slider
 
-    // Mostrar la pantalla solicitada
+    // Mostrar elementos según pantalla
     switch(screen) {
         case 'home':
             homeScreen.classList.remove('hidden');
+            document.getElementById('sliderContainer').classList.remove('hidden'); // Mostrar slider
             break;
         case 'category':
             categoryScreen.classList.remove('hidden');
