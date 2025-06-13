@@ -364,7 +364,7 @@
         'Quiroprácticos': ['whatsapp'],  
         'Doctores': ['call'],  
         'Fisioterapeutas': ['whatsapp', 'call'],  
-        'Tiendas de ropa': ['whatsapp'],  
+        'Tiendas de ropa': ['whatsapp', 'call'],  
         'Venta de suplementos': ['whatsapp'],  
         'Barberías': ['whatsapp', 'call'],  
         'Tiendas de Pinturas': ['call'],  
@@ -378,7 +378,7 @@
         'Veterinarios': ['whatsapp', 'call'],  
         'Mecánicos': ['call'],  
         'Técnicos en Computadoras': ['whatsapp'],  
-        'Tatuadores': ['whatsapp'],  
+        'Tatuadores': ['whatsapp', 'call'],  
         'Restaurantes': ['call'],  
         'Pezcaderías': ['call'],  
         'Construcción': ['whatsapp', 'call'],
@@ -686,6 +686,44 @@
             // Clothing Stores - Tiendas de ropa
             {
                 id: 7,
+                name: "Camisería Cristóbal",
+                category: "Tiendas de ropa",
+                specialty: "Ropa Elegante Para Caballero",
+                description: "En Camisería Cristóbal manejamos la mejor calidad de ropa de vestir para caballeros, jovenes y niños. Recuerda que tenemos las mejores marcas en ropa de vestir y un extenso surtido.",
+                phone: "3541015265",
+                address: "C. Abasolo Ote. #20, Col. Centro, Los Reyes, Mich. Justo frente a la escuela ICEP",
+                experience: "Mas de 20 años",
+                price: "Cotiza Ahora",
+                membership: "premium", //puedes cambiar a free
+                featured: true, //puedes cambiar a false
+                services: ["Trajes Para Caballero", "Trajes Para Niños", "Camisas de Vestir", "Pantalones de Vestir", "Pantalones de Mezclilla", "Playeras Tipo Polo", "Guayaberas", "Corbatas", "Smoking", "Marcas como: MARISCAL", "RAMATY", "JOHN HERNY", "PAVINI", "COLUCCI", "PIERRE CARDIN"],
+                schedule: "Lunes a Sábado: 9am a 8:30pm - Domingo: 10:30am a 2:30pm",
+                education: "",
+                image: "./Images/perfil-camiseria-cristobal.jpg",
+                gallery: [
+                          "./Images/camiseria-cristobal-1.jpg",
+                          "./Images/camiseria-cristobal-2.jpg",
+                          "./Images/camiseria-cristobal-3.jpg",
+                          "./Images/camiseria-cristobal-4.jpg",
+                          "./Images/camiseria-cristobal-5.jpg",
+                          "./Images/camiseria-cristobal-6.jpg",
+                          "./Images/camiseria-cristobal-7.jpg",
+                          "./Images/camiseria-cristobal-8.jpg",
+                          "./Images/camiseria-cristobal-9.jpg",
+                          "./Images/camiseria-cristobal-10.jpg"
+                         ],
+                offers: [
+                         {
+                        title: "Promo Viste Elegante",
+                        discount: "10% OFF",
+                        validity: "Válido hasta 30/Agosto/2025",
+                        description: "Te damos 10% de Descuento en toda la ropa de vestir.",
+                        conditions: "Valido solo en marcas: MARISCAL, PAVINI y JOHN HERNY."
+                        }
+                        ]
+            },
+            {
+                id: 7001,
                 name: "Fitnes Shop",
                 category: "Tiendas de ropa",
                 specialty: "Ropa Deportiva para Mujer",
