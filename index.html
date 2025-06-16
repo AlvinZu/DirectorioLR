@@ -392,7 +392,7 @@
         'Herreros': ['call'],  
         'Ferreterías': ['whatsapp', 'call'],  
         'Loncherías': ['call'],  
-        'Lavanderías': ['whatsapp'],  
+        'Lavanderías': ['whatsapp', 'call'],
         'Pastelerías': ['call'],  
         'Cafeterías': ['call'],  
         'Pizzerías': ['call'],  
@@ -2085,14 +2085,44 @@
 },
 
 // Lavanderías
-{
+  {
     id: 38,
+    name: "Lavandería TEYTUD",
+    category: "Lavanderías",
+    specialty: "Servicio a Domicilio",
+    description: "Nos especializamos en ofrecerte un servicio de lavandería rápido, eficiente y de alta calidad. Recuerda que contamos con Servicio a Domicilio.",
+    phone: "3541056424",
+    address: "Calle R. Macias #18-A, Col. Santa Rosa, Los Reyes, Mich. A media cuadra abajo del templo de Santa Rosa.",
+    experience: "Mas de 10 años",
+    price: "Llamanos Ahora",
+    membership: "premium", //Puedes cambiar a free
+    featured: true, //Puedes cambiar a false
+    services: ["Lavado de colchas y edredones", "Remoción de manchas dificiles", "Limpieza de tenis", "Servicio a Domicilio"],
+    schedule: "Lunes a Viernes: 9am a 9:30pm - Sábado: 7am a 7pm",
+    image: "./Images/perfil-lavanderia-teytud.jpg",
+    gallery: [
+              "./Images/lavanderia-teytud-1.jpg",
+              "./Images/lavanderia-teytud-2.jpg",
+              "./Images/lavanderia-teytud-3.jpg"
+             ],
+    offers: [
+       {
+            title: "Lavado Premium + Planchado",
+            discount: "10% OFF",
+            validity: "Válido hasta 31/Octubre/2025",
+            description: "Lavado + planchado en seco.",
+            conditions: "Aplica solo en prendas estándar (camisas, pantalones, blusas)."
+        }
+            ]
+},
+{
+    id: 3801,
     name: "Lavandería Lemoncito",
     category: "Lavanderías",
     specialty: "Limpieza de ropa",
     description: "Servicio rápido y profesional de lavandería.",
     phone: "3512023648",
-    address: "C. Torres Quintero, Esquina con Salazar #2, Col. Centro, Los Reyes",
+    address: "C. Torres Quintero, Esquina con Salazar #2, Col. Centro, Los Reyes, Mich.",
     experience: "Mas de 10 años",
     price: "$23/kg - Lavado Básico",
     membership: "premium", //Puedes cambiar a free
@@ -3323,7 +3353,7 @@
         },
         {
             title: "Pre Venta de Espacios en Nuevo Cementerio Jardinez del Recuerdo",
-            discount: "$2,500 - Enganche",
+            discount: "$1,500 - Enganche",
             validity: "Válido hasta 31/Dic/2025",
             description: "Te ofrecemos un lugar de paz para preservar la memoria de los seres que tanto amamos, Diseñado con respeto, Tranquilidad para tus seres queridos, Flexibilidad en planes de contratación.",
             conditions: "Solicita mas información por mensaje directo o llámanos."
