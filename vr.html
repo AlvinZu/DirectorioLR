@@ -2,41 +2,159 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Bienvenido a DirectorioPro Los Reyes</title>
+    <title>Instala DirectorioPro Los Reyes</title>
     <meta name="description" content="Instala la WebApp de DirectorioPro Los Reyes">
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #000;
+        }
+        .loading-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1a1a1a, #000);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: opacity 1s ease;
+        }
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #4CAF50;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+        .loading-text {
+            color: #fff;
+            font-size: 18px;
+            font-weight: 500;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        .instructions {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            z-index: 10;
+            width: 80%;
+            max-width: 500px;
+        }
+    </style>
 </head>
 <body>
-    <a-scene background="color: #1a1a1a">
+    <div class="loading-overlay" id="loading">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Cargando experiencia VR...</div>
+    </div>
 
+    <a-scene background="color: #1a1a1a" loading-screen="enabled: false">
         <a-assets>
             <img id="logo" src="icon-512x512.png"> 
             <img id="instrucciones" src="instrucciones-vr.png">
         </a-assets>
 
-        <a-image src="#logo" width="4" height="4" position="0 2.5 -6">
-            <a-animation attribute="rotation"
-                         dur="10000"
-                         fill="forwards"
-                         to="0 360 0"
+        <!-- Logo animado flotante -->
+        <a-image src="#logo" width="2.5" height="2.5" position="0 1.5 -4">
+            <a-animation attribute="position" 
+                         dur="2000"
+                         direction="alternate"
                          repeat="indefinite"
-                         easing="linear"></a-animation>
+                         to="0 1.8 -4"
+                         easing="easeInOutSine"></a-animation>
         </a-image>
-<a-image src="#instrucciones" width="4" height="4" position="4 2.5 -6">
-            <a-animation attribute="rotation"
-                         dur="10000"
-                         fill="forwards"
-                         to="0 360 0"
-                         repeat="indefinite"
-                         easing="linear"></a-animation>
-        </a-image>
-        
 
+        <!-- Instrucciones con efecto curvo y rotación -->
+        <a-curvedimage src="#instrucciones" 
+                      height="3" 
+                      radius="5.7" 
+                      theta-length="60" 
+                      position="0 1.5 -4"
+                      rotation="0 20 0">
+            <a-animation attribute="rotation"
+                         dur="30000"
+                         fill="forwards"
+                         to="0 380 0"
+                         repeat="indefinite"
+                         easing="linear"></a-animation>
+        </a-curvedimage>
+
+        <!-- Texto de bienvenida -->
+        <a-text value="Bienvenido a DirectorioPro" 
+                color="#4CAF50" 
+                position="0 2.8 -4" 
+                align="center" 
+                scale="1.5 1.5 1.5"
+                font="https://cdn.aframe.io/fonts/Exo2Bold.fnt"></a-text>
+
+        <!-- Botón flotante para instalar -->
+        <a-entity position="0 0.5 -4" 
+                  geometry="primitive: circle; radius: 0.5" 
+                  material="color: #4CAF50; shader: flat"
+                  class="clickable">
+            <a-text value="Instalar" 
+                    position="0 0 0.1" 
+                    align="center" 
+                    color="white"
+                    scale="1.5 1.5 1.5"></a-text>
+            <a-animation attribute="scale"
+                         dur="1000"
+                         direction="alternate"
+                         repeat="indefinite"
+                         to="1.1 1.1 1.1"
+                         easing="easeInOutSine"></a-animation>
+        </a-entity>
+
+        <!-- Fondo estelar -->
+        <a-entity particle-system="preset: star; color: #FFFFFF; particleCount: 2000"></a-entity>
 
         <a-camera>
-            <a-cursor color="#FFFFFF" scale="1.5 1.5 1.5"></a-cursor>
+            <a-cursor color="#4CAF50" scale="1.5 1.5 1.5"></a-cursor>
         </a-camera>
 
+        <!-- Luz ambiental -->
+        <a-light type="ambient" color="#445"></a-light>
+        <a-light type="directional" color="#fff" intensity="0.8" position="-0.5 1 1"></a-light>
     </a-scene>
+    
+    <div class="instructions">
+        Usa el cursor para mirar alrededor. Acerca el cursor al botón "Instalar" para agregar la app a tu dispositivo.
+    </div>
+
+    <script>
+        // Ocultar overlay de carga cuando la escena esté lista
+        document.querySelector('a-scene').addEventListener('loaded', function() {
+            setTimeout(function() {
+                document.getElementById('loading').style.opacity = '0';
+                setTimeout(function() {
+                    document.getElementById('loading').style.display = 'none';
+                }, 1000);
+            }, 1500);
+        });
+        
+        // Manejar el evento de instalación
+        document.querySelector('.clickable').addEventListener('click', function() {
+            // Aquí iría la lógica para instalar la PWA
+            alert('¡Gracias por instalar DirectorioPro! La aplicación se agregará a tu dispositivo.');
+        });
+    </script>
 </body>
 </html>
