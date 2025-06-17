@@ -5,8 +5,6 @@
     <title>DirectorioPro VR Experience</title>
     <meta name="description" content="Experiencia inmersiva de DirectorioPro Los Reyes">
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/aframe-particle-system-component@1.1.3/dist/aframe-particle-system-component.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
     <style>
         body {
             margin: 0;
@@ -107,20 +105,16 @@
 
     <div class="title-overlay" id="sceneTitle">¡Bienvenido al Futuro de DirectorioPro!</div>
 
-    <a-scene background="color: #1a1a1a" loading-screen="enabled: false" cursor="rayOrigin: mouse">
+    <a-scene background="color: #1a1a1a" loading-screen="enabled: false">
         <a-assets>
-            <img id="logo" src="icon-512x512.png">
-            <img id="instrucciones" src="instrucciones-vr.png">
-            <img id="feature1" src="feature1.png">
-            <img id="feature2" src="feature2.png">
-            <img id="feature3" src="feature3.png">
-            <audio id="hover-sound" src="https://cdn.aframe.io/360-image-gallery-boilerplate/audio/hover.ogg"></audio>
-            <audio id="click-sound" src="https://cdn.aframe.io/360-image-gallery-boilerplate/audio/click.ogg"></audio>
+            <img id="logo" crossorigin="anonymous" src="icon-512x512.png">
+            <img id="instrucciones" crossorigin="anonymous" src="instrucciones-vr.png">
         </a-assets>
 
-        <!-- Sistema estelar de fondo -->
-        <a-entity particle-system="preset: star; color: #FFFFFF; particleCount: 5000"></a-entity>
-        <a-entity particle-system="preset: star; color: #4CAF50; particleCount: 1000; size: 0.5; position: 0 -5 0"></a-entity>
+        <!-- Sistema estelar de fondo simplificado -->
+        <a-entity id="stars">
+            <!-- Generamos estrellas dinámicamente -->
+        </a-entity>
 
         <!-- Planeta central con logo -->
         <a-entity id="mainPlanet" position="0 0 -10">
@@ -134,31 +128,6 @@
                             repeat="indefinite"
                             easing="linear"></a-animation>
             </a-sphere>
-            
-            <!-- Anillos orbitales con características -->
-            <a-ring color="#4CAF50" 
-                   radius-inner="2.5" 
-                   radius-outer="2.7" 
-                   rotation="45 0 0">
-                <a-image src="#feature1" width="1.2" height="0.8" position="0 2.6 0"></a-image>
-                <a-animation attribute="rotation"
-                            dur="30000"
-                            to="0 360 0"
-                            repeat="indefinite"
-                            easing="linear"></a-animation>
-            </a-ring>
-            
-            <a-ring color="#4CAF50" 
-                   radius-inner="3.5" 
-                   radius-outer="3.7" 
-                   rotation="-45 0 0">
-                <a-image src="#feature2" width="1.2" height="0.8" position="0 3.6 0"></a-image>
-                <a-animation attribute="rotation"
-                            dur="40000"
-                            to="0 -360 0"
-                            repeat="indefinite"
-                            easing="linear"></a-animation>
-            </a-ring>
         </a-entity>
 
         <!-- Instrucciones como satélites -->
@@ -184,13 +153,12 @@
 
         <!-- Nave de instalación -->
         <a-entity id="installShip" position="0 5 -5" geometry="primitive: cone; radiusBottom: 0.5; height: 1" 
-                  material="color: #4CAF50; shader: flat" sound="on: click; src: #click-sound">
+                  material="color: #4CAF50; shader: flat">
             <a-text value="INSTALAR" 
                    position="0 -1 0" 
                    align="center" 
                    color="white"
-                   scale="1.5 1.5 1.5"
-                   font="https://cdn.aframe.io/fonts/Exo2Bold.fnt"></a-text>
+                   scale="1.5 1.5 1.5"></a-text>
             <a-animation attribute="position"
                         dur="5000"
                         direction="alternate"
@@ -220,16 +188,8 @@
                         easing="easeInOutSine"></a-animation>
         </a-ring>
 
-        <!-- Efectos especiales -->
-        <a-entity id="effects">
-            <a-entity position="0 0 -5" particle-system="preset: default; color: #4CAF50; particleCount: 200; positionSpread: 0.5 0.5 0.5"></a-entity>
-        </a-entity>
-
-        <!-- Audio ambiental -->
-        <a-sound src="https://cdn.aframe.io/360-image-gallery-boilerplate/audio/background.mp3" autoplay="true" loop="true"></a-sound>
-
         <a-camera>
-            <a-cursor color="#4CAF50" scale="1.5 1.5 1.5" animation__click="property: scale; startEvents: click; from: 1.5 1.5 1.5; to: 1 1 1; dur: 150"></a-cursor>
+            <a-cursor color="#4CAF50" scale="1.5 1.5 1.5"></a-cursor>
         </a-camera>
 
         <!-- Luz ambiental -->
@@ -245,33 +205,63 @@
         // Detectar si es iOS
         const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
         
-        // Ocultar overlay de carga cuando la escena esté lista
-        document.querySelector('a-scene').addEventListener('loaded', function() {
-            setTimeout(function() {
-                document.getElementById('loading').style.opacity = '0';
-                setTimeout(function() {
-                    document.getElementById('loading').style.display = 'none';
-                    
-                    // Mostrar instrucciones específicas para iOS
-                    if (isIOS) {
-                        document.getElementById('iosInstructions').style.display = 'block';
-                        document.getElementById('instructions-text').innerHTML = 
-                            'En iPhone, sigue las instrucciones en la parte superior para instalar la app.';
-                    }
-                    
-                    // Animación de título
-                    let title = document.getElementById('sceneTitle');
-                    setTimeout(() => {
-                        title.innerHTML = "Descubre un Mundo de Servicios Locales";
-                        setTimeout(() => {
-                            title.innerHTML = "Tu Directorio Profesional en Realidad Virtual";
-                        }, 5000);
-                    }, 3000);
-                }, 1000);
-            }, 1500);
-        });
+        // Función para generar estrellas manualmente
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            for (let i = 0; i < 500; i++) {
+                const star = document.createElement('a-entity');
+                star.setAttribute('geometry', {
+                    primitive: 'sphere',
+                    radius: Math.random() * 0.05
+                });
+                star.setAttribute('material', {
+                    color: Math.random() > 0.9 ? '#4CAF50' : '#FFFFFF',
+                    shader: 'flat'
+                });
+                star.setAttribute('position', {
+                    x: (Math.random() - 0.5) * 100,
+                    y: (Math.random() - 0.5) * 100,
+                    z: -50 - Math.random() * 50
+                });
+                starsContainer.appendChild(star);
+            }
+        }
         
-        // Manejar el evento de instalación con efectos especiales
+        // Función para ocultar la pantalla de carga
+        function hideLoading() {
+            const loading = document.getElementById('loading');
+            loading.style.opacity = '0';
+            setTimeout(() => {
+                loading.style.display = 'none';
+            }, 1000);
+        }
+        
+        // Inicializar la experiencia
+        function initExperience() {
+            // Crear las estrellas
+            createStars();
+            
+            // Ocultar la pantalla de carga después de un breve tiempo
+            setTimeout(hideLoading, 2000);
+            
+            // Mostrar instrucciones específicas para iOS
+            if (isIOS) {
+                document.getElementById('iosInstructions').style.display = 'block';
+                document.getElementById('instructions-text').innerHTML = 
+                    'En iPhone, sigue las instrucciones en la parte superior para instalar la app.';
+            }
+            
+            // Animación de título
+            let title = document.getElementById('sceneTitle');
+            setTimeout(() => {
+                title.innerHTML = "Descubre un Mundo de Servicios Locales";
+                setTimeout(() => {
+                    title.innerHTML = "Tu Directorio Profesional en Realidad Virtual";
+                }, 5000);
+            }, 3000);
+        }
+        
+        // Manejar el evento de instalación
         document.querySelector('#installShip').addEventListener('click', function() {
             if (isIOS) {
                 // iOS no permite instalación automática
@@ -286,17 +276,37 @@
                     easing: 'easeInCubic'
                 });
                 
-                // Crear explosión de partículas
-                const explosion = document.createElement('a-entity');
-                explosion.setAttribute('position', '0 0 -5');
-                explosion.setAttribute('particle-system', {
-                    preset: 'explosion',
-                    color: '#4CAF50',
-                    particleCount: 500,
-                    size: 0.5,
-                    maxAge: 2
-                });
-                document.querySelector('#effects').appendChild(explosion);
+                // Crear explosión de partículas (simulada)
+                for (let i = 0; i < 100; i++) {
+                    const particle = document.createElement('a-entity');
+                    particle.setAttribute('geometry', {
+                        primitive: 'sphere',
+                        radius: 0.05
+                    });
+                    particle.setAttribute('material', {
+                        color: '#4CAF50',
+                        shader: 'flat'
+                    });
+                    particle.setAttribute('position', {
+                        x: (Math.random() - 0.5) * 2,
+                        y: (Math.random() - 0.5) * 2,
+                        z: -5
+                    });
+                    particle.setAttribute('animation', {
+                        property: 'position',
+                        to: `${(Math.random() - 0.5) * 10} ${(Math.random() - 0.5) * 10} ${-20 - Math.random() * 10}`,
+                        dur: 1000 + Math.random() * 1000,
+                        easing: 'easeOutCubic'
+                    });
+                    particle.setAttribute('animation__opacity', {
+                        property: 'material.opacity',
+                        to: '0',
+                        dur: 1000,
+                        delay: 500,
+                        easing: 'easeInCubic'
+                    });
+                    document.querySelector('a-scene').appendChild(particle);
+                }
                 
                 // Mensaje final
                 setTimeout(() => {
@@ -307,12 +317,8 @@
             }
         });
         
-        // Efecto de sonido al pasar sobre elementos
-        document.querySelectorAll('[sound]').forEach(element => {
-            element.addEventListener('mouseenter', () => {
-                element.components.sound.playSound();
-            });
-        });
+        // Iniciar la experiencia cuando el DOM esté listo
+        document.addEventListener('DOMContentLoaded', initExperience);
     </script>
 </body>
 </html>
