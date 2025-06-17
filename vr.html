@@ -58,6 +58,23 @@
             width: 80%;
             max-width: 500px;
         }
+        .ios-instructions {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #4CAF50;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 15px;
+            border-radius: 15px;
+            font-size: 16px;
+            z-index: 10;
+            width: 90%;
+            max-width: 500px;
+            display: none;
+            border: 2px solid #4CAF50;
+        }
     </style>
 </head>
 <body>
@@ -66,13 +83,20 @@
         <div class="loading-text">Cargando experiencia VR...</div>
     </div>
 
+    <div class="ios-instructions" id="iosInstructions">
+        <strong>Instrucciones para iPhone:</strong><br>
+        1. Toca el botón Compartir (📤) en la barra de menú<br>
+        2. Selecciona "Agregar a Inicio"<br>
+        3. Toca "Agregar" en la esquina superior derecha
+    </div>
+
     <a-scene background="color: #1a1a1a" loading-screen="enabled: false">
         <a-assets>
             <img id="logo" src="icon-512x512.png"> 
             <img id="instrucciones" src="instrucciones-vr.png">
         </a-assets>
 
-        <!-- Logo animado flotante -->
+        <!-- Logo animado flotante en el centro -->
         <a-image src="#logo" width="2.5" height="2.5" position="0 1.5 -4">
             <a-animation attribute="position" 
                          dur="2000"
@@ -82,12 +106,12 @@
                          easing="easeInOutSine"></a-animation>
         </a-image>
 
-        <!-- Instrucciones con efecto curvo y rotación -->
+        <!-- Instrucciones con efecto curvo a la izquierda -->
         <a-curvedimage src="#instrucciones" 
                       height="3" 
                       radius="5.7" 
                       theta-length="60" 
-                      position="0 1.5 -4"
+                      position="-2.5 1.5 -4"
                       rotation="0 20 0">
             <a-animation attribute="rotation"
                          dur="30000"
@@ -97,31 +121,38 @@
                          easing="linear"></a-animation>
         </a-curvedimage>
 
-        <!-- Texto de bienvenida -->
-        <a-text value="Bienvenido a DirectorioPro" 
-                color="#4CAF50" 
-                position="0 2.8 -4" 
-                align="center" 
-                scale="1.5 1.5 1.5"
-                font="https://cdn.aframe.io/fonts/Exo2Bold.fnt"></a-text>
-
-        <!-- Botón flotante para instalar -->
-        <a-entity position="0 0.5 -4" 
-                  geometry="primitive: circle; radius: 0.5" 
+        <!-- Botón de instalación destacado a la derecha -->
+        <a-entity position="2.5 1.5 -4" 
+                  geometry="primitive: circle; radius: 0.7" 
                   material="color: #4CAF50; shader: flat"
                   class="clickable">
-            <a-text value="Instalar" 
+            <a-text value="INSTALAR" 
                     position="0 0 0.1" 
                     align="center" 
                     color="white"
-                    scale="1.5 1.5 1.5"></a-text>
+                    scale="1.8 1.8 1.8"
+                    font="https://cdn.aframe.io/fonts/Exo2Bold.fnt"></a-text>
             <a-animation attribute="scale"
                          dur="1000"
                          direction="alternate"
                          repeat="indefinite"
                          to="1.1 1.1 1.1"
                          easing="easeInOutSine"></a-animation>
+            <a-animation attribute="rotation"
+                         dur="8000"
+                         fill="forwards"
+                         to="0 360 0"
+                         repeat="indefinite"
+                         easing="linear"></a-animation>
         </a-entity>
+
+        <!-- Texto de bienvenida -->
+        <a-text value="DIRECTORIO PRO" 
+                color="#4CAF50" 
+                position="0 2.8 -4" 
+                align="center" 
+                scale="1.8 1.8 1.8"
+                font="https://cdn.aframe.io/fonts/Exo2Bold.fnt"></a-text>
 
         <!-- Fondo estelar -->
         <a-entity particle-system="preset: star; color: #FFFFFF; particleCount: 2000"></a-entity>
@@ -135,25 +166,41 @@
         <a-light type="directional" color="#fff" intensity="0.8" position="-0.5 1 1"></a-light>
     </a-scene>
     
-    <div class="instructions">
-        Usa el cursor para mirar alrededor. Acerca el cursor al botón "Instalar" para agregar la app a tu dispositivo.
+    <div class="instructions" id="instructions-text">
+        Usa el cursor para mirar alrededor. Acerca el cursor al botón "INSTALAR" para agregar la app.
     </div>
 
     <script>
+        // Detectar si es iOS
+        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+        
         // Ocultar overlay de carga cuando la escena esté lista
         document.querySelector('a-scene').addEventListener('loaded', function() {
             setTimeout(function() {
                 document.getElementById('loading').style.opacity = '0';
                 setTimeout(function() {
                     document.getElementById('loading').style.display = 'none';
+                    
+                    // Mostrar instrucciones específicas para iOS
+                    if (isIOS) {
+                        document.getElementById('iosInstructions').style.display = 'block';
+                        document.getElementById('instructions-text').innerHTML = 
+                            'En iPhone, sigue las instrucciones en la parte superior para instalar la app.';
+                    }
                 }, 1000);
             }, 1500);
         });
         
         // Manejar el evento de instalación
         document.querySelector('.clickable').addEventListener('click', function() {
-            // Aquí iría la lógica para instalar la PWA
-            alert('¡Gracias por instalar DirectorioPro! La aplicación se agregará a tu dispositivo.');
+            if (isIOS) {
+                // iOS no permite instalación automática
+                document.getElementById('iosInstructions').style.display = 'block';
+            } else {
+                // Para Android/otros navegadores
+                alert('¡Gracias por instalar DirectorioPro! La aplicación se agregará a tu dispositivo.');
+                // Aquí iría la lógica real de instalación PWA
+            }
         });
     </script>
 </body>
