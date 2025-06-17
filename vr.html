@@ -2,323 +2,41 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>DirectorioPro VR Experience</title>
-    <meta name="description" content="Experiencia inmersiva de DirectorioPro Los Reyes">
+    <title>Bienvenido a DirectorioPro Los Reyes</title>
+    <meta name="description" content="Instala la WebApp de DirectorioPro Los Reyes">
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
-    <style>
-        body {
-            margin: 0;
-            overflow: hidden;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #000;
-        }
-        .loading-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #1a1a1a, #000);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            transition: opacity 1s ease;
-        }
-        .loading-spinner {
-            width: 60px;
-            height: 60px;
-            border: 5px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            border-top-color: #4CAF50;
-            animation: spin 1s linear infinite;
-            margin-bottom: 20px;
-        }
-        .loading-text {
-            color: #fff;
-            font-size: 18px;
-            font-weight: 500;
-        }
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-        .instructions {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: white;
-            text-align: center;
-            background: rgba(0, 0, 0, 0.7);
-            padding: 10px 20px;
-            border-radius: 20px;
-            font-size: 14px;
-            z-index: 10;
-            width: 80%;
-            max-width: 500px;
-        }
-        .ios-instructions {
-            position: absolute;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: #4CAF50;
-            text-align: center;
-            background: rgba(0, 0, 0, 0.7);
-            padding: 15px;
-            border-radius: 15px;
-            font-size: 16px;
-            z-index: 10;
-            width: 90%;
-            max-width: 500px;
-            display: none;
-            border: 2px solid #4CAF50;
-        }
-        .title-overlay {
-            position: absolute;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: white;
-            text-align: center;
-            font-size: 24px;
-            font-weight: bold;
-            text-shadow: 0 0 10px rgba(76, 175, 80, 0.7);
-            z-index: 10;
-            width: 90%;
-        }
-    </style>
 </head>
 <body>
-    <div class="loading-overlay" id="loading">
-        <div class="loading-spinner"></div>
-        <div class="loading-text">Iniciando experiencia inmersiva...</div>
-    </div>
+    <a-scene background="color: #1a1a1a">
 
-    <div class="ios-instructions" id="iosInstructions">
-        <strong>Instrucciones para iPhone:</strong><br>
-        1. Toca el botón Compartir (📤) en la barra de menú<br>
-        2. Selecciona "Agregar a Inicio"<br>
-        3. Toca "Agregar" en la esquina superior derecha
-    </div>
-
-    <div class="title-overlay" id="sceneTitle">¡Bienvenido al Futuro de DirectorioPro!</div>
-
-    <a-scene background="color: #1a1a1a" loading-screen="enabled: false">
         <a-assets>
-            <img id="logo" crossorigin="anonymous" src="icon-512x512.png">
-            <img id="instrucciones" crossorigin="anonymous" src="instrucciones-vr.png">
+            <img id="logo" src="icon-512x512.png"> 
+            <img id="instrucciones" src="instrucciones-vr.png">
         </a-assets>
 
-        <!-- Sistema estelar de fondo simplificado -->
-        <a-entity id="stars">
-            <!-- Generamos estrellas dinámicamente -->
-        </a-entity>
-
-        <!-- Planeta central con logo -->
-        <a-entity id="mainPlanet" position="0 0 -10">
-            <a-sphere radius="2" 
-                     color="#333"
-                     roughness="0.8">
-                <a-image src="#logo" scale="0.9 0.9 0.9" position="0 0 2"></a-image>
-                <a-animation attribute="rotation"
-                            dur="100000"
-                            to="0 360 0"
-                            repeat="indefinite"
-                            easing="linear"></a-animation>
-            </a-sphere>
-        </a-entity>
-
-        <!-- Instrucciones como satélites -->
-        <a-entity id="instructionSatellite" position="5 2 -8">
-            <a-curvedimage src="#instrucciones" 
-                          height="1.5" 
-                          radius="0.8" 
-                          theta-length="180" 
-                          rotation="0 90 0">
-                <a-animation attribute="rotation"
-                            dur="30000"
-                            to="0 450 0"
-                            repeat="indefinite"
-                            easing="linear"></a-animation>
-            </a-curvedimage>
-            <a-animation attribute="position"
-                        dur="15000"
-                        direction="alternate"
-                        repeat="indefinite"
-                        to="-5 2 -8"
-                        easing="easeInOutSine"></a-animation>
-        </a-entity>
-
-        <!-- Nave de instalación -->
-        <a-entity id="installShip" position="0 5 -5" geometry="primitive: cone; radiusBottom: 0.5; height: 1" 
-                  material="color: #4CAF50; shader: flat">
-            <a-text value="INSTALAR" 
-                   position="0 -1 0" 
-                   align="center" 
-                   color="white"
-                   scale="1.5 1.5 1.5"></a-text>
-            <a-animation attribute="position"
-                        dur="5000"
-                        direction="alternate"
-                        repeat="indefinite"
-                        to="0 3 -5"
-                        easing="easeInOutSine"></a-animation>
+        <a-image src="#logo" width="4" height="4" position="0 2.5 -6">
             <a-animation attribute="rotation"
-                        dur="8000"
-                        to="0 360 0"
-                        repeat="indefinite"
-                        easing="linear"></a-animation>
-            <a-light type="point" color="#4CAF50" intensity="2" distance="5"></a-light>
-        </a-entity>
-
-        <!-- Portal de entrada -->
-        <a-ring id="entryPortal" position="0 0 -20" color="#4CAF50" radius-inner="3" radius-outer="4" opacity="0.8">
+                         dur="10000"
+                         fill="forwards"
+                         to="0 360 0"
+                         repeat="indefinite"
+                         easing="linear"></a-animation>
+        </a-image>
+<a-image src="#instrucciones" width="4" height="4" position="4 2.5 -6">
             <a-animation attribute="rotation"
-                        dur="15000"
-                        to="0 0 360"
-                        repeat="indefinite"
-                        easing="linear"></a-animation>
-            <a-animation attribute="scale"
-                        dur="3000"
-                        direction="alternate"
-                        repeat="indefinite"
-                        to="1.2 1.2 1.2"
-                        easing="easeInOutSine"></a-animation>
-        </a-ring>
+                         dur="10000"
+                         fill="forwards"
+                         to="0 360 0"
+                         repeat="indefinite"
+                         easing="linear"></a-animation>
+        </a-image>
+        
+
 
         <a-camera>
-            <a-cursor color="#4CAF50" scale="1.5 1.5 1.5"></a-cursor>
+            <a-cursor color="#FFFFFF" scale="1.5 1.5 1.5"></a-cursor>
         </a-camera>
 
-        <!-- Luz ambiental -->
-        <a-light type="ambient" color="#445"></a-light>
-        <a-light type="directional" color="#fff" intensity="0.8" position="-0.5 1 1"></a-light>
     </a-scene>
-    
-    <div class="instructions" id="instructions-text">
-        Explora nuestro universo digital. Acerca el cursor a la nave para instalar la app.
-    </div>
-
-    <script>
-        // Detectar si es iOS
-        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-        
-        // Función para generar estrellas manualmente
-        function createStars() {
-            const starsContainer = document.getElementById('stars');
-            for (let i = 0; i < 500; i++) {
-                const star = document.createElement('a-entity');
-                star.setAttribute('geometry', {
-                    primitive: 'sphere',
-                    radius: Math.random() * 0.05
-                });
-                star.setAttribute('material', {
-                    color: Math.random() > 0.9 ? '#4CAF50' : '#FFFFFF',
-                    shader: 'flat'
-                });
-                star.setAttribute('position', {
-                    x: (Math.random() - 0.5) * 100,
-                    y: (Math.random() - 0.5) * 100,
-                    z: -50 - Math.random() * 50
-                });
-                starsContainer.appendChild(star);
-            }
-        }
-        
-        // Función para ocultar la pantalla de carga
-        function hideLoading() {
-            const loading = document.getElementById('loading');
-            loading.style.opacity = '0';
-            setTimeout(() => {
-                loading.style.display = 'none';
-            }, 1000);
-        }
-        
-        // Inicializar la experiencia
-        function initExperience() {
-            // Crear las estrellas
-            createStars();
-            
-            // Ocultar la pantalla de carga después de un breve tiempo
-            setTimeout(hideLoading, 2000);
-            
-            // Mostrar instrucciones específicas para iOS
-            if (isIOS) {
-                document.getElementById('iosInstructions').style.display = 'block';
-                document.getElementById('instructions-text').innerHTML = 
-                    'En iPhone, sigue las instrucciones en la parte superior para instalar la app.';
-            }
-            
-            // Animación de título
-            let title = document.getElementById('sceneTitle');
-            setTimeout(() => {
-                title.innerHTML = "Descubre un Mundo de Servicios Locales";
-                setTimeout(() => {
-                    title.innerHTML = "Tu Directorio Profesional en Realidad Virtual";
-                }, 5000);
-            }, 3000);
-        }
-        
-        // Manejar el evento de instalación
-        document.querySelector('#installShip').addEventListener('click', function() {
-            if (isIOS) {
-                // iOS no permite instalación automática
-                document.getElementById('iosInstructions').style.display = 'block';
-            } else {
-                // Efectos especiales
-                const ship = document.querySelector('#installShip');
-                ship.setAttribute('animation', {
-                    property: 'position',
-                    to: '0 0 -30',
-                    dur: 2000,
-                    easing: 'easeInCubic'
-                });
-                
-                // Crear explosión de partículas (simulada)
-                for (let i = 0; i < 100; i++) {
-                    const particle = document.createElement('a-entity');
-                    particle.setAttribute('geometry', {
-                        primitive: 'sphere',
-                        radius: 0.05
-                    });
-                    particle.setAttribute('material', {
-                        color: '#4CAF50',
-                        shader: 'flat'
-                    });
-                    particle.setAttribute('position', {
-                        x: (Math.random() - 0.5) * 2,
-                        y: (Math.random() - 0.5) * 2,
-                        z: -5
-                    });
-                    particle.setAttribute('animation', {
-                        property: 'position',
-                        to: `${(Math.random() - 0.5) * 10} ${(Math.random() - 0.5) * 10} ${-20 - Math.random() * 10}`,
-                        dur: 1000 + Math.random() * 1000,
-                        easing: 'easeOutCubic'
-                    });
-                    particle.setAttribute('animation__opacity', {
-                        property: 'material.opacity',
-                        to: '0',
-                        dur: 1000,
-                        delay: 500,
-                        easing: 'easeInCubic'
-                    });
-                    document.querySelector('a-scene').appendChild(particle);
-                }
-                
-                // Mensaje final
-                setTimeout(() => {
-                    document.getElementById('sceneTitle').innerHTML = "¡Instalación Completa!";
-                    document.getElementById('instructions-text').innerHTML = 
-                        "La app se ha instalado en tu dispositivo. ¡Disfruta de DirectorioPro!";
-                }, 2000);
-            }
-        });
-        
-        // Iniciar la experiencia cuando el DOM esté listo
-        document.addEventListener('DOMContentLoaded', initExperience);
-    </script>
 </body>
 </html>
