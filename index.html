@@ -433,7 +433,8 @@
         'Comida Rápida': ['whatsapp', 'call'],
         'Aires Acondicionados': ['whatsapp', 'call'],
         'Sociedad Cooperativa de Ahorros y Préstamos': ['call'],
-        'Ginecólogos': ['whatsapp', 'call']
+        'Ginecólogos': ['whatsapp', 'call'],
+        'Supermercados': ['call']
         
 };
       
@@ -4303,7 +4304,47 @@
                         conditions: "Solo para primeras citas. Incluye diagnóstico completo."
                     }
                 ]
+            },
+          
+          // Supermercados
+    {
+        id: 81,
+        name: "Super Mary",
+        category: "Supermercados",
+        specialty: "Servicio a Domicilo",
+        description: "Tu supermercado de confianza con los mejores precios y productos frescos.",
+        phone: "3545422066",
+        address: "Av. Fidel Velázquez #1, Col. Obrera, Los Reyes, Mich. Justo en la Placita de la Obrera.",
+        experience: "Más de 35 años",
+        price: "Llamanos Ahora",
+        membership: "premium", //puedes cambiar a free
+        featured: true, //puedes cambiar a false
+        services: [
+            "Abarrotes",
+            "Frutas y verduras frescas",
+            "Vinos y Licores",
+            "Lácteos",
+            "Cremería",
+            "Productos de limpieza",
+            "Herramientas Truper",
+            "Servicio a Domicilio solo de 7am a 3pm"
+        ],
+        schedule: "Lunes a Domingo: 7am a 9pm",
+        image: "./Images/perfil-super-mary.jpg",
+        gallery: [
+            "./Images/super-mary-1.jpg",
+            "./Images/super-mary-2.jpg"
+        ],
+        offers: [
+            {
+                title: "Descuento en Frutas y Verduras",
+                discount: "10% OFF",
+                validity: "Válido hasta 30/Nov/2025",
+                description: "Todas las frutas y verduras frescas con descuento",
+                conditions: "Válido solo los martes y miércoles."
             }
+        ]
+    }
           
          ];
       
@@ -4504,7 +4545,8 @@ function initSwiper() {
         'Comida Rápida': '<i class="fas fa-hamburger"></i>',
         'Aires Acondicionados': '<i class="fas fa-fan"></i>',
         'Sociedad Cooperativa de Ahorros y Préstamos': '<i class="fas fa-coins"></i>',
-        'Ginecólogos': '<i class="fas fa-venus"></i><i class="fas fa-stethoscope ml-1"></i>'
+        'Ginecólogos': '<i class="fas fa-venus"></i><i class="fas fa-stethoscope ml-1"></i>',
+        'Supermercados': '<i class="fas fa-shopping-cart"></i>'
     };
             
             return icons[category] || '<i class="fas fa-briefcase"></i>';
