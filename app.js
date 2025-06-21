@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // --- Parte 2: Obtener el token del dispositivo (Sin cambios) ---
     function obtenerToken() {
         // Obtenemos el token de registro del dispositivo
-        messaging.getToken({ vapidKey: "BGkQS0paUdAKAMwT4jsidWnXbYb-h94QPyzMMrMb9lqnypRmYEIkSnjQ284EBExoO2o5DHId8aldMCTfu2Vm_s0" }) // ¡RECUERDA PONER TU VAPID KEY REAL!
+        messaging.getToken({ vapidKey: "BMC-Hk8bWWSVgHpa3dQXaiiMmyddglkBfLbrCIdw8s8tiN-zT4dYdkzvggCohu2mZSxP9eQaApJj-GNGvGBWIL4" }) // ¡RECUERDA PONER TU VAPID KEY REAL!
             .then((currentToken) => {
                 if (currentToken) {
                     console.log("Token del cliente obtenido:");
