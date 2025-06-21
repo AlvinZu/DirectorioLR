@@ -2,7 +2,7 @@
   "name": "DirectorioPro Los Reyes",
   "short_name": "DirectorioPro",
   "description": "El directorio #1 de negocios y profesionistas en Los Reyes, Michoacán.",
-  "start_url": "/DirectorioLR/index.html",
+  "start_url": "https://alvinzu.github.io/DirectorioLR/index.html",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#2563EB",
