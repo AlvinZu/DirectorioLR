@@ -2,47 +2,36 @@
 
 document.addEventListener("DOMContentLoaded", function () {
 
-    // ... (Aquí va todo tu otro código de la app que ya tienes) ...
+   // app.js - CÓDIGO CORREGIDO
 
-    // --- LÓGICA DE NOTIFICACIONES PUSH ---
+// --- LÓGICA DE NOTIFICACIONES PUSH ---
 
-    // La misma configuración de Firebase que usaste antes
-    const firebaseConfig = {
-      apiKey: "AIzaSyBM91yvFBEU9NDSEZKQyFHU6bhqCPgY3Uc", // Reemplaza con tus datos
-      authDomain: "directoriopro-los-reyes.firebaseapp.com", // Reemplaza con tus datos
-      projectId: "directoriopro-los-reyes", // Reemplaza con tus datos
-      storageBucket: "directoriopro-los-reyes.firebasestorage.app", // Reemplaza con tus datos
-      messagingSenderId: "689785400797", // Reemplaza con tus datos
-      appId: "1:689785400797:web:5b91b320d6aa70ae669a34" // Reemplaza con tus datos
-    };
+// Configuración de Firebase (sin cambios)
+const firebaseConfig = {
+    apiKey: "AIzaSyBM91yvFBEU9NDSEZKQyFHU6bhqCPgY3Uc",
+    authDomain: "directoriopro-los-reyes.firebaseapp.com",
+    projectId: "directoriopro-los-reyes",
+    storageBucket: "directoriopro-los-reyes.firebasestorage.app",
+    messagingSenderId: "689785400797",
+    appId: "1:689785400797:web:5b91b320d6aa70ae669a34"
+};
 
-    // Inicializa Firebase
-    firebase.initializeApp(firebaseConfig);
-    const messaging = firebase.messaging();
+// Inicializa Firebase
+firebase.initializeApp(firebaseConfig);
+const messaging = firebase.messaging();
 
-    const btnActivar = document.getElementById('activar-notificaciones');
+const btnActivar = document.getElementById('activar-notificaciones');
 
-    // **NUEVA FUNCIÓN PARA VERIFICAR Y OCULTAR EL BOTÓN**
-    function verificarEstadoNotificaciones() {
-        if (!btnActivar) return; // Si el botón no existe, no hagas nada.
-        
-        // Notification.permission puede tener 3 valores: 'granted', 'denied', 'default'
-        if (Notification.permission === 'granted') {
-            console.log('El permiso para notificaciones ya fue concedido.');
-            btnActivar.style.display = 'none'; // Oculta el botón
-            // Opcional: Si ya tienes el token, podrías volver a obtenerlo por si cambió
-            // obtenerToken(); 
-        } else if (Notification.permission === 'denied') {
-            console.log('El permiso para notificaciones fue denegado previamente.');
-            btnActivar.style.display = 'none'; // También lo ocultamos si lo denegaron
-        } else {
-            console.log('El permiso para notificaciones aún no se ha solicitado.');
-            btnActivar.style.display = 'block'; // Asegúrate de que el botón sea visible
-        }
+// Función para verificar y ocultar el botón (sin cambios)
+function verificarEstadoNotificaciones() {
+    if (!btnActivar) return;
+    if (Notification.permission === 'granted' || Notification.permission === 'denied') {
+        btnActivar.style.display = 'none';
+    } else {
+        btnActivar.style.display = 'block';
     }
-    
-    // Llama a la función de verificación tan pronto como la página cargue
-    verificarEstadoNotificaciones();
+}
+verificarEstadoNotificaciones();
 
 
     // --- Parte 1: Pedir permiso al usuario (Lógica Modificada) ---
