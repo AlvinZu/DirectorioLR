@@ -1,21 +1,23 @@
 {
-  "name": "DirectorioPro LR",
+  "name": "DirectorioPro Los Reyes",
   "short_name": "DirectorioPro",
-  "start_url": "https://alvinzu.github.io/DirectorioLR/",
+  "description": "El directorio #1 de negocios y profesionistas en Los Reyes, Michoacán.",
+  "start_url": "/DirectorioLR/index.html",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#1e3a8a",
+  "theme_color": "#2563EB",
+  "orientation": "portrait-primary",
   "icons": [
     {
       "src": "icon-192x192.png",
-      "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "sizes": "192x192"
     },
     {
       "src": "icon-512x512.png",
-      "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "sizes": "512x512"
     }
   ],
-   "gcm_sender_id": "103953800507"
+  "gcm_sender_id": "103953800507"
 }
