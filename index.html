@@ -4473,7 +4473,8 @@ function init() {
     setupEventListeners();
     initSwiper(); // Agrega esta línea
     history.replaceState({ screen: 'home' }, '');
-    showScreen('home', false);
+    handleInitialScreen();
+
 }
 
 // Nueva función para inicializar el slider
@@ -4680,7 +4681,7 @@ function initSwiper() {
         
       //genera los botones de contactos
       function generateContactButtons(professional) {
-    const config = contactConfig[professional.category] || ['whatsapp']; // Default: WhatsApp
+    const config = contactConfig[professional.category] || ['call']; // Default: Call
     let buttons = '';
     
     const phoneNumber = professional.phone.replace(/\D/g, ''); // Limpia el número
@@ -4689,6 +4690,7 @@ function initSwiper() {
     const nombreCompleto = encodeURIComponent(professional.name); // Nombre completo codificado
     
     config.forEach(method => {
+      
         if (method === 'whatsapp') {
             buttons += `
                 <a href="https://wa.me/${phoneNumber}?text=Hola%20${nombreCompleto},%20vi%20tu%20perfil%20en%20DirectorioPro%20LR%20y%20me%20gustaría%20saber%20más%20sobre%20tus%20servicios" 
@@ -4706,8 +4708,10 @@ function initSwiper() {
                    class="block ${isEmergency ? 'bg-red-500 emergency-btn' : 'bg-blue-500'} text-white text-center py-3 rounded-lg hover:${isEmergency ? 'bg-red-600' : 'bg-blue-600'} transition-colors">
                     <i class="fas fa-phone mr-2"></i> ${isEmergency ? 'Llamada de Emergencia' : 'Llamar ahora'}
                 </a>
+                
             `;
         }
+      
     });
     
     return buttons;
@@ -4756,6 +4760,9 @@ document.getElementById('lightbox').addEventListener('click', (e) => {
                        
 <div class="mt-6 w-full space-y-3">
     ${generateContactButtons(professional)}
+    <button id="shareBtn" class="bg-yellow-500 text-white font-bold py-2 px-4 rounded-lg w-full flex items-center justify-center hover:bg-yellow-600 transition-all">
+                    <i class="fas fa-share-alt mr-2"></i>Compartir
+                </button>
 </div>
                     </div>
                     
@@ -4814,6 +4821,7 @@ document.getElementById('lightbox').addEventListener('click', (e) => {
                 </div>
             `;
             
+          
             // Add event listener to call button
             const callBtn = professionalDetails.querySelector('.call-btn');
             if (callBtn) {
@@ -4821,10 +4829,63 @@ document.getElementById('lightbox').addEventListener('click', (e) => {
                     window.location.href = `tel:${professional.phone}`;
                 });
             }
+          // --- AÑADIDO: Lógica para el botón de compartir ---
+    // 1. Buscamos el botón que acabamos de crear en el HTML
+    const shareButton = professionalDetails.querySelector('#shareBtn');
+    
+    // 2. Si el botón existe, le añadimos el evento 'click'
+    if (shareButton) {
+        shareButton.addEventListener('click', () => {
+            // 3. Llamamos a la nueva función de compartir (que crearemos en el paso 2)
+            //    y le pasamos el 'id' del profesional que estamos viendo.
+            shareProfessional(id); 
+        });
+    }
+    // --- FIN DEL CÓDIGO AÑADIDO ---
             
             showScreen('details');
         }
-        
+      
+      // ESTA ES LA FUNCIÓN PRINCIPAL DE COMPARTIR
+async function shareProfessional(professionalId) {
+    const professional = professionals.find(p => p.id == professionalId);
+    if (!professional) return;
+
+    const shareData = {
+        title: 'DirectorioPro Los Reyes',
+        text: `¡Te recomiendo a "${professional.name}"! Encuéntralos en DirectorioPro Los Reyes.`,
+        url: `https://alvinzu.github.io/DirectorioLR/?id=${professional.id}`
+    };
+
+    if (navigator.share) {
+        try {
+            await navigator.share(shareData);
+            console.log('¡Perfil compartido exitosamente!');
+        } catch (err) {
+            console.log('Error al compartir:', err);
+        }
+    } else {
+        alert('La función de compartir no está disponible en este navegador.');
+    }
+}
+
+// ESTA FUNCIÓN REVISA LA URL CUANDO LA APP CARGA
+function handleInitialScreen() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const professionalId = urlParams.get('id');
+
+    if (professionalId) {
+        // Si hay un ID, muestra los detalles de ese profesional
+        history.replaceState({ screen: 'details' }, '');
+        showProfessionalDetails(professionalId);
+    } else {
+        // Si no, muestra la pantalla de inicio
+        history.replaceState({ screen: 'home' }, '');
+        showScreen('home');
+    }
+}
+      
+              
         // Load featured professionals preview
         function loadFeaturedPreview() {
             const featuredPros = professionals.filter(pro => pro.featured).slice(0, 3);
