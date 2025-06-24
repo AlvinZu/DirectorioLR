@@ -9,10 +9,6 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   
-  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-messaging.js"></script>
-  <script src="app.js"></script>
-  
   <!-- Icono App -->
     <link rel="icon" type="image/png" sizes="192x192" href="icon-192x192.png">
     <link rel="icon" type="image/png" sizes="512x512" href="icon-512x512.png">
@@ -196,9 +192,6 @@
             <button id="mobileOffersBtn" class="block w-full text-left py-2 hover:bg-blue-600 rounded px-2">
             <i class="fas fa-tag mr-2"></i> Ofertas Exclusivas
             </button>
-          <button id="activar-notificaciones">
-            <i class="fas fa-bell mr-2"></i> Activar Notificaciones
-          </button>
         </div>
     </header>
 
@@ -376,7 +369,7 @@
         'Barberías': ['whatsapp', 'call'],  
         'Tiendas de Pinturas': ['call'],  
         'Carpinteros': ['whatsapp'],  
-        'Electricistas': ['whatsapp'],  
+        'Electricistas': ['whatsapp', 'call'],  
         'Plomeros': ['call'],  
         'Fotógrafos': ['call'],  
         'Protección Civil': ['call'],  
@@ -1040,28 +1033,38 @@
             // Electricistas
             {
                 id: 12,
-                name: "Electricista Miguel Maciel",
+                name: "Distribuidora Eléctrica Deansa",
                 category: "Electricistas",
                 specialty: "Instalaciones Electricas",
-                description: "Servicio eléctrico confiable y seguro para tu hogar y area de trabajo..",
-                phone: "3541498328",
-                address: "Los Reyes, Mich. Y Alrededores.",
-                experience: "Mas de 20 años",
+                description: "Ofrecemos una alta gama de materiales eléctricos residenciales e industriales de alta calidad. Manejamos marcas como: Steren, Tecnolite, Igoto, Truper, Lucek, bticino, Altamira, Kobrex, Siemens y muchas mas.",
+                phone: "3541352811",
+                address: "Matriz: C. Nicolas Bravo #160-A, Col. Centro, Los Reyes, Mich.",
+                experience: "Mas de 18 años",
                 price: "Cotiza Ahora",
                 membership: "premium", //puedes cambiar a free
                 featured: true, //puedes cambiar a false
-                services: ["Instalaciones Eléctricas", "Mantenimiento", "Reparaciones Urgentes", "Instalación de Sockets", "Instalación de Tomas de Corriente", "Instalación de Apagadores"],
-                schedule: "Lunes a Viernes: 8am a 6pm - Sábado: 8am a 2pm",
+                services: ["Instalaciones Eléctricas", "Transformadores", "Lamparas de iluminación modernos", "Sockets", "Tomas de Corriente", "Apagadores", "Todo tipo de Cables Eléctricos", "Bases Troncopiramidales", "Botes Galvanizados", "Y Muchas cosas mas..."],
+                schedule: "Lunes a Viernes: 8am a 7:30pm - Sábado: 8am a 2pm",
                 education: "",
-                image: "./Images/perfil-electricista-miguel-maciel.jpg",
+                image: "./Images/perfil-deansa.jpg",
                 gallery: [
-                          "./Images/electricista-miguel-maciel-1.jpg",
-                          "./Images/electricista-miguel-maciel-2.jpg",
-                          "./Images/electricista-miguel-maciel-3.jpg",
-                          "./Images/electricista-miguel-maciel-4.jpg"
+                          "./Images/deansa-1.jpg",
+                          "./Images/deansa-2.jpg",
+                          "./Images/deansa-3.jpg",
+                          "./Images/deansa-4.jpg",
+                          "./Images/deansa-5.jpg",
+                          "./Images/deansa-6.jpg",
+                          "./Images/deansa-7.jpg",
+                          "./Images/deansa-8.jpg"
                          ],
                 offers: [
-                       
+                         {
+            title: "Promo Buen Fin",
+            discount: "10% OFF",
+            validity: "Válido hasta 30/Nov/2025",
+            description: "Llevate todo lo que necesites para tu proyecto con un 10% de DESCUENTO en toda la tienda es momento de transformar la iluminación de tu hogar.",
+            conditions: "Al pagar de contado, incluye servicio a domicilio."
+        }
                         ]
             },
             
@@ -1222,7 +1225,7 @@
     },
             
             // Abogados
-            {
+           /* {
                 id: 16,
                 name: "Lic. Daniela Mendoza",
                 category: "Abogados",
@@ -1252,7 +1255,7 @@
             conditions: "Válido para testamentos simples. No incluye modificaciones posteriores"
         }
     ]
-            },
+            },*/
             
             // Psicólogos
             {
@@ -4474,7 +4477,6 @@ function init() {
     initSwiper(); // Agrega esta línea
     history.replaceState({ screen: 'home' }, '');
     handleInitialScreen();
-
 }
 
 // Nueva función para inicializar el slider
@@ -4681,7 +4683,7 @@ function initSwiper() {
         
       //genera los botones de contactos
       function generateContactButtons(professional) {
-    const config = contactConfig[professional.category] || ['call']; // Default: Call
+    const config = contactConfig[professional.category] || ['whatsapp']; // Default: WhatsApp
     let buttons = '';
     
     const phoneNumber = professional.phone.replace(/\D/g, ''); // Limpia el número
@@ -4690,7 +4692,6 @@ function initSwiper() {
     const nombreCompleto = encodeURIComponent(professional.name); // Nombre completo codificado
     
     config.forEach(method => {
-      
         if (method === 'whatsapp') {
             buttons += `
                 <a href="https://wa.me/${phoneNumber}?text=Hola%20${nombreCompleto},%20vi%20tu%20perfil%20en%20DirectorioPro%20LR%20y%20me%20gustaría%20saber%20más%20sobre%20tus%20servicios" 
@@ -4708,10 +4709,8 @@ function initSwiper() {
                    class="block ${isEmergency ? 'bg-red-500 emergency-btn' : 'bg-blue-500'} text-white text-center py-3 rounded-lg hover:${isEmergency ? 'bg-red-600' : 'bg-blue-600'} transition-colors">
                     <i class="fas fa-phone mr-2"></i> ${isEmergency ? 'Llamada de Emergencia' : 'Llamar ahora'}
                 </a>
-                
             `;
         }
-      
     });
     
     return buttons;
@@ -4821,7 +4820,6 @@ document.getElementById('lightbox').addEventListener('click', (e) => {
                 </div>
             `;
             
-          
             // Add event listener to call button
             const callBtn = professionalDetails.querySelector('.call-btn');
             if (callBtn) {
@@ -4829,7 +4827,7 @@ document.getElementById('lightbox').addEventListener('click', (e) => {
                     window.location.href = `tel:${professional.phone}`;
                 });
             }
-          // --- AÑADIDO: Lógica para el botón de compartir ---
+            // --- AÑADIDO: Lógica para el botón de compartir ---
     // 1. Buscamos el botón que acabamos de crear en el HTML
     const shareButton = professionalDetails.querySelector('#shareBtn');
     
@@ -4842,10 +4840,9 @@ document.getElementById('lightbox').addEventListener('click', (e) => {
         });
     }
     // --- FIN DEL CÓDIGO AÑADIDO ---
-            
             showScreen('details');
         }
-      
+        
       // ESTA ES LA FUNCIÓN PRINCIPAL DE COMPARTIR
 async function shareProfessional(professionalId) {
     const professional = professionals.find(p => p.id == professionalId);
@@ -4885,7 +4882,6 @@ function handleInitialScreen() {
     }
 }
       
-              
         // Load featured professionals preview
         function loadFeaturedPreview() {
             const featuredPros = professionals.filter(pro => pro.featured).slice(0, 3);
@@ -5023,9 +5019,6 @@ function loadExclusiveOffers(selectedCategory = 'all') {
         }
     });
 }
-      
-      
-
       
       
         // Setup search functionality
