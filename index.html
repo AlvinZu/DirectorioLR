@@ -9,6 +9,10 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-messaging.js"></script>
+  <script src="app.js"></script>
+  
   <!-- Icono App -->
     <link rel="icon" type="image/png" sizes="192x192" href="icon-192x192.png">
     <link rel="icon" type="image/png" sizes="512x512" href="icon-512x512.png">
@@ -158,6 +162,59 @@
     </style>
 </head>
 <body class="bg-gray-50 font-sans">
+   <!-- ==================================================== -->
+    <!-- NUEVA PANTALLA DE AUTENTICACIÓN -->
+    <!-- ==================================================== -->
+    <div id="authScreen" class="auth-container p-4">
+        <div class="w-full max-w-md bg-white rounded-2xl shadow-xl p-8">
+            <div class="text-center mb-8">
+                <i class="fas fa-briefcase text-5xl text-blue-600"></i>
+                <h1 class="text-3xl font-bold text-gray-800 mt-4">Bienvenido a DirectorioPro</h1>
+                <p class="text-gray-500">Inicia sesión o regístrate para continuar</p>
+            </div>
+            
+            <div class="space-y-4">
+                <input type="email" id="authEmail" placeholder="Correo electrónico" class="w-full p-4 text-lg border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                <input type="password" id="authPassword" placeholder="Contraseña" class="w-full p-4 text-lg border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+            </div>
+
+            <div id="authMessage" class="mt-4 text-center text-red-500 font-medium"></div>
+
+            <div class="mt-6 space-y-3">
+                <button id="loginBtn" class="w-full bg-blue-600 text-white font-bold py-4 rounded-lg text-lg hover:bg-blue-700 transition-all">Iniciar Sesión</button>
+                <button id="registerBtn" class="w-full bg-gray-700 text-white font-bold py-4 rounded-lg text-lg hover:bg-gray-800 transition-all">Registrarse</button>
+            </div>
+            
+            <div class="relative my-6">
+                <div class="absolute inset-0 flex items-center">
+                    <div class="w-full border-t border-gray-300"></div>
+                </div>
+                <div class="relative flex justify-center text-sm">
+                    <span class="bg-white px-2 text-gray-500">o continuar con</span>
+                </div>
+            </div>
+
+            <div>
+                <button id="googleLoginBtn" class="w-full bg-white border-2 border-gray-300 text-gray-700 font-bold py-4 rounded-lg text-lg hover:bg-gray-50 transition-all flex items-center justify-center">
+                    <i class="fab fa-google mr-3"></i> Google
+                </button>
+            </div>
+
+            <!-- Selector de Rol (inicialmente oculto) -->
+            <div id="roleSelection" class="hidden mt-6 text-center">
+                <h3 class="font-bold text-gray-700 mb-3">Elige tu tipo de cuenta:</h3>
+                <div class="space-y-3">
+                     <button id="roleClientBtn" class="w-full bg-blue-100 text-blue-800 font-bold py-4 rounded-lg text-lg hover:bg-blue-200 transition-all">Soy Cliente</button>
+                     <button id="roleBusinessBtn" class="w-full bg-green-100 text-green-800 font-bold py-4 rounded-lg text-lg hover:bg-green-200 transition-all">Soy una Empresa</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- ==================================================== -->
+    <!-- TU APLICACIÓN (Ahora dentro de un contenedor) -->
+    <!-- ==================================================== -->
+    <div id="appContainer" class="hidden">
     <!-- Header -->
     <header class="bg-blue-600 text-white shadow-lg">
         <div class="container mx-auto px-4 py-3 flex justify-between items-center">
@@ -192,9 +249,15 @@
             <button id="mobileOffersBtn" class="block w-full text-left py-2 hover:bg-blue-600 rounded px-2">
             <i class="fas fa-tag mr-2"></i> Ofertas Exclusivas
             </button>
+          <button id="activar-notificaciones">
+            <i class="fas fa-bell mr-2"></i> Activar Notificaciones
+          </button>
+          <button id="logoutMobileBtn" class="block w-full text-left py-2 hover:bg-red-600 bg-red-500 rounded px-2 mt-2">
+                    <i class="fas fa-sign-out-alt mr-2"></i> Cerrar Sesión
+                </button>
         </div>
     </header>
-
+<main class="container mx-auto px-4 py-6">
   <!-- Slider de Empresas Destacadas -->
   <div id="sliderContainer">
     <section class="swiper mt-1">
@@ -314,7 +377,9 @@
         <!-- Las ofertas se cargarán aquí -->
     </div>
 </div>
-              
+  </main>
+            
+      
     <!-- Footer -->
     <footer class="bg-gray-800 text-white py-8">
         <div class="container mx-auto px-4">
@@ -341,6 +406,7 @@
                     <p class="text-gray-300">Tenemos Planes de 6 meses y 1 Año a un super precio.</p>
                 </div>
             </div>
+              </footer>
             
             <!-- Lightbox -->
 <div id="lightbox" class="hidden fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4">
@@ -356,6 +422,139 @@
     </footer>
     
     <script>
+      // --- CONFIGURACIÓN DE FIREBASE ---
+        const firebaseConfig = {
+            apiKey: "AIzaSyBM91yvFBEU9NDSEZKQyFHU6bhqCPgY3Uc",
+  authDomain: "directoriopro-los-reyes.firebaseapp.com",
+  projectId: "directoriopro-los-reyes",
+            storageBucket: "directoriopro-los-reyes.firebasestorage.app",
+  messagingSenderId: "689785400797",
+  appId: "1:689785400797:web:5b91b320d6aa70ae669a34"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+        const googleProvider = new firebase.auth.GoogleAuthProvider();
+      
+      // --- DOM ELEMENTS ---
+        const authScreen = document.getElementById('authScreen');
+        const appContainer = document.getElementById('appContainer');
+        const authEmail = document.getElementById('authEmail');
+        const authPassword = document.getElementById('authPassword');
+        const authMessage = document.getElementById('authMessage');
+        const loginBtn = document.getElementById('loginBtn');
+        const registerBtn = document.getElementById('registerBtn');
+        const googleLoginBtn = document.getElementById('googleLoginBtn');
+        const roleSelection = document.getElementById('roleSelection');
+        const roleClientBtn = document.getElementById('roleClientBtn');
+        const roleBusinessBtn = document.getElementById('roleBusinessBtn');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const logoutMobileBtn = document.getElementById('logoutMobileBtn');
+      
+      // --- LÓGICA DE AUTENTICACIÓN ---
+
+        // Listener para el estado de la sesión
+        auth.onAuthStateChanged(async (user) => {
+            if (user) {
+                // Usuario ha iniciado sesión
+                console.log("Usuario autenticado:", user.uid);
+                authScreen.classList.add('hidden');
+                appContainer.classList.remove('hidden');
+                // Aquí podrías leer el rol del usuario desde Firestore y personalizar la UI
+            } else {
+                // Usuario ha cerrado sesión
+                console.log("No hay usuario autenticado.");
+                authScreen.classList.remove('hidden');
+                appContainer.classList.add('hidden');
+            }
+        });
+
+        // Registrar nuevo usuario
+        registerBtn.addEventListener('click', () => {
+            // Muestra la selección de rol y oculta los botones principales
+            roleSelection.classList.remove('hidden');
+            loginBtn.classList.add('hidden');
+            registerBtn.classList.add('hidden');
+            googleLoginBtn.classList.add('hidden');
+        });
+
+        const handleRegistration = (role) => {
+            const email = authEmail.value;
+            const password = authPassword.value;
+            authMessage.innerText = '';
+            
+            if (!email || password.length < 6) {
+                authMessage.innerText = 'Por favor, introduce un correo válido y una contraseña de al menos 6 caracteres.';
+                return;
+            }
+
+            auth.createUserWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    // Guardar el rol del usuario en Firestore
+                    return db.collection('users').doc(userCredential.user.uid).set({
+                        email: userCredential.user.email,
+                        role: role,
+                        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                    });
+                })
+                .then(() => {
+                    console.log('Usuario registrado y rol guardado!');
+                    // La sesión se iniciará automáticamente por onAuthStateChanged
+                })
+                .catch((error) => {
+                    console.error("Error de registro:", error);
+                    authMessage.innerText = `Error: ${error.message}`;
+                });
+        };
+
+        roleClientBtn.addEventListener('click', () => handleRegistration('cliente'));
+        roleBusinessBtn.addEventListener('click', () => handleRegistration('empresa'));
+
+        // Iniciar sesión con Correo/Contraseña
+        loginBtn.addEventListener('click', () => {
+            const email = authEmail.value;
+            const password = authPassword.value;
+            authMessage.innerText = '';
+            auth.signInWithEmailAndPassword(email, password)
+                .catch((error) => {
+                    console.error("Error de inicio de sesión:", error);
+                    authMessage.innerText = 'Correo o contraseña incorrectos.';
+                });
+        });
+
+        // Iniciar sesión con Google
+        googleLoginBtn.addEventListener('click', () => {
+            auth.signInWithPopup(googleProvider)
+                .then((result) => {
+                    const user = result.user;
+                    const isNewUser = result.additionalUserInfo.isNewUser;
+
+                    if (isNewUser) {
+                        // Si es un usuario nuevo de Google, guardamos su info en Firestore.
+                        // Para este caso simple, le asignaremos el rol de 'cliente'.
+                        // En un futuro, podrías mostrar un modal para que elija su rol.
+                        return db.collection('users').doc(user.uid).set({
+                            email: user.email,
+                            displayName: user.displayName,
+                            photoURL: user.photoURL,
+                            role: 'cliente',
+                            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                        });
+                    }
+                })
+                .catch((error) => {
+                    console.error("Error con Google Sign-In:", error);
+                    authMessage.innerText = 'Hubo un problema al iniciar sesión con Google.';
+                });
+        });
+        
+        // Cerrar Sesión
+        const handleLogout = () => {
+            auth.signOut();
+        };
+        logoutBtn.addEventListener('click', handleLogout);
+        logoutMobileBtn.addEventListener('click', handleLogout);
+
       
       const contactConfig = {
     // Categorías configurar cuales botones aparecen    
@@ -4477,6 +4676,7 @@ function init() {
     initSwiper(); // Agrega esta línea
     history.replaceState({ screen: 'home' }, '');
     handleInitialScreen();
+
 }
 
 // Nueva función para inicializar el slider
@@ -4683,7 +4883,7 @@ function initSwiper() {
         
       //genera los botones de contactos
       function generateContactButtons(professional) {
-    const config = contactConfig[professional.category] || ['whatsapp']; // Default: WhatsApp
+    const config = contactConfig[professional.category] || ['call']; // Default: Call
     let buttons = '';
     
     const phoneNumber = professional.phone.replace(/\D/g, ''); // Limpia el número
@@ -4692,6 +4892,7 @@ function initSwiper() {
     const nombreCompleto = encodeURIComponent(professional.name); // Nombre completo codificado
     
     config.forEach(method => {
+      
         if (method === 'whatsapp') {
             buttons += `
                 <a href="https://wa.me/${phoneNumber}?text=Hola%20${nombreCompleto},%20vi%20tu%20perfil%20en%20DirectorioPro%20LR%20y%20me%20gustaría%20saber%20más%20sobre%20tus%20servicios" 
@@ -4709,8 +4910,10 @@ function initSwiper() {
                    class="block ${isEmergency ? 'bg-red-500 emergency-btn' : 'bg-blue-500'} text-white text-center py-3 rounded-lg hover:${isEmergency ? 'bg-red-600' : 'bg-blue-600'} transition-colors">
                     <i class="fas fa-phone mr-2"></i> ${isEmergency ? 'Llamada de Emergencia' : 'Llamar ahora'}
                 </a>
+                
             `;
         }
+      
     });
     
     return buttons;
@@ -4820,6 +5023,7 @@ document.getElementById('lightbox').addEventListener('click', (e) => {
                 </div>
             `;
             
+          
             // Add event listener to call button
             const callBtn = professionalDetails.querySelector('.call-btn');
             if (callBtn) {
@@ -4827,7 +5031,7 @@ document.getElementById('lightbox').addEventListener('click', (e) => {
                     window.location.href = `tel:${professional.phone}`;
                 });
             }
-            // --- AÑADIDO: Lógica para el botón de compartir ---
+          // --- AÑADIDO: Lógica para el botón de compartir ---
     // 1. Buscamos el botón que acabamos de crear en el HTML
     const shareButton = professionalDetails.querySelector('#shareBtn');
     
@@ -4840,9 +5044,10 @@ document.getElementById('lightbox').addEventListener('click', (e) => {
         });
     }
     // --- FIN DEL CÓDIGO AÑADIDO ---
+            
             showScreen('details');
         }
-        
+      
       // ESTA ES LA FUNCIÓN PRINCIPAL DE COMPARTIR
 async function shareProfessional(professionalId) {
     const professional = professionals.find(p => p.id == professionalId);
@@ -4882,6 +5087,7 @@ function handleInitialScreen() {
     }
 }
       
+              
         // Load featured professionals preview
         function loadFeaturedPreview() {
             const featuredPros = professionals.filter(pro => pro.featured).slice(0, 3);
@@ -5019,6 +5225,9 @@ function loadExclusiveOffers(selectedCategory = 'all') {
         }
     });
 }
+      
+      
+
       
       
         // Setup search functionality
