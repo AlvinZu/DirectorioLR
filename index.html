@@ -163,9 +163,9 @@
 </head>
 <body class="bg-gray-50 font-sans">
    <!-- ==================================================== -->
-    <!-- NUEVA PANTALLA DE AUTENTICACIÓN -->
+    <!-- PANTALLA DE AUTENTICACIÓN -->
     <!-- ==================================================== -->
-    <div id="authScreen" class="auth-container p-4">
+    <div id="authScreen" class="auth-container">
         <div class="w-full max-w-md bg-white rounded-2xl shadow-xl p-8">
             <div class="text-center mb-8">
                 <i class="fas fa-briefcase text-5xl text-blue-600"></i>
@@ -178,29 +178,13 @@
                 <input type="password" id="authPassword" placeholder="Contraseña" class="w-full p-4 text-lg border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
             </div>
 
-            <div id="authMessage" class="mt-4 text-center text-red-500 font-medium"></div>
+            <div id="authMessage" class="mt-4 text-center text-red-500 font-medium h-5"></div>
 
-            <div class="mt-6 space-y-3">
+            <div id="authButtons" class="mt-6 space-y-3">
                 <button id="loginBtn" class="w-full bg-blue-600 text-white font-bold py-4 rounded-lg text-lg hover:bg-blue-700 transition-all">Iniciar Sesión</button>
                 <button id="registerBtn" class="w-full bg-gray-700 text-white font-bold py-4 rounded-lg text-lg hover:bg-gray-800 transition-all">Registrarse</button>
             </div>
             
-            <div class="relative my-6">
-                <div class="absolute inset-0 flex items-center">
-                    <div class="w-full border-t border-gray-300"></div>
-                </div>
-                <div class="relative flex justify-center text-sm">
-                    <span class="bg-white px-2 text-gray-500">o continuar con</span>
-                </div>
-            </div>
-
-            <div>
-                <button id="googleLoginBtn" class="w-full bg-white border-2 border-gray-300 text-gray-700 font-bold py-4 rounded-lg text-lg hover:bg-gray-50 transition-all flex items-center justify-center">
-                    <i class="fab fa-google mr-3"></i> Google
-                </button>
-            </div>
-
-            <!-- Selector de Rol (inicialmente oculto) -->
             <div id="roleSelection" class="hidden mt-6 text-center">
                 <h3 class="font-bold text-gray-700 mb-3">Elige tu tipo de cuenta:</h3>
                 <div class="space-y-3">
@@ -208,6 +192,56 @@
                      <button id="roleBusinessBtn" class="w-full bg-green-100 text-green-800 font-bold py-4 rounded-lg text-lg hover:bg-green-200 transition-all">Soy una Empresa</button>
                 </div>
             </div>
+
+            <div class="relative my-6">
+                <div class="absolute inset-0 flex items-center"><div class="w-full border-t border-gray-300"></div></div>
+                <div class="relative flex justify-center text-sm"><span class="bg-white px-2 text-gray-500">o</span></div>
+            </div>
+
+            <div>
+                <button id="googleLoginBtn" class="w-full bg-white border-2 border-gray-300 text-gray-700 font-bold py-4 rounded-lg text-lg hover:bg-gray-50 transition-all flex items-center justify-center">
+                    <i class="fab fa-google mr-3"></i> Google
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================================================== -->
+    <!-- PANTALLA: CONFIGURACIÓN PERFIL DE EMPRESA -->
+    <!-- ==================================================== -->
+    <div id="businessSetupScreen" class="hidden setup-container">
+         <div class="w-full max-w-2xl bg-white rounded-2xl shadow-xl p-8">
+            <div class="text-center mb-8">
+                <i class="fas fa-store text-5xl text-green-600"></i>
+                <h1 class="text-3xl font-bold text-gray-800 mt-4">¡Casi listo para brillar!</h1>
+                <p class="text-gray-500">Completa tu perfil para que miles de clientes te encuentren.</p>
+            </div>
+            
+            <form id="businessSetupForm" class="space-y-4">
+                <input type="text" id="businessName" placeholder="Nombre de tu Negocio" class="w-full p-3 border border-gray-300 rounded-lg" required>
+                <input type="text" id="businessCategory" placeholder="Categoría (ej. Restaurantes, Barberías)" class="w-full p-3 border border-gray-300 rounded-lg" required>
+                <textarea id="businessDescription" placeholder="Describe tu negocio, qué te hace especial..." class="w-full p-3 border border-gray-300 rounded-lg" rows="4" required></textarea>
+                <input type="tel" id="businessPhone" placeholder="Teléfono de Contacto" class="w-full p-3 border border-gray-300 rounded-lg" required>
+                <input type="text" id="businessAddress" placeholder="Dirección Completa" class="w-full p-3 border border-gray-300 rounded-lg" required>
+
+                <div>
+                    <label class="block text-gray-700 font-medium mb-2">Foto de Perfil (Logo o Fachada)</label>
+                    <input type="file" id="businessImageUpload" accept="image/*" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100" required>
+                </div>
+                 <div>
+                    <label class="block text-gray-700 font-medium mb-2">Galería de Imágenes (Sube hasta 5 fotos)</label>
+                    <input type="file" id="businessGalleryUpload" accept="image/*" multiple class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-green-50 file:text-green-700 hover:file:bg-green-100">
+                </div>
+            
+                <div id="setupMessage" class="mt-4 text-center text-red-500 font-medium h-5"></div>
+            
+                <div class="mt-6">
+                    <button type="submit" id="saveProfileBtn" class="w-full bg-green-600 text-white font-bold py-4 rounded-lg text-lg hover:bg-green-700 transition-all flex items-center justify-center">
+                        <span id="saveProfileText">Guardar y Proceder al Pago</span>
+                        <i id="saveProfileSpinner" class="fas fa-spinner fa-spin hidden ml-3"></i>
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 
@@ -453,29 +487,43 @@
       
       // --- LÓGICA DE AUTENTICACIÓN ---
 
-        // Listener para el estado de la sesión
         auth.onAuthStateChanged(async (user) => {
             if (user) {
-                // Usuario ha iniciado sesión
-                console.log("Usuario autenticado:", user.uid);
+                const userDocRef = db.collection('users').doc(user.uid);
+                const userDoc = await userDocRef.get();
+
                 authScreen.classList.add('hidden');
-                appContainer.classList.remove('hidden');
-                // Aquí podrías leer el rol del usuario desde Firestore y personalizar la UI
+                
+                if (userDoc.exists) {
+                    const role = userDoc.data().role;
+                    if (role === 'cliente') {
+                        showApp();
+                    } else if (role === 'empresa') {
+                        const businessProfileRef = db.collection('businesses').doc(user.uid);
+                        const businessProfileDoc = await businessProfileRef.get();
+                        if (businessProfileDoc.exists) {
+                            showApp(); // Futuro: Mostrar dashboard
+                        } else {
+                            appContainer.classList.add('hidden');
+                            businessSetupScreen.classList.remove('hidden');
+                        }
+                    }
+                } else {
+                    // Esto puede pasar si un usuario de Google se registra por primera vez
+                    // Lo manejamos en la función de googleLogin para que tenga un rol
+                    console.log("Documento de usuario no encontrado, esperando creación...");
+                }
             } else {
-                // Usuario ha cerrado sesión
-                console.log("No hay usuario autenticado.");
                 authScreen.classList.remove('hidden');
                 appContainer.classList.add('hidden');
+                businessSetupScreen.classList.add('hidden');
             }
         });
 
-        // Registrar nuevo usuario
         registerBtn.addEventListener('click', () => {
-            // Muestra la selección de rol y oculta los botones principales
-            roleSelection.classList.remove('hidden');
-            loginBtn.classList.add('hidden');
-            registerBtn.classList.add('hidden');
+            authButtons.classList.add('hidden');
             googleLoginBtn.classList.add('hidden');
+            roleSelection.classList.remove('hidden');
         });
 
         const handleRegistration = (role) => {
@@ -484,76 +532,112 @@
             authMessage.innerText = '';
             
             if (!email || password.length < 6) {
-                authMessage.innerText = 'Por favor, introduce un correo válido y una contraseña de al menos 6 caracteres.';
+                authMessage.innerText = 'Correo y contraseña (mínimo 6 caracteres) son requeridos.';
                 return;
             }
 
             auth.createUserWithEmailAndPassword(email, password)
-                .then((userCredential) => {
-                    // Guardar el rol del usuario en Firestore
-                    return db.collection('users').doc(userCredential.user.uid).set({
+                .then(async (userCredential) => {
+                    await db.collection('users').doc(userCredential.user.uid).set({
                         email: userCredential.user.email,
                         role: role,
                         createdAt: firebase.firestore.FieldValue.serverTimestamp()
                     });
-                })
-                .then(() => {
                     console.log('Usuario registrado y rol guardado!');
-                    // La sesión se iniciará automáticamente por onAuthStateChanged
                 })
-                .catch((error) => {
-                    console.error("Error de registro:", error);
-                    authMessage.innerText = `Error: ${error.message}`;
-                });
+                .catch(error => authMessage.innerText = `Error: ${error.message}`);
         };
 
         roleClientBtn.addEventListener('click', () => handleRegistration('cliente'));
         roleBusinessBtn.addEventListener('click', () => handleRegistration('empresa'));
 
-        // Iniciar sesión con Correo/Contraseña
         loginBtn.addEventListener('click', () => {
             const email = authEmail.value;
             const password = authPassword.value;
             authMessage.innerText = '';
             auth.signInWithEmailAndPassword(email, password)
-                .catch((error) => {
-                    console.error("Error de inicio de sesión:", error);
-                    authMessage.innerText = 'Correo o contraseña incorrectos.';
-                });
+                .catch(error => authMessage.innerText = 'Correo o contraseña incorrectos.');
         });
 
-        // Iniciar sesión con Google
         googleLoginBtn.addEventListener('click', () => {
             auth.signInWithPopup(googleProvider)
-                .then((result) => {
-                    const user = result.user;
-                    const isNewUser = result.additionalUserInfo.isNewUser;
-
-                    if (isNewUser) {
-                        // Si es un usuario nuevo de Google, guardamos su info en Firestore.
-                        // Para este caso simple, le asignaremos el rol de 'cliente'.
-                        // En un futuro, podrías mostrar un modal para que elija su rol.
-                        return db.collection('users').doc(user.uid).set({
-                            email: user.email,
-                            displayName: user.displayName,
-                            photoURL: user.photoURL,
+                .then(async (result) => {
+                    if (result.additionalUserInfo.isNewUser) {
+                        await db.collection('users').doc(result.user.uid).set({
+                            email: result.user.email,
                             role: 'cliente',
                             createdAt: firebase.firestore.FieldValue.serverTimestamp()
                         });
                     }
                 })
-                .catch((error) => {
-                    console.error("Error con Google Sign-In:", error);
-                    authMessage.innerText = 'Hubo un problema al iniciar sesión con Google.';
-                });
+                .catch(error => authMessage.innerText = `Error con Google: ${error.message}`);
         });
         
-        // Cerrar Sesión
-        const handleLogout = () => {
-            auth.signOut();
-        };
-        logoutBtn.addEventListener('click', handleLogout);
-        logoutMobileBtn.addEventListener('click', handleLogout);
+        logoutBtn.addEventListener('click', () => auth.signOut());
+
+        // --- LÓGICA DE LA APP ---
+        
+        function showApp() {
+            businessSetupScreen.classList.add('hidden');
+            appContainer.classList.remove('hidden');
+            // Inicializa tu directorio si no lo has hecho ya
+            // init(); // <- Llama a tu función de inicialización aquí
+        }
+
+        businessSetupForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const currentUser = auth.currentUser;
+            if (!currentUser) return;
+
+            const saveBtnText = document.getElementById('saveProfileText');
+            const saveBtnSpinner = document.getElementById('saveProfileSpinner');
+            
+            saveBtnText.innerText = 'Guardando...';
+            saveBtnSpinner.classList.remove('hidden');
+
+            try {
+                const profileImageFile = document.getElementById('businessImageUpload').files[0];
+                let profileImageUrl = '';
+                if (profileImageFile) {
+                    const filePath = `business_images/${currentUser.uid}/profile_${Date.now()}`;
+                    const fileRef = storage.ref(filePath);
+                    await fileRef.put(profileImageFile);
+                    profileImageUrl = await fileRef.getDownloadURL();
+                }
+
+                const galleryFiles = document.getElementById('businessGalleryUpload').files;
+                const galleryImageUrls = [];
+                for (const file of galleryFiles) {
+                    const filePath = `business_images/${currentUser.uid}/gallery_${Date.now()}_${file.name}`;
+                    const fileRef = storage.ref(filePath);
+                    await fileRef.put(file);
+                    galleryImageUrls.push(await fileRef.getDownloadURL());
+                }
+                
+                await db.collection('businesses').doc(currentUser.uid).set({
+                    ownerId: currentUser.uid,
+                    name: document.getElementById('businessName').value,
+                    category: document.getElementById('businessCategory').value,
+                    description: document.getElementById('businessDescription').value,
+                    phone: document.getElementById('businessPhone').value,
+                    address: document.getElementById('businessAddress').value,
+                    image: profileImageUrl,
+                    gallery: galleryImageUrls,
+                    status: 'pending_payment',
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                });
+                
+                alert('¡Perfil guardado! Ahora serás redirigido al pago.');
+                // Aquí irá la lógica de Stripe
+                
+            } catch (error) {
+                console.error("Error al guardar el perfil:", error);
+                document.getElementById('setupMessage').innerText = 'Hubo un error. Inténtalo de nuevo.';
+            } finally {
+                saveBtnText.innerText = 'Guardar y Proceder al Pago';
+                saveBtnSpinner.classList.add('hidden');
+            }
+        });
 
       
       const contactConfig = {
