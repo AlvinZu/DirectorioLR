@@ -4937,12 +4937,21 @@ function handleInitialScreen() {
             break;
     }
 
+    // NUEVO: Scroll al inicio de la página
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+    document.body.scrollTop = 0; // Para Safari
+    document.documentElement.scrollTop = 0; // Para otros navegadores
+
     // Actualizar el historial
     if (pushState) {
         history.pushState({ screen: screen }, '');
     }
 }
-      
+
+    
       
       // Manejar el botón de retroceso del navegador
 window.addEventListener('popstate', (event) => {
@@ -4952,6 +4961,10 @@ window.addEventListener('popstate', (event) => {
     } else {
         showScreen('home', false);
     }
+    // Añade esto para scroll al inicio en retroceso
+    window.scrollTo(0, 0);
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
 });
 
       
