@@ -14,6 +14,7 @@
 <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-analytics-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-messaging-compat.js"></script>
   
   <!-- Icono App -->
     <link rel="icon" type="image/png" sizes="192x192" href="icon-192x192.png">
@@ -509,6 +510,10 @@
                 <span id="profileJoinedDate"></span>
             </div>
 
+            <button id="enableNotificationsBtn" class="w-full flex justify-between items-center p-3 bg-green-400 hover:bg-green-500 rounded-lg mt-2">
+    <span><i class="fas fa-bell mr-2"></i> Activar Notificaciones</span>
+    <i class="fas fa-chevron-right text-gray-400"></i>
+</button>
             <button id="profileSignOutBtn" class="w-full max-w-xs bg-blue-600 text-white font-bold py-3 rounded-lg hover:bg-blue-700 transition-colors shadow-lg">
                 Cerrar Sesión
             </button>
@@ -5590,7 +5595,42 @@ function loadExclusiveOffers(selectedCategory = 'all') {
         }
     });
 }
- 
+
+
+// --- AÑADIR AL FINAL DE TU SCRIPT ---
+
+// Inicializar Firebase Messaging
+const messaging = firebase.messaging();
+
+// Función para solicitar permiso y guardar el token
+function solicitarPermisoNotificaciones() {
+  console.log('Solicitando permiso para notificaciones...');
+  messaging.requestPermission().then(() => {
+    console.log('Permiso concedido.');
+    // Obtenemos el token del dispositivo del usuario
+    return messaging.getToken();
+  }).then(token => {
+    if (token) {
+      console.log('Token FCM:', token);
+      // Guardamos el token en Firestore para poder enviarle notificaciones después
+      // Es una buena práctica guardar el token junto al ID del usuario
+      db.collection('fcmTokens').doc(token).set({
+        userId: currentUser.uid,
+        createdAt: new Date()
+      });
+      alert('¡Gracias! Has activado las notificaciones.');
+    } else {
+      alert('No se pudo obtener el token. Asegúrate de no estar en modo incógnito.');
+    }
+  }).catch(err => {
+    console.error('No se pudo obtener el permiso para notificaciones', err);
+    alert('No has permitido las notificaciones.');
+  });
+}
+
+// Asociamos la función al botón que creamos
+document.getElementById('enableNotificationsBtn').addEventListener('click', solicitarPermisoNotificaciones);
+        
       
       // =======================================================
 // ========== LÓGICA DEL SISTEMA DE VALORACIÓN ==========
