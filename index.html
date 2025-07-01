@@ -13,6 +13,7 @@
 <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-analytics-compat.js"></script>
   
   <!-- Icono App -->
     <link rel="icon" type="image/png" sizes="192x192" href="icon-192x192.png">
@@ -4657,7 +4658,8 @@
   };
 
   // Inicializar Firebase
-  firebase.initializeApp(firebaseConfig);  
+  firebase.initializeApp(firebaseConfig);
+  const analytics = firebase.analytics();
       
 
         // Get all unique categories
@@ -4898,6 +4900,10 @@ auth.onAuthStateChanged(user => {
         // ¡Éxito! El documento existe (ya sea porque estaba antes o porque se acaba de crear).
         userRole = doc.data().role;
         document.getElementById('appHeader').classList.remove('hidden');
+        // --- LÍNEA de Analitics ---
+    // Registra un evento de login en Analytics.
+    analytics.logEvent('login', { method: user.providerData[0].providerId });
+    // --- FIN LÍNEA Analitics ---
         showScreen('home');
 
         // Opcional: una vez que lo encontramos, podemos dejar de escuchar para ahorrar recursos.
@@ -5184,6 +5190,15 @@ document.getElementById('lightbox').addEventListener('click', (e) => {
             const professional = professionals.find(pro => pro.id === parseInt(id));
             
             if (!professional) return;
+            
+    // --- BLOQUE A Analitics ---
+    // Registra una vista de perfil en Analytics.
+    analytics.logEvent('view_item', {
+      item_id: `profesional_${professional.id}`, // Un ID único para el item
+      item_name: professional.name,           // El nombre del profesional
+      item_category: professional.category      // La categoría a la que pertenece
+    });
+    // --- FIN BLOQUE Analitics ---
             
             professionalDetails.innerHTML = `
                 <div class="md:flex">
