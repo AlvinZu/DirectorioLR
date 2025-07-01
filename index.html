@@ -4878,27 +4878,46 @@ let currentUser = null;
 let userRole = null;
 
 // Observador de autenticación
+// Variable para guardar nuestra función de "escucha" en tiempo real.
+let authUnsubscribe = null;
+
+// Observador de autenticación MEJORADO
 auth.onAuthStateChanged(user => {
-  const appHeader = document.getElementById('appHeader'); // Obtenemos nuestro nuevo encabezado
+  // Si ya estábamos "escuchando" a un usuario anterior, dejamos de hacerlo.
+  if (authUnsubscribe) {
+    authUnsubscribe();
+  }
 
   if (user) {
     currentUser = user;
-    db.collection('users').doc(user.uid).get().then(doc => {
+    
+    // Usamos .onSnapshot() para escuchar en tiempo real.
+    // Esto se ejecutará inmediatamente, y OTRA VEZ si los datos cambian (es decir, cuando se crea el documento).
+    authUnsubscribe = db.collection('users').doc(user.uid).onSnapshot(doc => {
       if (doc.exists) {
+        // ¡Éxito! El documento existe (ya sea porque estaba antes o porque se acaba de crear).
         userRole = doc.data().role;
-        appHeader.classList.remove('hidden'); // MOSTRAR el encabezado si el usuario está logueado
+        document.getElementById('appHeader').classList.remove('hidden');
         showScreen('home');
-        // La función handleInitialScreen se encargará de mostrar la pantalla correcta
-      } else {
-        // En caso de un error (usuario en auth pero no en DB), cerramos sesión
-        auth.signOut();
+
+        // Opcional: una vez que lo encontramos, podemos dejar de escuchar para ahorrar recursos.
+        if (authUnsubscribe) {
+          authUnsubscribe();
+        }
       }
+      // Si el documento NO existe todavía, NO hacemos nada.
+      // onSnapshot se volverá a ejecutar solo en cuanto la función de Google lo cree.
+    }, error => {
+        // Manejar posibles errores de lectura de Firestore
+        console.error("Error al escuchar el perfil del usuario:", error);
+        auth.signOut(); // Si hay un error de permisos, desconectar.
     });
+
   } else {
     currentUser = null;
     userRole = null;
-    appHeader.classList.add('hidden'); // OCULTAR el encabezado si no hay sesión
-    showScreen('login'); // Mostrar la pantalla de login
+    document.getElementById('appHeader').classList.add('hidden');
+    showScreen('login');
   }
 });
 
