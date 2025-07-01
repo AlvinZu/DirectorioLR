@@ -4974,24 +4974,27 @@ document.getElementById('googleSignIn').addEventListener('click', () => {
             // Verificar si el usuario ya existe en Firestore
             return userRef.get().then((doc) => {
                 if (doc.exists) {
-                    // El usuario ya existe, es un inicio de sesión normal.
-                    // Actualizamos la fecha del último login.
+                    // El usuario ya existe, solo actualizamos su último login.
                     return userRef.update({
                         lastLogin: new Date()
                     });
                 } else {
+                    // **AQUÍ ESTÁ LA CORRECCIÓN**
                     // Si el usuario es nuevo, lo registramos automáticamente como cliente.
                     return userRef.set({
                         email: user.email,
-                        role: 'client', // Asignar rol de cliente automáticamente
+                        role: 'client', // Asignamos el rol de cliente por defecto
                         createdAt: new Date(),
                         lastLogin: new Date()
                     });
                 }
             });
         }).catch((error) => {
+            // Manejo de errores, como que el usuario cierre la ventana de Google.
             console.error("Error con el inicio de sesión de Google:", error);
-            alert("Hubo un problema al intentar iniciar sesión con Google. Por favor, intenta de nuevo.");
+            if (error.code !== 'auth/popup-closed-by-user') {
+               alert("Hubo un problema al intentar iniciar sesión con Google. Por favor, intenta de nuevo.");
+            }
         });
 });
       
