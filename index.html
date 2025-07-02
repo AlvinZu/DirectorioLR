@@ -5611,7 +5611,7 @@ function solicitarPermisoNotificaciones() {
     if (permission === 'granted') {
       console.log('Permiso de notificación concedido.');
       // Una vez que el usuario da permiso, obtenemos el token de Firebase.
-      return messaging.getToken();
+      return messaging.getToken({ serviceWorkerRegistration: navigator.serviceWorker.register('/DirectorioLR/firebase-messaging-sw.js') });
     } else {
       console.log('Permiso de notificación denegado.');
       alert('No has permitido las notificaciones.');
