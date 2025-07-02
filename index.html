@@ -5604,9 +5604,8 @@ const messaging = firebase.messaging();
 
 // Función para solicitar permiso y guardar el token
 function solicitarPermisoNotificaciones() {
-  console.log('Solicitando permiso para notificaciones...');
+  console.log('Solicitando permiso para notificaciones...');  
   
-  // --- ESTA ES LA CORRECCIÓN ---
   // Se usa la función nativa del navegador para pedir el permiso.
   Notification.requestPermission().then((permission) => {
     if (permission === 'granted') {
