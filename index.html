@@ -5605,26 +5605,34 @@ const messaging = firebase.messaging();
 // Función para solicitar permiso y guardar el token
 function solicitarPermisoNotificaciones() {
   console.log('Solicitando permiso para notificaciones...');
-  messaging.requestPermission().then(() => {
-    console.log('Permiso concedido.');
-    // Obtenemos el token del dispositivo del usuario
-    return messaging.getToken();
+  
+  // --- ESTA ES LA CORRECCIÓN ---
+  // Se usa la función nativa del navegador para pedir el permiso.
+  Notification.requestPermission().then((permission) => {
+    if (permission === 'granted') {
+      console.log('Permiso de notificación concedido.');
+      // Una vez que el usuario da permiso, obtenemos el token de Firebase.
+      return messaging.getToken();
+    } else {
+      console.log('Permiso de notificación denegado.');
+      alert('No has permitido las notificaciones.');
+      // Detenemos el proceso si el permiso es denegado.
+      throw new Error('Permiso denegado');
+    }
   }).then(token => {
+    // Este .then() solo se ejecuta si el permiso fue concedido.
     if (token) {
-      console.log('Token FCM:', token);
-      // Guardamos el token en Firestore para poder enviarle notificaciones después
-      // Es una buena práctica guardar el token junto al ID del usuario
+      console.log('Token FCM obtenido:', token);
+      // Guardamos el token en Firestore.
       db.collection('fcmTokens').doc(token).set({
         userId: currentUser.uid,
         createdAt: new Date()
       });
       alert('¡Gracias! Has activado las notificaciones.');
-    } else {
-      alert('No se pudo obtener el token. Asegúrate de no estar en modo incógnito.');
     }
   }).catch(err => {
-    console.error('No se pudo obtener el permiso para notificaciones', err);
-    alert('No has permitido las notificaciones.');
+    // Este .catch() atrapará cualquier error en el proceso.
+    console.error('Error al obtener token o permiso:', err);
   });
 }
 
