@@ -1,8 +1,8 @@
 // firebase-messaging-sw.js
 
 // Importamos los scripts de Firebase (esto es necesario en el Service Worker)
-importScripts('https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js');
-importScripts('https://www.gstatic.com/firebasejs/10.7.1/firebase-messaging-compat.js');
+importScripts("https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js");
+importScripts("https://www.gstatic.com/firebasejs/8.10.1/firebase-messaging.js");
 
 // Tu configuración de Firebase, la misma que en el paso 1
 const firebaseConfig = {
@@ -32,7 +32,7 @@ messaging.onBackgroundMessage((payload) => {
   const notificationTitle = payload.notification.title;
   const notificationOptions = {
     body: payload.notification.body,
-    icon: '/images/logo-192.png' // Asegúrate de tener un logo en esta ruta
+    icon: '/icon-192x192.png'
   };
 
   self.registration.showNotification(notificationTitle, notificationOptions);
