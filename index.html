@@ -5628,8 +5628,7 @@ function solicitarPermisoNotificaciones() {
   });
 }
 
-// Asociamos la función al botón que creamos
-document.getElementById('enableNotificationsBtn').addEventListener('click', solicitarPermisoNotificaciones);
+
         
       
       // =======================================================
@@ -6026,7 +6025,10 @@ document.getElementById('backFromOffers').addEventListener('click', () => showSc
         backFromProfileButton.addEventListener('click', () => history.back());
     }
     // =================================================================
-          
+
+            // Asociamos la función del botón de Activar Notificaciones
+document.getElementById('enableNotificationsBtn').addEventListener('click', solicitarPermisoNotificaciones);
+            
             // Navigation
             homeBtn.addEventListener('click', () => showScreen('home'));
             featuredBtn.addEventListener('click', showAllFeatured);
