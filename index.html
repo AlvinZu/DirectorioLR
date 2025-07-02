@@ -5604,25 +5604,29 @@ const messaging = firebase.messaging();
 
 // Función para solicitar permiso y guardar el token
 function solicitarPermisoNotificaciones() {
-  console.log('Solicitando permiso para notificaciones...');  
+  let serviceWorkerRegistration; // Variable para guardar el registro
+
+  console.log('Solicitando permiso para notificaciones...');
   
-  // Se usa la función nativa del navegador para pedir el permiso.
   Notification.requestPermission().then((permission) => {
     if (permission === 'granted') {
       console.log('Permiso de notificación concedido.');
-      // Una vez que el usuario da permiso, obtenemos el token de Firebase.
-      return messaging.getToken({ serviceWorkerRegistration: navigator.serviceWorker.register('/DirectorioLR/firebase-messaging-sw.js') });
+      // 1. Primero, registramos el Service Worker y esperamos a que se complete.
+      return navigator.serviceWorker.register('/DirectorioLR/firebase-messaging-sw.js');
     } else {
       console.log('Permiso de notificación denegado.');
       alert('No has permitido las notificaciones.');
-      // Detenemos el proceso si el permiso es denegado.
       throw new Error('Permiso denegado');
     }
+  }).then((registration) => {
+    console.log('Service Worker registrado con éxito:', registration);
+    serviceWorkerRegistration = registration; // Guardamos el registro
+    // 2. Ahora que tenemos el registro, pedimos el token de Firebase.
+    return messaging.getToken({ serviceWorkerRegistration: registration });
   }).then(token => {
-    // Este .then() solo se ejecuta si el permiso fue concedido.
+    // 3. Con el token en mano, lo guardamos en Firestore.
     if (token) {
       console.log('Token FCM obtenido:', token);
-      // Guardamos el token en Firestore.
       db.collection('fcmTokens').doc(token).set({
         userId: currentUser.uid,
         createdAt: new Date()
@@ -5630,8 +5634,8 @@ function solicitarPermisoNotificaciones() {
       alert('¡Gracias! Has activado las notificaciones.');
     }
   }).catch(err => {
-    // Este .catch() atrapará cualquier error en el proceso.
-    console.error('Error al obtener token o permiso:', err);
+    console.error('Error durante el proceso de notificaciones:', err);
+    alert('Ocurrió un error al activar las notificaciones. Revisa la consola (F12) para más detalles.');
   });
 }
 
