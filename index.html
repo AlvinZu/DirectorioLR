@@ -831,8 +831,9 @@ function initSwiper() {
             <div class="swiper-slide-content">
                 <h3 class="text-xl font-bold">${company.name}</h3>
                 
-                <button class="mt-2 bg-white/20 backdrop-blur-sm px-4 py-1 rounded-full text-xs hover:bg-white/30 transition-all"
-                        onclick="showProfessionalDetails('${company.id}')">
+                <button 
+                    class="swiper-details-btn mt-2 bg-white/20 backdrop-blur-sm px-4 py-1 rounded-full text-xs hover:bg-white/30 transition-all"
+                    data-id="${company.id}">
                     Ver Perfil
                 </button>
             </div>
@@ -2211,9 +2212,12 @@ function loadProfileData() {
     document.getElementById('backFromOffers').addEventListener('click', () => history.back());
     mobileMenuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
     document.addEventListener('click', (e) => {
-        if (e.target.classList.contains('details-btn')) {
-            showProfessionalDetails(e.target.dataset.id);
-        }
+    // Busca el botón más cercano, incluso si se hace clic en un ícono dentro de él.
+    const detailsButton = e.target.closest('.details-btn, .swiper-details-btn');
+
+    if (detailsButton) {
+        showProfessionalDetails(detailsButton.dataset.id);
+    }
     });
             
           // --- ACCIONES DE LOS BOTONES DEL PERFIL ---
