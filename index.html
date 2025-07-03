@@ -4896,13 +4896,7 @@ let authUnsubscribe = null;
 // Variable global para saber si el usuario actual es admin
 let isCurrentUserAdmin = false;
 
-// Observador de autenticación
-// Variable para guardar nuestra función de "escucha" en tiempo real.
-let authUnsubscribe = null;
-// Variable global para saber si el usuario actual es admin
-let isCurrentUserAdmin = false;
-      
-// Observador de autenticación MEJORADO con lógica de Administrador
+// Observador de autenticación MEJORADO
 auth.onAuthStateChanged(user => {
   // Si ya estábamos "escuchando" a un usuario anterior, dejamos de hacerlo.
   if (authUnsubscribe) {
@@ -4913,45 +4907,48 @@ auth.onAuthStateChanged(user => {
     currentUser = user;
     
     // Usamos .onSnapshot() para escuchar en tiempo real.
+    // Esto se ejecutará inmediatamente, y OTRA VEZ si los datos cambian (es decir, cuando se crea el documento).
     authUnsubscribe = db.collection('users').doc(user.uid).onSnapshot(doc => {
       if (doc.exists) {
+        // ¡Éxito! El documento existe (ya sea porque estaba antes o porque se acaba de crear).
         userRole = doc.data().role;
-
-        // --- INICIA LÓGICA DE ADMIN ---
-        // Verificamos si el campo isAdmin es true en la base de datos
+          // --- INICIA LA MODIFICACIÓN ---
+        // Verificamos si el campo isAdmin es true
         if (doc.data().isAdmin === true) {
           isCurrentUserAdmin = true;
-          // Si es admin, mostramos el botón del panel
+          // Mostramos el botón para ir al panel de administrador
           document.getElementById('adminPanelBtn').classList.remove('hidden');
         } else {
           isCurrentUserAdmin = false;
-          // Si no es admin, nos aseguramos de que el botón esté oculto
           document.getElementById('adminPanelBtn').classList.add('hidden');
         }
-        // --- FIN LÓGICA DE ADMIN ---
-
+        // --- FIN DE LA MODIFICACIÓN ---
         document.getElementById('appHeader').classList.remove('hidden');
-        analytics.logEvent('login', { method: user.providerData[0].providerId });
+        // --- LÍNEA de Analitics ---
+    // Registra un evento de login en Analytics.
+    analytics.logEvent('login', { method: user.providerData[0].providerId });
+    // --- FIN LÍNEA Analitics ---
         showScreen('home');
 
+        // Opcional: una vez que lo encontramos, podemos dejar de escuchar para ahorrar recursos.
         if (authUnsubscribe) {
           authUnsubscribe();
         }
       }
+      // Si el documento NO existe todavía, NO hacemos nada.
+      // onSnapshot se volverá a ejecutar solo en cuanto la función de Google lo cree.
     }, error => {
+        // Manejar posibles errores de lectura de Firestore
         console.error("Error al escuchar el perfil del usuario:", error);
-        auth.signOut();
+        auth.signOut(); // Si hay un error de permisos, desconectar.
     });
 
   } else {
-    // Se ejecuta al cerrar sesión o si no hay usuario
     currentUser = null;
     userRole = null;
-    
-    // Reseteamos el estado de admin y ocultamos el botón
-    isCurrentUserAdmin = false;
+      // Asegúrate de resetear la variable al cerrar sesión
+    isCurrentUserAdmin = false; 
     document.getElementById('adminPanelBtn').classList.add('hidden');
-    
     document.getElementById('appHeader').classList.add('hidden');
     showScreen('login');
   }
@@ -5477,7 +5474,7 @@ function handleInitialScreen() {
             loadProfileData(); 
             break;
 
-        case 'admin':
+            case 'admin':
             document.getElementById('adminScreen').classList.remove('hidden');
             // Aquí llamaremos a la función para cargar los datos del panel
             cargarProfesionalesEnAdmin(); 
@@ -5507,7 +5504,36 @@ function handleInitialScreen() {
     }
 }     
       
-           
+           // Esta función es temporal, solo para la migración.
+function migrarProfesionalesAFirestore() {
+  // Obtenemos el array de profesionales que ya tienes en tu código.
+  const profesionalesParaMigrar = professionals;
+
+  if (!profesionalesParaMigrar || profesionalesParaMigrar.length === 0) {
+    console.error("El array 'professionals' está vacío o no existe.");
+    alert("No se encontraron profesionales para migrar.");
+    return;
+  }
+
+  console.log(`Iniciando migración de ${profesionalesParaMigrar.length} profesionales...`);
+  const batch = db.batch(); // Usamos un "batch" para hacer todas las escrituras a la vez, es más eficiente.
+
+  profesionalesParaMigrar.forEach(prof => {
+    // Creamos una referencia a un nuevo documento en la colección 'professionals'.
+    // Usaremos el 'id' que ya tienes en tu array como el ID del documento para mantener la consistencia.
+    const docRef = db.collection('professionals').doc(String(prof.id));
+    batch.set(docRef, prof); // Añadimos la operación de escritura al lote.
+  });
+
+  // Ejecutamos todas las operaciones del lote.
+  batch.commit().then(() => {
+    console.log("¡Migración completada con éxito!");
+    alert(`¡Se han migrado ${profesionalesParaMigrar.length} profesionales a Firestore!`);
+  }).catch(error => {
+    console.error("Error durante la migración: ", error);
+    alert("Ocurrió un error al migrar los datos. Revisa la consola (F12).");
+  });
+}
       
       
       // Logout
