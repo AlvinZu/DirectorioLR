@@ -332,7 +332,9 @@
               <button id="offersBtn" class="hover:text-blue-200 font-medium flex items-center">
               <i class="fas fa-tag mr-1"></i> Ofertas Exclusivas
               </button>
-              
+              <button id="mobileAccountBtn" class="block w-full text-left py-2 hover:bg-blue-600 rounded px-2">
+        <i class="fas fa-user-circle mr-2"></i> Mi Cuenta
+    </button>
             </nav>
             <button class="md:hidden text-xl" id="mobileMenuBtn">
                 <i class="fas fa-bars"></i>
@@ -5407,17 +5409,62 @@ function handleInitialScreen() {
         }
         
         // Show all featured professionals
-        function showAllFeatured() {
-            const featuredPros = professionals.filter(pro => pro.featured);
-            featuredGrid.innerHTML = '';
+        async function showAllFeatured() {
+            // Cambiamos dinámicamente el título de la pantalla de "Destacados"
+            const featuredTitle = document.querySelector('#featuredScreen .font-bold.text-gray-800');
+            if(featuredTitle) {
+                featuredTitle.textContent = "Profesionales Mejor Valorados";
+            }
+
+            // Mostramos un mensaje de carga mientras se obtienen los datos
+            featuredGrid.innerHTML = '<p class="text-center text-gray-500 col-span-1 sm:col-span-2 lg:col-span-3">Buscando a los mejores profesionales...</p>';
             
-            featuredPros.forEach(pro => {
-                const proCard = createProfessionalCard(pro);
-                featuredGrid.appendChild(proCard);
-            });
+            try {
+                const ratingsRef = db.collection('ratings');
+                // Buscamos en la base de datos a los profesionales con valoración promedio de 4 o más.
+                const querySnapshot = await ratingsRef.where('averageRating', '>=', 4).get();
+
+                const topRatedPros = [];
+                querySnapshot.forEach(doc => {
+                    const ratingData = doc.data();
+                    // El ID del documento en 'ratings' corresponde al ID del profesional
+                    const professionalId = doc.id;
+                    const pro = professionals.find(p => p.id == professionalId);
+                    
+                    if (pro) {
+                        // Añadimos la información de la valoración al objeto del profesional para poder ordenarlo después
+                        topRatedPros.push({
+                            ...pro,
+                            averageRating: ratingData.averageRating 
+                        });
+                    }
+                });
+
+                // Ordenamos los resultados para que los de mayor valoración aparezcan primero
+                topRatedPros.sort((a, b) => b.averageRating - a.averageRating);
+
+                // Limpiamos el grid antes de añadir los nuevos resultados
+                featuredGrid.innerHTML = '';
+
+                if (topRatedPros.length > 0) {
+                    topRatedPros.forEach(pro => {
+                        const proCard = createProfessionalCard(pro);
+                        featuredGrid.appendChild(proCard);
+                    });
+                } else {
+                    // Mensaje si no se encuentra ningún profesional con alta valoración
+                    featuredGrid.innerHTML = '<p class="text-center text-gray-500 col-span-1 sm:col-span-2 lg:col-span-3">Aún no hay profesionales con valoraciones altas. ¡Sé el primero en valorar!</p>';
+                }
+
+            } catch (error) {
+                console.error("Error al obtener los profesionales mejor valorados:", error);
+                featuredGrid.innerHTML = '<p class="text-center text-red-500 col-span-1 sm:col-span-2 lg:col-span-3">No se pudieron cargar los datos. Intenta de nuevo más tarde.</p>';
+            }
             
+            // Finalmente, mostramos la pantalla de "Destacados" ya actualizada
             showScreen('featured');
         }
+      
         
         // Show the specified screen
         function showScreen(screen, pushState = true) {
