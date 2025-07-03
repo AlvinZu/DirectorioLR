@@ -654,685 +654,363 @@
     </footer>
     
     <script>
-      // Variable global para almacenar los profesionales que cargaremos desde Firestore.
-    let professionals = [];
-      
-      const contactConfig = {
-    // Categorías configurar cuales botones aparecen    
-        'Dentistas': ['call'],  
-        'Nutriólogos': ['whatsapp'],  
-        'Quiroprácticos': ['whatsapp'],  
-        'Doctores': ['call'],  
-        'Fisioterapeutas': ['whatsapp', 'call'],  
-        'Tiendas de ropa': ['whatsapp', 'call'],  
-        'Venta de suplementos': ['whatsapp'],  
-        'Barberías': ['whatsapp', 'call'],  
-        'Tiendas de Pinturas': ['call'],  
-        'Carpinteros': ['whatsapp'],  
-        'Electricistas': ['whatsapp', 'call'],  
-        'Plomeros': ['call'],  
-        'Fotógrafos': ['call'],  
-        'Protección Civil': ['call'],  
-        'Abogados': ['whatsapp'],  
-        'Psicólogos': ['whatsapp', 'call'],  
-        'Veterinarios': ['whatsapp', 'call'],  
-        'Mecánicos': ['call'],  
-        'Técnicos en Computadoras': ['whatsapp'],  
-        'Tatuadores': ['whatsapp', 'call'],  
-        'Restaurantes': ['call'],  
-        'Pezcaderías': ['call'],  
-        'Construcción': ['whatsapp', 'call'],
-        'Arquitectos': ['whatsapp', 'call'],    
-        'Rotulistas': ['whatsapp'],  
-        'Llanteras': ['call'],  
-        'Sitios de Taxis': ['call'],  
-        'Masajistas': ['whatsapp'],  
-        'Vinaterías': ['call'],  
-        'Vidrierías': ['whatsapp', 'call'],  
-        'Herreros': ['call'],  
-        'Ferreterías': ['whatsapp', 'call'],  
-        'Loncherías': ['call'],  
-        'Lavanderías': ['whatsapp', 'call'],
-        'Pastelerías': ['call'],  
-        'Cafeterías': ['call'],  
-        'Pizzerías': ['call'],  
-        'Pollerías': ['call'],  
-        'Carnicerías': ['whatsapp', 'call'],  
-        'Papelerías': ['whatsapp', 'call'],  
-        'Imprentas': ['call'],  
-        'Hoteles': ['call'],  
-        'Talleres de Motos': ['call'],  
-        'Productos de Limpieza': ['call'],  
-        'Purificadoras':['whatsapp', 'call'],  
-        'Policías': ['call'],  
-        'Ambulancias': ['call'],
-        'Panaderías': ['whatsapp', 'call'],
-        'Reparación de Celulares': ['whatsapp', 'call'],
-        'Agencias de Viajes':['call'],
-        'Refaccionarias':['whatsapp', 'call'],
-        'Florerías':['whatsapp', 'call'],
-        'Podólogos':['whatsapp', 'call'],
-        'Quintas':['whatsapp', 'call'],
-        'Renta de Muebles':['whatsapp', 'call'],
-        'Músicos': ['whatsapp', 'call'],
-        'Tablaroqueros': ['whatsapp', 'call'],
-        'Renta de Inflables': ['whatsapp', 'call'],
-        'Cámaras de Seguridad': ['whatsapp', 'call'],
-        'Paneles Solares': ['whatsapp', 'call'],
-        'Auto Lavados': ['whatsapp', 'call'],
-        'Funerarias': ['call'],
-        'Cruz Roja': ['call'],
-        'Escuelas de Ingles': ['whatsapp', 'call'],
-        'Cerrajeros': ['whatsapp', 'call'],
-        'Deportes': ['whatsapp', 'call'],
-        'Perfumerías': ['whatsapp'],
-       'Hospitales': ['call'],
-        'Belleza': ['whatsapp', 'call'],
-        'Productos de Belleza': ['whatsapp', 'call'],
-        'Joyerías': ['whatsapp', 'call'],
-        'Comida Rápida': ['whatsapp', 'call'],
-        'Aires Acondicionados': ['whatsapp', 'call'],
-        'Sociedad Cooperativa de Ahorros y Préstamos': ['call'],
-        'Ginecólogos': ['whatsapp', 'call'],
-        'Supermercados': ['call']
-        
+      // =======================================================================
+// SCRIPT COMPLETO, LIMPIO Y CORREGIDO PARA DIRECTORIO PRO
+// =======================================================================
+
+// --- 1. VARIABLES GLOBALES Y CONFIGURACIÓN ---
+let professionals = []; // Almacenará los perfiles cargados desde Firestore.
+const contactConfig = {
+    'Dentistas': ['call'], 'Nutriólogos': ['whatsapp'], 'Quiroprácticos': ['whatsapp'], 'Doctores': ['call'], 'Fisioterapeutas': ['whatsapp', 'call'], 'Tiendas de ropa': ['whatsapp', 'call'], 'Venta de suplementos': ['whatsapp'], 'Barberías': ['whatsapp', 'call'], 'Tiendas de Pinturas': ['call'], 'Carpinteros': ['whatsapp'], 'Electricistas': ['whatsapp', 'call'], 'Plomeros': ['call'], 'Fotógrafos': ['call'], 'Protección Civil': ['call'], 'Abogados': ['whatsapp'], 'Psicólogos': ['whatsapp', 'call'], 'Veterinarios': ['whatsapp', 'call'], 'Mecánicos': ['call'], 'Técnicos en Computadoras': ['whatsapp'], 'Tatuadores': ['whatsapp', 'call'], 'Restaurantes': ['call'], 'Pezcaderías': ['call'], 'Construcción': ['whatsapp', 'call'],'Arquitectos': ['whatsapp', 'call'], 'Rotulistas': ['whatsapp'], 'Llanteras': ['call'], 'Sitios de Taxis': ['call'], 'Masajistas': ['whatsapp'], 'Vinaterías': ['call'], 'Vidrierías': ['whatsapp', 'call'], 'Herreros': ['call'], 'Ferreterías': ['whatsapp', 'call'], 'Loncherías': ['call'], 'Lavanderías': ['whatsapp', 'call'],'Pastelerías': ['call'], 'Cafeterías': ['call'], 'Pizzerías': ['call'], 'Pollerías': ['call'], 'Carnicerías': ['whatsapp', 'call'], 'Papelerías': ['whatsapp', 'call'], 'Imprentas': ['call'], 'Hoteles': ['call'], 'Talleres de Motos': ['call'], 'Productos de Limpieza': ['call'], 'Purificadoras':['whatsapp', 'call'], 'Policías': ['call'], 'Ambulancias': ['call'],'Panaderías': ['whatsapp', 'call'],'Reparación de Celulares': ['whatsapp', 'call'],'Agencias de Viajes':['call'],'Refaccionarias':['whatsapp', 'call'],'Florerías':['whatsapp', 'call'],'Podólogos':['whatsapp', 'call'],'Quintas':['whatsapp', 'call'],'Renta de Muebles':['whatsapp', 'call'],'Músicos': ['whatsapp', 'call'],'Tablaroqueros': ['whatsapp', 'call'],'Renta de Inflables': ['whatsapp', 'call'],'Cámaras de Seguridad': ['whatsapp', 'call'],'Paneles Solares': ['whatsapp', 'call'],'Auto Lavados': ['whatsapp', 'call'],'Funerarias': ['call'],'Cruz Roja': ['call'],'Escuelas de Ingles': ['whatsapp', 'call'],'Cerrajeros': ['whatsapp', 'call'],'Deportes': ['whatsapp', 'call'],'Perfumerías': ['whatsapp'],'Hospitales': ['call'],'Belleza': ['whatsapp', 'call'],'Productos de Belleza': ['whatsapp', 'call'],'Joyerías': ['whatsapp', 'call'],'Comida Rápida': ['whatsapp', 'call'],'Aires Acondicionados': ['whatsapp', 'call'],'Sociedad Cooperativa de Ahorros y Préstamos': ['call'],'Ginecólogos': ['whatsapp', 'call'],'Supermercados': ['call']
 };
-      
-        
-      
-      
-      // Configuración de Firebase
-    const firebaseConfig = {
-        apiKey: "AIzaSyBM91yvFBEU9NDSEZKQyFHU6bhqCPgY3Uc",
-        authDomain: "directoriopro-los-reyes.firebaseapp.com",
-        projectId: "directoriopro-los-reyes",
-        storageBucket: "directoriopro-los-reyes.firebasestorage.app",
-        messagingSenderId: "689785400797",
-        appId: "1:689785400797:web:5b91b320d6aa70ae669a34"
-    };
+const firebaseConfig = {
+    apiKey: "AIzaSyBM91yvFBEU9NDSEZKQyFHU6bhqCPgY3Uc",
+    authDomain: "directoriopro-los-reyes.firebaseapp.com",
+    projectId: "directoriopro-los-reyes",
+    storageBucket: "directoriopro-los-reyes.firebasestorage.app",
+    messagingSenderId: "689785400797",
+    appId: "1:689785400797:web:5b91b320d6aa70ae669a34"
+};
 
-  // Inicializar Firebase
-    firebase.initializeApp(firebaseConfig);
-    const analytics = firebase.analytics();
-    const auth = firebase.auth();
-    const db = firebase.firestore();
-      
+// --- 2. INICIALIZACIÓN DE FIREBASE Y SERVICIOS ---
+firebase.initializeApp(firebaseConfig);
+const analytics = firebase.analytics();
+const auth = firebase.auth();
+const db = firebase.firestore();
+const messaging = firebase.messaging();
 
-        // DOM Elements
-    const homeScreen = document.getElementById('homeScreen');
-    const categoryScreen = document.getElementById('categoryScreen');
-    const detailsScreen = document.getElementById('detailsScreen');
-    const featuredScreen = document.getElementById('featuredScreen');
-    const offersScreen = document.getElementById('offersScreen');
-    const profileScreen = document.getElementById('profileScreen');
-    const adminScreen = document.getElementById('adminScreen');
-    const categoriesGrid = document.getElementById('categoriesGrid');
-    const professionalsGrid = document.getElementById('professionalsGrid');
-    const professionalDetails = document.getElementById('professionalDetails');
-    const featuredGrid = document.getElementById('featuredGrid');
-    const featuredPreview = document.getElementById('featuredPreview');
-    const searchInput = document.getElementById('searchInput');
-    const searchResults = document.getElementById('searchResults');
-    const categoryTitle = document.getElementById('categoryTitle');
-    const mobileMenu = document.getElementById('mobileMenu');
-      
-      // --- NUEVA FUNCIÓN ---
-    // Carga todos los profesionales desde Firestore y los almacena en la variable global.
-    // Es asíncrona porque la lectura de la base de datos toma tiempo.
-    async function loadProfessionalsFromFirestore() {
-        try {
-            const snapshot = await db.collection('professionals').orderBy('name').get();
-            // Mapeamos los documentos a un formato que el resto del código entiende,
-            // añadiendo el ID del documento, que es crucial para editar y borrar.
-            professionals = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-            console.log(`DirectorioPro: ${professionals.length} perfiles cargados desde Firestore.`);
-        } catch (error) {
-            console.error("Error crítico al cargar perfiles desde Firestore: ", error);
-            alert("No se pudieron cargar los datos del directorio. Por favor, recarga la página.");
-        }
+// --- 3. REFERENCIAS A ELEMENTOS DEL DOM (CACHE) ---
+const homeScreen = document.getElementById('homeScreen');
+const categoryScreen = document.getElementById('categoryScreen');
+const detailsScreen = document.getElementById('detailsScreen');
+const featuredScreen = document.getElementById('featuredScreen');
+const offersScreen = document.getElementById('offersScreen');
+const profileScreen = document.getElementById('profileScreen');
+const adminScreen = document.getElementById('adminScreen');
+const categoriesGrid = document.getElementById('categoriesGrid');
+const professionalsGrid = document.getElementById('professionalsGrid');
+const professionalDetails = document.getElementById('professionalDetails');
+const featuredGrid = document.getElementById('featuredGrid');
+const featuredPreview = document.getElementById('featuredPreview');
+const searchInput = document.getElementById('searchInput');
+const searchResults = document.getElementById('searchResults');
+const categoryTitle = document.getElementById('categoryTitle');
+const mobileMenu = document.getElementById('mobileMenu');
+
+// --- 4. LÓGICA DE DATOS Y AUTENTICACIÓN ---
+
+// Carga los perfiles desde Firestore.
+async function loadProfessionalsFromFirestore() {
+    try {
+        const snapshot = await db.collection('professionals').orderBy('name').get();
+        professionals = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        console.log(`DirectorioPro: ${professionals.length} perfiles cargados.`);
+    } catch (error) {
+        console.error("Error crítico al cargar perfiles: ", error);
+        alert("No se pudieron cargar los datos. Por favor, recarga la página.");
     }
-        
-        // En tu función init() agrega:
-async function init() {
-    // 1. Mostrar un estado de carga mientras se obtienen los datos.
-    document.getElementById('loginScreen').classList.add('hidden');
-    document.getElementById('registerScreen').classList.add('hidden');
-    homeScreen.classList.remove('hidden'); // Mostramos el home para que se vea algo.
-    categoriesGrid.innerHTML = '<p class="col-span-full text-center text-gray-500">Cargando...</p>';
-    featuredPreview.innerHTML = '<p class="col-span-full text-center text-gray-500">Cargando...</p>';
-
-    // 2. Cargar los profesionales de Firestore y esperar a que termine.
-    await loadProfessionalsFromFirestore();
-    
-    // 3. Una vez cargados los datos, inicializar el resto de la aplicación.
-    loadCategories();
-    loadFeaturedPreview();
-    setupEventListeners();
-    initSwiper();
-    history.replaceState({ screen: 'home' }, '');
-    
-    // La lógica para mostrar la pantalla correcta (login vs home) se manejará en el observador de autenticación
-    handleInitialScreen(); 
 }
 
-// Nueva función para inicializar el slider
+// Observador del estado de autenticación (Maneja quién está logueado).
+let currentUser = null;
+let userRole = null;
+let isCurrentUserAdmin = false;
+auth.onAuthStateChanged(user => {
+    if (user) {
+        currentUser = user;
+        db.collection('users').doc(user.uid).get().then(doc => {
+            if (doc.exists) {
+                userRole = doc.data().role;
+                isCurrentUserAdmin = doc.data().isAdmin === true;
+                document.getElementById('appHeader').classList.remove('hidden');
+                document.getElementById('logoutBtn').classList.remove('hidden');
+                document.getElementById('adminPanelBtn').classList.toggle('hidden', !isCurrentUserAdmin);
+                handleInitialScreen();
+            }
+        });
+    } else {
+        currentUser = null;
+        userRole = null;
+        isCurrentUserAdmin = false;
+        document.getElementById('appHeader').classList.add('hidden');
+        document.getElementById('logoutBtn').classList.add('hidden');
+        showScreen('login');
+    }
+});
+
+// --- 5. FUNCIONES DE RENDERIZADO Y UI ---
+
+// Controla qué pantalla principal se muestra.
+function showScreen(screen, pushState = true) {
+    const screens = [homeScreen, categoryScreen, detailsScreen, featuredScreen, offersScreen, profileScreen, adminScreen, document.getElementById('loginScreen'), document.getElementById('registerScreen')];
+    screens.forEach(s => s.classList.add('hidden'));
+    document.getElementById('sliderContainer').classList.add('hidden');
+
+    if (!currentUser && !['login', 'register'].includes(screen)) {
+        document.getElementById('loginScreen').classList.remove('hidden');
+        return;
+    }
+
+    switch(screen) {
+        case 'home':
+            homeScreen.classList.remove('hidden');
+            document.getElementById('sliderContainer').classList.remove('hidden');
+            break;
+        case 'details': detailsScreen.classList.remove('hidden'); break;
+        case 'admin':
+            if (isCurrentUserAdmin) {
+                adminScreen.classList.remove('hidden');
+                cargarProfesionalesEnAdmin();
+            } else {
+                alert("Acceso denegado.");
+                showScreen('home');
+            }
+            break;
+        // Agrega los demás casos que necesites.
+        default:
+            const currentScreen = document.getElementById(screen + 'Screen');
+            if (currentScreen) currentScreen.classList.remove('hidden');
+            else homeScreen.classList.remove('hidden'); // Pantalla por defecto
+    }
+    
+    if (pushState) history.pushState({ screen: screen }, '', `#${screen}`);
+    window.scrollTo(0, 0);
+}
+
+// Carga las tarjetas de categorías en la pantalla de inicio.
+function loadCategories() {
+    const categories = [...new Set(professionals.map(pro => pro.category))].sort();
+    categoriesGrid.innerHTML = '';
+    categories.forEach(category => {
+        const icon = getCategoryIcon(category);
+        const categoryElement = document.createElement('div');
+        categoryElement.className = 'bg-white rounded-lg shadow-md p-4 flex flex-col items-center justify-center text-center cursor-pointer hover:shadow-lg transition-shadow';
+        categoryElement.innerHTML = `<div class="text-4xl text-blue-600 mb-2">${icon}</div><h3 class="text-md font-medium">${category}</h3>`;
+        categoryElement.addEventListener('click', () => showCategoryProfessionals(category));
+        categoriesGrid.appendChild(categoryElement);
+    });
+}
+
+// Muestra los profesionales de una categoría seleccionada.
+function showCategoryProfessionals(category) {
+    const categoryPros = professionals.filter(pro => pro.category === category);
+    categoryTitle.textContent = category;
+    professionalsGrid.innerHTML = '';
+    categoryPros.forEach(pro => professionalsGrid.appendChild(createProfessionalCard(pro)));
+    showScreen('category');
+}
+
+// Muestra una vista previa de los profesionales destacados.
+function loadFeaturedPreview() {
+    const featuredPros = professionals.filter(pro => pro.featured).slice(0, 3);
+    featuredPreview.innerHTML = '';
+    featuredPros.forEach(pro => featuredPreview.appendChild(createProfessionalCard(pro)));
+}
+
+// Muestra todos los profesionales destacados en su propia pantalla.
+function showAllFeatured() {
+    const featuredPros = professionals.filter(pro => pro.featured);
+    featuredGrid.innerHTML = '';
+    featuredPros.forEach(pro => featuredGrid.appendChild(createProfessionalCard(pro)));
+    showScreen('featured');
+}
+
+// Crea el HTML para una tarjeta de profesional individual.
+function createProfessionalCard(professional) {
+    const card = document.createElement('div');
+    const isPremium = professional.membership === true || professional.membership === 'premium';
+    card.className = `bg-white rounded-lg shadow-md overflow-hidden ${isPremium ? 'premium-card' : ''}`;
+    
+    card.innerHTML = `
+        <div class="relative">
+            <img src="${professional.image || './Images/Logo.jpg'}" alt="${professional.name}" class="w-full h-48 object-cover">
+            ${isPremium ? '' : `<div class="membership-badge bg-gray-200 text-gray-800"><i class="fas fa-user"></i></div>`}
+        </div>
+        <div class="p-4">
+            <h3 class="text-xl font-bold mb-1">${professional.name}</h3>
+            <p class="text-blue-600 font-medium mb-2">${professional.specialty || ''}</p>
+            <p class="text-gray-600 text-sm mb-3 line-clamp-2">${professional.description || ''}</p>
+            <div class="flex justify-between items-center">
+                <span class="text-gray-800 font-medium">${professional.price || ''}</span>
+                <button class="details-btn bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors" data-id="${professional.id}">
+                    Ver Detalles
+                </button>
+            </div>
+        </div>`;
+    return card;
+}
+
+// Muestra la pantalla de detalles de un profesional.
+function showProfessionalDetails(id) {
+    const professional = professionals.find(pro => pro.id === id);
+    if (!professional) {
+        alert("Profesional no encontrado. El directorio puede estar actualizándose.");
+        return;
+    }
+    
+    analytics.logEvent('view_item', { item_id: `prof_${id}`, item_name: professional.name });
+    
+    const isPremium = professional.membership === true || professional.membership === 'premium';
+    const servicesHTML = (professional.services?.length > 0)
+        ? professional.services.map(s => `<li><i class="fas fa-check text-blue-500 mr-2"></i>${s}</li>`).join('')
+        : '<li>Servicios no especificados.</li>';
+    const galleryHTML = (isPremium && professional.gallery?.length > 0) ? `
+        <div class="mt-8">
+            <h4 class="text-xl font-bold mb-4">Galería</h4>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                ${professional.gallery.map(img => `<img src="${img}" alt="Foto de ${professional.name}" class="cursor-pointer w-full h-32 object-cover rounded-lg shadow-md" onclick="showLightbox('${img}')">`).join('')}
+            </div>
+        </div>` : '';
+
+    professionalDetails.innerHTML = `
+        <div class="md:flex">
+            <div class="md:w-1/3 bg-gray-100 p-6 flex flex-col items-center text-center">
+                <div class="relative mb-4">
+                    <img src="${professional.image || './Images/Logo.jpg'}" alt="${professional.name}" class="w-32 h-32 rounded-full object-cover border-4 border-white shadow-md">
+                    ${isPremium ? `<div class="membership-badge"><i class="fas fa-crown"></i></div>` : ''}
+                </div>
+                <h3 class="text-2xl font-bold">${professional.name}</h3>
+                <p class="text-blue-600 font-medium">${professional.specialty || ''}</p>
+                <p class="text-gray-600 mt-2">${professional.category}</p>
+                <div class="mt-6 w-full space-y-3">
+                    ${generateContactButtons(professional)}
+                    <button id="shareBtn" data-id="${id}" class="bg-yellow-500 text-white font-bold py-2 px-4 rounded-lg w-full flex items-center justify-center hover:bg-yellow-600">
+                        <i class="fas fa-share-alt mr-2"></i>Compartir
+                    </button>
+                </div>
+            </div>
+            <div class="md:w-2/3 p-6">
+                <div class="mb-6"><h4 class="text-lg font-bold mb-2">Sobre mí</h4><p>${professional.description || 'No disponible.'}</p></div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div><h4 class="text-lg font-bold mb-2">Servicios</h4><ul class="space-y-1 text-gray-700">${servicesHTML}</ul></div>
+                    <div>
+                        <h4 class="text-lg font-bold mb-2">Horario</h4><p class="text-gray-700"><i class="far fa-clock mr-2"></i>${professional.schedule || 'No especificado'}</p>
+                        <h4 class="text-lg font-bold mt-4 mb-2">Experiencia</h4><p class="text-gray-700"><i class="fas fa-briefcase mr-2"></i>${professional.experience || 'No especificada'}</p>
+                    </div>
+                </div>
+                ${professional.education ? `<div class="mb-6"><h4 class="text-lg font-bold mb-2">Educación</h4><p class="text-gray-700"><i class="fas fa-graduation-cap mr-2"></i>${professional.education}</p></div>` : ''}
+                <div><h4 class="text-lg font-bold mb-2">Ubicación</h4><p class="text-gray-700"><i class="fas fa-map-marker-alt mr-2"></i>${professional.address || 'No especificada'}</p></div>
+                ${galleryHTML}
+            </div>
+        </div>`;
+    showScreen('details');
+}
+
+// Inicializa y controla el slider de Swiper.
 function initSwiper() {
+    const sliderCompanies = professionals.filter(pro => pro.showInSlider && pro.image);
     const swiperWrapper = document.querySelector('.swiper-wrapper');
-    
-    // Filtrar empresas con showInSlider: true
-    const sliderCompanies = professionals.filter(pro => 
-        pro.showInSlider && pro.image
-    );
-    
-    // Generar slides
+    if (!swiperWrapper) return;
+
     swiperWrapper.innerHTML = sliderCompanies.map(company => `
         <div class="swiper-slide">
             <img src="${company.image}" alt="${company.name}">
             <div class="swiper-slide-content">
                 <h3 class="text-xl font-bold">${company.name}</h3>
-                
-                <button 
-                    class="swiper-details-btn mt-2 bg-white/20 backdrop-blur-sm px-4 py-1 rounded-full text-xs hover:bg-white/30 transition-all"
-                    data-id="${company.id}">
-                    Ver Perfil
-                </button>
+                <button class="swiper-details-btn mt-2 bg-white/20 backdrop-blur-sm px-4 py-1 rounded-full text-xs" data-id="${company.id}">Ver Perfil</button>
             </div>
-        </div>
-    `).join('');
+        </div>`).join('');
 
-    // Inicializar Swiper
     new Swiper('.swiper', {
-        loop: true,
-        autoplay: {
-            delay: 2500,
-        },
-        navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-        },
-        pagination: {
-            el: '.swiper-pagination',
-            clickable: true,
-        },
-        breakpoints: {
-            640: {
-                slidesPerView: 2,
-                spaceBetween: 20,
-            },
-            1024: {
-                slidesPerView: 3,
-                spaceBetween: 30,
-            },
-        }
+        loop: sliderCompanies.length > 1, // El loop solo tiene sentido si hay más de 1 slide
+        autoplay: { delay: 3000 },
+        navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+        pagination: { el: '.swiper-pagination', clickable: true },
+        slidesPerView: 1, spaceBetween: 10,
+        breakpoints: { 640: { slidesPerView: 2, spaceBetween: 20 }, 1024: { slidesPerView: 3, spaceBetween: 30 } }
     });
 }
-        
-        // Load categories into the grid
-        function loadCategories() {
-    // Deriva las categorías del array 'professionals' y las ordena alfabéticamente.
-    const categories = [...new Set(professionals.map(pro => pro.category))].sort();
-    
-    categoriesGrid.innerHTML = ''; // Limpia el contenido anterior
-    
-    categories.forEach(category => {
-        const icon = getCategoryIcon(category);
-        const categoryElement = document.createElement('div');
-        categoryElement.className = 'bg-white rounded-lg shadow-md p-4 flex flex-col items-center cursor-pointer hover:shadow-lg transition-shadow';
-        categoryElement.innerHTML = `
-            <div class="text-4xl text-blue-600 mb-2">${icon}</div>
-            <h3 class="text-lg font-medium text-center">${category}</h3>
-        `;
-        categoryElement.addEventListener('click', () => {
-            showCategoryProfessionals(category);
-        });
-        categoriesGrid.appendChild(categoryElement);
-    });
-}
-        
-        // Los Iconos para cada categoría
-        function getCategoryIcon(category) {
-            const icons = {
-                'Dentistas': '<i class="fas fa-tooth"></i>',
-                'Nutriólogos': '<i class="fas fa-apple-alt"></i>',
-                'Quiroprácticos': '<i class="fas fa-bone"></i>',
-                'Doctores': '<i class="fas fa-user-md"></i>',
-                'Fisioterapeutas': '<i class="fas fa-hand-holding-heart"></i>',
-                'Tiendas de ropa': '<i class="fas fa-tshirt"></i>',
-                'Tiendas de suplementos': '<i class="fas fa-pills"></i>',
-                'Barberías': '<i class="fas fa-cut"></i>',
-                'Tiendas de Pinturas': '<i class="fas fa-paint-roller"></i>',
-                'Carpinteros': '<i class="fas fa-hammer"></i>',
-                'Electricistas': '<i class="fas fa-bolt"></i>',
-                'Plomeros': '<i class="fas fa-faucet"></i>',
-                'Fotógrafos': '<i class="fas fa-camera-retro"></i>',
-                'Protección Civil': '<i class="fas fa-shield-alt"></i>',
-                'Abogados': '<i class="fas fa-gavel"></i>',
-                'Psicólogos': '<i class="fas fa-brain"></i>',
-                'Veterinarios': '<i class="fas fa-paw"></i>',
-                'Mecánicos': '<i class="fas fa-car"></i>',
-                'Técnicos en Computadoras': '<i class="fas fa-laptop"></i>',
-                'Tatuadores': '<i class="fas fa-dragon"></i>',
-        'Restaurantes': '<i class="fas fa-utensils"></i>',
-        'Pezcaderías': '<i class="fas fa-shrimp"></i>',
-        'Construcción': '<i class="fas fa-hard-hat"></i>',
-        'Arquitectos': '<i class="fas fa-drafting-compass"></i>',       
-        'Rotulistas': '<i class="fas fa-paint-brush"></i>',
-        'Llanteras': '<i class="fas fa-car"></i>',
-        'Sitios de Taxis': '<i class="fas fa-taxi"></i>',
-        'Masajistas': '<i class="fas fa-spa"></i>',
-        'Vinaterías': '<i class="fas fa-wine-bottle"></i>',
-        'Vidrierías': '<i class="fas fa-store"></i>',
-        'Herreros': '<i class="fas fa-tools"></i>',
-        'Ferreterías': '<i class="fas fa-toolbox"></i>',
-        'Loncherías': '<i class="fas fa-bread-slice"></i>',
-        'Lavanderías': '<i class="fas fa-soap"></i>',
-        'Pastelerías': '<i class="fas fa-birthday-cake"></i>',
-        'Cafeterías': '<i class="fas fa-coffee"></i>',
-        'Pizzerías': '<i class="fas fa-pizza-slice"></i>',
-        'Pollerías': '<i class="fas fa-drumstick-bite"></i>',
-        'Carnicerías': '<i class="fas fa-drumstick-bite"></i>',
-        'Papelerías': '<i class="fas fa-pencil"></i>',
-        'Imprentas': '<i class="fas fa-print"></i>',
-        'Hoteles': '<i class="fas fa-hotel"></i>',
-        'Talleres de Motos': '<i class="fas fa-motorcycle"></i>',
-        'Productos de Limpieza': '<i class="fas fa-broom"></i>',
-        'Purificadoras de Agua': '<i class="fas fa-water"></i>',
-        'Policías': '<i class="fas fa-shield-alt"></i>',
-        'Ambulancias': '<i class="fas fa-ambulance"></i>',        
-        'Panaderías': '<i class="fas fa-bread-slice"></i>',
-        'Reparación de Celulares': '<i class="fas fa-mobile-alt"></i>',
-        'Agencias de Viajes': '<i class="fas fa-plane-departure"></i>',
-        'Refaccionarias': '<i class="fas fa-car-side"></i>',
-        'Florerías': '<i class="fas fa-spa"></i>',
-        'Podólogos': '<i class="fas fa-shoe-prints"></i>',
-        'Quintas': '<i class="fas fa-home"></i>',
-        'Renta de Muebles': '<i class="fas fa-couch"></i>',
-        'Músicos': '<i class="fas fa-music"></i>',       
-        'Tablaroqueros': '<i class="fas fa-border-style"></i>',
-        'Renta de Inflables': '<i class="fas fa-cloud"></i>',
-        'Cámaras de Seguridad': '<i class="fas fa-camera"></i>',
-        'Paneles Solares': '<i class="fas fa-solar-panel"></i>',
-        'Auto Lavados': '<i class="fas fa-car"></i>',
-        'Funerarias': '<i class="fas fa-monument"></i>',
-        'Cruz Roja': '<i class="fas fa-cross"></i>',
-        'Escuelas de Ingles': '<i class="fas fa-language"></i>',
-        'Cerrajeros': '<i class="fas fa-key"></i>',
-        'Deportes': '<i class="fas fa-medal"></i>',
-        'Perfumerías': '<i class="fas fa-spray-can-sparkles"></i>',
-        'Hospitales': '<i class="fas fa-hospital"></i>',
-        'Belleza': '<i class="fas fa-crown"></i>',
-        'Productos de Belleza': '<i class="fas fa-spa"></i>',
-        'Joyerías': '<i class="fas fa-gem"></i>',
-        'Comida Rápida': '<i class="fas fa-hamburger"></i>',
-        'Aires Acondicionados': '<i class="fas fa-fan"></i>',
-        'Sociedad Cooperativa de Ahorros y Préstamos': '<i class="fas fa-coins"></i>',
-        'Ginecólogos': '<i class="fas fa-venus"></i><i class="fas fa-stethoscope ml-1"></i>',
-        'Supermercados': '<i class="fas fa-shopping-cart"></i>'
-    };
-            
-            return icons[category] || '<i class="fas fa-briefcase"></i>';
-        }
-        
-      
-      
 
-// Estado de usuario
-let currentUser = null;
-let userRole = null;
+// --- 6. FUNCIONES DE AYUDA Y UTILIDADES ---
 
-// Observador de autenticación
-// Variable para guardar nuestra función de "escucha" en tiempo real.
-let authUnsubscribe = null;
-// Variable global para saber si el usuario actual es admin
-let isCurrentUserAdmin = false;
-
-// Observador de autenticación MEJORADO
-auth.onAuthStateChanged(user => {
-  // Si ya estábamos "escuchando" a un usuario anterior, dejamos de hacerlo.
-  if (authUnsubscribe) {
-    authUnsubscribe();
-  }
-
-  if (user) {
-    currentUser = user;
-    
-    // Usamos .onSnapshot() para escuchar en tiempo real.
-    // Esto se ejecutará inmediatamente, y OTRA VEZ si los datos cambian (es decir, cuando se crea el documento).
-    authUnsubscribe = db.collection('users').doc(user.uid).onSnapshot(doc => {
-      if (doc.exists) {
-        // ¡Éxito! El documento existe (ya sea porque estaba antes o porque se acaba de crear).
-        userRole = doc.data().role;
-          // --- INICIA LA MODIFICACIÓN ---
-        // Verificamos si el campo isAdmin es true
-        if (doc.data().isAdmin === true) {
-          isCurrentUserAdmin = true;
-          // Mostramos el botón para ir al panel de administrador
-          document.getElementById('adminPanelBtn').classList.remove('hidden');
-        } else {
-          isCurrentUserAdmin = false;
-          document.getElementById('adminPanelBtn').classList.add('hidden');
-        }
-        // --- FIN DE LA MODIFICACIÓN ---
-        document.getElementById('appHeader').classList.remove('hidden');
-        // --- LÍNEA de Analitics ---
-    // Registra un evento de login en Analytics.
-    analytics.logEvent('login', { method: user.providerData[0].providerId });
-    // --- FIN LÍNEA Analitics ---
-        showScreen('home');
-
-        // Opcional: una vez que lo encontramos, podemos dejar de escuchar para ahorrar recursos.
-        if (authUnsubscribe) {
-          authUnsubscribe();
-        }
-      }
-      // Si el documento NO existe todavía, NO hacemos nada.
-      // onSnapshot se volverá a ejecutar solo en cuanto la función de Google lo cree.
-    }, error => {
-        // Manejar posibles errores de lectura de Firestore
-        console.error("Error al escuchar el perfil del usuario:", error);
-        auth.signOut(); // Si hay un error de permisos, desconectar.
-    });
-
-  } else {
-    currentUser = null;
-    userRole = null;
-      // Asegúrate de resetear la variable al cerrar sesión
-    isCurrentUserAdmin = false; 
-    document.getElementById('adminPanelBtn').classList.add('hidden');
-    document.getElementById('appHeader').classList.add('hidden');
-    showScreen('login');
-  }
-});
-
-// Función para mostrar la pantalla de login
-function showLoginScreen() {
-  document.getElementById('loginScreen').classList.remove('hidden');
-  homeScreen.classList.add('hidden');
-  categoryScreen.classList.add('hidden');
-  // ... ocultar otras pantallas ...
-  currentUser = null;
-  userRole = null;
+// Devuelve el HTML del ícono para una categoría.
+function getCategoryIcon(category) {
+    const icons = { 'Dentistas': '<i class="fas fa-tooth"></i>', 'Nutriólogos': '<i class="fas fa-apple-alt"></i>', 'Quiroprácticos': '<i class="fas fa-bone"></i>', 'Doctores': '<i class="fas fa-user-md"></i>', 'Fisioterapeutas': '<i class="fas fa-hand-holding-heart"></i>', 'Tiendas de ropa': '<i class="fas fa-tshirt"></i>', 'Tiendas de suplementos': '<i class="fas fa-pills"></i>', 'Barberías': '<i class="fas fa-cut"></i>', 'Tiendas de Pinturas': '<i class="fas fa-paint-roller"></i>', 'Carpinteros': '<i class="fas fa-hammer"></i>', 'Electricistas': '<i class="fas fa-bolt"></i>', 'Plomeros': '<i class="fas fa-faucet"></i>', 'Fotógrafos': '<i class="fas fa-camera-retro"></i>', 'Protección Civil': '<i class="fas fa-shield-alt"></i>', 'Abogados': '<i class="fas fa-gavel"></i>', 'Psicólogos': '<i class="fas fa-brain"></i>', 'Veterinarios': '<i class="fas fa-paw"></i>', 'Mecánicos': '<i class="fas fa-car"></i>', 'Técnicos en Computadoras': '<i class="fas fa-laptop"></i>', 'Tatuadores': '<i class="fas fa-dragon"></i>', 'Restaurantes': '<i class="fas fa-utensils"></i>', 'Pezcaderías': '<i class="fas fa-shrimp"></i>', 'Construcción': '<i class="fas fa-hard-hat"></i>', 'Arquitectos': '<i class="fas fa-drafting-compass"></i>', 'Rotulistas': '<i class="fas fa-paint-brush"></i>', 'Llanteras': '<i class="fas fa-car"></i>', 'Sitios de Taxis': '<i class="fas fa-taxi"></i>', 'Masajistas': '<i class="fas fa-spa"></i>', 'Vinaterías': '<i class="fas fa-wine-bottle"></i>', 'Vidrierías': '<i class="fas fa-store"></i>', 'Herreros': '<i class="fas fa-tools"></i>', 'Ferreterías': '<i class="fas fa-toolbox"></i>', 'Loncherías': '<i class="fas fa-bread-slice"></i>', 'Lavanderías': '<i class="fas fa-soap"></i>', 'Pastelerías': '<i class="fas fa-birthday-cake"></i>', 'Cafeterías': '<i class="fas fa-coffee"></i>', 'Pizzerías': '<i class="fas fa-pizza-slice"></i>', 'Pollerías': '<i class="fas fa-drumstick-bite"></i>', 'Carnicerías': '<i class="fas fa-drumstick-bite"></i>', 'Papelerías': '<i class="fas fa-pencil"></i>', 'Imprentas': '<i class="fas fa-print"></i>', 'Hoteles': '<i class="fas fa-hotel"></i>', 'Talleres de Motos': '<i class="fas fa-motorcycle"></i>', 'Productos de Limpieza': '<i class="fas fa-broom"></i>', 'Purificadoras de Agua': '<i class="fas fa-water"></i>', 'Policías': '<i class="fas fa-shield-alt"></i>', 'Ambulancias': '<i class="fas fa-ambulance"></i>', 'Panaderías': '<i class="fas fa-bread-slice"></i>', 'Reparación de Celulares': '<i class="fas fa-mobile-alt"></i>', 'Agencias de Viajes': '<i class="fas fa-plane-departure"></i>', 'Refaccionarias': '<i class="fas fa-car-side"></i>', 'Florerías': '<i class="fas fa-spa"></i>', 'Podólogos': '<i class="fas fa-shoe-prints"></i>', 'Quintas': '<i class="fas fa-home"></i>', 'Renta de Muebles': '<i class="fas fa-couch"></i>', 'Músicos': '<i class="fas fa-music"></i>', 'Tablaroqueros': '<i class="fas fa-border-style"></i>', 'Renta de Inflables': '<i class="fas fa-cloud"></i>', 'Cámaras de Seguridad': '<i class="fas fa-camera"></i>', 'Paneles Solares': '<i class="fas fa-solar-panel"></i>', 'Auto Lavados': '<i class="fas fa-car"></i>', 'Funerarias': '<i class="fas fa-monument"></i>', 'Cruz Roja': '<i class="fas fa-cross"></i>', 'Escuelas de Ingles': '<i class="fas fa-language"></i>', 'Cerrajeros': '<i class="fas fa-key"></i>', 'Deportes': '<i class="fas fa-medal"></i>', 'Perfumerías': '<i class="fas fa-spray-can-sparkles"></i>', 'Hospitales': '<i class="fas fa-hospital"></i>', 'Belleza': '<i class="fas fa-crown"></i>', 'Productos de Belleza': '<i class="fas fa-spa"></i>', 'Joyerías': '<i class="fas fa-gem"></i>', 'Comida Rápida': '<i class="fas fa-hamburger"></i>', 'Aires Acondicionados': '<i class="fas fa-fan"></i>', 'Sociedad Cooperativa de Ahorros y Préstamos': '<i class="fas fa-coins"></i>', 'Ginecólogos': '<i class="fas fa-venus-mars"></i>', 'Supermercados': '<i class="fas fa-shopping-cart"></i>' };
+    return icons[category] || '<i class="fas fa-briefcase"></i>';
 }
 
-// Función para mostrar pantalla según rol
-function showScreen(screen) {
-  // Ocultar login
-  document.getElementById('loginScreen').classList.add('hidden');
-  
-  // Mostrar pantalla según el rol
-  if (screen === 'home') {
-    homeScreen.classList.remove('hidden');
-    document.getElementById('sliderContainer').classList.remove('hidden');
-    
-    // Mostrar contenido diferente según rol
-    if (userRole === 'business') {
-      document.querySelector('h1').textContent = 'Panel de Empresa';
-      // Aquí podrías agregar funcionalidades específicas para empresas
-    } else {
-      document.querySelector('h1').textContent = 'DirectorioPro Los Reyes';
+// Genera los botones de contacto (WhatsApp, Llamada) para un perfil.
+function generateContactButtons(professional) {
+    const config = contactConfig[professional.category] || ['call'];
+    const phoneNumber = professional.phone ? professional.phone.replace(/\D/g, '') : '';
+    const encodedName = encodeURIComponent(professional.name);
+    return config.map(method => {
+        if (method === 'whatsapp') {
+            return `<a href="https://wa.me/${phoneNumber}?text=Hola%20${encodedName},%20vi%20tu%20perfil%20en%20DirectorioPro" target="_blank" class="block bg-green-500 text-white text-center py-3 rounded-lg hover:bg-green-600"><i class="fab fa-whatsapp mr-2"></i>WhatsApp</a>`;
+        }
+        if (method === 'call') {
+            const isEmergency = ['Policías', 'Ambulancias', 'Cruz Roja', 'Protección Civil'].includes(professional.category);
+            return `<a href="tel:${phoneNumber}" class="block ${isEmergency ? 'bg-red-500' : 'bg-blue-500'} text-white text-center py-3 rounded-lg"><i class="fas fa-phone mr-2"></i>${isEmergency ? 'Llamada de Emergencia' : 'Llamar'}</a>`;
+        }
+        return '';
+    }).join('');
+}
+
+// Funciones para el Lightbox de la galería de imágenes.
+function showLightbox(imgUrl) { document.getElementById('lightbox-img').src = imgUrl; document.getElementById('lightbox').classList.remove('hidden'); }
+function closeLightbox() { document.getElementById('lightbox').classList.add('hidden'); }
+
+// Función para compartir un perfil.
+async function shareProfessional(id) {
+    const pro = professionals.find(p => p.id === id);
+    if (!pro) return;
+    try {
+        await navigator.share({ title: 'DirectorioPro Los Reyes', text: `¡Te recomiendo a "${pro.name}"!`, url: `https://alvinzu.github.io/DirectorioLR/?id=${id}` });
+    } catch (err) {
+        console.error('Error al compartir:', err);
     }
-  }
-  // ... otras pantallas ...
 }
 
-      
-// Login con correo/contraseña
-document.getElementById('loginBtn').addEventListener('click', () => {
-  const email = document.getElementById('email').value;
-  const password = document.getElementById('password').value;
+// --- 7. PANEL DE ADMINISTRADOR ---
 
-  if (!email || !password) {
-    alert("Por favor, ingresa tu correo y contraseña.");
-    return;
-  }
-
-  auth.signInWithEmailAndPassword(email, password)
-    .then((userCredential) => {
-      // Inicio de sesión exitoso. El sistema te redirigirá automáticamente.
-      console.log('Inicio de sesión exitoso para:', userCredential.user.email);
-    })
-    .catch((error) => {
-      console.error("Error de autenticación:", error);
-      let message = "Ocurrió un error al iniciar sesión.";
-      if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password' || error.code === 'auth/invalid-credential') {
-          message = "Correo electrónico o contraseña incorrectos. Por favor, verifica tus datos.";
-      } else if (error.code === 'auth/invalid-email') {
-          message = "El formato del correo electrónico no es válido.";
-      }
-      alert(message);
-    });
-});
-
-      
-// Login con Google
-document.getElementById('googleSignIn').addEventListener('click', () => {
-    const provider = new firebase.auth.GoogleAuthProvider();
-
-    auth.signInWithPopup(provider)
-        .then((result) => {
-            const user = result.user;
-            const userRef = db.collection('users').doc(user.uid);
-
-            // Verificar si el usuario ya existe en Firestore
-            return userRef.get().then((doc) => {
-                if (doc.exists) {
-                    // El usuario ya existe, solo actualizamos su último login.
-                    return userRef.update({
-                        lastLogin: new Date()
-                    });
-                } else {
-                    // **AQUÍ ESTÁ LA CORRECCIÓN**
-                    // Si el usuario es nuevo, lo registramos automáticamente como cliente.
-                    return userRef.set({
-                        email: user.email,
-                        role: 'client', // Asignamos el rol de cliente por defecto
-                        createdAt: new Date(),
-                        lastLogin: new Date()
-                    });
-                }
-            });
-        }).catch((error) => {
-            // Manejo de errores, como que el usuario cierre la ventana de Google.
-            console.error("Error con el inicio de sesión de Google:", error);
-            if (error.code !== 'auth/popup-closed-by-user') {
-               alert("Hubo un problema al intentar iniciar sesión con Google. Por favor, intenta de nuevo.");
-            }
-        });
-});
-      
-
-// Registro
-// Mostrar pantalla de registro
-document.getElementById('registerBtn').addEventListener('click', () => {
-  document.getElementById('loginScreen').classList.add('hidden');
-  document.getElementById('registerScreen').classList.remove('hidden');
-});
-
-// Volver al login desde registro
-document.getElementById('backToLogin').addEventListener('click', () => {
-  document.getElementById('registerScreen').classList.add('hidden');
-  document.getElementById('loginScreen').classList.remove('hidden');
-});
-
-// Función de registro mejorada
-document.getElementById('registerSubmitBtn').addEventListener('click', registerUser);
-
-function registerUser() {
-  const email = document.getElementById('registerEmail').value;
-  const password = document.getElementById('registerPassword').value;
-  const confirmPassword = document.getElementById('confirmPassword').value;
-  const role = document.getElementById('registerRole').value;
-  
-  if (!email || !password || !confirmPassword) {
-    alert("Por favor completa todos los campos");
-    return;
-  }
-  
-  if (password !== confirmPassword) {
-    alert("Las contraseñas no coinciden");
-    return;
-  }
-  
-  auth.createUserWithEmailAndPassword(email, password)
-    .then((userCredential) => {
-      // Guardar rol en Firestore
-      db.collection('users').doc(userCredential.user.uid).set({
-        role: role,
-        email: email,
-        createdAt: new Date()
-      }).then(() => {
-        // Cerrar pantalla de registro
-        document.getElementById('registerScreen').classList.add('hidden');
-        // Mostrar mensaje de éxito
-        alert("¡Registro exitoso! Ahora puedes iniciar sesión");
-        // Limpiar formulario
-        document.getElementById('registerEmail').value = '';
-        document.getElementById('registerPassword').value = '';
-        document.getElementById('confirmPassword').value = '';
-      });
-    })
-    .catch((error) => {
-      console.error("Error en registro:", error);
-      alert(error.message);
-    });
-}
-      
-      
-        // Show professionals for a specific category
-        function showCategoryProfessionals(category) {
-            const categoryPros = professionals.filter(pro => pro.category === category);
-            
-            categoryTitle.textContent = category;
-            professionalsGrid.innerHTML = '';
-            
-            categoryPros.forEach(pro => {
-                const proCard = createProfessionalCard(pro);
-                professionalsGrid.appendChild(proCard);
-            });
-            
-            showScreen('category');
-        }
-        
-        // Create a professional card element - Crear una tarjeta de profesional
-        function createProfessionalCard(professional) {
-            const card = document.createElement('div');
-            card.className = `bg-white rounded-lg shadow-md overflow-hidden ${professional.membership === 'premium' ? 'premium-card' : ''}`;
-            
-            card.innerHTML = `
-                <div class="relative">
-                    <img src="${professional.image}" alt="${professional.name}" class="w-full h-48 object-cover">
-                    ${professional.membership === 'premium' ? '' : 
-                    `<div class="membership-badge bg-gray-200 text-gray-800">
-                        <i class="fas fa-user"></i>
-                    </div>`}
-                </div>
-                <div class="p-4">
-                    <h3 class="text-xl font-bold mb-1">${professional.name}</h3>
-                    <div id="stars-container-${professional.id}" class="flex items-center mb-2"></div>
-                    <div id="stars-container-${professional.id}" class="flex items-center mb-2">
-    <!-- Las estrellas se cargarán aquí -->
-</div>
-                    <p class="text-blue-600 font-medium mb-2">${professional.specialty}</p>
-                    <p class="text-gray-600 text-sm mb-3 line-clamp-2">${professional.description}</p>
-                    <div class="flex justify-between items-center">
-                        <span class="text-gray-800 font-medium">${professional.price}</span>
-                        <button class="details-btn bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors" 
-                                data-id="${professional.id}">
-                            Ver Detalles
-                        </button>
-                    </div>
-                </div>
-            `;
-            getAndDisplayStars(professional.id, card.querySelector(`#stars-container-${professional.id}`));
-          
-            return card;
-        }
-      
-      // --- NUEVAS FUNCIONES PARA EL PANEL DE ADMINISTRADOR ---
-
-// Carga y muestra la lista de profesionales en la tabla del admin.
+// Carga los datos en la tabla del panel de admin.
 function cargarProfesionalesEnAdmin() {
     const listContainer = document.getElementById('adminProfessionalsList');
-    if (!listContainer) return; // Salir si el elemento no existe
-    
-    listContainer.innerHTML = ''; // Limpiar la tabla
-    
-    if (professionals.length === 0) {
-        listContainer.innerHTML = '<tr><td colspan="4" class="p-4 text-center text-gray-500">No hay profesionales para mostrar.</td></tr>';
-        return;
-    }
-    
-    let content = '';
-    // Ordenamos los profesionales por nombre para una mejor visualización
-    [...professionals].sort((a, b) => a.name.localeCompare(b.name)).forEach(pro => {
-        const membershipType = pro.membership === true || pro.membership === 'premium' ? 'premium' : 'free';
-        content += `
-            <tr class="border-b hover:bg-gray-50">
-                <td class="p-3 text-sm text-gray-700 font-medium">${pro.name}</td>
-                <td class="p-3 text-sm text-gray-700">${pro.category}</td>
-                <td class="p-3 text-sm text-gray-700">
-                    <span class="p-1.5 text-xs font-medium uppercase tracking-wider rounded-md ${membershipType === 'premium' ? 'bg-yellow-200 text-yellow-800' : 'bg-gray-200 text-gray-800'}">
-                        ${membershipType}
-                    </span>
-                </td>
-                <td class="p-3 text-sm">
-                    <button class="edit-btn text-blue-600 hover:text-blue-800 font-semibold" data-id="${pro.id}">Editar</button>
-                    <button class="delete-btn text-red-600 hover:text-red-800 font-semibold ml-4" data-id="${pro.id}">Eliminar</button>
-                </td>
-            </tr>
-        `;
-    });
-    listContainer.innerHTML = content;
+    if (!listContainer) return;
+    const sortedProfessionals = [...professionals].sort((a, b) => a.name.localeCompare(b.name));
+    listContainer.innerHTML = sortedProfessionals.map(pro => `
+        <tr class="border-b hover:bg-gray-50">
+            <td class="p-3 text-sm font-medium">${pro.name}</td>
+            <td class="p-3 text-sm">${pro.category}</td>
+            <td class="p-3 text-sm"><span class="p-1.5 text-xs font-medium uppercase rounded-md ${pro.membership ? 'bg-yellow-200 text-yellow-800' : 'bg-gray-200'}">${pro.membership ? 'Premium' : 'Gratis'}</span></td>
+            <td class="p-3 text-sm"><button class="edit-btn text-blue-600 font-semibold" data-id="${pro.id}">Editar</button><button class="delete-btn text-red-600 font-semibold ml-4" data-id="${pro.id}">Eliminar</button></td>
+        </tr>`).join('') || '<tr><td colspan="4" class="p-4 text-center">No hay profesionales.</td></tr>';
 }
 
-// Abre el modal para agregar o editar
+// Abre el modal para crear o editar un perfil.
 function openProfessionalModal(id = null) {
-    const modal = document.getElementById('professionalModal');
     const form = document.getElementById('professionalForm');
-    const modalTitle = document.getElementById('modalTitle');
-    
     form.reset();
-    
+    document.getElementById('professionalId').value = id || '';
     if (id) {
         const pro = professionals.find(p => p.id === id);
         if (pro) {
-            modalTitle.textContent = "Editar Profesional";
-            document.getElementById('professionalId').value = pro.id;
-            document.getElementById('profName').value = pro.name || '';
-            document.getElementById('profCategory').value = pro.category || '';
-            document.getElementById('profSpecialty').value = pro.specialty || '';
-            document.getElementById('profPhone').value = pro.phone || '';
-            document.getElementById('profAddress').value = pro.address || '';
-            document.getElementById('profSchedule').value = pro.schedule || '';
-            document.getElementById('profPrice').value = pro.price || '';
-            document.getElementById('profExperience').value = pro.experience || '';
-            document.getElementById('profEducation').value = pro.education || '';
-            document.getElementById('profImage').value = pro.image || '';
-            document.getElementById('profDescription').value = pro.description || '';
-            document.getElementById('profServices').value = Array.isArray(pro.services) ? pro.services.join(', ') : '';
-            document.getElementById('profGallery').value = Array.isArray(pro.gallery) ? pro.gallery.join(', ') : '';
-            document.getElementById('profFeatured').checked = pro.featured === true;
-            document.getElementById('profPremium').checked = pro.membership === true || pro.membership === 'premium';
-            document.getElementById('profShowInSlider').checked = pro.showInSlider === true;
+            document.getElementById('modalTitle').textContent = "Editar Profesional";
+            Object.keys(pro).forEach(key => {
+                const input = form.elements[`prof${key.charAt(0).toUpperCase() + key.slice(1)}`];
+                if (input) {
+                    if (input.type === 'checkbox') input.checked = pro[key];
+                    else input.value = Array.isArray(pro[key]) ? pro[key].join(', ') : pro[key];
+                }
+            });
+            // Renombrar el campo `profPremium` a `profMembership` para que coincida.
+            document.getElementById('profPremium').checked = pro.membership === true;
         }
     } else {
-        modalTitle.textContent = "Agregar Nuevo Profesional";
-        document.getElementById('professionalId').value = '';
+        document.getElementById('modalTitle').textContent = "Agregar Profesional";
     }
-    
-    modal.classList.remove('hidden');
+    document.getElementById('professionalModal').classList.remove('hidden');
 }
 
-// Cierra el modal
+// Cierra el modal de edición/creación.
 function closeProfessionalModal() {
     document.getElementById('professionalModal').classList.add('hidden');
 }
 
-// Guarda los cambios (crear o actualizar)
+// Guarda un perfil (nuevo o editado) en Firestore.
 async function saveProfessional(event) {
     event.preventDefault();
     const id = document.getElementById('professionalId').value;
-
     const proData = {
         name: document.getElementById('profName').value,
         category: document.getElementById('profCategory').value,
@@ -1348,963 +1026,158 @@ async function saveProfessional(event) {
         services: document.getElementById('profServices').value.split(',').map(s => s.trim()).filter(Boolean),
         gallery: document.getElementById('profGallery').value.split(',').map(s => s.trim()).filter(Boolean),
         featured: document.getElementById('profFeatured').checked,
-        membership: document.getElementById('profPremium').checked, // Guardar como booleano
+        membership: document.getElementById('profPremium').checked,
         showInSlider: document.getElementById('profShowInSlider').checked,
     };
 
     try {
-        if (id) {
-            await db.collection('professionals').doc(id).set(proData, { merge: true });
-            alert("Profesional actualizado con éxito.");
-        } else {
-            await db.collection('professionals').add(proData);
-            alert("Profesional agregado con éxito.");
-        }
+        const action = id ? db.collection('professionals').doc(id).set(proData, { merge: true }) : db.collection('professionals').add(proData);
+        await action;
+        alert(`Profesional ${id ? 'actualizado' : 'agregado'} con éxito.`);
         closeProfessionalModal();
-        await loadProfessionalsFromFirestore(); // Recargar datos
-        cargarProfesionalesEnAdmin(); // Actualizar la vista del admin
+        await loadProfessionalsFromFirestore();
+        cargarProfesionalesEnAdmin();
     } catch (error) {
-        console.error("Error al guardar el profesional: ", error);
+        console.error("Error al guardar:", error);
         alert("Ocurrió un error al guardar.");
     }
 }
 
-// Elimina un profesional
+// Elimina un perfil de Firestore.
 async function deleteProfessional(id) {
     if (confirm("¿Estás seguro? Esta acción es irreversible.")) {
         try {
             await db.collection('professionals').doc(id).delete();
             alert("Profesional eliminado.");
-            // Actualizar la UI sin recargar toda la página
             professionals = professionals.filter(p => p.id !== id);
             cargarProfesionalesEnAdmin(); 
         } catch (error) {
-            console.error("Error al eliminar: ", error);
-            alert("Ocurrió un error al eliminar.");
+            console.error("Error al eliminar:", error);
         }
     }
 }
-        
-      //genera los botones de contactos
-      function generateContactButtons(professional) {
-    const config = contactConfig[professional.category] || ['call']; // Default: WhatsApp
-    let buttons = '';
+
+// --- 8. MANEJO DE EVENTOS ---
+
+// Configura todos los event listeners de la aplicación.
+function setupEventListeners() {
+    // Navegación principal y móvil
+    document.getElementById('homeBtn').addEventListener('click', () => showScreen('home'));
+    document.getElementById('featuredBtn').addEventListener('click', showAllFeatured);
+    document.getElementById('offersBtn').addEventListener('click', () => showScreen('offers'));
+    document.getElementById('adminPanelBtn').addEventListener('click', () => showScreen('admin'));
+    document.getElementById('mobileMenuBtn').addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
     
-    const phoneNumber = professional.phone.replace(/\D/g, ''); // Limpia el número
+    // Navegación desde el menú móvil
+    document.querySelectorAll('#mobileHomeBtn, #footerHomeBtn').forEach(btn => btn.addEventListener('click', () => { showScreen('home'); mobileMenu.classList.add('hidden'); }));
+    document.querySelectorAll('#mobileFeaturedBtn, #footerFeaturedBtn').forEach(btn => btn.addEventListener('click', () => { showAllFeatured(); mobileMenu.classList.add('hidden'); }));
+    document.getElementById('mobileOffersBtn').addEventListener('click', () => { showScreen('offers'); mobileMenu.classList.add('hidden'); });
     
-    // Obtener el nombre completo
-    const nombreCompleto = encodeURIComponent(professional.name); // Nombre completo codificado
-    
-    config.forEach(method => {
-        if (method === 'whatsapp') {
-            buttons += `
-                <a href="https://wa.me/${phoneNumber}?text=Hola%20${nombreCompleto},%20vi%20tu%20perfil%20en%20DirectorioPro%20LR%20y%20me%20gustaría%20saber%20más%20sobre%20tus%20servicios" 
-                   target="_blank" 
-                   class="block bg-green-500 text-white text-center py-3 rounded-lg hover:bg-green-600 transition-colors">
-                    <i class="fab fa-whatsapp mr-2"></i> Contactar por WhatsApp
-                </a>
-            `;
-        }
-        
-        if (method === 'call') {
-            const isEmergency = ['Policías', 'Ambulancias', 'Bomberos', 'Cruz Roja', 'Protección Civil'].includes(professional.category);
-            buttons += `
-                <a href="tel:${phoneNumber}" 
-                   class="block ${isEmergency ? 'bg-red-500 emergency-btn' : 'bg-blue-500'} text-white text-center py-3 rounded-lg hover:${isEmergency ? 'bg-red-600' : 'bg-blue-600'} transition-colors">
-                    <i class="fas fa-phone mr-2"></i> ${isEmergency ? 'Llamada de Emergencia' : 'Llamar ahora'}
-                </a>
-            `;
-        }
+    // Botones de "Atrás"
+    document.getElementById('backFromCategory').addEventListener('click', () => history.back());
+    document.getElementById('backFromDetails').addEventListener('click', () => history.back());
+    document.getElementById('backFromFeatured').addEventListener('click', () => history.back());
+    document.getElementById('backFromOffers').addEventListener('click', () => history.back());
+
+    // Botones de Perfil de Usuario
+    document.getElementById('mobileAccountBtn').addEventListener('click', () => { showScreen('profile'); mobileMenu.classList.add('hidden'); });
+    document.getElementById('profileSignOutBtn').addEventListener('click', () => { if (confirm("¿Cerrar sesión?")) auth.signOut(); });
+    // Aquí puedes agregar los listeners para cambiar contraseña y eliminar cuenta.
+
+    // Listener delegado para todos los botones de "Ver Detalles" y "Compartir"
+    document.addEventListener('click', e => {
+        const detailsBtn = e.target.closest('.details-btn, .swiper-details-btn');
+        if (detailsBtn) showProfessionalDetails(detailsBtn.dataset.id);
+
+        const shareBtn = e.target.closest('#shareBtn');
+        if (shareBtn) shareProfessional(shareBtn.dataset.id);
+    });
+
+    // Listeners del Panel de Administrador
+    document.getElementById('addProfessionalBtn')?.addEventListener('click', () => openProfessionalModal());
+    document.getElementById('cancelProfessionalBtn')?.addEventListener('click', closeProfessionalModal);
+    document.getElementById('professionalForm')?.addEventListener('submit', saveProfessional);
+    document.getElementById('adminProfessionalsList')?.addEventListener('click', e => {
+        if (e.target.closest('.edit-btn')) openProfessionalModal(e.target.closest('.edit-btn').dataset.id);
+        if (e.target.closest('.delete-btn')) deleteProfessional(e.target.closest('.delete-btn').dataset.id);
     });
     
-    return buttons;
-}
-      
-      
-      // Lightbox functions
-function showLightbox(imgUrl) {
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightbox-img');
-    lightboxImg.src = imgUrl;
-    lightbox.classList.remove('hidden');
+    setupSearch();
 }
 
-function closeLightbox() {
-    document.getElementById('lightbox').classList.add('hidden');
-}
-
-// Cerrar al hacer clic fuera de la imagen
-document.getElementById('lightbox').addEventListener('click', (e) => {
-    if (e.target.id === 'lightbox') closeLightbox();
-});
-      
-      
-        // Show professional details - Detalles de los profesionales
-        function showProfessionalDetails(id) {
-    // Buscamos por el ID de string, sin convertirlo a número.
-    const professional = professionals.find(pro => pro.id === id);
-    
-    if (!professional) {
-        alert("Profesional no encontrado.");
-        return;
-    }
-    
-    analytics.logEvent('view_item', {
-      item_id: `profesional_${professional.id}`,
-      item_name: professional.name,
-      item_category: professional.category
-    });
-    
-    const membershipType = professional.membership === true || professional.membership === 'premium' ? 'premium' : 'free';
-    const servicesHTML = (professional.services && Array.isArray(professional.services) && professional.services.length > 0)
-        ? professional.services.map(service => `<li class="text-gray-700"><i class="fas fa-check text-blue-500 mr-2"></i>${service}</li>`).join('')
-        : '<li class="text-gray-500">Servicios no especificados.</li>';
-
-    const galleryHTML = (membershipType === 'premium' && professional.gallery && Array.isArray(professional.gallery) && professional.gallery.length > 0) ? `
-    <div class="mt-8">
-        <h4 class="text-xl font-bold mb-4 text-gray-800">Galería de Trabajos</h4>
-        <div class="grid grid-cols-2 md:grid-cols-3 gap-4 gallery-grid">
-            ${professional.gallery.map(img => `
-                <img src="${img}" alt="Trabajo de ${professional.name}" 
-                     class="cursor-pointer w-full h-48 object-cover rounded-lg shadow-md hover:shadow-lg transition-transform transform hover:scale-105"
-                     onclick="showLightbox('${img}')">
-            `).join('')}
-        </div>
-    </div>` : '';
-
-    professionalDetails.innerHTML = `
-        <div class="md:flex">
-            <div class="md:w-1/3 bg-gray-100 p-6 flex flex-col items-center text-center">
-                 <div class="relative mb-4">
-                    <img src="${professional.image || './Images/Logo.jpg'}" alt="${professional.name}" 
-                         class="w-32 h-32 rounded-full object-cover border-4 border-white shadow-md">
-                    ${membershipType === 'premium' ? 
-                    `<div class="membership-badge"><i class="fas fa-crown"></i></div>` : ''}
-                </div>
-                <h3 class="text-xl font-bold">${professional.name}</h3>
-                <p class="text-blue-600 font-medium">${professional.specialty || ''}</p>
-                <p class="text-gray-600 mt-2">${professional.category}</p>
-                <div class="mt-6 w-full space-y-3">
-                    ${generateContactButtons(professional)}
-                    <button id="shareBtn" class="bg-yellow-500 text-white font-bold py-2 px-4 rounded-lg w-full flex items-center justify-center hover:bg-yellow-600 transition-all">
-                        <i class="fas fa-share-alt mr-2"></i>Compartir
-                    </button>
-                </div>
-            </div>
-            <div class="md:w-2/3 p-6">
-                 <div class="mb-6">
-                    <h4 class="text-lg font-bold mb-2 text-gray-800">Sobre mí</h4>
-                    <p class="text-gray-700">${professional.description || 'Descripción no disponible.'}</p>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                    <div>
-                        <h4 class="text-lg font-bold mb-2 text-gray-800">Servicios</h4>
-                        <ul class="space-y-1">${servicesHTML}</ul>
-                    </div>
-                    <div>
-                        <h4 class="text-lg font-bold mb-2 text-gray-800">Horario</h4>
-                        <p class="text-gray-700"><i class="far fa-clock text-blue-500 mr-2"></i>${professional.schedule || 'No especificado'}</p>
-                        <h4 class="text-lg font-bold mt-4 mb-2 text-gray-800">Experiencia</h4>
-                        <p class="text-gray-700"><i class="fas fa-briefcase text-blue-500 mr-2"></i>${professional.experience || 'No especificada'}</p>
-                    </div>
-                </div>
-                 ${professional.education ? `
-                <div class="mb-6">
-                    <h4 class="text-lg font-bold mb-2 text-gray-800">Educación</h4>
-                    <p class="text-gray-700"><i class="fas fa-graduation-cap text-blue-500 mr-2"></i>${professional.education}</p>
-                </div>` : ''}
-                <div>
-                    <h4 class="text-lg font-bold mb-2 text-gray-800">Ubicación</h4>
-                    <p class="text-gray-700 mb-4"><i class="fas fa-map-marker-alt text-blue-500 mr-2"></i>${professional.address || 'No especificada'}</p>
-                </div>
-                ${galleryHTML}
-            </div>
-        </div>
-    `;
-
-    const shareButton = professionalDetails.querySelector('#shareBtn');
-    if (shareButton) {
-        shareButton.addEventListener('click', () => shareProfessional(id));
-    }
-    
-    // setupRatingSection(id); // Descomenta si usas el sistema de valoración.
-    showScreen('details');
-}
-        
-      // ESTA ES LA FUNCIÓN PRINCIPAL DE COMPARTIR
-async function shareProfessional(professionalId) {
-    const professional = professionals.find(p => p.id == professionalId);
-    if (!professional) return;
-
-    const shareData = {
-        title: 'DirectorioPro Los Reyes',
-        text: `¡Te recomiendo a "${professional.name}"! Encuéntralos en DirectorioPro Los Reyes.`,
-        url: `https://alvinzu.github.io/DirectorioLR/?id=${professional.id}`
-    };
-
-    if (navigator.share) {
-        try {
-            await navigator.share(shareData);
-            console.log('¡Perfil compartido exitosamente!');
-        } catch (err) {
-            console.log('Error al compartir:', err);
+// Configura la barra de búsqueda.
+function setupSearch() {
+    searchInput.addEventListener('input', () => {
+        const query = searchInput.value.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        if (query.length === 0) {
+            searchResults.classList.add('hidden');
+            return;
         }
-    } else {
-        alert('La función de compartir no está disponible en este navegador.');
-    }
-  // Añade esto al final
-    window.scrollTo(0, 0);
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
+
+        const categories = [...new Set(professionals.map(pro => pro.category))];
+        
+        const proResults = professionals.filter(pro => 
+            pro.name.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").includes(query) ||
+            pro.category.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").includes(query) ||
+            (pro.specialty && pro.specialty.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").includes(query))
+        ).map(pro => ({ type: 'professional', ...pro }));
+
+        const catResults = categories.filter(cat => 
+            cat.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").includes(query)
+        ).map(cat => ({ type: 'category', name: cat }));
+
+        const allResults = [...proResults, ...catResults];
+        
+        if (allResults.length > 0) {
+            searchResults.innerHTML = allResults.map(result => {
+                if (result.type === 'category') {
+                    return `<div class="p-3 hover:bg-gray-100 cursor-pointer" onclick="showCategoryProfessionals('${result.name}'); searchResults.classList.add('hidden');"><i class="fas fa-folder mr-3 text-blue-500"></i>${result.name}</div>`;
+                }
+                return `<div class="p-3 hover:bg-gray-100 cursor-pointer" onclick="showProfessionalDetails('${result.id}'); searchResults.classList.add('hidden');"><i class="fas fa-user mr-3 text-gray-400"></i>${result.name} <span class="text-sm text-gray-500">- ${result.category}</span></div>`;
+            }).join('');
+            searchResults.classList.remove('hidden');
+        } else {
+            searchResults.innerHTML = '<div class="p-3 text-gray-500">No se encontraron resultados.</div>';
+            searchResults.classList.remove('hidden');
+        }
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.relative')) { // Asumiendo que el buscador está en un div relative
+            searchResults.classList.add('hidden');
+        }
+    });
 }
 
-// ESTA FUNCIÓN REVISA LA URL CUANDO LA APP CARGA
+
+// --- 9. INICIALIZACIÓN DE LA APLICACIÓN ---
+
+// Maneja la carga inicial basada en la URL (para compartir enlaces).
 function handleInitialScreen() {
     const urlParams = new URLSearchParams(window.location.search);
     const professionalId = urlParams.get('id');
+    const screen = window.location.hash.substring(1);
 
     if (professionalId) {
-        // Si hay un ID, muestra los detalles de ese profesional
-        history.replaceState({ screen: 'details' }, '');
         showProfessionalDetails(professionalId);
+    } else if (screen) {
+        showScreen(screen, false);
     } else {
-        // Si no, muestra la pantalla de inicio
-        history.replaceState({ screen: 'home' }, '');
         showScreen('home');
     }
 }
-      
-        // Load featured professionals preview
-        function loadFeaturedPreview() {
-            const featuredPros = professionals.filter(pro => pro.featured).slice(0, 3);
-            featuredPreview.innerHTML = '';
-            
-            featuredPros.forEach(pro => {
-                const proCard = createProfessionalCard(pro);
-                featuredPreview.appendChild(proCard);
-            });
-        }
-        
-        // Show all featured professionals
-        function showAllFeatured() {
-            const featuredPros = professionals.filter(pro => pro.featured);
-            featuredGrid.innerHTML = '';
-            
-            featuredPros.forEach(pro => {
-                const proCard = createProfessionalCard(pro);
-                featuredGrid.appendChild(proCard);
-            });
-            
-            showScreen('featured');
-        }
-        
-        // Show the specified screen
-        function showScreen(screen, pushState = true) {
-    // Ocultar todas las pantallas principales
-    document.getElementById('loginScreen').classList.add('hidden');
-    document.getElementById('registerScreen').classList.add('hidden');
-    homeScreen.classList.add('hidden');
-    categoryScreen.classList.add('hidden');
-    detailsScreen.classList.add('hidden');
-    featuredScreen.classList.add('hidden');
-    offersScreen.classList.add('hidden');
-    document.getElementById('profileScreen').classList.add('hidden');
-    document.getElementById('adminScreen').classList.add('hidden');
-    document.getElementById('sliderContainer').classList.add('hidden');
 
-    if (!currentUser && screen !== 'login' && screen !== 'register') {
-        document.getElementById('loginScreen').classList.remove('hidden');
-        return;
-    }
-
-    switch(screen) {
-        case 'home':
-            homeScreen.classList.remove('hidden');
-            document.getElementById('sliderContainer').classList.remove('hidden');
-            break;
-        case 'category': categoryScreen.classList.remove('hidden'); break;
-        case 'details': detailsScreen.classList.remove('hidden'); break;
-        case 'featured': featuredScreen.classList.remove('hidden'); break;
-        case 'offers': 
-            offersScreen.classList.remove('hidden');
-            loadExclusiveOffers();
-            break;
-        case 'profile':
-            document.getElementById('profileScreen').classList.remove('hidden');
-            loadProfileData(); 
-            break;
-        case 'admin':
-            if (isCurrentUserAdmin) {
-                document.getElementById('adminScreen').classList.remove('hidden');
-                cargarProfesionalesEnAdmin(); // Cargar datos al mostrar el panel
-            } else {
-                 showScreen('home'); // Si no es admin, mandar a home
-                 alert("Acceso denegado.");
-            }
-            break;
-        case 'login': document.getElementById('loginScreen').classList.remove('hidden'); break;
-        case 'register': document.getElementById('registerScreen').classList.remove('hidden'); break;
-        default:
-             homeScreen.classList.remove('hidden');
-             document.getElementById('sliderContainer').classList.remove('hidden');
-    }
-    
-    if (pushState) {
-        history.pushState({ screen: screen }, '', `#${screen}`);
-    }
-
-    window.scrollTo(0, 0); // Scroll al inicio en cada cambio de pantalla
-}
-      
-           
-      
-      
-      // Logout
-document.getElementById('logoutBtn').addEventListener('click', () => {
-  auth.signOut().then(() => {
-    // Limpiar los campos del formulario de inicio de sesión
-    document.getElementById('email').value = '';
-    document.getElementById('password').value = '';
-
-    showLoginScreen();
-  });
-});
-
-      // Manejar el evento de retroceso específico para iOS
-window.addEventListener('pagehide', function(event) {
-    if (event.persisted) {
-        // Forzar scroll al inicio cuando la página se restaure desde la caché
-        window.scrollTo(0, 0);
-    }
-});
-
-window.addEventListener('pageshow', function(event) {
-    if (event.persisted) {
-        // Forzar scroll al inicio cuando la página se restaure desde la caché
-        window.scrollTo(0, 0);
-    }
-});
-      
-      
-// Mostrar/ocultar botón de logout
-auth.onAuthStateChanged(user => {
-  if (user) {
-    document.getElementById('logoutBtn').classList.remove('hidden');
-  } else {
-    document.getElementById('logoutBtn').classList.add('hidden');
-  }
-});
-      
-      
-      // Manejar el botón de retroceso del navegador
-window.addEventListener('popstate', (event) => {
-    const state = event.state;
-    if (state && state.screen) {
-        showScreen(state.screen, false);
-    } else {
-        showScreen('home', false);
-    }
-// Añade esto para scroll al inicio en retroceso
-    window.scrollTo(0, 0);
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
-});
-
-      
-        
-      // Función para cargar ofertas
-function loadExclusiveOffers(selectedCategory = 'all') {
-    const offersGrid = document.getElementById('offersGrid');
-    offersGrid.innerHTML = '';
-
-    // Obtener categorías únicas que tienen ofertas
-    const categoriesWithOffers = [...new Set(
-        professionals
-            .filter(pro => pro.offers && pro.offers.length > 0)
-            .map(pro => pro.category)
-    )];
-
-    // Actualizar opciones del filtro
-    const categoryFilter = document.getElementById('categoryFilter');
-    categoryFilter.innerHTML = `
-        <option value="all">Todas las categorías</option>
-        ${categoriesWithOffers.map(category => `
-            <option value="${category}" ${selectedCategory === category ? 'selected' : ''}>
-                ${category}
-            </option>
-        `).join('')}
-    `;
-
-    // Generar ofertas
-    professionals.forEach(pro => {
-        if(pro.membership === 'premium' && pro.offers && pro.offers.length > 0) {
-            if(selectedCategory === 'all' || pro.category === selectedCategory) {
-                pro.offers.forEach(offer => {
-                    const offerCard = document.createElement('div');
-                    offerCard.className = 'bg-white rounded-lg shadow-md overflow-hidden relative';
-                    offerCard.innerHTML = `
-                        <div class="p-4 bg-gradient-to-r from-blue-100 to-purple-100">
-                            <div class="flex items-center justify-between mb-2">
-                                <span class="bg-blue-600 text-white px-3 py-1 rounded-full text-sm">
-                                    ${offer.discount}
-                                </span>
-                                <span class="text-gray-500 text-sm">${offer.validity}</span>
-                            </div>
-                            <h3 class="text-xl font-bold mb-2">${offer.title}</h3>
-                            <p class="text-gray-600 mb-4">${offer.description}</p>
-                            <div class="bg-yellow-50 p-3 rounded-lg">
-                                <p class="text-sm font-semibold text-yellow-800">Condiciones:</p>
-                                <p class="text-sm text-yellow-700">${offer.conditions}</p>
-                            </div>
-                            <div class="mt-4 flex items-center">
-                                <img src="${pro.image}" class="w-10 h-10 rounded-full mr-3">
-                                <div>
-                                    <p class="font-medium">${pro.name}</p>
-                                    <p class="text-sm text-gray-500">${pro.category}</p>
-                                </div>
-                            </div>
-                            <button class="mt-4 w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition-colors"
-                                    onclick="showProfessionalDetails(${pro.id})">
-                                Ver Perfil Completo
-                            </button>
-                        </div>
-                    `;
-                    offersGrid.appendChild(offerCard);
-                });
-            }
-        }
-    });
+// Función principal que inicia la aplicación.
+async function init() {
+    document.querySelector('body').classList.add('fade-in');
+    await loadProfessionalsFromFirestore();
+    setupEventListeners();
+    initSwiper(); // Inicializar swiper después de cargar datos
+    // El observador de auth se encargará de llamar a handleInitialScreen
 }
 
-
-// --- AÑADIR AL FINAL DE TU SCRIPT ---
-
-// Inicializar Firebase Messaging
-const messaging = firebase.messaging();
-
-// Función para solicitar permiso y guardar el token
-function solicitarPermisoNotificaciones() {
-  let serviceWorkerRegistration; // Variable para guardar el registro
-
-  console.log('Solicitando permiso para notificaciones...');
-  
-  Notification.requestPermission().then((permission) => {
-    if (permission === 'granted') {
-      console.log('Permiso de notificación concedido.');
-      // 1. Primero, registramos el Service Worker y esperamos a que se complete.
-      return navigator.serviceWorker.register('/DirectorioLR/firebase-messaging-sw.js');
-    } else {
-      console.log('Permiso de notificación denegado.');
-      alert('No has permitido las notificaciones.');
-      throw new Error('Permiso denegado');
-    }
-  }).then((registration) => {
-    console.log('Service Worker registrado con éxito:', registration);
-    serviceWorkerRegistration = registration; // Guardamos el registro
-    // 2. Ahora que tenemos el registro, pedimos el token de Firebase.
-    return messaging.getToken({ serviceWorkerRegistration: registration });
-  }).then(token => {
-    // 3. Con el token en mano, lo guardamos en Firestore.
-    if (token) {
-      console.log('Token FCM obtenido:', token);
-      db.collection('fcmTokens').doc(token).set({
-        userId: currentUser.uid,
-        createdAt: new Date()
-      });
-      alert('¡Gracias! Has activado las notificaciones.');
-    }
-  }).catch(err => {
-    console.error('Error durante el proceso de notificaciones:', err);
-    alert('Ocurrió un error al activar las notificaciones. Revisa la consola (F12) para más detalles.');
-  });
-}
-
-
-        
-      
-      // =======================================================
-// ========== LÓGICA DEL SISTEMA DE VALORACIÓN ==========
-// =======================================================
-
-/**
- * Genera y muestra las estrellas (llenas, media, vacías) en un contenedor.
- * @param {number} average - El promedio de valoración (ej. 4.7).
- * @param {number} count - El número total de valoraciones.
- * @param {HTMLElement} container - El elemento div donde se insertarán las estrellas.
- */
-function displayStars(average, count, container) {
-    if (!container) return;
-    container.innerHTML = ''; // Limpiar contenedor
-    const avg = parseFloat(average) || 0;
-    const num = parseInt(count) || 0;
-
-    for (let i = 1; i <= 5; i++) {
-        const starIcon = document.createElement('i');
-        if (i <= avg) {
-            starIcon.className = "fas fa-star text-yellow-400"; // Estrella llena
-        } else if (i - 0.5 <= avg) {
-            starIcon.className = "fas fa-star-half-alt text-yellow-400"; // Media estrella
-        } else {
-            starIcon.className = "far fa-star text-yellow-400"; // Estrella vacía
-        }
-        container.appendChild(starIcon);
-    }
-
-    if (num > 0) {
-        const ratingText = document.createElement('span');
-        ratingText.className = "ml-2 text-sm text-gray-500";
-        ratingText.textContent = `${avg.toFixed(1)} (${num} ${num === 1 ? 'valoración' : 'valoraciones'})`;
-        container.appendChild(ratingText);
-    } else {
-        const noRatingText = document.createElement('span');
-        noRatingText.className = "ml-2 text-sm text-gray-400";
-        noRatingText.textContent = "Sin valoraciones";
-        container.appendChild(noRatingText);
-    }
-}
-
-/**
- * Obtiene los datos de valoración de Firestore y los muestra.
- * @param {string} professionalId - El ID del profesional.
- * @param {HTMLElement} container - El contenedor para las estrellas.
- */
-async function getAndDisplayStars(professionalId, container) {
-    try {
-        const docRef = db.collection('ratings').doc(String(professionalId));
-        const docSnap = await docRef.get();
-
-        if (docSnap.exists) {
-            const data = docSnap.data();
-            displayStars(data.averageRating, data.ratingCount, container);
-        } else {
-            displayStars(0, 0, container);
-        }
-    } catch (error) {
-        console.error("Error al obtener valoración:", error);
-        displayStars(0, 0, container);
-    }
-}
-
-/**
- * Prepara la sección de valoración en la pantalla de detalles.
- * @param {string} professionalId - El ID del profesional.
- */
-async function setupRatingSection(professionalId) {
-    const displayContainer = document.getElementById('details-stars-display');
-    const inputContainer = document.getElementById('user-rating-input-container');
-    const interactiveStars = document.getElementById('interactive-stars');
-    const ratingFeedback = document.getElementById('rating-feedback');
-    
-    // 1. Mostrar siempre el promedio actual
-    await getAndDisplayStars(professionalId, displayContainer);
-    
-    // 2. Mostrar la opción de votar solo a clientes
-    if (userRole === 'client' && currentUser) {
-        inputContainer.classList.remove('hidden');
-        ratingFeedback.textContent = "";
-
-        // 3. Verificar si este cliente ya votó
-        const voteDoc = await db.collection('ratings').doc(String(professionalId)).collection('votes').doc(currentUser.uid).get();
-
-        if (voteDoc.exists) {
-            ratingFeedback.textContent = `Ya has valorado este servicio con ${voteDoc.data().rating} estrellas.`;
-            interactiveStars.classList.add('hidden'); // Ocultar estrellas para votar
-        } else {
-            interactiveStars.classList.remove('hidden'); // Mostrar estrellas
-            
-            // 4. Añadir interactividad a las estrellas para votar
-            const stars = interactiveStars.querySelectorAll('i');
-            stars.forEach(star => {
-                star.addEventListener('mouseover', () => highlightStars(stars, star.dataset.value));
-                star.addEventListener('mouseout', () => highlightStars(stars, 0)); // Reset on mouse out
-                star.addEventListener('click', () => submitRating(professionalId, star.dataset.value, stars));
-            });
-        }
-    }
-}
-
-// Función de ayuda para el efecto hover
-function highlightStars(stars, value) {
-    stars.forEach(s => {
-        s.className = s.dataset.value <= value ? "fas fa-star text-yellow-500" : "far fa-star text-gray-300";
-    });
-}
-
-// Función de ayuda para el efecto hover en las estrellas
-function highlightStars(stars, value) {
-    stars.forEach(s => {
-        s.className = s.dataset.value <= value ? "fas fa-star text-yellow-500" : "far fa-star text-gray-300";
-    });
-}
-
-/**
- * Envía la valoración a Firestore usando una transacción para seguridad.
- * @param {string} professionalId - El ID del profesional.
- * @param {number} ratingValue - La valoración del usuario (1-5).
- * @param {NodeListOf<HTMLElement>} stars - La lista de elementos de estrella.
- */
-async function submitRating(professionalId, ratingValue, stars) {
-    if (!currentUser) return;
-    const rating = parseInt(ratingValue);
-    const professionalIdStr = String(professionalId);
-    const userId = currentUser.uid;
-
-    const ratingDocRef = db.collection('ratings').doc(professionalIdStr);
-    const voteDocRef = ratingDocRef.collection('votes').doc(userId);
-    
-    document.getElementById('rating-feedback').textContent = "Guardando tu valoración...";
-
-    try {
-        await db.runTransaction(async (transaction) => {
-            const voteDoc = await transaction.get(voteDocRef);
-            if (voteDoc.exists) {
-                throw "¡Ya has valorado este profesional!";
-            }
-
-            const ratingDoc = await transaction.get(ratingDocRef);
-            let newCount = 1;
-            let newAverage = rating;
-
-            if (ratingDoc.exists) {
-                const data = ratingDoc.data();
-                const oldCount = data.ratingCount || 0;
-                const oldAverage = data.averageRating || 0;
-                newCount = oldCount + 1;
-                newAverage = ((oldAverage * oldCount) + rating) / newCount;
-            }
-            
-            transaction.set(ratingDocRef, {
-                averageRating: newAverage,
-                ratingCount: newCount
-            }, { merge: true });
-
-            transaction.set(voteDocRef, { rating: rating });
-        });
-        
-        document.getElementById('rating-feedback').textContent = "¡Gracias por tu valoración!";
-        stars.forEach(s => s.style.pointerEvents = 'none'); // Deshabilitar más clics
-        getAndDisplayStars(professionalIdStr, document.getElementById('details-stars-display')); // Actualizar promedio
-
-    } catch (error) {
-        console.error("Error al enviar valoración: ", error);
-        document.getElementById('rating-feedback').textContent = "Error: " + error;
-    }
-}
-      
-      
-      // --- FUNCIÓN PARA CARGAR LOS DATOS DEL PERFIL ---
-function loadProfileData() {
-    if (!currentUser) return; // Salir si no hay usuario
-
-    // Referencias a los elementos del DOM
-    const profileImage = document.getElementById('profileImage');
-    const profileIconFallback = document.getElementById('profileIconFallback');
-    const profileName = document.getElementById('profileName');
-    const profileEmail = document.getElementById('profileEmail');
-    const profileJoinedDate = document.getElementById('profileJoinedDate');
-
-    // Cargar imagen de perfil o mostrar icono de fallback
-    if (currentUser.photoURL) {
-        profileImage.src = currentUser.photoURL;
-        profileImage.classList.remove('hidden');
-        profileIconFallback.classList.add('hidden');
-    } else {
-        profileImage.classList.add('hidden');
-        profileIconFallback.classList.remove('hidden');
-    }
-
-    // Cargar nombre (si no existe, usar el email) y correo
-    profileName.textContent = currentUser.displayName || 'Usuario';
-    profileEmail.textContent = currentUser.email;
-
-    // Cargar y formatear la fecha de registro
-    const creationDate = new Date(currentUser.metadata.creationTime);
-    profileJoinedDate.textContent = `Se unió el ${creationDate.toLocaleDateString('es-MX')}`;
-}
-// ======================================
-      
-      
-        // Setup search functionality
-        function setupSearch() {
-            searchInput.addEventListener('input', () => {
-                const query = searchInput.value.trim().toLowerCase();
-                
-                if (query.length === 0) {
-                    searchResults.classList.add('hidden');
-                    return;
-                }
-                
-                // Remove accents and special characters for better search
-                const normalizedQuery = query.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-                
-                // Search in professionals and categories
-                const results = [];
-                
-                // Search in categories
-                categories.forEach(category => {
-                    const normalizedCategory = category.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-                    if (normalizedCategory.includes(normalizedQuery)) {
-                        results.push({
-                            type: 'category',
-                            name: category,
-                            match: category
-                        });
-                    }
-                });
-                
-                // Search in professionals
-                professionals.forEach(pro => {
-                    const normalizedName = pro.name.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-                    const normalizedCategory = pro.category.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-                    const normalizedSpecialty = pro.specialty.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-                    
-                    if (normalizedName.includes(normalizedQuery) || 
-                        normalizedCategory.includes(normalizedQuery) || 
-                        normalizedSpecialty.includes(normalizedQuery)) {
-                        
-                        // Highlight the matching part
-                        let matchField = '';
-                        let matchText = '';
-                        
-                        if (normalizedName.includes(normalizedQuery)) {
-                            matchField = 'name';
-                            const startIdx = normalizedName.indexOf(normalizedQuery);
-                            matchText = pro.name.substring(startIdx, startIdx + query.length);
-                        } else if (normalizedSpecialty.includes(normalizedQuery)) {
-                            matchField = 'specialty';
-                            const startIdx = normalizedSpecialty.indexOf(normalizedQuery);
-                            matchText = pro.specialty.substring(startIdx, startIdx + query.length);
-                        } else {
-                            matchField = 'category';
-                            const startIdx = normalizedCategory.indexOf(normalizedQuery);
-                            matchText = pro.category.substring(startIdx, startIdx + query.length);
-                        }
-                        
-                        results.push({
-                            type: 'professional',
-                            id: pro.id,
-                            name: pro.name,
-                            category: pro.category,
-                            specialty: pro.specialty,
-                            matchField: matchField,
-                            matchText: matchText
-                        });
-                    }
-                });
-                
-                // Display results
-                if (results.length > 0) {
-                    searchResults.innerHTML = '';
-                    results.forEach(result => {
-                        const resultElement = document.createElement('div');
-                        resultElement.className = 'p-3 hover:bg-gray-100 cursor-pointer border-b border-gray-100 last:border-0';
-                        
-                        if (result.type === 'category') {
-                            resultElement.innerHTML = `
-                                <div class="flex items-center">
-                                    <i class="fas fa-folder mr-3 text-blue-500"></i>
-                                    <div>
-                                        <p class="font-medium">${result.name}</p>
-                                        <p class="text-sm text-gray-500">Categoría</p>
-                                    </div>
-                                </div>
-                            `;
-                            
-                            resultElement.addEventListener('click', () => {
-                                showCategoryProfessionals(result.name);
-                                searchInput.value = '';
-                                searchResults.classList.add('hidden');
-                            });
-                        } else {
-                            // Highlight the matching text
-                            let displayName = result.name;
-                            let displayCategory = result.category;
-                            let displaySpecialty = result.specialty;
-                            
-                            if (result.matchField === 'name') {
-                                displayName = result.name.replace(
-                                    new RegExp(result.matchText, 'i'), 
-                                    `<span class="search-highlight">${result.matchText}</span>`
-                                );
-                            } else if (result.matchField === 'specialty') {
-                                displaySpecialty = result.specialty.replace(
-                                    new RegExp(result.matchText, 'i'), 
-                                    `<span class="search-highlight">${result.matchText}</span>`
-                                );
-                            } else {
-                                displayCategory = result.category.replace(
-                                    new RegExp(result.matchText, 'i'), 
-                                    `<span class="search-highlight">${result.matchText}</span>`
-                                );
-                            }
-                            
-                            resultElement.innerHTML = `
-                                <div class="flex items-start">
-                                    <img src="${professionals.find(p => p.id === result.id).image}" 
-                                         class="w-10 h-10 rounded-full object-cover mr-3">
-                                    <div>
-                                        <p class="font-medium">${displayName}</p>
-                                        <p class="text-sm">${displaySpecialty}</p>
-                                        <p class="text-xs text-gray-500">${displayCategory}</p>
-                                    </div>
-                                </div>
-                            `;
-                            
-                            resultElement.addEventListener('click', () => {
-                                showProfessionalDetails(result.id);
-                                searchInput.value = '';
-                                searchResults.classList.add('hidden');
-                            });
-                        }
-                        
-                        searchResults.appendChild(resultElement);
-                    });
-                    
-                    searchResults.classList.remove('hidden');
-                } else {
-                    searchResults.innerHTML = '<div class="p-3 text-gray-500">No se encontraron resultados</div>';
-                    searchResults.classList.remove('hidden');
-                }
-            });
-            
-            // Hide results when clicking outside
-            document.addEventListener('click', (e) => {
-                if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
-                    searchResults.classList.add('hidden');
-                }
-            });
-        }
-        
-        // Setup event listeners
-        function setupEventListeners() {
-    // Listeners de navegación existentes
-    document.getElementById('categoryFilter').addEventListener('change', (e) => loadExclusiveOffers(e.target.value));
-    document.getElementById('adminPanelBtn').addEventListener('click', () => showScreen('admin'));
-    document.getElementById('offersBtn').addEventListener('click', () => showScreen('offers'));
-    document.getElementById('mobileOffersBtn').addEventListener('click', () => {
-        showScreen('offers');
-        mobileMenu.classList.add('hidden');
-    });
-    const accountButton = document.getElementById('accountBtn');
-    if (accountButton) accountButton.addEventListener('click', () => showScreen('profile'));
-    const mobileAccountButton = document.getElementById('mobileAccountBtn');
-    if (mobileAccountButton) mobileAccountButton.addEventListener('click', () => {
-        showScreen('profile');
-        if (mobileMenu) mobileMenu.classList.add('hidden');
-    });
-    document.getElementById('enableNotificationsBtn').addEventListener('click', solicitarPermisoNotificaciones);
-    homeBtn.addEventListener('click', () => showScreen('home'));
-    featuredBtn.addEventListener('click', showAllFeatured);
-    mobileHomeBtn.addEventListener('click', () => {
-        showScreen('home');
-        mobileMenu.classList.add('hidden');
-    });
-    mobileFeaturedBtn.addEventListener('click', () => {
-        showAllFeatured();
-        mobileMenu.classList.add('hidden');
-    });
-    footerHomeBtn.addEventListener('click', () => showScreen('home'));
-    footerFeaturedBtn.addEventListener('click', showAllFeatured);
-    viewAllFeatured.addEventListener('click', showAllFeatured);
-    backFromCategory.addEventListener('click', () => history.back());
-    backFromDetails.addEventListener('click', () => history.back());
-    backFromFeatured.addEventListener('click', () => history.back());
-    document.getElementById('backFromOffers').addEventListener('click', () => history.back());
-    mobileMenuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
-    document.addEventListener('click', (e) => {
-    // Busca el botón más cercano, incluso si se hace clic en un ícono dentro de él.
-    const detailsButton = e.target.closest('.details-btn, .swiper-details-btn');
-
-    if (detailsButton) {
-        showProfessionalDetails(detailsButton.dataset.id);
-    }
-    });
-            
-          // --- ACCIONES DE LOS BOTONES DEL PERFIL ---
-
-// 1. Cerrar Sesión
-document.getElementById('profileSignOutBtn').addEventListener('click', () => {
-    if (confirm("¿Estás seguro de que deseas cerrar sesión?")) {
-        auth.signOut();
-    }
-});
-
-// 2. Cambiar Contraseña
-document.getElementById('profileChangePasswordBtn').addEventListener('click', () => {
-    if (!currentUser || !currentUser.email) return;
-
-    // Firebase solo permite cambiar contraseña a usuarios registrados por email/pass
-    const isEmailProvider = currentUser.providerData.some(provider => provider.providerId === 'password');
-    
-    if (!isEmailProvider) {
-        alert("No puedes cambiar la contraseña porque iniciaste sesión con un proveedor externo (como Google).");
-        return;
-    }
-
-    if (confirm("Se enviará un correo a tu dirección para restablecer tu contraseña. ¿Deseas continuar?")) {
-        auth.sendPasswordResetEmail(currentUser.email)
-            .then(() => {
-                alert("¡Correo enviado! Revisa tu bandeja de entrada (y la carpeta de spam) para continuar.");
-            })
-            .catch(error => {
-                console.error("Error al enviar correo de reseteo:", error);
-                alert("Hubo un error al intentar enviar el correo. Por favor, intenta más tarde.");
-            });
-    }
-});
-
-// 3. Eliminar Cuenta
-document.getElementById('profileDeleteAccountBtn').addEventListener('click', () => {
-    if (!currentUser) return;
-
-    const confirmationText = "¡Atención! Esta acción es irreversible y eliminará permanentemente tu cuenta y todos tus datos.\n\n¿Estás completamente seguro de que quieres eliminar tu cuenta?";
-    
-    if (confirm(confirmationText)) {
-        currentUser.delete()
-            .then(() => {
-                alert("Tu cuenta ha sido eliminada exitosamente.");
-                // onAuthStateChanged se encargará de redirigir al login
-            })
-            .catch(error => {
-                console.error("Error al eliminar la cuenta:", error);
-                // Este error común ocurre si el usuario no ha iniciado sesión recientemente
-                if (error.code === 'auth/requires-recent-login') {
-                    alert("Por seguridad, esta operación requiere que hayas iniciado sesión recientemente. Por favor, cierra sesión y vuelve a entrar para poder eliminar tu cuenta.");
-                } else {
-                    alert("Ocurrió un error al intentar eliminar tu cuenta.");
-                }
-            });
-    }
-});
-          // --- NUEVOS LISTENERS PARA EL PANEL DE ADMINISTRADOR ---
-    const addBtn = document.getElementById('addProfessionalBtn');
-    if(addBtn) addBtn.addEventListener('click', () => openProfessionalModal());
-
-    const cancelBtn = document.getElementById('cancelProfessionalBtn');
-    if(cancelBtn) cancelBtn.addEventListener('click', closeProfessionalModal);
-
-    const profForm = document.getElementById('professionalForm');
-    if(profForm) profForm.addEventListener('submit', saveProfessional);
-    
-    // Delegación de eventos para los botones de editar y eliminar en la lista
-    const adminList = document.getElementById('adminProfessionalsList');
-    if(adminList) {
-        adminList.addEventListener('click', (e) => {
-            if (e.target.classList.contains('edit-btn')) {
-                openProfessionalModal(e.target.dataset.id);
-            }
-            if (e.target.classList.contains('delete-btn')) {
-                deleteProfessional(e.target.dataset.id);
-            }
-        });
-    }
-          
-            // Setup search
-            setupSearch();
-        }
-        
-        // Initialize the app when DOM is loaded
-        document.addEventListener('DOMContentLoaded', init);
+// Arranca todo cuando el DOM está listo.
+document.addEventListener('DOMContentLoaded', init);
     </script>
 </body>
 </html>
