@@ -4896,7 +4896,13 @@ let authUnsubscribe = null;
 // Variable global para saber si el usuario actual es admin
 let isCurrentUserAdmin = false;
 
-// Observador de autenticación MEJORADO
+// Observador de autenticación
+// Variable para guardar nuestra función de "escucha" en tiempo real.
+let authUnsubscribe = null;
+// Variable global para saber si el usuario actual es admin
+let isCurrentUserAdmin = false;
+      
+// Observador de autenticación MEJORADO con lógica de Administrador
 auth.onAuthStateChanged(user => {
   // Si ya estábamos "escuchando" a un usuario anterior, dejamos de hacerlo.
   if (authUnsubscribe) {
@@ -4907,48 +4913,45 @@ auth.onAuthStateChanged(user => {
     currentUser = user;
     
     // Usamos .onSnapshot() para escuchar en tiempo real.
-    // Esto se ejecutará inmediatamente, y OTRA VEZ si los datos cambian (es decir, cuando se crea el documento).
     authUnsubscribe = db.collection('users').doc(user.uid).onSnapshot(doc => {
       if (doc.exists) {
-        // ¡Éxito! El documento existe (ya sea porque estaba antes o porque se acaba de crear).
         userRole = doc.data().role;
-          // --- INICIA LA MODIFICACIÓN ---
-        // Verificamos si el campo isAdmin es true
+
+        // --- INICIA LÓGICA DE ADMIN ---
+        // Verificamos si el campo isAdmin es true en la base de datos
         if (doc.data().isAdmin === true) {
           isCurrentUserAdmin = true;
-          // Mostramos el botón para ir al panel de administrador
+          // Si es admin, mostramos el botón del panel
           document.getElementById('adminPanelBtn').classList.remove('hidden');
         } else {
           isCurrentUserAdmin = false;
+          // Si no es admin, nos aseguramos de que el botón esté oculto
           document.getElementById('adminPanelBtn').classList.add('hidden');
         }
-        // --- FIN DE LA MODIFICACIÓN ---
+        // --- FIN LÓGICA DE ADMIN ---
+
         document.getElementById('appHeader').classList.remove('hidden');
-        // --- LÍNEA de Analitics ---
-    // Registra un evento de login en Analytics.
-    analytics.logEvent('login', { method: user.providerData[0].providerId });
-    // --- FIN LÍNEA Analitics ---
+        analytics.logEvent('login', { method: user.providerData[0].providerId });
         showScreen('home');
 
-        // Opcional: una vez que lo encontramos, podemos dejar de escuchar para ahorrar recursos.
         if (authUnsubscribe) {
           authUnsubscribe();
         }
       }
-      // Si el documento NO existe todavía, NO hacemos nada.
-      // onSnapshot se volverá a ejecutar solo en cuanto la función de Google lo cree.
     }, error => {
-        // Manejar posibles errores de lectura de Firestore
         console.error("Error al escuchar el perfil del usuario:", error);
-        auth.signOut(); // Si hay un error de permisos, desconectar.
+        auth.signOut();
     });
 
   } else {
+    // Se ejecuta al cerrar sesión o si no hay usuario
     currentUser = null;
     userRole = null;
-      // Asegúrate de resetear la variable al cerrar sesión
-    isCurrentUserAdmin = false; 
+    
+    // Reseteamos el estado de admin y ocultamos el botón
+    isCurrentUserAdmin = false;
     document.getElementById('adminPanelBtn').classList.add('hidden');
+    
     document.getElementById('appHeader').classList.add('hidden');
     showScreen('login');
   }
