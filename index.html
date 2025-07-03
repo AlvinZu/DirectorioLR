@@ -582,6 +582,10 @@
         <div class="mt-8 bg-white rounded-lg shadow-md overflow-hidden">
             <div class="p-5 border-b">
                 <h2 class="text-xl font-bold text-gray-800">Lista de Usuarios</h2>
+              <div class="mt-3">
+            <input type="text" id="userSearchInput" placeholder="Buscar por correo electrónico..."
+                   class="w-full p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+        </div>
             </div>
             <div class="overflow-x-auto">
                 <table class="w-full">
@@ -602,6 +606,10 @@
             <div class="p-5 border-b">
                 <h2 class="text-xl font-bold text-gray-800">Panel de Valoraciones</h2>
                 <p class="text-sm text-gray-500 mt-1">Monitorea y gestiona las calificaciones de los profesionales.</p>
+              <div class="mt-3">
+            <input type="text" id="ratingsSearchInput" placeholder="Buscar por nombre del profesional..."
+                   class="w-full p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+        </div>
             </div>
             <div class="overflow-x-auto">
                 <table class="w-full">
@@ -6224,6 +6232,31 @@ document.addEventListener('click', async (event) => {
     }
 });
       
+// ===============================================
+// ======= LÓGICA PARA FILTRAR TABLAS (BUSCADOR) ======
+// ===============================================
+function setupTableSearch(inputId, tableBodyId, cellIndex) {
+    const input = document.getElementById(inputId);
+    const tableBody = document.getElementById(tableBodyId);
+
+    input.addEventListener('input', () => {
+        const searchTerm = input.value.toLowerCase();
+        const rows = tableBody.getElementsByTagName('tr');
+
+        for (const row of rows) {
+            const cell = row.getElementsByTagName('td')[cellIndex];
+            if (cell) {
+                const cellText = cell.textContent || cell.innerText;
+                if (cellText.toLowerCase().indexOf(searchTerm) > -1) {
+                    row.style.display = "";
+                } else {
+                    row.style.display = "none";
+                }
+            }
+        }
+    });
+}
+      
       
 // ===============================================
 // ======= LÓGICA DEL PANEL DE ADMINISTRADOR (VERSIÓN CON VALORACIONES) =======
@@ -6451,7 +6484,12 @@ document.getElementById('profileDeleteAccountBtn').addEventListener('click', () 
 });
           
             // Setup search
-            setupSearch();
+            setupSearch();          
+            // Activar buscador para la tabla de usuarios (busca en la columna 0: correo)
+            setupTableSearch('userSearchInput', 'adminUserTableBody', 0);
+            // Activar buscador para la tabla de valoraciones (busca en la columna 0: nombre del profesional)
+            setupTableSearch('ratingsSearchInput', 'adminRatingsTableBody', 0);
+            
         }
         
         // Initialize the app when DOM is loaded
