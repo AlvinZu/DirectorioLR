@@ -736,53 +736,43 @@ function init() {
 
 // Nueva función para inicializar el slider
 function initSwiper() {
-    const swiperWrapper = document.querySelector('.swiper-wrapper');
-    
-    // Filtrar empresas con showInSlider: true
-    const sliderCompanies = professionals.filter(pro => 
-        pro.showInSlider && pro.image
-    );
-    
-    // Generar slides
-    swiperWrapper.innerHTML = sliderCompanies.map(company => `
-        <div class="swiper-slide">
-            <img src="${company.image}" alt="${company.name}">
-            <div class="swiper-slide-content">
-                <h3 class="text-xl font-bold">${company.name}</h3>
-                
-                <button class="mt-2 bg-white/20 backdrop-blur-sm px-4 py-1 rounded-full text-xs hover:bg-white/30 transition-all"
-                        onclick="showProfessionalDetails(${company.id})">
-                    Ver Perfil
-                </button>
-            </div>
-        </div>
-    `).join('');
+    // Usamos un try-catch para evitar que un error aquí detenga toda la app
+    try {
+        const swiperWrapper = document.querySelector('.swiper-wrapper');
+        if (!swiperWrapper) return;
 
-    // Inicializar Swiper
-    new Swiper('.swiper', {
-        loop: true,
-        autoplay: {
-            delay: 2500,
-        },
-        navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-        },
-        pagination: {
-            el: '.swiper-pagination',
-            clickable: true,
-        },
-        breakpoints: {
-            640: {
-                slidesPerView: 2,
-                spaceBetween: 20,
-            },
-            1024: {
-                slidesPerView: 3,
-                spaceBetween: 30,
-            },
-        }
-    });
+        // --- CAMBIO IMPORTANTE ---
+        // Usamos la nueva variable que viene de Firestore
+        const sliderCompanies = todosLosProfesionales.filter(pro => 
+            pro.showInSlider && pro.image
+        );
+        
+        swiperWrapper.innerHTML = sliderCompanies.map(company => `
+            <div class="swiper-slide">
+                <img src="${company.image}" alt="${company.name}">
+                <div class="swiper-slide-content">
+                    <h3 class="text-xl font-bold">${company.name}</h3>
+                    <button class="mt-2 bg-white/20 backdrop-blur-sm px-4 py-1 rounded-full text-xs hover:bg-white/30 transition-all"
+                            onclick="showProfessionalDetails(${company.id})">
+                        Ver Perfil
+                    </button>
+                </div>
+            </div>
+        `).join('');
+
+        new Swiper('.swiper', {
+            loop: sliderCompanies.length > 1, // El loop solo funciona si hay más de 1 slide
+            autoplay: { delay: 2500 },
+            navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+            pagination: { el: '.swiper-pagination', clickable: true },
+            breakpoints: {
+                640: { slidesPerView: 2, spaceBetween: 20 },
+                1024: { slidesPerView: 3, spaceBetween: 30 },
+            }
+        });
+    } catch (error) {
+        console.error("Error inicializando el slider:", error);
+    }
 }
 
         // Nueva función para cargar TODOS los profesionales una sola vez al inicio
@@ -1382,8 +1372,8 @@ document.getElementById('lightbox').addEventListener('click', (e) => {
         }
         
       // ESTA ES LA FUNCIÓN PRINCIPAL DE COMPARTIR
-async function shareProfessional(professionalId) {
-    const professional = professionals.find(p => p.id == professionalId);
+async function shareProfessional(professionalId) {    
+    const professional = todosLosProfesionales.find(p => p.id == professionalId);
     if (!professional) return;
 
     const shareData = {
@@ -1393,12 +1383,7 @@ async function shareProfessional(professionalId) {
     };
 
     if (navigator.share) {
-        try {
-            await navigator.share(shareData);
-            console.log('¡Perfil compartido exitosamente!');
-        } catch (err) {
-            console.log('Error al compartir:', err);
-        }
+        await navigator.share(shareData).catch(err => console.log('Error al compartir:', err));
     } else {
         alert('La función de compartir no está disponible en este navegador.');
     }
@@ -1623,55 +1608,31 @@ function loadExclusiveOffers(selectedCategory = 'all') {
     const offersGrid = document.getElementById('offersGrid');
     offersGrid.innerHTML = '';
 
-    // Obtener categorías únicas que tienen ofertas
+    // --- CAMBIO IMPORTANTE ---
     const categoriesWithOffers = [...new Set(
-        professionals
+        todosLosProfesionales
             .filter(pro => pro.offers && pro.offers.length > 0)
             .map(pro => pro.category)
     )];
 
-    // Actualizar opciones del filtro
     const categoryFilter = document.getElementById('categoryFilter');
-    categoryFilter.innerHTML = `
-        <option value="all">Todas las categorías</option>
-        ${categoriesWithOffers.map(category => `
-            <option value="${category}" ${selectedCategory === category ? 'selected' : ''}>
-                ${category}
-            </option>
-        `).join('')}
-    `;
+    categoryFilter.innerHTML = `<option value="all">Todas las categorías</option>` + 
+        categoriesWithOffers.map(category => `<option value="${category}" ${selectedCategory === category ? 'selected' : ''}>${category}</option>`).join('');
 
-    // Generar ofertas
-    professionals.forEach(pro => {
-        if(pro.membership === 'premium' && pro.offers && pro.offers.length > 0) {
-            if(selectedCategory === 'all' || pro.category === selectedCategory) {
+    // --- CAMBIO IMPORTANTE ---
+    todosLosProfesionales.forEach(pro => {
+        if (pro.membership === 'premium' && pro.offers && pro.offers.length > 0) {
+            if (selectedCategory === 'all' || pro.category === selectedCategory) {
                 pro.offers.forEach(offer => {
                     const offerCard = document.createElement('div');
                     offerCard.className = 'bg-white rounded-lg shadow-md overflow-hidden relative';
                     offerCard.innerHTML = `
                         <div class="p-4 bg-gradient-to-r from-blue-100 to-purple-100">
-                            <div class="flex items-center justify-between mb-2">
-                                <span class="bg-blue-600 text-white px-3 py-1 rounded-full text-sm">
-                                    ${offer.discount}
-                                </span>
-                                <span class="text-gray-500 text-sm">${offer.validity}</span>
-                            </div>
                             <h3 class="text-xl font-bold mb-2">${offer.title}</h3>
                             <p class="text-gray-600 mb-4">${offer.description}</p>
-                            <div class="bg-yellow-50 p-3 rounded-lg">
-                                <p class="text-sm font-semibold text-yellow-800">Condiciones:</p>
-                                <p class="text-sm text-yellow-700">${offer.conditions}</p>
-                            </div>
-                            <div class="mt-4 flex items-center">
-                                <img src="${pro.image}" class="w-10 h-10 rounded-full mr-3">
-                                <div>
-                                    <p class="font-medium">${pro.name}</p>
-                                    <p class="text-sm text-gray-500">${pro.category}</p>
-                                </div>
-                            </div>
-                            <button class="mt-4 w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition-colors"
+                            <button class="mt-4 w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700"
                                     onclick="showProfessionalDetails(${pro.id})">
-                                Ver Perfil Completo
+                                Ver Perfil
                             </button>
                         </div>
                     `;
@@ -1932,34 +1893,27 @@ function loadProfileData() {
       
         // Setup search functionality
         function setupSearch() {
-            searchInput.addEventListener('input', () => {
-                const query = searchInput.value.trim().toLowerCase();
-                
-                if (query.length === 0) {
-                    searchResults.classList.add('hidden');
-                    return;
-                }
-                
-                // Remove accents and special characters for better search
-                const normalizedQuery = query.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-                
-                // Search in professionals and categories
-                const results = [];
-                
-                // Search in categories
-                categories.forEach(category => {
-                    const normalizedCategory = category.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-                    if (normalizedCategory.includes(normalizedQuery)) {
-                        results.push({
-                            type: 'category',
-                            name: category,
-                            match: category
-                        });
-                    }
-                });
+    searchInput.addEventListener('input', () => {
+        const query = searchInput.value.trim().toLowerCase();
+        
+        if (query.length === 0) {
+            searchResults.classList.add('hidden');
+            return;
+        }
+        
+        const normalizedQuery = query.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        const results = [];
+        const uniqueCategories = [...new Set(todosLosProfesionales.map(pro => pro.category))];
+
+        uniqueCategories.forEach(category => {
+            const normalizedCategory = category.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            if (normalizedCategory.includes(normalizedQuery)) {
+                results.push({ type: 'category', name: category });
+            }
+        });
                 
                 // Search in professionals
-                professionals.forEach(pro => {
+                todosLosProfesionales.forEach(pro => {
                     const normalizedName = pro.name.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
                     const normalizedCategory = pro.category.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
                     const normalizedSpecialty = pro.specialty.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
