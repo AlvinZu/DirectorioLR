@@ -5431,6 +5431,7 @@ function handleInitialScreen() {
     offersScreen.classList.add('hidden');
     document.getElementById('profileScreen').classList.add('hidden');
     document.getElementById('sliderContainer').classList.add('hidden');
+    document.getElementById('adminScreen').classList.add('hidden');
 
     // Verificar si el usuario está autenticado
     if (!currentUser) {
@@ -5504,36 +5505,7 @@ function handleInitialScreen() {
     }
 }     
       
-           // Esta función es temporal, solo para la migración.
-function migrarProfesionalesAFirestore() {
-  // Obtenemos el array de profesionales que ya tienes en tu código.
-  const profesionalesParaMigrar = professionals;
-
-  if (!profesionalesParaMigrar || profesionalesParaMigrar.length === 0) {
-    console.error("El array 'professionals' está vacío o no existe.");
-    alert("No se encontraron profesionales para migrar.");
-    return;
-  }
-
-  console.log(`Iniciando migración de ${profesionalesParaMigrar.length} profesionales...`);
-  const batch = db.batch(); // Usamos un "batch" para hacer todas las escrituras a la vez, es más eficiente.
-
-  profesionalesParaMigrar.forEach(prof => {
-    // Creamos una referencia a un nuevo documento en la colección 'professionals'.
-    // Usaremos el 'id' que ya tienes en tu array como el ID del documento para mantener la consistencia.
-    const docRef = db.collection('professionals').doc(String(prof.id));
-    batch.set(docRef, prof); // Añadimos la operación de escritura al lote.
-  });
-
-  // Ejecutamos todas las operaciones del lote.
-  batch.commit().then(() => {
-    console.log("¡Migración completada con éxito!");
-    alert(`¡Se han migrado ${profesionalesParaMigrar.length} profesionales a Firestore!`);
-  }).catch(error => {
-    console.error("Error durante la migración: ", error);
-    alert("Ocurrió un error al migrar los datos. Revisa la consola (F12).");
-  });
-}
+           
       
       
       // Logout
