@@ -832,7 +832,7 @@ function initSwiper() {
                 <h3 class="text-xl font-bold">${company.name}</h3>
                 
                 <button class="mt-2 bg-white/20 backdrop-blur-sm px-4 py-1 rounded-full text-xs hover:bg-white/30 transition-all"
-                        onclick="showProfessionalDetails(${company.id})">
+                        onclick="showProfessionalDetails('${company.id}')"> // <-- ¡CORRECCIÓN CLAVE!
                     Ver Perfil
                 </button>
             </div>
