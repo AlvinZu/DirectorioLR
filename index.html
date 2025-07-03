@@ -598,6 +598,27 @@
                 </table>
             </div>
         </div>
+      <div class="mt-8 bg-white rounded-lg shadow-md overflow-hidden">
+            <div class="p-5 border-b">
+                <h2 class="text-xl font-bold text-gray-800">Panel de Valoraciones</h2>
+                <p class="text-sm text-gray-500 mt-1">Monitorea y gestiona las calificaciones de los profesionales.</p>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Profesional</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Calificación Promedio</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total de Votos</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="adminRatingsTableBody" class="divide-y divide-gray-200">
+                        <tr><td colspan="4" class="p-4 text-center text-gray-500">Cargando valoraciones...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
               
@@ -6167,56 +6188,129 @@ function loadProfileData() {
             });
         }
         
-      
       // ===============================================
-// ======= LÓGICA DEL PANEL DE ADMINISTRADOR =======
+// ======= LÓGICA PARA GESTIONAR VALORACIONES ======
+// ===============================================
+
+// Función para borrar todas las valoraciones de un profesional
+async function resetRating(professionalId, professionalName) {
+    if (!confirm(`¿Estás seguro de que quieres borrar TODAS las valoraciones de "${professionalName}"?\n\nEsta acción es irreversible.`)) {
+        return; // El usuario canceló la acción
+    }
+
+    try {
+        const ratingDocRef = db.collection('ratings').doc(String(professionalId));
+        await ratingDocRef.delete();
+        alert(`Las valoraciones de "${professionalName}" han sido reseteadas.`);
+        // Volvemos a cargar los datos del panel para que la tabla se actualice
+        loadAdminPanelData();
+    } catch (error) {
+        console.error("Error al resetear la valoración:", error);
+        alert("Ocurrió un error al intentar resetear la valoración.");
+    }
+}
+
+// Escuchador de eventos para los botones de "Resetear"
+document.addEventListener('click', async (event) => {
+    // Verificamos si el clic fue en un botón con la clase 'reset-rating-btn'
+    if (event.target.classList.contains('reset-rating-btn')) {
+        const button = event.target;
+        const professionalId = button.dataset.proId;
+        const professionalName = button.dataset.proName;
+        
+        if (professionalId && professionalName) {
+            await resetRating(professionalId, professionalName);
+        }
+    }
+});
+      
+      
+// ===============================================
+// ======= LÓGICA DEL PANEL DE ADMINISTRADOR (VERSIÓN CON VALORACIONES) =======
 // ===============================================
 async function loadAdminPanelData() {
-    // 1. Calcular estadísticas desde el array local `professionals`
+    // 1. Cargar estadísticas locales (esto no cambia)
     const totalPros = professionals.length;
     const premiumMembers = professionals.filter(p => p.membership === 'premium').length;
     const totalOffers = professionals.reduce((acc, pro) => acc + (pro.offers ? pro.offers.length : 0), 0);
-
-    // Actualizar las tarjetas de estadísticas locales
     document.getElementById('adminTotalPros').textContent = totalPros;
     document.getElementById('adminPremiumMembers').textContent = premiumMembers;
     document.getElementById('adminTotalOffers').textContent = totalOffers;
 
-    // 2. Obtener datos de usuarios desde Firestore
+    // 2. Cargar lista de usuarios (esto no cambia)
     const userTableBody = document.getElementById('adminUserTableBody');
     userTableBody.innerHTML = '<tr><td colspan="3" class="p-4 text-center text-gray-500">Cargando usuarios...</td></tr>';
-
     try {
         const usersSnapshot = await db.collection('users').orderBy('createdAt', 'desc').get();
-        const totalUsers = usersSnapshot.size;
-        document.getElementById('adminTotalUsers').textContent = totalUsers;
-
-        userTableBody.innerHTML = ''; // Limpiar la tabla
-
+        document.getElementById('adminTotalUsers').textContent = usersSnapshot.size;
+        userTableBody.innerHTML = '';
         if (usersSnapshot.empty) {
             userTableBody.innerHTML = '<tr><td colspan="3" class="p-4 text-center text-gray-500">No hay usuarios registrados.</td></tr>';
-            return;
+        } else {
+            usersSnapshot.forEach(doc => {
+                const userData = doc.data();
+                const joinDate = (userData.createdAt && typeof userData.createdAt.toDate === 'function')
+                                 ? userData.createdAt.toDate().toLocaleDateString('es-MX')
+                                 : 'Fecha no disponible';
+                const row = `
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${userData.email}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${userData.role === 'client' ? 'Cliente' : 'Empresa'}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${joinDate}</td>
+                    </tr>
+                `;
+                userTableBody.innerHTML += row;
+            });
         }
-
-        usersSnapshot.forEach(doc => {
-            const userData = doc.data();
-            const joinDate = userData.createdAt.toDate().toLocaleDateString('es-MX');
-
-            const row = `
-                <tr>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${userData.email}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${userData.role === 'client' ? 'Cliente' : 'Empresa'}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${joinDate}</td>
-                </tr>
-            `;
-            userTableBody.innerHTML += row;
-        });
-
     } catch (error) {
         console.error("Error al cargar los usuarios:", error);
         document.getElementById('adminTotalUsers').textContent = 'Error';
         userTableBody.innerHTML = '<tr><td colspan="3" class="p-4 text-center text-red-500">No se pudieron cargar los usuarios.</td></tr>';
     }
+
+    // --- INICIO DE LA NUEVA LÓGICA PARA VALORACIONES ---
+    const ratingsTableBody = document.getElementById('adminRatingsTableBody');
+    ratingsTableBody.innerHTML = '<tr><td colspan="4" class="p-4 text-center text-gray-500">Cargando valoraciones...</td></tr>';
+
+    try {
+        const ratingsSnapshot = await db.collection('ratings').orderBy('averageRating', 'desc').get();
+        ratingsTableBody.innerHTML = ''; // Limpiar la tabla
+
+        if (ratingsSnapshot.empty) {
+            ratingsTableBody.innerHTML = '<tr><td colspan="4" class="p-4 text-center text-gray-500">Aún no hay valoraciones registradas.</td></tr>';
+        } else {
+            ratingsSnapshot.forEach(doc => {
+                const ratingData = doc.data();
+                const proId = doc.id;
+                // Buscamos el nombre del profesional en nuestro array local
+                const professional = professionals.find(p => p.id == proId);
+                const proName = professional ? professional.name : `ID: ${proId} (No encontrado)`;
+
+                const row = `
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${proName}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-yellow-500 font-bold">
+                            <i class="fas fa-star"></i> ${ratingData.averageRating.toFixed(1)}
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${ratingData.ratingCount}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm">
+                            <button 
+                                class="reset-rating-btn bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600 transition-colors"
+                                data-pro-id="${proId}"
+                                data-pro-name="${proName}">
+                                Resetear
+                            </button>
+                        </td>
+                    </tr>
+                `;
+                ratingsTableBody.innerHTML += row;
+            });
+        }
+    } catch (error) {
+        console.error("Error al cargar las valoraciones:", error);
+        ratingsTableBody.innerHTML = '<tr><td colspan="4" class="p-4 text-center text-red-500">No se pudieron cargar las valoraciones.</td></tr>';
+    }
+    // --- FIN DE LA NUEVA LÓGICA ---
 }
       
       
