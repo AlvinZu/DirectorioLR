@@ -5476,6 +5476,12 @@ function handleInitialScreen() {
             // LA LÍNEA QUE OCULTABA EL HEADER FUE ELIMINADA DE AQUÍ
             loadProfileData(); 
             break;
+
+        case 'admin':
+            document.getElementById('adminScreen').classList.remove('hidden');
+            // Aquí llamaremos a la función para cargar los datos del panel
+            cargarProfesionalesEnAdmin(); 
+            break;
     
     }
 
@@ -6027,7 +6033,7 @@ function loadProfileData() {
 document.getElementById('categoryFilter').addEventListener('change', (e) => {
     loadExclusiveOffers(e.target.value);
 });
-          
+          document.getElementById('adminPanelBtn').addEventListener('click', () => showScreen('admin'));
           // Nuevo para ofertas setupEventListeners:
 document.getElementById('offersBtn').addEventListener('click', () => showScreen('offers'));
 document.getElementById('mobileOffersBtn').addEventListener('click', () => {
