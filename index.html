@@ -5132,55 +5132,59 @@ let isCurrentUserAdmin = false;
 
 // Observador de autenticación MEJORADO
 auth.onAuthStateChanged(user => {
-  // Si ya estábamos "escuchando" a un usuario anterior, dejamos de hacerlo.
   if (authUnsubscribe) {
     authUnsubscribe();
   }
 
   if (user) {
     currentUser = user;
-    
-    // Usamos .onSnapshot() para escuchar en tiempo real.
-    // Esto se ejecutará inmediatamente, y OTRA VEZ si los datos cambian (es decir, cuando se crea el documento).
+
     authUnsubscribe = db.collection('users').doc(user.uid).onSnapshot(doc => {
       if (doc.exists) {
-        // ¡Éxito! El documento existe (ya sea porque estaba antes o porque se acaba de crear).
         userRole = doc.data().role;
-          // --- INICIA LA MODIFICACIÓN ---
-        // Verificamos si el campo isAdmin es true
         if (doc.data().isAdmin === true) {
           isCurrentUserAdmin = true;
-          // Mostramos el botón para ir al panel de administrador
           document.getElementById('adminPanelBtn').classList.remove('hidden');
         } else {
           isCurrentUserAdmin = false;
           document.getElementById('adminPanelBtn').classList.add('hidden');
         }
-        // --- FIN DE LA MODIFICACIÓN ---
         document.getElementById('appHeader').classList.remove('hidden');
-        // --- LÍNEA de Analitics ---
-    // Registra un evento de login en Analytics.
-    analytics.logEvent('login', { method: user.providerData[0].providerId });
-    // --- FIN LÍNEA Analitics ---
+        analytics.logEvent('login', { method: user.providerData[0].providerId });
+
+        // --- INICIO DEL CÓDIGO CLAVE AÑADIDO ---
+        // Revisamos si hay una redirección pendiente guardada en la sesión.
+        const pendingRedirect = sessionStorage.getItem('redirectAfterLogin');
+        if (pendingRedirect) {
+            // Si la hay, la eliminamos para que no se repita en el futuro.
+            sessionStorage.removeItem('redirectAfterLogin');
+
+            // Separamos el destino y el parámetro (ej: "details" y "123")
+            const [screen, param] = pendingRedirect.split('_');
+
+            // Si el destino es ver detalles de un profesional, lo mostramos.
+            if (screen === 'details' && param) {
+                showProfessionalDetails(param); // Redirigimos al perfil correcto.
+                return; // Detenemos la ejecución para no ir a la pantalla de inicio.
+            }
+        }
+        // --- FIN DEL CÓDIGO CLAVE AÑADIDO ---
+
+        // Si no hay ninguna redirección pendiente, continuamos a la pantalla de inicio.
         showScreen('home');
 
-        // Opcional: una vez que lo encontramos, podemos dejar de escuchar para ahorrar recursos.
         if (authUnsubscribe) {
           authUnsubscribe();
         }
       }
-      // Si el documento NO existe todavía, NO hacemos nada.
-      // onSnapshot se volverá a ejecutar solo en cuanto la función de Google lo cree.
     }, error => {
-        // Manejar posibles errores de lectura de Firestore
         console.error("Error al escuchar el perfil del usuario:", error);
-        auth.signOut(); // Si hay un error de permisos, desconectar.
+        auth.signOut();
     });
 
   } else {
     currentUser = null;
     userRole = null;
-      // Asegúrate de resetear la variable al cerrar sesión
     isCurrentUserAdmin = false; 
     document.getElementById('adminPanelBtn').classList.add('hidden');
     document.getElementById('appHeader').classList.add('hidden');
@@ -5618,16 +5622,26 @@ function handleInitialScreen() {
     const urlParams = new URLSearchParams(window.location.search);
     const professionalId = urlParams.get('id');
 
+    // --- INICIO DE LA MODIFICACIÓN ---
     if (professionalId) {
-        // Si hay un ID, muestra los detalles de ese profesional
-        history.replaceState({ screen: 'details' }, '');
-        showProfessionalDetails(professionalId);
-    } else {
-        // Si no, muestra la pantalla de inicio
-        history.replaceState({ screen: 'home' }, '');
-        showScreen('home');
+        // Si la URL tiene un ID, lo guardamos en la sesión del navegador.
+        // Esto nos permitirá recordarlo después del inicio de sesión.
+        sessionStorage.setItem('redirectAfterLogin', `details_${professionalId}`);
+
+        // Si ya hay un usuario logueado, lo llevamos directamente.
+        if (currentUser) {
+            showProfessionalDetails(professionalId);
+            return;
+        }
     }
+    // --- FIN DE LA MODIFICACIÓN ---
+
+    // Si no hay ID en la URL o no hay sesión iniciada, muestra la pantalla por defecto.
+    // El observador de Firebase se encargará de mostrar el login si es necesario.
+    history.replaceState({ screen: 'home' }, '');
+    showScreen('home'); 
 }
+      
       
         // Load featured professionals preview
         function loadFeaturedPreview() {
