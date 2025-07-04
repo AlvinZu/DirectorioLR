@@ -390,10 +390,16 @@
             <div class="bg-white rounded-lg shadow-md p-6 mb-8 -mt-4">
                 <h2 class="text-2xl font-bold text-gray-800 mb-4">Encuentra profesionales cerca de ti</h2>
                 <div class="relative">
-                    <input type="text" id="searchInput" placeholder="Buscar por nombre o categoría..." 
-                           class="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                    <i class="fas fa-search absolute right-4 top-4 text-gray-400"></i>
-                </div>
+    <input type="text" id="searchInput" placeholder="Buscar por nombre, categoría o por voz..." 
+           class="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 pr-20">
+
+    <div class="absolute inset-y-0 right-0 flex items-center pr-3 space-x-3">
+        <button id="voiceSearchBtn" class="p-2 text-gray-500 hover:text-blue-600 focus:outline-none">
+            <i class="fas fa-microphone text-xl"></i>
+        </button>
+        <i class="fas fa-search text-gray-400"></i>
+    </div>
+</div>
                 <div id="searchResults" class="hidden mt-2 border border-gray-200 rounded-lg max-h-60 overflow-y-auto"></div>
             </div>
             
@@ -6378,6 +6384,54 @@ function setupTableSearch(inputId, tableBodyId, cellIndex) {
     });
 }
       
+ // ===============================================
+// ======= LÓGICA PARA BÚSQUEDA POR VOZ ======
+// ===============================================
+function setupVoiceSearch() {
+    const voiceSearchBtn = document.getElementById('voiceSearchBtn');
+    const searchInput = document.getElementById('searchInput');
+
+    // Verificamos si el navegador es compatible con la API de reconocimiento de voz
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRecognition) {
+        // Si no es compatible, ocultamos el botón y no hacemos nada más.
+        voiceSearchBtn.style.display = 'none';
+        console.log("El navegador no soporta la búsqueda por voz.");
+        return;
+    }
+
+    const recognition = new SpeechRecognition();
+    recognition.lang = 'es-MX'; // Establecemos el idioma a Español (México)
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
+
+    // Cuando se hace clic en el botón del micrófono
+    voiceSearchBtn.addEventListener('click', () => {
+        recognition.start();
+        voiceSearchBtn.classList.add('text-red-500'); // Cambia a color rojo para indicar que está escuchando
+    });
+
+    // Cuando la API de voz termina de escuchar
+    recognition.onend = () => {
+        voiceSearchBtn.classList.remove('text-red-500'); // Vuelve al color normal
+    };
+
+    // Cuando la API detecta un resultado
+    recognition.onresult = (event) => {
+        const speechResult = event.results[0][0].transcript;
+        searchInput.value = speechResult; // Ponemos el texto en la barra de búsqueda
+
+        // Simulamos un evento 'input' para que la lógica de búsqueda existente se active
+        searchInput.dispatchEvent(new Event('input', { bubbles: true }));
+    };
+
+    // Manejo de errores
+    recognition.onerror = (event) => {
+        console.error("Error en el reconocimiento de voz:", event.error);
+        alert(`Error en el reconocimiento de voz: ${event.error}`);
+    };
+}
+      
       
 // ===============================================
 // ======= LÓGICA DEL PANEL DE ADMINISTRADOR (VERSIÓN CON CATEGORÍAS) =======
@@ -6635,7 +6689,8 @@ document.getElementById('profileDeleteAccountBtn').addEventListener('click', () 
             setupTableSearch('userSearchInput', 'adminUserTableBody', 0);
             // Activar buscador para la tabla de valoraciones (busca en la columna 0: nombre del profesional)
             setupTableSearch('ratingsSearchInput', 'adminRatingsTableBody', 0);
-            
+            // Activar la funcionalidad de búsqueda por voz
+            setupVoiceSearch();
         }
         
         // Initialize the app when DOM is loaded
