@@ -6391,10 +6391,21 @@ function setupVoiceSearch() {
     const voiceSearchBtn = document.getElementById('voiceSearchBtn');
     const searchInput = document.getElementById('searchInput');
 
-    // Verificamos si el navegador es compatible con la API de reconocimiento de voz
+    // --- INICIO DE LA MODIFICACIÓN CLAVE ---
+    // Verificación robusta para iOS, donde la API puede existir pero no es funcional.
+    // Esta línea detecta si el dispositivo es un iPhone, iPad o iPod.
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+
+    if (isIOS) {
+        voiceSearchBtn.style.display = 'none'; // Ocultamos el botón en todos los dispositivos iOS.
+        console.log("Búsqueda por voz deshabilitada en iOS por incompatibilidad.");
+        return; // Detenemos la ejecución de la función por completo.
+    }
+    // --- FIN DE LA MODIFICACIÓN CLAVE ---
+
+    // La comprobación original se mantiene como respaldo para otros navegadores no compatibles.
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     if (!SpeechRecognition) {
-        // Si no es compatible, ocultamos el botón y no hacemos nada más.
         voiceSearchBtn.style.display = 'none';
         console.log("El navegador no soporta la búsqueda por voz.");
         return;
@@ -6407,8 +6418,12 @@ function setupVoiceSearch() {
 
     // Cuando se hace clic en el botón del micrófono
     voiceSearchBtn.addEventListener('click', () => {
-        recognition.start();
-        voiceSearchBtn.classList.add('text-red-500'); // Cambia a color rojo para indicar que está escuchando
+        try {
+            recognition.start();
+            voiceSearchBtn.classList.add('text-red-500'); // Cambia a color rojo para indicar que está escuchando
+        } catch(e) {
+            console.error("Error al iniciar el reconocimiento de voz. Es posible que ya estuviera activo.", e);
+        }
     });
 
     // Cuando la API de voz termina de escuchar
@@ -6428,7 +6443,10 @@ function setupVoiceSearch() {
     // Manejo de errores
     recognition.onerror = (event) => {
         console.error("Error en el reconocimiento de voz:", event.error);
-        alert(`Error en el reconocimiento de voz: ${event.error}`);
+        // Evitamos mostrar alertas al usuario por errores comunes como 'no-speech'
+        if (event.error !== 'no-speech' && event.error !== 'aborted') {
+            alert(`Error en el reconocimiento de voz: ${event.error}`);
+        }
     };
 }
       
