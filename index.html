@@ -161,6 +161,11 @@
 .swiper-pagination-bullet-active {
     background: white !important;
 }
+ 
+      /* Estilos para el botón de Volver Arriba */
+#scrollToTopBtn {
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
       
     </style>
 </head>
@@ -6449,6 +6454,30 @@ function setupVoiceSearch() {
         }
     };
 }
+
+// ===============================================
+// ======= LÓGICA PARA BOTÓN DE VOLVER ARRIBA ======
+// ===============================================
+function setupScrollToTop() {
+    const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+
+    // Muestra u oculta el botón basado en la posición del scroll
+    window.onscroll = () => {
+        if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+            scrollToTopBtn.classList.remove('hidden');
+        } else {
+            scrollToTopBtn.classList.add('hidden');
+        }
+    };
+
+    // Cuando se hace clic en el botón, se desplaza suavemente hacia arriba
+    scrollToTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth' // ¡La magia del desplazamiento suave!
+        });
+    });
+}
       
       
 // ===============================================
@@ -6709,10 +6738,17 @@ document.getElementById('profileDeleteAccountBtn').addEventListener('click', () 
             setupTableSearch('ratingsSearchInput', 'adminRatingsTableBody', 0);
             // Activar la funcionalidad de búsqueda por voz
             setupVoiceSearch();
+            // Activar la funcionalidad del botón de Volver Arriba
+            setupScrollToTop();
         }
         
         // Initialize the app when DOM is loaded
         document.addEventListener('DOMContentLoaded', init);
     </script>
+      
+      <button id="scrollToTopBtn" class="hidden fixed bottom-5 right-5 bg-blue-600 text-white w-12 h-12 rounded-full shadow-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-transform transform hover:scale-110">
+    <i class="fas fa-arrow-up text-xl"></i>
+</button>
+      
 </body>
 </html>
