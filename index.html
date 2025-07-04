@@ -540,7 +540,7 @@
         <h1 class="text-3xl font-bold text-gray-800">Panel de Administrador</h1>
         <p class="text-gray-500 mt-1">Bienvenido, aquí puedes ver las métricas clave de DirectorioPro.</p>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mt-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mt-6">
             <div class="bg-white p-5 rounded-lg shadow-md flex items-center space-x-4">
                 <div class="bg-blue-100 p-3 rounded-full">
                     <i class="fas fa-briefcase text-2xl text-blue-600"></i>
@@ -577,6 +577,17 @@
                     <p id="adminTotalUsers" class="text-2xl font-bold">0</p>
                 </div>
             </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mt-6">
+    <div class="bg-white p-5 rounded-lg shadow-md flex items-center space-x-4">
+        <div class="bg-indigo-100 p-3 rounded-full">
+            <i class="fas fa-folder-open text-2xl text-indigo-600"></i>
+        </div>
+        <div>
+            <p class="text-sm text-gray-500">Total Categorías</p>
+            <p id="adminTotalCategories" class="text-2xl font-bold">0</p>
+        </div>
+    </div>
+    </div>
         </div>
 
         <div class="mt-8 bg-white rounded-lg shadow-md overflow-hidden">
@@ -627,6 +638,19 @@
                 </table>
             </div>
         </div>
+      
+      <div class="mt-8 bg-white rounded-lg shadow-md">
+    <div class="p-5 border-b">
+        <h2 class="text-xl font-bold text-gray-800">Desglose por Categoría</h2>
+        <p class="text-sm text-gray-500 mt-1">Conteo de profesionales en cada categoría.</p>
+    </div>
+    <div class="p-5">
+        <ul id="adminCategoryList" class="space-y-3">
+            <li class="text-center text-gray-500">Cargando datos...</li>
+        </ul>
+    </div>
+</div>
+      
     </div>
 </div>
               
@@ -6259,10 +6283,10 @@ function setupTableSearch(inputId, tableBodyId, cellIndex) {
       
       
 // ===============================================
-// ======= LÓGICA DEL PANEL DE ADMINISTRADOR (VERSIÓN CON VALORACIONES) =======
+// ======= LÓGICA DEL PANEL DE ADMINISTRADOR (VERSIÓN CON CATEGORÍAS) =======
 // ===============================================
 async function loadAdminPanelData() {
-    // 1. Cargar estadísticas locales (esto no cambia)
+    // 1. Cargar estadísticas de profesionales (modificado)
     const totalPros = professionals.length;
     const premiumMembers = professionals.filter(p => p.membership === 'premium').length;
     const totalOffers = professionals.reduce((acc, pro) => acc + (pro.offers ? pro.offers.length : 0), 0);
@@ -6270,7 +6294,37 @@ async function loadAdminPanelData() {
     document.getElementById('adminPremiumMembers').textContent = premiumMembers;
     document.getElementById('adminTotalOffers').textContent = totalOffers;
 
-    // 2. Cargar lista de usuarios (esto no cambia)
+    // --- INICIO DE LA NUEVA LÓGICA PARA CATEGORÍAS ---
+    const categoryCounts = {};
+    // Contamos cuántos profesionales hay por categoría
+    professionals.forEach(pro => {
+        categoryCounts[pro.category] = (categoryCounts[pro.category] || 0) + 1;
+    });
+
+    // Actualizamos la tarjeta de total de categorías
+    const totalCategories = Object.keys(categoryCounts).length;
+    document.getElementById('adminTotalCategories').textContent = totalCategories;
+
+    // Mostramos la lista del desglose
+    const categoryList = document.getElementById('adminCategoryList');
+    categoryList.innerHTML = ''; // Limpiar la lista
+
+    // Convertimos el objeto a un array para ordenarlo alfabéticamente y mostrarlo
+    Object.entries(categoryCounts)
+        .sort((a, b) => a[0].localeCompare(b[0]))
+        .forEach(([category, count]) => {
+            const listItem = `
+                <li class="flex justify-between items-center p-2 rounded-md hover:bg-gray-50 transition-colors">
+                    <span class="text-sm font-medium text-gray-700">${category}</span>
+                    <span class="px-2 py-1 text-xs font-semibold text-blue-800 bg-blue-100 rounded-full">${count}</span>
+                </li>
+            `;
+            categoryList.innerHTML += listItem;
+        });
+    // --- FIN DE LA NUEVA LÓGICA ---
+
+
+    // 2. Cargar lista de usuarios (sin cambios)
     const userTableBody = document.getElementById('adminUserTableBody');
     userTableBody.innerHTML = '<tr><td colspan="3" class="p-4 text-center text-gray-500">Cargando usuarios...</td></tr>';
     try {
@@ -6301,24 +6355,20 @@ async function loadAdminPanelData() {
         userTableBody.innerHTML = '<tr><td colspan="3" class="p-4 text-center text-red-500">No se pudieron cargar los usuarios.</td></tr>';
     }
 
-    // --- INICIO DE LA NUEVA LÓGICA PARA VALORACIONES ---
+    // 3. Cargar Panel de Valoraciones (sin cambios)
     const ratingsTableBody = document.getElementById('adminRatingsTableBody');
     ratingsTableBody.innerHTML = '<tr><td colspan="4" class="p-4 text-center text-gray-500">Cargando valoraciones...</td></tr>';
-
     try {
         const ratingsSnapshot = await db.collection('ratings').orderBy('averageRating', 'desc').get();
-        ratingsTableBody.innerHTML = ''; // Limpiar la tabla
-
+        ratingsTableBody.innerHTML = '';
         if (ratingsSnapshot.empty) {
             ratingsTableBody.innerHTML = '<tr><td colspan="4" class="p-4 text-center text-gray-500">Aún no hay valoraciones registradas.</td></tr>';
         } else {
             ratingsSnapshot.forEach(doc => {
                 const ratingData = doc.data();
                 const proId = doc.id;
-                // Buscamos el nombre del profesional en nuestro array local
                 const professional = professionals.find(p => p.id == proId);
                 const proName = professional ? professional.name : `ID: ${proId} (No encontrado)`;
-
                 const row = `
                     <tr>
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${proName}</td>
@@ -6343,7 +6393,6 @@ async function loadAdminPanelData() {
         console.error("Error al cargar las valoraciones:", error);
         ratingsTableBody.innerHTML = '<tr><td colspan="4" class="p-4 text-center text-red-500">No se pudieron cargar las valoraciones.</td></tr>';
     }
-    // --- FIN DE LA NUEVA LÓGICA ---
 }
       
       
