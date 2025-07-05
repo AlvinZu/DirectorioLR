@@ -626,7 +626,7 @@
                     <thead class="bg-gray-50">
                         <tr>
                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Correo Electrónico</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Rol</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nombre de Usuario</th>
                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Fecha de Registro</th>
                         </tr>
                     </thead>
@@ -6531,12 +6531,17 @@ function setupProfileEditing() {
             saveNameBtn.textContent = 'Guardando...';
 
             await currentUser.updateProfile({
-                displayName: newName
-            });
+    displayName: newName
+});
 
-            // Actualizamos la UI
-            profileName.textContent = newName;
-            alert('¡Nombre actualizado con éxito!');
+// Ahora, también guardamos el nuevo nombre en el documento del usuario en Firestore.
+await db.collection('users').doc(currentUser.uid).update({
+    displayName: newName
+});
+
+// Actualizamos la UI
+profileName.textContent = newName;
+alert('¡Nombre actualizado con éxito!');
 
         } catch (error) {
             console.error("Error al actualizar el nombre:", error);
@@ -6556,30 +6561,21 @@ function setupProfileEditing() {
 // ======= LÓGICA DEL PANEL DE ADMINISTRADOR (VERSIÓN CON CATEGORÍAS) =======
 // ===============================================
 async function loadAdminPanelData() {
-    // 1. Cargar estadísticas de profesionales (modificado)
+    // --- Sección de Estadísticas y Categorías (sin cambios) ---
     const totalPros = professionals.length;
     const premiumMembers = professionals.filter(p => p.membership === 'premium').length;
     const totalOffers = professionals.reduce((acc, pro) => acc + (pro.offers ? pro.offers.length : 0), 0);
     document.getElementById('adminTotalPros').textContent = totalPros;
     document.getElementById('adminPremiumMembers').textContent = premiumMembers;
     document.getElementById('adminTotalOffers').textContent = totalOffers;
-
-    // --- INICIO DE LA NUEVA LÓGICA PARA CATEGORÍAS ---
     const categoryCounts = {};
-    // Contamos cuántos profesionales hay por categoría
     professionals.forEach(pro => {
         categoryCounts[pro.category] = (categoryCounts[pro.category] || 0) + 1;
     });
-
-    // Actualizamos la tarjeta de total de categorías
     const totalCategories = Object.keys(categoryCounts).length;
     document.getElementById('adminTotalCategories').textContent = totalCategories;
-
-    // Mostramos la lista del desglose
     const categoryList = document.getElementById('adminCategoryList');
-    categoryList.innerHTML = ''; // Limpiar la lista
-
-    // Convertimos el objeto a un array para ordenarlo alfabéticamente y mostrarlo
+    categoryList.innerHTML = '';
     Object.entries(categoryCounts)
         .sort((a, b) => a[0].localeCompare(b[0]))
         .forEach(([category, count]) => {
@@ -6591,10 +6587,8 @@ async function loadAdminPanelData() {
             `;
             categoryList.innerHTML += listItem;
         });
-    // --- FIN DE LA NUEVA LÓGICA ---
 
-
-    // 2. Cargar lista de usuarios (sin cambios)
+    // --- Sección de Lista de Usuarios (MODIFICADA) ---
     const userTableBody = document.getElementById('adminUserTableBody');
     userTableBody.innerHTML = '<tr><td colspan="3" class="p-4 text-center text-gray-500">Cargando usuarios...</td></tr>';
     try {
@@ -6609,13 +6603,19 @@ async function loadAdminPanelData() {
                 const joinDate = (userData.createdAt && typeof userData.createdAt.toDate === 'function')
                                  ? userData.createdAt.toDate().toLocaleDateString('es-MX')
                                  : 'Fecha no disponible';
+
+                // --- INICIO DE LA MODIFICACIÓN CLAVE ---
+                // Obtenemos el nombre de usuario. Si no existe, mostramos un texto alternativo.
+                const displayName = userData.displayName || `<em class="text-gray-400">No establecido</em>`;
+
                 const row = `
                     <tr>
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${userData.email}</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${userData.role === 'client' ? 'Cliente' : 'Empresa'}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">${displayName}</td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${joinDate}</td>
                     </tr>
                 `;
+                // --- FIN DE LA MODIFICACIÓN CLAVE ---
                 userTableBody.innerHTML += row;
             });
         }
@@ -6625,7 +6625,7 @@ async function loadAdminPanelData() {
         userTableBody.innerHTML = '<tr><td colspan="3" class="p-4 text-center text-red-500">No se pudieron cargar los usuarios.</td></tr>';
     }
 
-    // 3. Cargar Panel de Valoraciones (sin cambios)
+    // --- Sección de Panel de Valoraciones (sin cambios) ---
     const ratingsTableBody = document.getElementById('adminRatingsTableBody');
     ratingsTableBody.innerHTML = '<tr><td colspan="4" class="p-4 text-center text-gray-500">Cargando valoraciones...</td></tr>';
     try {
