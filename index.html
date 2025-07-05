@@ -513,11 +513,23 @@
                 </div>
             </div>
 
-            <div class="text-center">
-                <h3 id="profileName" class="text-2xl font-bold text-gray-900"></h3>
-                <p id="profileEmail" class="text-gray-500"></p>
-                <span class="inline-block bg-blue-100 text-blue-800 text-xs font-semibold mt-2 px-2.5 py-0.5 rounded-full">Cliente</span>
-            </div>
+            <div class="text-center w-full max-w-xs">
+    <div id="nameDisplay">
+        <h3 id="profileName" class="text-2xl font-bold text-gray-900 truncate"></h3>
+        <button id="editNameBtn" class="mt-1 text-sm text-blue-600 hover:underline focus:outline-none">Editar nombre</button>
+    </div>
+
+    <div id="nameEdit" class="hidden">
+        <input type="text" id="nameInput" placeholder="Tu nombre" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+        <div class="flex space-x-2 mt-2">
+            <button id="saveNameBtn" class="w-full bg-blue-600 text-white font-bold py-2 rounded-lg hover:bg-blue-700 transition-colors shadow-md">Guardar</button>
+            <button id="cancelEditBtn" class="w-full bg-gray-200 text-gray-800 font-bold py-2 rounded-lg hover:bg-gray-300 transition-colors">Cancelar</button>
+        </div>
+    </div>
+
+    <p id="profileEmail" class="text-gray-500 mt-2"></p>
+    <span class="inline-block bg-blue-100 text-blue-800 text-xs font-semibold mt-2 px-2.5 py-0.5 rounded-full">Cliente</span>
+</div>
 
             <div class="flex items-center space-x-3 text-gray-600 bg-gray-100 px-4 py-2 rounded-lg">
                 <i class="far fa-calendar-alt"></i>
@@ -6146,16 +6158,15 @@ async function submitRating(professionalId, ratingValue, stars) {
       
       // --- FUNCIÓN PARA CARGAR LOS DATOS DEL PERFIL ---
 function loadProfileData() {
-    if (!currentUser) return; // Salir si no hay usuario
+    if (!currentUser) return;
 
-    // Referencias a los elementos del DOM
     const profileImage = document.getElementById('profileImage');
     const profileIconFallback = document.getElementById('profileIconFallback');
     const profileName = document.getElementById('profileName');
     const profileEmail = document.getElementById('profileEmail');
     const profileJoinedDate = document.getElementById('profileJoinedDate');
+    const nameInput = document.getElementById('nameInput'); // <- Nuevo elemento
 
-    // Cargar imagen de perfil o mostrar icono de fallback
     if (currentUser.photoURL) {
         profileImage.src = currentUser.photoURL;
         profileImage.classList.remove('hidden');
@@ -6165,11 +6176,12 @@ function loadProfileData() {
         profileIconFallback.classList.remove('hidden');
     }
 
-    // Cargar nombre (si no existe, usar el email) y correo
-    profileName.textContent = currentUser.displayName || 'Usuario';
+    const displayName = currentUser.displayName || 'Usuario';
+    profileName.textContent = displayName;
+    nameInput.value = displayName; // <- Llenamos el campo de edición
+
     profileEmail.textContent = currentUser.email;
 
-    // Cargar y formatear la fecha de registro
     const creationDate = new Date(currentUser.metadata.creationTime);
     profileJoinedDate.textContent = `Se unió el ${creationDate.toLocaleDateString('es-MX')}`;
 }
@@ -6327,7 +6339,7 @@ function loadProfileData() {
             });
         }
         
-      // ===============================================
+// ===============================================
 // ======= LÓGICA PARA GESTIONAR VALORACIONES ======
 // ===============================================
 
@@ -6475,6 +6487,67 @@ function setupScrollToTop() {
             top: 0,
             behavior: 'smooth' // ¡La magia del desplazamiento suave!
         });
+    });
+}
+      
+// ===============================================
+// ======= LÓGICA PARA EDITAR PERFIL DE USUARIO ======
+// ===============================================
+function setupProfileEditing() {
+    const editNameBtn = document.getElementById('editNameBtn');
+    const saveNameBtn = document.getElementById('saveNameBtn');
+    const cancelEditBtn = document.getElementById('cancelEditBtn');
+    const nameDisplay = document.getElementById('nameDisplay');
+    const nameEdit = document.getElementById('nameEdit');
+    const nameInput = document.getElementById('nameInput');
+    const profileName = document.getElementById('profileName');
+
+    // Al hacer clic en "Editar"
+    editNameBtn.addEventListener('click', () => {
+        nameDisplay.classList.add('hidden');
+        nameEdit.classList.remove('hidden');
+        nameInput.value = profileName.textContent; // Asegura que el input tenga el valor actual
+        nameInput.focus();
+    });
+
+    // Al hacer clic en "Cancelar"
+    cancelEditBtn.addEventListener('click', () => {
+        nameEdit.classList.add('hidden');
+        nameDisplay.classList.remove('hidden');
+    });
+
+    // Al hacer clic en "Guardar"
+    saveNameBtn.addEventListener('click', async () => {
+        const newName = nameInput.value.trim();
+        if (newName === '' || newName === currentUser.displayName) {
+            // Si el nombre está vacío o no ha cambiado, simplemente cancelamos
+            nameEdit.classList.add('hidden');
+            nameDisplay.classList.remove('hidden');
+            return;
+        }
+
+        try {
+            saveNameBtn.disabled = true;
+            saveNameBtn.textContent = 'Guardando...';
+
+            await currentUser.updateProfile({
+                displayName: newName
+            });
+
+            // Actualizamos la UI
+            profileName.textContent = newName;
+            alert('¡Nombre actualizado con éxito!');
+
+        } catch (error) {
+            console.error("Error al actualizar el nombre:", error);
+            alert('Ocurrió un error al guardar tu nombre. Inténtalo de nuevo.');
+        } finally {
+            // Volvemos al modo vista
+            saveNameBtn.disabled = false;
+            saveNameBtn.textContent = 'Guardar';
+            nameEdit.classList.add('hidden');
+            nameDisplay.classList.remove('hidden');
+        }
     });
 }
       
@@ -6739,6 +6812,8 @@ document.getElementById('profileDeleteAccountBtn').addEventListener('click', () 
             setupVoiceSearch();
             // Activar la funcionalidad del botón de Volver Arriba
             setupScrollToTop();
+            // Activar la lógica para editar el perfil
+            setupProfileEditing();
         }
         
         // Initialize the app when DOM is loaded
