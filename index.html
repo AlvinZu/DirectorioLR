@@ -580,66 +580,61 @@
         </div>
 
         <div class="mt-8 bg-white rounded-lg shadow-md overflow-hidden">
-            <div class="p-5 border-b">
-                <h2 class="text-xl font-bold text-gray-800">Lista de Usuarios</h2>
-              <div class="mt-3">
-            <input type="text" id="userSearchInput" placeholder="Buscar por correo electrónico..."
-                   class="w-full p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+    <div class="p-5 border-b">
+        <h2 class="text-xl font-bold text-gray-800">Lista de Usuarios</h2>
+        <div class="mt-3">
+            <input type="text" id="userSearchInput" placeholder="Buscar por correo electrónico..." class="w-full p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
         </div>
-            </div>
-            <div class="overflow-x-auto">
-                <table class="w-full">
-                    <thead class="bg-gray-50">
-                        <tr>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Correo Electrónico</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nombre de Usuario</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Fecha de Registro</th>
-                        </tr>
-                    </thead>
-                    <tbody id="adminUserTableBody" class="divide-y divide-gray-200">
-                        <tr><td colspan="3" class="p-4 text-center text-gray-500">Cargando datos...</td></tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+    </div>
+    <div class="max-h-[400px] overflow-y-auto">
+        <table class="w-full">
+            <thead class="sticky top-0 bg-gray-50 z-10">
+                <tr>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Correo Electrónico</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nombre de Usuario</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Fecha de Registro</th>
+                </tr>
+            </thead>
+            <tbody id="adminUserTableBody" class="divide-y divide-gray-200">
+                </tbody>
+        </table>
+    </div>
+</div>
+      
       <div class="mt-8 bg-white rounded-lg shadow-md overflow-hidden">
-            <div class="p-5 border-b">
-                <h2 class="text-xl font-bold text-gray-800">Panel de Valoraciones</h2>
-                <p class="text-sm text-gray-500 mt-1">Monitorea y gestiona las calificaciones de los profesionales.</p>
-              <div class="mt-3">
-            <input type="text" id="ratingsSearchInput" placeholder="Buscar por nombre del profesional..."
-                   class="w-full p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+    <div class="p-5 border-b">
+        <h2 class="text-xl font-bold text-gray-800">Panel de Valoraciones</h2>
+        <p class="text-sm text-gray-500 mt-1">Monitorea y gestiona las calificaciones de los profesionales.</p>
+        <div class="mt-3">
+            <input type="text" id="ratingsSearchInput" placeholder="Buscar por nombre del profesional..." class="w-full p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
         </div>
-            </div>
-            <div class="overflow-x-auto">
-                <table class="w-full">
-                    <thead class="bg-gray-50">
-                        <tr>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Profesional</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Calificación Promedio</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total de Votos</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody id="adminRatingsTableBody" class="divide-y divide-gray-200">
-                        <tr><td colspan="4" class="p-4 text-center text-gray-500">Cargando valoraciones...</td></tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+    </div>
+    <div class="max-h-[400px] overflow-y-auto">
+        <table class="w-full">
+            <thead class="sticky top-0 bg-gray-50 z-10">
+                <tr>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Profesional</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Calificación Promedio</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total de Votos</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="adminRatingsTableBody" class="divide-y divide-gray-200">
+                </tbody>
+        </table>
+    </div>
+</div>
       
       <div class="mt-8 bg-white rounded-lg shadow-md overflow-hidden">
     <div class="p-5 border-b">
         <h2 class="text-xl font-bold text-gray-800">Desglose por Categoría</h2>
-
         <div class="mt-3">
-            <input type="text" id="categorySearchInput" placeholder="Buscar por nombre de categoría..." 
-                   class="w-full p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+            <input type="text" id="categorySearchInput" placeholder="Buscar por nombre de categoría..." class="w-full p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
         </div>
     </div>
-    <div class="overflow-x-auto">
+    <div class="max-h-[400px] overflow-y-auto">
         <table class="w-full">
-            <thead class="bg-gray-50">
+            <thead class="sticky top-0 bg-gray-50 z-10">
                 <tr>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Categoría</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nº de Profesionales</th>
@@ -6648,7 +6643,17 @@ function setupShowPasswordToggle(checkboxId, passwordInputIds) {
 // ======= LÓGICA DEL PANEL DE ADMINISTRADOR (VERSIÓN CON CATEGORÍAS) =======
 // ===============================================
 async function loadAdminPanelData() {
-    // --- Sección de Estadísticas (sin cambios) ---
+    // Obtenemos las referencias a los cuerpos de las tablas
+    const userTableBody = document.getElementById('adminUserTableBody');
+    const ratingsTableBody = document.getElementById('adminRatingsTableBody');
+    const categoryTableBody = document.getElementById('adminCategoryTableBody');
+
+    // 1. Limpiamos las tablas al iniciar para un estado limpio
+    userTableBody.innerHTML = '';
+    ratingsTableBody.innerHTML = '';
+    categoryTableBody.innerHTML = '';
+
+    // --- Sección de Estadísticas y Categorías ---
     const totalPros = professionals.length;
     const premiumMembers = professionals.filter(p => p.membership === 'premium').length;
     const totalOffers = professionals.reduce((acc, pro) => acc + (pro.offers ? pro.offers.length : 0), 0);
@@ -6658,20 +6663,14 @@ async function loadAdminPanelData() {
     const totalCategories = Object.keys([...new Set(professionals.map(pro => pro.category))]).length;
     document.getElementById('adminTotalCategories').textContent = totalCategories;
 
-    // --- INICIO DE LA MODIFICACIÓN: Lógica de Categorías ahora usa una tabla ---
     const categoryCounts = {};
     professionals.forEach(pro => {
         categoryCounts[pro.category] = (categoryCounts[pro.category] || 0) + 1;
     });
 
-    // Obtenemos el CUERPO de la nueva TABLA de categorías
-    const categoryTableBody = document.getElementById('adminCategoryTableBody');
-    categoryTableBody.innerHTML = '<tr><td colspan="2" class="p-4 text-center text-gray-500">Cargando datos...</td></tr>';
-
     Object.entries(categoryCounts)
         .sort((a, b) => a[0].localeCompare(b[0]))
         .forEach(([category, count]) => {
-            // Creamos una FILA de tabla (tr)
             const row = `
                 <tr>
                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${category}</td>
@@ -6680,23 +6679,19 @@ async function loadAdminPanelData() {
             `;
             categoryTableBody.innerHTML += row;
         });
-    // --- FIN DE LA MODIFICACIÓN ---
 
-    // --- Secciones de Usuarios y Valoraciones (sin cambios) ---
-    const userTableBody = document.getElementById('adminUserTableBody');
+    // --- Sección de Carga de Usuarios ---
     userTableBody.innerHTML = '<tr><td colspan="3" class="p-4 text-center text-gray-500">Cargando usuarios...</td></tr>';
     try {
         const usersSnapshot = await db.collection('users').orderBy('createdAt', 'desc').get();
         document.getElementById('adminTotalUsers').textContent = usersSnapshot.size;
-        userTableBody.innerHTML = '';
+        userTableBody.innerHTML = ''; // Limpiamos antes de añadir los datos reales
         if (usersSnapshot.empty) {
             userTableBody.innerHTML = '<tr><td colspan="3" class="p-4 text-center text-gray-500">No hay usuarios registrados.</td></tr>';
         } else {
             usersSnapshot.forEach(doc => {
                 const userData = doc.data();
-                const joinDate = (userData.createdAt && typeof userData.createdAt.toDate === 'function')
-                                 ? userData.createdAt.toDate().toLocaleDateString('es-MX')
-                                 : 'Fecha no disponible';
+                const joinDate = (userData.createdAt && typeof userData.createdAt.toDate === 'function') ? userData.createdAt.toDate().toLocaleDateString('es-MX') : 'Fecha no disponible';
                 const displayName = userData.displayName || `<em class="text-gray-400">No establecido</em>`;
                 const row = `
                     <tr>
@@ -6713,11 +6708,12 @@ async function loadAdminPanelData() {
         document.getElementById('adminTotalUsers').textContent = 'Error';
         userTableBody.innerHTML = '<tr><td colspan="3" class="p-4 text-center text-red-500">No se pudieron cargar los usuarios.</td></tr>';
     }
-    const ratingsTableBody = document.getElementById('adminRatingsTableBody');
+
+    // --- Sección de Carga de Valoraciones ---
     ratingsTableBody.innerHTML = '<tr><td colspan="4" class="p-4 text-center text-gray-500">Cargando valoraciones...</td></tr>';
     try {
         const ratingsSnapshot = await db.collection('ratings').orderBy('averageRating', 'desc').get();
-        ratingsTableBody.innerHTML = '';
+        ratingsTableBody.innerHTML = ''; // Limpiamos antes de añadir los datos reales
         if (ratingsSnapshot.empty) {
             ratingsTableBody.innerHTML = '<tr><td colspan="4" class="p-4 text-center text-gray-500">Aún no hay valoraciones registradas.</td></tr>';
         } else {
