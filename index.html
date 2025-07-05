@@ -242,6 +242,11 @@
     <div class="w-full max-w-sm mx-auto pb-4">
         <div class="bg-white p-6 rounded-xl shadow-md space-y-4">
             <div>
+                <div>
+        <label for="registerName" class="sr-only">Nombre</label>
+        <input id="registerName" name="name" type="text" autocomplete="name" required placeholder="Nombre completo" class="appearance-none block w-full px-3 py-3 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+    </div>
+              
                 <label for="registerEmail" class="sr-only">Correo electrónico</label>
                 <input id="registerEmail" name="email" type="email" autocomplete="email" required placeholder="Correo electrónico" class="appearance-none block w-full px-3 py-3 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
             </div>
@@ -5289,42 +5294,62 @@ document.getElementById('backToLogin').addEventListener('click', () => {
 document.getElementById('registerSubmitBtn').addEventListener('click', registerUser);
 
 function registerUser() {
+  const name = document.getElementById('registerName').value.trim();
   const email = document.getElementById('registerEmail').value;
   const password = document.getElementById('registerPassword').value;
   const confirmPassword = document.getElementById('confirmPassword').value;
   const role = document.getElementById('registerRole').value;
-  
-  if (!email || !password || !confirmPassword) {
-    alert("Por favor completa todos los campos");
+
+  // 1. Validación actualizada para incluir el nombre
+  if (!name || !email || !password || !confirmPassword) {
+    alert("Por favor completa todos los campos, incluyendo tu nombre.");
     return;
   }
-  
+
   if (password !== confirmPassword) {
     alert("Las contraseñas no coinciden");
     return;
   }
-  
+
   auth.createUserWithEmailAndPassword(email, password)
-    .then((userCredential) => {
-      // Guardar rol en Firestore
-      db.collection('users').doc(userCredential.user.uid).set({
+    .then(async (userCredential) => {
+      const user = userCredential.user;
+
+      // 2. Actualizamos el perfil de Autenticación de Firebase con el nombre
+      await user.updateProfile({
+        displayName: name
+      });
+
+      // 3. Guardamos todos los datos, incluyendo el nombre, en la base de datos Firestore
+      await db.collection('users').doc(user.uid).set({
+        displayName: name, // <-- Dato clave que se guarda
         role: role,
         email: email,
         createdAt: new Date()
-      }).then(() => {
-        // Cerrar pantalla de registro
-        document.getElementById('registerScreen').classList.add('hidden');
-        // Mostrar mensaje de éxito
-        alert("¡Registro exitoso! Ahora puedes iniciar sesión");
-        // Limpiar formulario
-        document.getElementById('registerEmail').value = '';
-        document.getElementById('registerPassword').value = '';
-        document.getElementById('confirmPassword').value = '';
       });
+
+      // Limpiamos todo el formulario
+      document.getElementById('registerName').value = '';
+      document.getElementById('registerEmail').value = '';
+      document.getElementById('registerPassword').value = '';
+      document.getElementById('confirmPassword').value = '';
+
+      alert("¡Registro exitoso! Ahora puedes iniciar sesión con tu nueva cuenta.");
+
+      // Llevamos al usuario a la pantalla de login para que inicie sesión
+      document.getElementById('registerScreen').classList.add('hidden');
+      document.getElementById('loginScreen').classList.remove('hidden');
+
     })
     .catch((error) => {
       console.error("Error en registro:", error);
-      alert(error.message);
+      let message = "Ocurrió un error al registrar la cuenta.";
+      if(error.code === 'auth/email-already-in-use') {
+          message = "Este correo electrónico ya está en uso. Por favor, intenta con otro.";
+      } else if (error.code === 'auth/weak-password') {
+          message = "La contraseña es muy débil. Debe tener al menos 6 caracteres.";
+      }
+      alert(message);
     });
 }
       
