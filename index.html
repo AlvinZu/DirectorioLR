@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   
   <!-- Firebase SDK -->
 <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
@@ -5505,9 +5506,14 @@ document.getElementById('lightbox').addEventListener('click', (e) => {
                        
 <div class="mt-6 w-full space-y-3">
     ${generateContactButtons(professional)}
-    <button id="shareBtn" class="bg-yellow-500 text-white font-bold py-2 px-4 rounded-lg w-full flex items-center justify-center hover:bg-yellow-600 transition-all">
-                    <i class="fas fa-share-alt mr-2"></i>Compartir
-                </button>
+    <div class="flex space-x-2">
+        <button id="shareBtn" class="bg-yellow-500 text-white font-bold py-2 px-4 rounded-lg w-full flex items-center justify-center hover:bg-yellow-600 transition-all">
+            <i class="fas fa-share-alt mr-2"></i>Compartir
+        </button>
+        <button id="generateQRBtn" class="bg-gray-800 text-white font-bold p-3 rounded-lg flex items-center justify-center hover:bg-black transition-all">
+            <i class="fas fa-qrcode text-xl"></i>
+        </button>
+    </div>
 </div>
                     </div>
                     
@@ -5607,7 +5613,49 @@ document.getElementById('lightbox').addEventListener('click', (e) => {
             shareProfessional(id); 
         });
     }
-    // --- FIN DEL CÓDIGO AÑADIDO ---
+    
+          // Lógica para el nuevo botón de generar QR
+        const generateQRBtn = document.getElementById('generateQRBtn');
+        const qrcodeContainer = document.getElementById('qrcode');
+        const qrProfessionalName = document.getElementById('qrProfessionalName');
+        const downloadQRBtn = document.getElementById('downloadQRBtn');
+
+        generateQRBtn.addEventListener('click', () => {
+            // 1. Limpiamos cualquier QR anterior
+            qrcodeContainer.innerHTML = '';
+
+            // 2. Definimos la URL que contendrá el QR (¡recuerda cambiarla cuando migres!)
+            const profileUrl = `https://alvinzu.github.io/DirectorioLR/?id=${professional.id}`;
+
+            // 3. Creamos el nuevo código QR usando la librería
+            new QRCode(qrcodeContainer, {
+                text: profileUrl,
+                width: 256,
+                height: 256,
+                colorDark: "#000000",
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.H
+            });
+
+            // 4. Mostramos el nombre del profesional y el modal
+            qrProfessionalName.textContent = professional.name;
+            document.getElementById('qrModal').classList.remove('hidden');
+
+            // 5. Preparamos el botón de descarga
+            // Usamos un pequeño retraso para asegurar que la imagen del QR se haya renderizado
+            setTimeout(() => {
+                const qrImg = qrcodeContainer.querySelector('img');
+                if (qrImg) {
+                    downloadQRBtn.onclick = () => {
+                        const link = document.createElement('a');
+                        link.href = qrImg.src;
+                        link.download = `QR-DirectorioPro-${professional.name.replace(/\s+/g, '-')}.png`;
+                        link.click();
+                    };
+                }
+            }, 100);
+        });
+          
           setupRatingSection(id);
             showScreen('details');
         }
@@ -6556,6 +6604,26 @@ alert('¡Nombre actualizado con éxito!');
     });
 }
       
+// ===============================================
+// ======= LÓGICA PARA GENERADOR DE CÓDIGO QR ======
+// ===============================================
+function setupQRCodeGenerator() {
+    const qrModal = document.getElementById('qrModal');
+    const closeQRModalBtn = document.getElementById('closeQRModalBtn');
+    const downloadQRBtn = document.getElementById('downloadQRBtn');
+
+    // Función para cerrar el modal
+    const closeModal = () => qrModal.classList.add('hidden');
+
+    // Eventos para cerrar el modal
+    closeQRModalBtn.addEventListener('click', closeModal);
+    qrModal.addEventListener('click', (event) => {
+        // Cierra el modal solo si se hace clic en el fondo oscuro
+        if (event.target === qrModal) {
+            closeModal();
+        }
+    });
+}      
       
 // ===============================================
 // ======= LÓGICA DEL PANEL DE ADMINISTRADOR (VERSIÓN CON CATEGORÍAS) =======
@@ -6814,11 +6882,25 @@ document.getElementById('profileDeleteAccountBtn').addEventListener('click', () 
             setupScrollToTop();
             // Activar la lógica para editar el perfil
             setupProfileEditing();
+            // Activar la funcionalidad del generador de QR
+            setupQRCodeGenerator();
         }
         
         // Initialize the app when DOM is loaded
         document.addEventListener('DOMContentLoaded', init);
     </script>
+      
+      <div id="qrModal" class="hidden fixed inset-0 bg-black bg-opacity-70 z-50 flex items-center justify-center p-4">
+    <div class="bg-white p-6 rounded-lg shadow-xl text-center max-w-xs w-full">
+        <h3 class="text-lg font-bold mb-4">Comparte este Perfil</h3>
+        <div id="qrcode" class="flex justify-center mb-4"></div>
+        <p id="qrProfessionalName" class="font-medium mb-4"></p>
+        <button id="downloadQRBtn" class="w-full bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors mb-2">
+            <i class="fas fa-download mr-2"></i>Descargar QR
+        </button>
+        <button id="closeQRModalBtn" class="w-full bg-gray-200 text-gray-800 font-bold py-2 px-4 rounded-lg hover:bg-gray-300 transition-colors">Cerrar</button>
+    </div>
+</div>
       
       <button id="scrollToTopBtn" class="hidden fixed bottom-5 right-5 bg-blue-600 text-white w-12 h-12 rounded-full shadow-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-transform transform hover:scale-110">
     <i class="fas fa-arrow-up text-xl"></i>
