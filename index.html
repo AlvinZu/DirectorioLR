@@ -994,45 +994,378 @@
                 offers: [
                        
                         ]
-            },
+            },            
             
-            
-            // Fisioterapeutas
+    // Comida Rápida
+    {
+        id: 6,
+        name: "La Brava",
+        category: "Comida Rápida",
+        specialty: "Servicio a Domicilio",
+        description: "Somos La Brava un local de comida en donde puedes encontrar un sabor increible con super precios que te sorprenderan y el toque final de una buena salsa brava.",
+        phone: "3541188235",
+        address: "Calle Av. Fidel Velázquez S/N. Col. Obrera, Los Reyes, Mich. Frente a la placita de la obrera y aun lado de la empresa Italika.",
+        experience: "Mas de 1 año",
+        price: "Realiza tu pedido Ahora",
+        membership: "premium", // Puedes cambiar a free
+        featured: true, // Puedes cambiar a false
+        services: [
+            "Papas al Horno",
+            "Alitas",
+            "Burritos",
+            "Tacos",
+            "Wraps",
+            "Sincronizadas",
+            "Chavindecas",
+            "Volcanes",
+            "Quesabirrias",
+            "Huaraches",
+            "Bebidas",
+            "Servicio a Domicilio"
+        ],
+        schedule: "Miercoles a Domingo: 2pm a 11pm",
+        image: "./Images/perfil-la-brava.jpg",
+        gallery: [
+            "./Images/comida-la-brava-1.jpg",
+            "./Images/comida-la-brava-2.jpg",
+            "./Images/comida-la-brava-3.jpg",
+            "./Images/comida-la-brava-4.jpg",
+            "./Images/comida-la-brava-5.jpg",
+            "./Images/comida-la-brava-6.jpg",
+            "./Images/comida-la-brava-7.jpg"
+        ],
+        offers: [            
             {
-                id: 6,
-                name: "Fisioterapia Efectiva",
-                showInSlider: false, // Control del slider
-                category: "Fisioterapeutas",
-                specialty: "Rehabilitación deportiva",
-                description: "Especialista en recuperación de lesiones, bindamos tratamiento de todo tipo de lesiones que puedan limitar tu calidad de vida.",
-                phone: "3541033232",
-                address: "C. Profesor santos campos #13, Col. Centro, Los Reyes, Mich.",
-                experience: "Mas de 3 años",
-                price: "Inicia con tu recuperación",
-                membership: "premium", //Puedes cambiar a free
-                featured: true, //Puedes cambiar a false
-                services: ["Rehabilitación", "Terapia de movimiento", "Ventosas", "Acupuntura", "Terapia post cirujía y cicatriz", "Ajuste quiropráctico"],
-                schedule: "Lunes a Viernes: 9am - 8pm",
-                education: "",
-                image: "./Images/perfil-fisioterapia-efectiva.jpg",
-                gallery: [
-                          "./Images/fisioterapia-efectiva-1.jpg",
-                          "./Images/fisioterapia-efectiva-2.jpg",
-                          "./Images/fisioterapia-efectiva-3.jpg",
-                          "./Images/fisioterapia-efectiva-4.jpg",
-                          "./Images/fisioterapia-efectiva-5.jpg",
-                          "./Images/fisioterapia-efectiva-6.jpg"
-                         ],
-              offers: [
-                {
-                  title: "Primera Consulta Express",
-                  discount: "20% OFF",
-                  validity: "Promoción Permanente",
-                  description: "Valoración inicial con protocolo de tratamiento personalizado",
-                  conditions: "Solo para nuevos pacientes. Máximo 1 uso por persona."
-               }
-                      ]
+                title: "Combo Brava",
+                discount: "$200 Pesos",
+                validity: "Promoción Permanente",
+                description: "1 Burrito tradicional + 1 Sincronizada + 1 Volcán + 1 Bebida. Válido para servicio en local y a domicilio.",
+                conditions: "Pedir después de las 2:30pm."
+            }
+        ]
+    },
+       {
+        id: 601,
+        name: "El Comelón",
+        category: "Comida Rápida",
+        specialty: "Hamburgesas - Tacos - Burritos",
+        description: "El Comelón somos un local de comida en donde puedes encontrar una gran variedad de alimentos que te sorprenderan el paladar y lo que no puede faltar una gran variedad de salsas picantes.",
+        phone: "3311738601",
+        address: "Calle Av. Morelos #248. Col. Centro, Los Reyes, Mich. Frente al Hotel Oasis.",
+        experience: "Mas de 10 años",
+        price: "Realiza tu pedido Ahora",
+        membership: "premium", // Puedes cambiar a free
+        featured: true, // Puedes cambiar a false
+        services: [
+            "Hamburgesas",
+            "Hot Dogs",
+            "Burritos",
+            "Tacos",
+            "Sincronizadas",
+            "Flautas",
+            "Tortas",
+            "Volcanes",
+            "Patadas",
+            "Huaraches",
+            "Taco Vaquero",
+            "Quesadillas",
+            "Papas con Queso",
+            "Alitas",
+            "Nuguets",
+            "Boneles",
+            "Dedos de Queso",
+            "Bebidas"
+        ],
+        schedule: "Miercoles a Domingo: 6pm a 12am - Sábado: 2pm a 2am",
+        image: "./Images/perfil-el-comelon.jpg",
+        gallery: [
+            "./Images/comida-el-comelon-1.jpg",
+            "./Images/comida-el-comelon-2.jpg",
+            "./Images/comida-el-comelon-3.jpg",
+            "./Images/comida-el-comelon-4.jpg",
+            "./Images/comida-el-comelon-5.jpg"
+        ],
+        offers: [            
+            {
+                title: "Combo Sincro-Burro",
+                discount: "$200 Pesos",
+                validity: "Promoción Permanente",
+                description: "1 Burrito tradicional + 1 Sincronizada + 1 Bebida 1L.",
+                conditions: "Pedir después de las 6:00pm."
+            }
+        ]
+    },
+          {
+        id: 602,
+        name: "Zapata Burger",
+        category: "Comida Rápida",
+        specialty: "Servicio a Domicilio",
+        description: "Zapata Burger somos un negocio de comida en donde puedes encontrar una gran variedad de alimentos que te sorprenderan y lo que no puede faltar una gran variedad de salsas y super promociones.",
+        phone: "3541184872",
+        address: "Calle Emiliano Zapata #178. Col. Zapata, Los Reyes, Mich.",
+        experience: "Mas de 3 años",
+        price: "Realiza tu pedido Ahora",
+        membership: "premium", // Puedes cambiar a free
+        featured: true, // Puedes cambiar a false
+        services: [
+            "Hamburgesas",
+            "Hot Dogs",
+            "Burritos",
+            "Sincronizadas",
+            "Tacotes",
+            "Volcanes",
+            "Quesadillas",
+            "Salchipapas",
+            "Papas a la francesa",
+            "Papas Locas",
+            "Papas Rancheras",
+            "Orden de alitas",
+            "Orden de aros de cebolla",
+            "Noneless de pollo",
+            "Dedos de queso",
+            "Refrescos 400ml",
+            "Aguas frescas",
+            "Alitas"            
+        ],
+        schedule: "Lunes Jueves y Viernes: 5pm a 10:30pm - Sábado y Domingo: 4pm a 11pm",
+        image: "./Images/perfil-zapata-burger.jpg",
+        gallery: [
+            "./Images/comida-zapata-burger-1.jpg",
+            "./Images/comida-zapata-burger-2.jpg",
+            "./Images/comida-zapata-burger-3.jpg",
+            "./Images/comida-zapata-burger-4.jpg",
+            "./Images/comida-zapata-burger-5.jpg",
+            "./Images/comida-zapata-burger-6.jpg",
+            "./Images/comida-zapata-burger-7.jpg",
+            "./Images/comida-zapata-burger-8.jpg",
+            "./Images/comida-zapata-burger-9.jpg",
+            "./Images/comida-zapata-burger-10.jpg"
+        ],
+        offers: [            
+            {
+                title: "Combo Cuates",
+                discount: "$220 Pesos",
+                validity: "Promoción Permanente",
+                description: "2 Hamburguesas + 4 Alitas + Papas.",
+                conditions: "Pedir después de las 6:00pm. Incluye Servicio a Domicilio"
+            }
+        ]
+    },
+      {
+        id: 603,
+        name: "Asada de Piñon",
+        category: "Comida Rápida",
+        specialty: "Servicio a Domicilio",
+        description: "Asada de Piñón somos una franquicia moreliana de tacos de carne asada en donde puedes encontrar una gran variedad de alimentos y platillos que te sorprenderan y lo que no puede faltar una gran variedad de salsas.",
+        phone: "3541282315",
+        address: "Calle Emiliano Zapata en Segundo Piso, Col. Obrera, Los Reyes, Mich. Frente a la Glorieta de Los Reyes Magos.",
+        experience: "Mas de 4 año",
+        price: "Realiza tu pedido Ahora",
+        membership: "premium", // Puedes cambiar a free
+        featured: true, // Puedes cambiar a false
+        services: [
+            "Sopa Tarasca",
+            "Papas al Horno",
+            "Burritos",
+            "Tacos",
+            "Sincronizadas",
+            "Quesos",
+            "Quesadillas",
+            "Volcanes",
+            "Chicharrón de Queso",
+            "Alambres",
+            "Kilos",
+            "Jugos",
+            "Licuados",
+            "Postres",
+            "Malteadas",
+            "Smoothies",
+            "Cerveza",
+            "Mojitos"
+        ],
+        schedule: "Lunes a Sábado: 12:30pm a 10:30pm - Domingo: 9:30am a 11pm",
+        image: "./Images/perfil-asada-de-piñon.jpg",
+        gallery: [
+            "./Images/comida-asada-de-piñon-1.jpg",
+            "./Images/comida-asada-de-piñon-2.jpg",
+            "./Images/comida-asada-de-piñon-3.jpg",
+            "./Images/comida-asada-de-piñon-4.jpg",
+            "./Images/comida-asada-de-piñon-5.jpg",
+            "./Images/comida-asada-de-piñon-6.jpg",
+            "./Images/comida-asada-de-piñon-7.jpg",
+            "./Images/comida-asada-de-piñon-8.jpg",
+            "./Images/comida-asada-de-piñon-9.jpg",
+            "./Images/comida-asada-de-piñon-10.jpg"
+        ],
+        offers: [            
+            {
+                title: "Promo Lunes Tacos de Adobada",
+                discount: "Al 2x1",
+                validity: "Promoción Permanente",
+                description: "Todos los Lunes disfruta de tus tacos de adobada al 2x1.",
+                conditions: "Pedir después de la 1:00pm. Tenemos Servicio a Domicilio."
+            }
+        ]
+    },
+          {
+        id: 604,
+        name: "La Burreteria Los Reyes",
+        category: "Comida Rápida",
+        specialty: "Servicio a Domicilio",
+        description: "Somos La Burreteria un local de comida en donde puedes encontrar un sabor inigualable.",
+        phone: "3541261511",
+        address: "C. Belisario Domínguez, Esquina con Jacaranda, Los Reyes. A media cuadra arriba del Hospital San José.",
+        experience: "Mas de 1 año",
+        price: "Realiza tu pedido Ahora",
+        membership: "premium", // Puedes cambiar a free
+        featured: true, // Puedes cambiar a false
+        services: [
+            "Burritos gigantes",
+            "Sincronizadas especiales",
+            "Tacos deliciosos",
+            "Promociones",
+            "Servicio a Domicilio"
+        ],
+        schedule: "Martes a Domingo 2pm a 10pm",
+        image: "./Images/perfil-burreteria.jpg",
+        gallery: [
+            "./Images/comida-burreteria-1.jpg",
+            "./Images/comida-burreteria-2.jpg",
+            "./Images/comida-burreteria-3.jpg"
+        ],
+        offers: [
+            {
+                title: "Combo Individual",
+                discount: "$90 Pesos",
+                validity: "Promoción Permanente",
+                description: "1 Burrito o 1 Sincronizada + Bebida 600ml. Válido para servicio en local y a domicilio.",
+                conditions: "Pedir después de las 4pm."
             },
+            {
+                title: "Paquete Grupal",
+                discount: "$200 Pesos",
+                validity: "Promoción Permanente",
+                description: "3 Burritos o 3 Sincronizadas. Válido para servicio en local y a domicilio.",
+                conditions: "Pedir después de las 4pm."
+            }
+        ]
+    },
+         {
+        id: 605,
+        name: "Go Burger Hamburgesas",
+        category: "Comida Rápida",
+        specialty: "Servicio a Domicilio",
+        description: "Las mejores hamburguesas con ingredientes premium, Ven y prueba nuestras opciones favoritas.",
+        phone: "3545435613",
+        address: "C. Emiliano Zapata #249, Los Reyes. Frente a Farmacias Guadalajara de la Zapata.",
+        experience: "Mas de 1 Año",
+        price: "Realiza tu pedido Ahora",
+        membership: "premium",
+        featured: true,
+        services: [
+            "Hamburguesas 100% carne premium",
+            "Papas fritas caseras",
+            "Salchipapas",
+            "Hot Dogs",
+            "Bebidas",
+            "Servicio a Domicilio"
+        ],
+        schedule: "Jueves a Domingo 6pm - 10:30pm",
+        image: "./Images/perfil-go-burger.jpg",
+        gallery: [
+            "./Images/comida-go-burger-1.jpg",
+            "./Images/comida-go-burger-2.jpg"
+        ],
+        offers: [
+            {
+                title: "Combo Trio Burger",
+                discount: "$220 Pesos",
+                validity: "Promoción Nocturna",
+                description: "3 Hamburguesas clásicas + 1 orden de papas.",
+                conditions: "Válido después de las 6pm. Servicio a Domicilio gratis."
+            }
+        ]
+    },
+          {
+        id: 606,
+        name: "Zam Burger",
+        category: "Comida Rápida",
+        specialty: "Servicio a Domicilio",
+        description: "Zam Burger desde hace años haciendo las hamburgesas mas deliciosas de los reyes.",
+        phone: "3541104275",
+        address: "C. Tulipanes #40-A, Col. Jardin, Los Reyes. A unos locales del marlin.",
+        experience: "Mas de 5 Años",
+        price: "Realiza tu pedido Ahora",
+        membership: "premium",
+        featured: true,
+        services: [
+            "Hamburguesas 100% carne premium",
+            "Papas fritas caseras",
+            "Salchipapas",
+            "Hot Dogs",
+            "Bebidas",
+            "Servicio a Domicilio"
+        ],
+        schedule: "Lunes a Viernes: 3pm a 12pm - Sabados: 3pm a 2am y Domingos: 3pm - 12pm",
+        image: "./Images/perfil-zamburger.jpg",
+        gallery: [
+            "./Images/comida-zamburger-1.jpg",
+            "./Images/comida-zamburger-2.jpg",
+            "./Images/comida-zamburger-3.jpg",
+            "./Images/comida-zamburger-4.jpg",
+            "./Images/comida-zamburger-5.jpg",
+            "./Images/comida-zamburger-6.jpg"
+        ],
+        offers: [
+            {
+                title: "Combo Zam Burger",
+                discount: "$220 Pesos",
+                validity: "Promoción Nocturna",
+                description: "2 Hamburguesas clásicas + 2 bebidas.",
+                conditions: "Válido después de las 7pm. Servicio a Domicilio gratis."
+            }
+        ]
+    },
+          {
+        id: 607,
+        name: "Crepería Kin Krep",
+        category: "Comida Rápida",
+        specialty: "Servicio a Domicilio",
+        description: "Las mejores crepas con ingredientes premium, frappes deliciosos, smoothies inigualables y sodas refrescantes.",
+        phone: "3541138520",
+        address: "C. Emiliano Zapata #258, Los Reyes. Frente al Merza de la Zapata.",
+        experience: "Mas de 3 Años",
+        price: "Realiza tu pedido Ahora",
+        membership: "premium",
+        featured: true,
+        services: [
+            "Crepas Dulces: Bonita, Monster, Especial de Oreo, Especial KinKrep, etc.",
+            "Crepas Saladas: Krepizza, Vienna, etc.",
+            "Frappes: Galleta, Fresa, Vainilla, etc.",
+            "Smoothies",
+            "Sodas",
+            "Servicio a Domicilio."
+        ],
+        schedule: "Martes a Domingo 10am - 10pm",
+        image: "./Images/perfil-kinkrep.jpg",
+        gallery: [
+            "./Images/comida-kinkrep-1.jpg",
+            "./Images/comida-kinkrep-2.jpg",
+            "./Images/comida-kinkrep-3.jpg",
+            "./Images/comida-kinkrep-4.jpg",
+            "./Images/comida-kinkrep-5.jpg",
+            "./Images/comida-kinkrep-6.jpg"
+        ],
+        offers: [
+            {
+                title: "Combo 4",
+                discount: "$240 Pesos",
+                validity: "Promoción Permanente",
+                description: "2 Crepas Dulces + 2 Frappes.",
+                conditions: "Válido a partir de las 11am en adelante. Servicio a Domicilio gratis."
+            }
+        ]
+    },
             
             // Clothing Stores - Tiendas de ropa
             {
@@ -1303,41 +1636,73 @@
     ]
             },
             
-            // Tiendas de Pinturas
-            {
-                id: 10,
-                name: "Pinturas Prisa Los Reyes",
-                category: "Tiendas de Pinturas",
-                specialty: "Pintura residencial",
-                description: "Somos una tienda de pinturas de excelente calidad, variedad y precios para todos los bolsillos. Tenemos lo que necesitas para embellecer tu hogar, oficinas y negocios.",
-                phone: "3545428951",
-                address: "C. 16 de Septiembre #437, Col. Centro, Los Reyes, Mich. Aun lado de la tienda 3B.",
-                experience: "Mas de 10 años",
-                price: "Cotiza Ahora",
-                membership: "premium", //puedes cambiar a free
-                featured: true, //puedes cambiar a false
-                services: ["Mas de 10 mil colores para igualar", "Pintura para interior", "Pintura para exterior", "Asesoría en colores", "Barniz Poliuretano", "Preparación de superficies", "Selladores acrilicos", "Impermeabilizantes", "Herramientas de aplicación"],
-                schedule: "Lunes a Sábado: 8:30am a 2pm - 4pm a 7pm.",
-                education: "",
-                image: "./Images/perfil-pinturas-prisa.jpg",
-                gallery: [
-                          "./Images/pinturas-prisa-1.jpg",
-                          "./Images/pinturas-prisa-2.jpg",
-                          "./Images/pinturas-prisa-3.jpg",
-                          "./Images/pinturas-prisa-4.jpg",
-                          "./Images/pinturas-prisa-5.jpg",
-                          "./Images/pinturas-prisa-6.jpg"
-                         ],
-                 offers: [
+            // Belleza - Uñas - Maquillistas - Lashistas     
+      {
+    id: 10,
+    name: "Studio Medusa",
+    category: "Belleza",
+    specialty: "Alisado Japonés - Lashista",
+    description: "En Studio Medusa nos dedicamos a la belleza de la mujer.",
+    phone: "3545414862",
+    address: "C. Belisario Domínguez, Local Color Rosa, Los Reyes. A media cuadra arriba del Hospital San José.",
+    experience: "Mas de 5 años",
+    price: "Agenda Ahora",
+    membership: "premium", // Puedes cambiar a free
+    featured: true, // Puedes cambiar a false
+    services: ["Faciales", "Lash Lifting Efecto Rimel", "Botox Capilar", "Alisado Japonés", "Cejas HD", "Diseños con Maping", "Laminado o Planchado de Cejas", "Maquillaje", "Aplicación de Extensiones de Cabello", "Extensiones Crochet", "Pedicura Spa", "Pedicura Clínica"],
+    schedule: "Lunes: 10am a 8pm - Miercoles a Sábados: 10am a 8pm y Domingos: 10am a 1pm",
+    image: "./Images/perfil-studio-medusa.jpg",
+    gallery: [
+              "./Images/studio-medusa-1.jpg",
+              "./Images/studio-medusa-2.jpg",
+              "./Images/studio-medusa-3.jpg",
+              "./Images/studio-medusa-4.jpg",
+              "./Images/studio-medusa-5.jpg",
+              "./Images/studio-medusa-6.jpg",
+              "./Images/studio-medusa-7.jpg",
+              "./Images/studio-medusa-8.jpg",
+              "./Images/studio-medusa-9.jpg"
+             ],
+    offers: [
         {
-            title: "Kit de Pintura",
-            discount: "15% OFF",
-            validity: "Válido hasta 30/Nov/2025",
-            description: "1 Galón de pintura premium + rodillo profesional + brochas + cubeta + guantes",
-            conditions: "Compra mínima de $1,500."
+            title: "Paquete Faciales",
+            discount: "$350 Pesos",
+            validity: "Válido para primeras citas",
+            description: "Limpieza Facial Profunda + Aromaterapia + 1 Bebida de Cortesía.",
+            conditions: "Reserva minimo con 2 Días de anticipación."
         }
     ]
-            },
+  },
+    /*  {
+    id: 1001,
+    name: "Nails by Karen",
+    category: "Belleza",
+    specialty: "Esculpidas y diseño de uñas",
+    description: "Servicio profesional de uñas acrílicas y semipermanentes.",
+    phone: "5544556677",
+    address: "Plaza Las Flores Local 12",
+    experience: "3 años",
+    price: "$300 - Manicura completa",
+    membership: "premium", //Puedes cambiar a free
+    featured: true, //Puedes cambiar a false
+    services: ["Uñas acrílicas", "Diseño de uñas", "Retoques"],
+    schedule: "Martes a Domingo 10am - 8pm",
+    image: "https://images.unsplash.com/photo-1590540172602-9b60de55b9e1",
+    gallery: [
+              "https://randomuser.me/api/portraits/women/25.jpg",
+              "https://randomuser.me/api/portraits/women/65.jpg",
+              "https://randomuser.me/api/portraits/women/30.jpg"
+             ],
+    offers: [
+        {
+            title: "Promo Amigas",
+            discount: "15% OFF",
+            validity: "Válido hasta 30/Nov/2025",
+            description: "Diseño de uñas para 2 amigas + Incluye diseño personalizado + Hidratación profunda de manos.",
+            conditions: "Agendar mínimo con 2 semanas de anticipación."
+        },        
+    ]
+},*/
             
             // Carpinteros
             {
@@ -4055,73 +4420,41 @@
     ]
 },
           
-       // Belleza - Uñas - Maquillistas - Lashistas     
-      {
-    id: 7401,
-    name: "Studio Medusa",
-    category: "Belleza",
-    specialty: "Alisado Japonés - Lashista",
-    description: "En Studio Medusa nos dedicamos a la belleza de la mujer.",
-    phone: "3545414862",
-    address: "C. Belisario Domínguez, Local Color Rosa, Los Reyes. A media cuadra arriba del Hospital San José.",
-    experience: "Mas de 5 años",
-    price: "Agenda Ahora",
-    membership: "premium", // Puedes cambiar a free
-    featured: true, // Puedes cambiar a false
-    services: ["Faciales", "Lash Lifting Efecto Rimel", "Botox Capilar", "Alisado Japonés", "Cejas HD", "Diseños con Maping", "Laminado o Planchado de Cejas", "Maquillaje", "Aplicación de Extensiones de Cabello", "Extensiones Crochet", "Pedicura Spa", "Pedicura Clínica"],
-    schedule: "Lunes: 10am a 8pm - Miercoles a Sábados: 10am a 8pm y Domingos: 10am a 1pm",
-    image: "./Images/perfil-studio-medusa.jpg",
-    gallery: [
-              "./Images/studio-medusa-1.jpg",
-              "./Images/studio-medusa-2.jpg",
-              "./Images/studio-medusa-3.jpg",
-              "./Images/studio-medusa-4.jpg",
-              "./Images/studio-medusa-5.jpg",
-              "./Images/studio-medusa-6.jpg",
-              "./Images/studio-medusa-7.jpg",
-              "./Images/studio-medusa-8.jpg",
-              "./Images/studio-medusa-9.jpg"
-             ],
-    offers: [
+      // Tiendas de Pinturas
+            {
+                id: 74,
+                name: "Pinturas Prisa Los Reyes",
+                category: "Tiendas de Pinturas",
+                specialty: "Pintura residencial",
+                description: "Somos una tienda de pinturas de excelente calidad, variedad y precios para todos los bolsillos. Tenemos lo que necesitas para embellecer tu hogar, oficinas y negocios.",
+                phone: "3545428951",
+                address: "C. 16 de Septiembre #437, Col. Centro, Los Reyes, Mich. Aun lado de la tienda 3B.",
+                experience: "Mas de 10 años",
+                price: "Cotiza Ahora",
+                membership: "premium", //puedes cambiar a free
+                featured: true, //puedes cambiar a false
+                services: ["Mas de 10 mil colores para igualar", "Pintura para interior", "Pintura para exterior", "Asesoría en colores", "Barniz Poliuretano", "Preparación de superficies", "Selladores acrilicos", "Impermeabilizantes", "Herramientas de aplicación"],
+                schedule: "Lunes a Sábado: 8:30am a 2pm - 4pm a 7pm.",
+                education: "",
+                image: "./Images/perfil-pinturas-prisa.jpg",
+                gallery: [
+                          "./Images/pinturas-prisa-1.jpg",
+                          "./Images/pinturas-prisa-2.jpg",
+                          "./Images/pinturas-prisa-3.jpg",
+                          "./Images/pinturas-prisa-4.jpg",
+                          "./Images/pinturas-prisa-5.jpg",
+                          "./Images/pinturas-prisa-6.jpg"
+                         ],
+                 offers: [
         {
-            title: "Paquete Faciales",
-            discount: "$350 Pesos",
-            validity: "Válido para primeras citas",
-            description: "Limpieza Facial Profunda + Aromaterapia + 1 Bebida de Cortesía.",
-            conditions: "Reserva minimo con 2 Días de anticipación."
-        }
-    ]
-  },
-    /*  {
-    id: 7402,
-    name: "Nails by Karen",
-    category: "Belleza",
-    specialty: "Esculpidas y diseño de uñas",
-    description: "Servicio profesional de uñas acrílicas y semipermanentes.",
-    phone: "5544556677",
-    address: "Plaza Las Flores Local 12",
-    experience: "3 años",
-    price: "$300 - Manicura completa",
-    membership: "premium", //Puedes cambiar a free
-    featured: true, //Puedes cambiar a false
-    services: ["Uñas acrílicas", "Diseño de uñas", "Retoques"],
-    schedule: "Martes a Domingo 10am - 8pm",
-    image: "https://images.unsplash.com/photo-1590540172602-9b60de55b9e1",
-    gallery: [
-              "https://randomuser.me/api/portraits/women/25.jpg",
-              "https://randomuser.me/api/portraits/women/65.jpg",
-              "https://randomuser.me/api/portraits/women/30.jpg"
-             ],
-    offers: [
-        {
-            title: "Promo Amigas",
+            title: "Kit de Pintura",
             discount: "15% OFF",
             validity: "Válido hasta 30/Nov/2025",
-            description: "Diseño de uñas para 2 amigas + Incluye diseño personalizado + Hidratación profunda de manos.",
-            conditions: "Agendar mínimo con 2 semanas de anticipación."
-        },        
+            description: "1 Galón de pintura premium + rodillo profesional + brochas + cubeta + guantes",
+            conditions: "Compra mínima de $1,500."
+        }
     ]
-},*/
+            },
 
 // Hospitales
 {
@@ -4355,376 +4688,42 @@
         ]
     },
           
-         // Comida Rápida
-    {
-        id: 77,
-        name: "La Brava",
-        category: "Comida Rápida",
-        specialty: "Servicio a Domicilio",
-        description: "Somos La Brava un local de comida en donde puedes encontrar un sabor increible con super precios que te sorprenderan y el toque final de una buena salsa brava.",
-        phone: "3541188235",
-        address: "Calle Av. Fidel Velázquez S/N. Col. Obrera, Los Reyes, Mich. Frente a la placita de la obrera y aun lado de la empresa Italika.",
-        experience: "Mas de 1 año",
-        price: "Realiza tu pedido Ahora",
-        membership: "premium", // Puedes cambiar a free
-        featured: true, // Puedes cambiar a false
-        services: [
-            "Papas al Horno",
-            "Alitas",
-            "Burritos",
-            "Tacos",
-            "Wraps",
-            "Sincronizadas",
-            "Chavindecas",
-            "Volcanes",
-            "Quesabirrias",
-            "Huaraches",
-            "Bebidas",
-            "Servicio a Domicilio"
-        ],
-        schedule: "Miercoles a Domingo: 2pm a 11pm",
-        image: "./Images/perfil-la-brava.jpg",
-        gallery: [
-            "./Images/comida-la-brava-1.jpg",
-            "./Images/comida-la-brava-2.jpg",
-            "./Images/comida-la-brava-3.jpg",
-            "./Images/comida-la-brava-4.jpg",
-            "./Images/comida-la-brava-5.jpg",
-            "./Images/comida-la-brava-6.jpg",
-            "./Images/comida-la-brava-7.jpg"
-        ],
-        offers: [            
+         // Fisioterapeutas
             {
-                title: "Combo Brava",
-                discount: "$200 Pesos",
-                validity: "Promoción Permanente",
-                description: "1 Burrito tradicional + 1 Sincronizada + 1 Volcán + 1 Bebida. Válido para servicio en local y a domicilio.",
-                conditions: "Pedir después de las 2:30pm."
-            }
-        ]
-    },
-       {
-        id: 7701,
-        name: "El Comelón",
-        category: "Comida Rápida",
-        specialty: "Hamburgesas - Tacos - Burritos",
-        description: "El Comelón somos un local de comida en donde puedes encontrar una gran variedad de alimentos que te sorprenderan el paladar y lo que no puede faltar una gran variedad de salsas picantes.",
-        phone: "3311738601",
-        address: "Calle Av. Morelos #248. Col. Centro, Los Reyes, Mich. Frente al Hotel Oasis.",
-        experience: "Mas de 10 años",
-        price: "Realiza tu pedido Ahora",
-        membership: "premium", // Puedes cambiar a free
-        featured: true, // Puedes cambiar a false
-        services: [
-            "Hamburgesas",
-            "Hot Dogs",
-            "Burritos",
-            "Tacos",
-            "Sincronizadas",
-            "Flautas",
-            "Tortas",
-            "Volcanes",
-            "Patadas",
-            "Huaraches",
-            "Taco Vaquero",
-            "Quesadillas",
-            "Papas con Queso",
-            "Alitas",
-            "Nuguets",
-            "Boneles",
-            "Dedos de Queso",
-            "Bebidas"
-        ],
-        schedule: "Miercoles a Domingo: 6pm a 12am - Sábado: 2pm a 2am",
-        image: "./Images/perfil-el-comelon.jpg",
-        gallery: [
-            "./Images/comida-el-comelon-1.jpg",
-            "./Images/comida-el-comelon-2.jpg",
-            "./Images/comida-el-comelon-3.jpg",
-            "./Images/comida-el-comelon-4.jpg",
-            "./Images/comida-el-comelon-5.jpg"
-        ],
-        offers: [            
-            {
-                title: "Combo Sincro-Burro",
-                discount: "$200 Pesos",
-                validity: "Promoción Permanente",
-                description: "1 Burrito tradicional + 1 Sincronizada + 1 Bebida 1L.",
-                conditions: "Pedir después de las 6:00pm."
-            }
-        ]
-    },
-          {
-        id: 7702,
-        name: "Zapata Burger",
-        category: "Comida Rápida",
-        specialty: "Servicio a Domicilio",
-        description: "Zapata Burger somos un negocio de comida en donde puedes encontrar una gran variedad de alimentos que te sorprenderan y lo que no puede faltar una gran variedad de salsas y super promociones.",
-        phone: "3541184872",
-        address: "Calle Emiliano Zapata #178. Col. Zapata, Los Reyes, Mich.",
-        experience: "Mas de 3 años",
-        price: "Realiza tu pedido Ahora",
-        membership: "premium", // Puedes cambiar a free
-        featured: true, // Puedes cambiar a false
-        services: [
-            "Hamburgesas",
-            "Hot Dogs",
-            "Burritos",
-            "Sincronizadas",
-            "Tacotes",
-            "Volcanes",
-            "Quesadillas",
-            "Salchipapas",
-            "Papas a la francesa",
-            "Papas Locas",
-            "Papas Rancheras",
-            "Orden de alitas",
-            "Orden de aros de cebolla",
-            "Noneless de pollo",
-            "Dedos de queso",
-            "Refrescos 400ml",
-            "Aguas frescas",
-            "Alitas"            
-        ],
-        schedule: "Lunes Jueves y Viernes: 5pm a 10:30pm - Sábado y Domingo: 4pm a 11pm",
-        image: "./Images/perfil-zapata-burger.jpg",
-        gallery: [
-            "./Images/comida-zapata-burger-1.jpg",
-            "./Images/comida-zapata-burger-2.jpg",
-            "./Images/comida-zapata-burger-3.jpg",
-            "./Images/comida-zapata-burger-4.jpg",
-            "./Images/comida-zapata-burger-5.jpg",
-            "./Images/comida-zapata-burger-6.jpg",
-            "./Images/comida-zapata-burger-7.jpg",
-            "./Images/comida-zapata-burger-8.jpg",
-            "./Images/comida-zapata-burger-9.jpg",
-            "./Images/comida-zapata-burger-10.jpg"
-        ],
-        offers: [            
-            {
-                title: "Combo Cuates",
-                discount: "$220 Pesos",
-                validity: "Promoción Permanente",
-                description: "2 Hamburguesas + 4 Alitas + Papas.",
-                conditions: "Pedir después de las 6:00pm. Incluye Servicio a Domicilio"
-            }
-        ]
-    },
-      {
-        id: 7703,
-        name: "Asada de Piñon",
-        category: "Comida Rápida",
-        specialty: "Servicio a Domicilio",
-        description: "Asada de Piñón somos una franquicia moreliana de tacos de carne asada en donde puedes encontrar una gran variedad de alimentos y platillos que te sorprenderan y lo que no puede faltar una gran variedad de salsas.",
-        phone: "3541282315",
-        address: "Calle Emiliano Zapata en Segundo Piso, Col. Obrera, Los Reyes, Mich. Frente a la Glorieta de Los Reyes Magos.",
-        experience: "Mas de 4 año",
-        price: "Realiza tu pedido Ahora",
-        membership: "premium", // Puedes cambiar a free
-        featured: true, // Puedes cambiar a false
-        services: [
-            "Sopa Tarasca",
-            "Papas al Horno",
-            "Burritos",
-            "Tacos",
-            "Sincronizadas",
-            "Quesos",
-            "Quesadillas",
-            "Volcanes",
-            "Chicharrón de Queso",
-            "Alambres",
-            "Kilos",
-            "Jugos",
-            "Licuados",
-            "Postres",
-            "Malteadas",
-            "Smoothies",
-            "Cerveza",
-            "Mojitos"
-        ],
-        schedule: "Lunes a Sábado: 12:30pm a 10:30pm - Domingo: 9:30am a 11pm",
-        image: "./Images/perfil-asada-de-piñon.jpg",
-        gallery: [
-            "./Images/comida-asada-de-piñon-1.jpg",
-            "./Images/comida-asada-de-piñon-2.jpg",
-            "./Images/comida-asada-de-piñon-3.jpg",
-            "./Images/comida-asada-de-piñon-4.jpg",
-            "./Images/comida-asada-de-piñon-5.jpg",
-            "./Images/comida-asada-de-piñon-6.jpg",
-            "./Images/comida-asada-de-piñon-7.jpg",
-            "./Images/comida-asada-de-piñon-8.jpg",
-            "./Images/comida-asada-de-piñon-9.jpg",
-            "./Images/comida-asada-de-piñon-10.jpg"
-        ],
-        offers: [            
-            {
-                title: "Promo Lunes Tacos de Adobada",
-                discount: "Al 2x1",
-                validity: "Promoción Permanente",
-                description: "Todos los Lunes disfruta de tus tacos de adobada al 2x1.",
-                conditions: "Pedir después de la 1:00pm. Tenemos Servicio a Domicilio."
-            }
-        ]
-    },
-          {
-        id: 7704,
-        name: "La Burreteria Los Reyes",
-        category: "Comida Rápida",
-        specialty: "Servicio a Domicilio",
-        description: "Somos La Burreteria un local de comida en donde puedes encontrar un sabor inigualable.",
-        phone: "3541261511",
-        address: "C. Belisario Domínguez, Esquina con Jacaranda, Los Reyes. A media cuadra arriba del Hospital San José.",
-        experience: "Mas de 1 año",
-        price: "Realiza tu pedido Ahora",
-        membership: "premium", // Puedes cambiar a free
-        featured: true, // Puedes cambiar a false
-        services: [
-            "Burritos gigantes",
-            "Sincronizadas especiales",
-            "Tacos deliciosos",
-            "Promociones",
-            "Servicio a Domicilio"
-        ],
-        schedule: "Martes a Domingo 2pm a 10pm",
-        image: "./Images/perfil-burreteria.jpg",
-        gallery: [
-            "./Images/comida-burreteria-1.jpg",
-            "./Images/comida-burreteria-2.jpg",
-            "./Images/comida-burreteria-3.jpg"
-        ],
-        offers: [
-            {
-                title: "Combo Individual",
-                discount: "$90 Pesos",
-                validity: "Promoción Permanente",
-                description: "1 Burrito o 1 Sincronizada + Bebida 600ml. Válido para servicio en local y a domicilio.",
-                conditions: "Pedir después de las 4pm."
-            },
-            {
-                title: "Paquete Grupal",
-                discount: "$200 Pesos",
-                validity: "Promoción Permanente",
-                description: "3 Burritos o 3 Sincronizadas. Válido para servicio en local y a domicilio.",
-                conditions: "Pedir después de las 4pm."
-            }
-        ]
-    },
-         {
-        id: 7705,
-        name: "Go Burger Hamburgesas",
-        category: "Comida Rápida",
-        specialty: "Servicio a Domicilio",
-        description: "Las mejores hamburguesas con ingredientes premium, Ven y prueba nuestras opciones favoritas.",
-        phone: "3545435613",
-        address: "C. Emiliano Zapata #249, Los Reyes. Frente a Farmacias Guadalajara de la Zapata.",
-        experience: "Mas de 1 Año",
-        price: "Realiza tu pedido Ahora",
-        membership: "premium",
-        featured: true,
-        services: [
-            "Hamburguesas 100% carne premium",
-            "Papas fritas caseras",
-            "Salchipapas",
-            "Hot Dogs",
-            "Bebidas",
-            "Servicio a Domicilio"
-        ],
-        schedule: "Jueves a Domingo 6pm - 10:30pm",
-        image: "./Images/perfil-go-burger.jpg",
-        gallery: [
-            "./Images/comida-go-burger-1.jpg",
-            "./Images/comida-go-burger-2.jpg"
-        ],
-        offers: [
-            {
-                title: "Combo Trio Burger",
-                discount: "$220 Pesos",
-                validity: "Promoción Nocturna",
-                description: "3 Hamburguesas clásicas + 1 orden de papas.",
-                conditions: "Válido después de las 6pm. Servicio a Domicilio gratis."
-            }
-        ]
-    },
-          {
-        id: 7706,
-        name: "Zam Burger",
-        category: "Comida Rápida",
-        specialty: "Servicio a Domicilio",
-        description: "Zam Burger desde hace años haciendo las hamburgesas mas deliciosas de los reyes.",
-        phone: "3541104275",
-        address: "C. Tulipanes #40-A, Col. Jardin, Los Reyes. A unos locales del marlin.",
-        experience: "Mas de 5 Años",
-        price: "Realiza tu pedido Ahora",
-        membership: "premium",
-        featured: true,
-        services: [
-            "Hamburguesas 100% carne premium",
-            "Papas fritas caseras",
-            "Salchipapas",
-            "Hot Dogs",
-            "Bebidas",
-            "Servicio a Domicilio"
-        ],
-        schedule: "Lunes a Viernes: 3pm a 12pm - Sabados: 3pm a 2am y Domingos: 3pm - 12pm",
-        image: "./Images/perfil-zamburger.jpg",
-        gallery: [
-            "./Images/comida-zamburger-1.jpg",
-            "./Images/comida-zamburger-2.jpg",
-            "./Images/comida-zamburger-3.jpg",
-            "./Images/comida-zamburger-4.jpg",
-            "./Images/comida-zamburger-5.jpg",
-            "./Images/comida-zamburger-6.jpg"
-        ],
-        offers: [
-            {
-                title: "Combo Zam Burger",
-                discount: "$220 Pesos",
-                validity: "Promoción Nocturna",
-                description: "2 Hamburguesas clásicas + 2 bebidas.",
-                conditions: "Válido después de las 7pm. Servicio a Domicilio gratis."
-            }
-        ]
-    },
-          {
-        id: 7707,
-        name: "Crepería Kin Krep",
-        category: "Comida Rápida",
-        specialty: "Servicio a Domicilio",
-        description: "Las mejores crepas con ingredientes premium, frappes deliciosos, smoothies inigualables y sodas refrescantes.",
-        phone: "3541138520",
-        address: "C. Emiliano Zapata #258, Los Reyes. Frente al Merza de la Zapata.",
-        experience: "Mas de 3 Años",
-        price: "Realiza tu pedido Ahora",
-        membership: "premium",
-        featured: true,
-        services: [
-            "Crepas Dulces: Bonita, Monster, Especial de Oreo, Especial KinKrep, etc.",
-            "Crepas Saladas: Krepizza, Vienna, etc.",
-            "Frappes: Galleta, Fresa, Vainilla, etc.",
-            "Smoothies",
-            "Sodas",
-            "Servicio a Domicilio."
-        ],
-        schedule: "Martes a Domingo 10am - 10pm",
-        image: "./Images/perfil-kinkrep.jpg",
-        gallery: [
-            "./Images/comida-kinkrep-1.jpg",
-            "./Images/comida-kinkrep-2.jpg",
-            "./Images/comida-kinkrep-3.jpg",
-            "./Images/comida-kinkrep-4.jpg",
-            "./Images/comida-kinkrep-5.jpg",
-            "./Images/comida-kinkrep-6.jpg"
-        ],
-        offers: [
-            {
-                title: "Combo 4",
-                discount: "$240 Pesos",
-                validity: "Promoción Permanente",
-                description: "2 Crepas Dulces + 2 Frappes.",
-                conditions: "Válido a partir de las 11am en adelante. Servicio a Domicilio gratis."
-            }
-        ]
-    },
+                id: 77,
+                name: "Fisioterapia Efectiva",
+                showInSlider: false, // Control del slider
+                category: "Fisioterapeutas",
+                specialty: "Rehabilitación deportiva",
+                description: "Especialista en recuperación de lesiones, bindamos tratamiento de todo tipo de lesiones que puedan limitar tu calidad de vida.",
+                phone: "3541033232",
+                address: "C. Profesor santos campos #13, Col. Centro, Los Reyes, Mich.",
+                experience: "Mas de 3 años",
+                price: "Inicia con tu recuperación",
+                membership: "premium", //Puedes cambiar a free
+                featured: true, //Puedes cambiar a false
+                services: ["Rehabilitación", "Terapia de movimiento", "Ventosas", "Acupuntura", "Terapia post cirujía y cicatriz", "Ajuste quiropráctico"],
+                schedule: "Lunes a Viernes: 9am - 8pm",
+                education: "",
+                image: "./Images/perfil-fisioterapia-efectiva.jpg",
+                gallery: [
+                          "./Images/fisioterapia-efectiva-1.jpg",
+                          "./Images/fisioterapia-efectiva-2.jpg",
+                          "./Images/fisioterapia-efectiva-3.jpg",
+                          "./Images/fisioterapia-efectiva-4.jpg",
+                          "./Images/fisioterapia-efectiva-5.jpg",
+                          "./Images/fisioterapia-efectiva-6.jpg"
+                         ],
+              offers: [
+                {
+                  title: "Primera Consulta Express",
+                  discount: "20% OFF",
+                  validity: "Promoción Permanente",
+                  description: "Valoración inicial con protocolo de tratamiento personalizado",
+                  conditions: "Solo para nuevos pacientes. Máximo 1 uso por persona."
+               }
+                      ]
+            },   
           
           // Aires Acondicionados
     {
