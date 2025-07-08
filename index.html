@@ -328,6 +328,9 @@
             <button id="mobileAccountBtn" class="block w-full text-left py-2 hover:bg-blue-600 rounded px-2">
         <i class="fas fa-user-circle mr-2"></i> Mi Cuenta
     </button>
+          <button id="shareAppBtn" class="block w-full text-left py-2 hover:bg-blue-600 rounded px-2">
+    <i class="fas fa-qrcode mr-1"></i> Compartir DirectorioPro
+</button>
           <button id="logoutBtn" class="hidden text-white hover:text-blue-200">
   <i class="fas fa-sign-out-alt mr-1"></i> Salir
 </button>
@@ -5643,8 +5646,14 @@ document.getElementById('lightbox').addEventListener('click', (e) => {
         const qrcodeContainer = document.getElementById('qrcode');
         const qrProfessionalName = document.getElementById('qrProfessionalName');
         const downloadQRBtn = document.getElementById('downloadQRBtn');
+        const qrModalTitle = document.getElementById('qrModalTitle'); 
 
         generateQRBtn.addEventListener('click', () => {
+
+        // ▼▼ AÑADIMOS ESTA LÍNEA PARA ASEGURAR EL TÍTULO CORRECTO ▼▼
+        qrModalTitle.textContent = 'Comparte este Perfil';
+
+        
             // 1. Limpiamos cualquier QR anterior
             qrcodeContainer.innerHTML = '';
 
@@ -6909,6 +6918,60 @@ document.getElementById('profileDeleteAccountBtn').addEventListener('click', () 
     }
 });
           
+    // =================================================================
+    // COMPARTIR EL DIRECTORIO CON CÓDIGO QR EN EL MENU MOBILE
+    // =================================================================
+          const shareAppBtn = document.getElementById('shareAppBtn');
+if (shareAppBtn) {
+    shareAppBtn.addEventListener('click', () => {
+        // Obtenemos los elementos del modal que ya existen en tu HTML
+        const qrcodeContainer = document.getElementById('qrcode');
+        const qrModal = document.getElementById('qrModal');
+        const qrProfessionalName = document.getElementById('qrProfessionalName');
+        const downloadQRBtn = document.getElementById('downloadQRBtn');
+        const qrModalTitle = document.getElementById('qrModalTitle'); 
+      
+        // ▼▼ ESTA ES LA LÍNEA MÁGICA AÑADIDA ▼▼
+        qrModalTitle.textContent = 'Comparte el DirectorioPro';
+
+        // 1. Definimos la URL principal de tu directorio
+        const appUrl = 'https://alvinzu.github.io/DirectorioLR/';
+
+        // 2. Limpiamos cualquier QR anterior
+        qrcodeContainer.innerHTML = '';
+
+        // 3. Generamos el nuevo código QR apuntando a la URL principal
+        new QRCode(qrcodeContainer, {
+            text: appUrl,
+            width: 256,
+            height: 256,
+            colorDark: "#000000",
+            colorLight: "#ffffff",
+            correctLevel: QRCode.CorrectLevel.H
+        });
+
+        // 4. Personalizamos el texto y el botón de descarga del modal
+        qrProfessionalName.textContent = 'DirectorioPro Los Reyes';
+        
+        // Un pequeño retraso para asegurar que la imagen del QR se renderice
+        setTimeout(() => {
+            const qrImg = qrcodeContainer.querySelector('img');
+            if (qrImg) {
+                downloadQRBtn.onclick = () => {
+                    const link = document.createElement('a');
+                    link.href = qrImg.src;
+                    link.download = `QR-DirectorioPro-LosReyes.png`;
+                    link.click();
+                };
+            }
+        }, 100);
+
+        // 5. Mostramos el modal
+        qrModal.classList.remove('hidden');
+    });
+}
+          
+          
             // Setup search
             setupSearch();          
             // Activar buscador para la tabla de usuarios (busca en la columna 0: correo)
@@ -6938,7 +7001,7 @@ document.getElementById('profileDeleteAccountBtn').addEventListener('click', () 
       
       <div id="qrModal" class="hidden fixed inset-0 bg-black bg-opacity-70 z-50 flex items-center justify-center p-4">
     <div class="bg-white p-6 rounded-lg shadow-xl text-center max-w-xs w-full">
-        <h3 class="text-lg font-bold mb-4">Comparte este Perfil</h3>
+        <h3 id="qrModalTitle" class="text-lg font-bold mb-4">Comparte este Perfil</h3>
         <div id="qrcode" class="flex justify-center mb-4"></div>
         <p id="qrProfessionalName" class="font-medium mb-4"></p>
         <button id="downloadQRBtn" class="w-full bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors mb-2">
